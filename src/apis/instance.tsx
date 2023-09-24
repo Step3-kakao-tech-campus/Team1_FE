@@ -27,7 +27,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     // 다른 데이터는 body에 담는데 토큰은 header에 담으므로 로그인 요청일땐 따로 지정
-    if (response.config.url === '/login') {
+    if (response.config.url === '/auth/login') {
       return response.headers.authorization;
     }
     return response.data.response;
