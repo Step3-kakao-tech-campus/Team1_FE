@@ -1,7 +1,7 @@
 import instance from 'apis/instance';
 
 const postLogin = (kakaoCode: string) => {
-  return instance.post(`/login`, {
+  return instance.post(`/auth/login`, {
     code: kakaoCode,
   });
 };
