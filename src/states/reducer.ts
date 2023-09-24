@@ -13,4 +13,5 @@ const rootReducer = combineReducers({
   login: loginSlice.reducer,
 });
 
+export type ReducerType = ReturnType<typeof rootReducer>;
 export default persistReducer(persistConfig, rootReducer);
