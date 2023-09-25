@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setUserReducer, clearUserReducer } from 'states/slices/loginSlice';
 import { AppDispatch } from 'states/store';
 
-const useSaveToken = () => {
+const useLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -27,4 +27,4 @@ const useSaveToken = () => {
   return { login, logout };
 };
 
-export default useSaveToken;
+export default useLogin;
