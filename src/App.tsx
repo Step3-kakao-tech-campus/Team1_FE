@@ -2,7 +2,8 @@ import Header from 'components/organisms/HeaderBar';
 import React, { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HeaderBar from './components/organisms/HeaderBar';
+import HeaderBar from 'components/organisms/HeaderBar';
+import NavigationBar from 'components/organisms/NavigationBar';
 
 function App(): JSX.Element {
   return (
@@ -15,7 +16,7 @@ function App(): JSX.Element {
           </Routes>
         </Suspense>
       </ErrorBoundary>
-      <p>네비게이션바..</p>
+      <NavigationBar />
     </BrowserRouter>
   );
 }
