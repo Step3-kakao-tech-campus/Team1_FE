@@ -1,6 +1,5 @@
 import React from 'react';
 import instance from 'apis/instance';
-import Button from 'components/atoms/Button';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {};
