@@ -7,7 +7,7 @@ type Props = {
   onClick?: (e?: React.MouseEventHandler<HTMLButtonElement>) => void;
 };
 
-const Button = ({ className, children, disabled, onClick }: Props) => {
+const SubmitButton = ({ className, children, disabled, onClick }: Props) => {
   return (
     <button className={className} disabled={disabled} onClick={(e) => onClick}>
       {children}
@@ -15,4 +15,4 @@ const Button = ({ className, children, disabled, onClick }: Props) => {
   );
 };
 
-export default Button;
+export default SubmitButton;
