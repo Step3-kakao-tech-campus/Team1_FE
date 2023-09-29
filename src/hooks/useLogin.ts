@@ -7,7 +7,7 @@ const useLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
-  const login = (token: any) => {
+  const saveLogin = (token: any) => {
     if (typeof token !== 'string') return;
     dispatch(
       setUserReducer({
@@ -24,7 +24,7 @@ const useLogin = () => {
     navigate('/');
   };
 
-  return { login, logout };
+  return { saveLogin, logout };
 };
 
 export default useLogin;
