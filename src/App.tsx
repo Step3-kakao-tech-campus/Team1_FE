@@ -5,11 +5,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import KakaoAuth from 'auth/KakaoAuth';
 import LoginPage from 'pages/LoginPage';
 import SigninPage from 'pages/SigninPage';
+import HeaderNB from 'components/organisms/HeaderNB';
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <p>헤더..</p>
+      <HeaderNB />
       <ErrorBoundary fallback={<p>에러...</p>}>
         <Suspense fallback={<p>로딩...</p>}>
           <Routes>
@@ -20,7 +21,6 @@ function App(): JSX.Element {
           </Routes>
         </Suspense>
       </ErrorBoundary>
-      <p>네비게이션바..</p>
     </BrowserRouter>
   );
 }
