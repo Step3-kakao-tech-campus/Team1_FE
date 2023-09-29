@@ -6,6 +6,7 @@ import KakaoAuth from 'auth/KakaoAuth';
 import LoginPage from 'pages/LoginPage';
 import SigninPage from 'pages/SigninPage';
 import HeaderNB from 'components/organisms/HeaderNB';
+import { convertPath } from 'apis/convertURI';
 
 function App(): JSX.Element {
   return (
@@ -14,10 +15,10 @@ function App(): JSX.Element {
       <ErrorBoundary fallback={<p>에러...</p>}>
         <Suspense fallback={<p>로딩...</p>}>
           <Routes>
-            <Route path={'/'} element={<div>메인...</div>} />
-            <Route path={'/login'} element={<LoginPage />} />
-            <Route path={'/login/kakao'} element={<KakaoAuth />} />
-            <Route path={'/signin'} element={<SigninPage />} />
+            <Route path={convertPath('/')} element={<div>메인...</div>} />
+            <Route path={convertPath('/login')} element={<LoginPage />} />
+            <Route path={convertPath('/login/kakao')} element={<KakaoAuth />} />
+            <Route path={convertPath('/signin')} element={<SigninPage />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
