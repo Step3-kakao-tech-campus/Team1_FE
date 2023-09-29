@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import KakaoAuth from 'auth/KakaoAuth';
 import LoginPage from 'pages/LoginPage';
 import SigninPage from 'pages/SigninPage';
+import InvitedPage from 'pages/InvitedPage';
+
 import HeaderNB from 'components/organisms/HeaderNB';
 import { convertPath } from 'apis/convertURI';
 
@@ -19,6 +21,7 @@ function App(): JSX.Element {
             <Route path={convertPath('/login')} element={<LoginPage />} />
             <Route path={convertPath('/login/kakao')} element={<KakaoAuth />} />
             <Route path={convertPath('/signin')} element={<SigninPage />} />
+            <Route path={convertPath('/invited')} element={<InvitedPage />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
