@@ -1,8 +1,9 @@
 import instance from 'apis/instance';
 
-const postSignin = (username: string) => {
+const postSignin = (name: string, admin: boolean) => {
   return instance.post(`/auth/join`, {
-    username: username,
+    userName: name,
+    isAdmin: admin,
   });
 };
 
