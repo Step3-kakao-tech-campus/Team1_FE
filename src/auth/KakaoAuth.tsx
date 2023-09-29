@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const KakaoAuth = (): JSX.Element => {
   const navigate = useNavigate();
-  const { login } = useLogin();
+  const { saveLogin } = useLogin();
   const code: string | null = new URL(window.location.href).searchParams.get('code');
 
   useEffect(() => {
@@ -13,11 +13,11 @@ const KakaoAuth = (): JSX.Element => {
     postLogin(code)
       .then((response) => {
         // 회원일 경우 로그인
-        login(response);
+        saveLogin(response);
       })
       .catch((error) => {
         // 비회원일 경우
-        if (error.response && error.response.status === 400) {
+        if (error.response && error.response.status === 404) {
           // 회원가입 처리를 하러 간다.
           navigate('/signin');
         }
