@@ -8,6 +8,7 @@ import InvitedPage from 'pages/InvitedPage';
 
 import { convertPath } from 'apis/convertURI';
 import MainPage from 'pages/MainPage';
+import AddGroupPage from 'pages/AddGroupPage';
 
 function App(): JSX.Element {
   return (
@@ -19,6 +20,7 @@ function App(): JSX.Element {
             <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
             <Route path={convertPath('/signup')} element={<SignupPage />} />
             <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
+            <Route path={convertPath('/addGroup')} element={<AddGroupPage />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
