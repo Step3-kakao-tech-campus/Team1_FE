@@ -1,24 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props {
-  children: JSX.Element;
-}
-
-const Modal = ({ children }: Props): JSX.Element => {
-  return (
-    <Background>
-      <Box>
-        {children}
-        <button>닫기버튼</button>
-      </Box>
-    </Background>
-  );
-};
-
-export default Modal;
-
-const Background = styled.div`
+export const Background = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
@@ -29,7 +12,8 @@ const Background = styled.div`
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
 `;
-const Box = styled.div`
+
+export const Box = styled.div`
   background-color: #ffffff;
   min-width: 250px;
   width: 70%;
