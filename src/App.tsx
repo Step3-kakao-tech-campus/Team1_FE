@@ -21,7 +21,7 @@ function App(): JSX.Element {
             <Route path={convertPath('/login')} element={<LoginPage />} />
             <Route path={convertPath('/login/kakao')} element={<KakaoAuth />} />
             <Route path={convertPath('/signin')} element={<SigninPage />} />
-            <Route path={convertPath('/invited')} element={<InvitedPage />} />
+            <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
