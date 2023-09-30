@@ -7,9 +7,9 @@ export const postGroupJoin = async (key: string) => {
   });
 };
 
-// 그룹 프사, 그룹 이름
+// 그룹 이름, (추가: 그룹 가입 여부)
 export const getGroupInvitation = async (key: string) => {
-  return await instance.post(`/group`, {
+  return await instance.post(`/group/information`, {
     invitationKey: key,
   });
 };
