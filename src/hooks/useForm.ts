@@ -4,13 +4,13 @@ interface StateType {
   [index: string]: any;
 }
 
-const useForm = (initialStateObject: StateType) => {
-  const [obj, setObj] = useState<StateType>(initialStateObject);
+const useForm = <T extends StateType>(initialStateObject: T) => {
+  const [obj, setObj] = useState<T>(initialStateObject);
 
   const formHandler = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const newObj = { ...obj, [event.target.id]: event.target.value };
-      setObj((prev: StateType) => newObj);
+      setObj((prev: T) => newObj);
     },
     [obj],
   );
@@ -18,7 +18,7 @@ const useForm = (initialStateObject: StateType) => {
   const toggleHandler = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const newObj = { ...obj, [event.target.id]: !obj[event.target.id] };
-      setObj((prev: StateType) => newObj);
+      setObj((prev: T) => newObj);
     },
     [obj],
   );
