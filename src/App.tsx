@@ -3,12 +3,12 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import KakaoAuthPage from 'pages/KakaoAuthPage';
-import LoginPage from 'pages/LoginPage';
 import SigninPage from 'pages/SigninPage';
 import InvitedPage from 'pages/InvitedPage';
 
-import HeaderNB from 'components/organisms/HeaderNB';
 import { convertPath } from 'apis/convertURI';
+import LoginOrSignup from 'components/organisms/LoginOrSignup';
+import HeaderNB from 'components/organisms/HeaderNB';
 
 function App(): JSX.Element {
   return (
@@ -17,8 +17,7 @@ function App(): JSX.Element {
       <ErrorBoundary fallback={<p>에러...</p>}>
         <Suspense fallback={<p>로딩...</p>}>
           <Routes>
-            <Route path={convertPath('/')} element={<div>메인...</div>} />
-            <Route path={convertPath('/login')} element={<LoginPage />} />
+            <Route path={convertPath('/')} element={<LoginOrSignup />} />
             <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
             <Route path={convertPath('/signin')} element={<SigninPage />} />
             <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
