@@ -4,7 +4,7 @@ import { HiOutlineUserAdd, HiOutlineHome, HiOutlineUserCircle } from 'react-icon
 
 type Props = {};
 
-const NavigationBar = (props: Props) => {
+const BottomNB = (props: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -16,4 +16,4 @@ const NavigationBar = (props: Props) => {
   );
 };
 
-export default NavigationBar;
+export default BottomNB;
