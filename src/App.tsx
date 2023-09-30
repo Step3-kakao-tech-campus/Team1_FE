@@ -9,15 +9,15 @@ import InvitedPage from 'pages/InvitedPage';
 import { convertPath } from 'apis/convertURI';
 import LoginOrSignup from 'components/organisms/LoginOrSignup';
 import HeaderNB from 'components/organisms/HeaderNB';
+import MainPage from 'pages/MainPage';
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <HeaderNB />
       <ErrorBoundary fallback={<p>에러...</p>}>
         <Suspense fallback={<p>로딩...</p>}>
           <Routes>
-            <Route path={convertPath('/')} element={<LoginOrSignup />} />
+            <Route path={convertPath('/')} element={<MainPage />} />
             <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
             <Route path={convertPath('/signin')} element={<SigninPage />} />
             <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
