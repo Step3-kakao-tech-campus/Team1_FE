@@ -1,14 +1,13 @@
-import Header from 'components/organisms/HeaderBar';
+import Header from 'components/organisms/HeaderNB';
 import React, { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HeaderBar from 'components/organisms/HeaderBar';
-import NavigationBar from 'components/organisms/NavigationBar';
+import HeaderNB from 'components/organisms/HeaderNB';
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <HeaderBar />
+      <HeaderNB />
       <ErrorBoundary fallback={<p>에러...</p>}>
         <Suspense fallback={<p>로딩...</p>}>
           <Routes>
@@ -16,7 +15,6 @@ function App(): JSX.Element {
           </Routes>
         </Suspense>
       </ErrorBoundary>
-      <NavigationBar />
     </BrowserRouter>
   );
 }
