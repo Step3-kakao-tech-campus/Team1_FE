@@ -2,14 +2,14 @@ import React from 'react';
 
 type Props = {
   className?: string;
-  children?: any;
+  children: any;
   disabled?: boolean;
-  onClick?: (e?: React.MouseEventHandler<HTMLButtonElement>) => void;
+  onClick: () => void;
 };
 
 const SubmitButton = ({ className, children, disabled, onClick }: Props) => {
   return (
-    <button className={className} disabled={disabled} onClick={(e) => onClick}>
+    <button className={className} disabled={disabled} onClick={() => onClick()}>
       {children}
     </button>
   );

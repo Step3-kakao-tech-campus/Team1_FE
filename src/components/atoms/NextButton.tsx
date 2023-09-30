@@ -9,7 +9,7 @@ type Props = {
 
 const NextButton = ({ onClick, size, color }: Props) => {
   return (
-    <button onClick={() => onClick}>
+    <button onClick={() => onClick()}>
       <IoIosArrowForward size={size} color={color} />
     </button>
   );

@@ -9,7 +9,7 @@ type Props = {
 
 const BackButton = ({ onClick, size, color }: Props) => {
   return (
-    <button onClick={() => onClick}>
+    <button onClick={() => onClick()}>
       <IoMdArrowRoundBack size={size} color={color} />
     </button>
   );

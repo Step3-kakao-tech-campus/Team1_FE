@@ -9,7 +9,7 @@ type Props = {
 
 const PrevButton = ({ onClick, size, color }: Props) => {
   return (
-    <button onClick={() => onClick}>
+    <button onClick={() => onClick()}>
       <IoIosArrowBack size={size} color={color} />
     </button>
   );

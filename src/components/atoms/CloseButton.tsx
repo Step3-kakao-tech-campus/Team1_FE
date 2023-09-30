@@ -9,9 +9,9 @@ type Props = {
 
 const CloseButton = ({ onClick, size, color }: Props) => {
   return (
-    <button onClick={() => onClick}>
+    <div onClick={() => onClick()}>
       <IoIosCloseCircleOutline size={size} color={color} />
-    </button>
+    </div>
   );
 };
 
