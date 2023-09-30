@@ -1,11 +1,12 @@
 import React, { Suspense, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
 import { getGroupInvitation, postGroupJoin } from 'apis/groupInvite';
 import { useQuery } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import LoginOrSignup from 'components/organisms/LoginOrSignup';
+import { convertPath } from 'apis/convertURI';
 
 interface Component {}
 
@@ -70,12 +71,12 @@ const Invitation = ({ invitationKey }: Props): JSX.Element => {
   );
   return <p>{obj?.data.groupName} 에 초대되었습니다</p>;
 };
-
+const navigate = useNavigate();
 const InvitationDone = (): JSX.Element => {
   return (
     <div>
       <p>가입을 축하합니다</p>
-      <button>이동하기</button>
+      <button onClick={() => navigate(convertPath('/'))}>이동하기</button>
     </div>
   );
 };
