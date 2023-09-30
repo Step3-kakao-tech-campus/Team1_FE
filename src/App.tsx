@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import KakaoAuth from 'auth/KakaoAuth';
+import KakaoAuthPage from 'pages/KakaoAuthPage';
 import LoginPage from 'pages/LoginPage';
 import SigninPage from 'pages/SigninPage';
 import InvitedPage from 'pages/InvitedPage';
@@ -19,7 +19,7 @@ function App(): JSX.Element {
           <Routes>
             <Route path={convertPath('/')} element={<div>메인...</div>} />
             <Route path={convertPath('/login')} element={<LoginPage />} />
-            <Route path={convertPath('/login/kakao')} element={<KakaoAuth />} />
+            <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
             <Route path={convertPath('/signin')} element={<SigninPage />} />
             <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
           </Routes>

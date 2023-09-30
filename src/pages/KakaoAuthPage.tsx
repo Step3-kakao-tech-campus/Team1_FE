@@ -3,7 +3,7 @@ import useLogin from 'hooks/useLogin';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const KakaoAuth = (): JSX.Element => {
+const KakaoAuthPage = (): JSX.Element => {
   const navigate = useNavigate();
   const { saveLogin } = useLogin();
   const code: string | null = new URL(window.location.href).searchParams.get('code');
@@ -27,4 +27,4 @@ const KakaoAuth = (): JSX.Element => {
   return <p> 로그인 처리중 ... </p>;
 };
 
-export default KakaoAuth;
+export default KakaoAuthPage;
