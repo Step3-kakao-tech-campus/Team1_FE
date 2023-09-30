@@ -1,12 +1,6 @@
 import axios from 'axios';
 import store from 'states/store';
-
-let path: string = '';
-let apiURL: string = process.env.REACT_APP_API_URL;
-if (process.env.REACT_APP_PATH !== undefined) {
-  path = process.env.REACT_APP_PATH;
-  apiURL = path + '/api';
-}
+import { apiURL } from 'apis/convertURI';
 
 const instance = axios.create({
   baseURL: apiURL,
@@ -38,7 +32,7 @@ export const responseInterceptors = instance.interceptors.response.use(
     if (response.config.url?.includes('/auth')) {
       return response.headers.authorization;
     }
-    return response.data.response;
+    return response;
   },
   (error) => {
     return Promise.reject(error);

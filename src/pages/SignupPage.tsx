@@ -1,10 +1,10 @@
-import { postSignin } from 'apis/signin';
+import { postsignup } from 'apis/signup';
 import useForm from 'hooks/useForm';
 import useLogin from 'hooks/useLogin';
 import React, { useState } from 'react';
-import signinValidator from 'utils/signinValidator';
+import signupValidator from 'utils/signupValidator';
 
-const SigninPage = (): JSX.Element => {
+const signupPage = (): JSX.Element => {
   // 1. 알바/매니저 선택
   type adminType = boolean | null;
 
@@ -30,11 +30,11 @@ const SigninPage = (): JSX.Element => {
   // 3. 로그인 요청 관리
   const { saveLogin } = useLogin();
 
-  const SigninHandler = () => {
+  const signupHandler = () => {
     if (isAdmin === null) return;
-    postSignin(userInfo.name, isAdmin)
+    postsignup(userInfo.name, isAdmin)
       .then((response) => {
-        // 토큰 저장
+        // 로그인, 토큰 저장
         saveLogin(response);
       })
       .catch((error) => {
@@ -64,7 +64,7 @@ const SigninPage = (): JSX.Element => {
             <label htmlFor="name">약관동의</label>
           </div>
 
-          <button onClick={SigninHandler} disabled={!signinValidator(userInfo)}>
+          <button onClick={signupHandler} disabled={!signupValidator(userInfo)}>
             가입 완료
           </button>
         </div>
@@ -73,4 +73,4 @@ const SigninPage = (): JSX.Element => {
   );
 };
 
-export default SigninPage;
+export default signupPage;

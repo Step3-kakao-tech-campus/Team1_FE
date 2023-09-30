@@ -2,22 +2,25 @@ import React, { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import KakaoAuth from 'auth/KakaoAuth';
-import LoginPage from 'pages/LoginPage';
-import SigninPage from 'pages/SigninPage';
+import KakaoAuthPage from 'pages/KakaoAuthPage';
+import SignupPage from 'pages/SignupPage';
+import InvitedPage from 'pages/InvitedPage';
+
+import { convertPath } from 'apis/convertURI';
+import LoginOrSignup from 'components/organisms/LoginOrSignup';
 import HeaderNB from 'components/organisms/HeaderNB';
+import MainPage from 'pages/MainPage';
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <HeaderNB />
       <ErrorBoundary fallback={<p>에러...</p>}>
         <Suspense fallback={<p>로딩...</p>}>
           <Routes>
-            <Route path={'/'} element={<div>메인...</div>} />
-            <Route path={'/login'} element={<LoginPage />} />
-            <Route path={'/login/kakao'} element={<KakaoAuth />} />
-            <Route path={'/signin'} element={<SigninPage />} />
+            <Route path={convertPath('/')} element={<MainPage />} />
+            <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
+            <Route path={convertPath('/signup')} element={<SignupPage />} />
+            <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
