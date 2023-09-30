@@ -32,7 +32,7 @@ export const responseInterceptors = instance.interceptors.response.use(
     if (response.config.url?.includes('/auth')) {
       return response.headers.authorization;
     }
-    return response.data.response;
+    return response;
   },
   (error) => {
     return Promise.reject(error);
