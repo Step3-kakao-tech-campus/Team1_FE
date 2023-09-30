@@ -16,31 +16,36 @@ const InvitedPage = ({}: Component): JSX.Element => {
 
   const loginState = useSelector((state: RootState) => state.login);
   const [isModal, setIsModal] = useState(false);
+  const [isDone, setisDone] = useState(false);
 
   // 초대 승인 클릭 시
   const AcceptBtnHandler = (): void => {
     switch (loginState.islogin) {
-      case false: // 비로그인 시
+      case false: // 비로그인 상태일 때
         setIsModal((prev) => true); // 로그인/회원가입 모달
         // 로컬에 초대키 킵하기
         // 카카오 redirect uri 고민해보기
         // login/kakao 페이지를 팝업처리?
         break;
 
-      case true: // 로그인 시
+      case true: // 로그인 상태일 때
         postGroupJoin(invitationKey)
           .then((res) => {
+            setisDone((prev) => true);
             // 그룹 가입 완료 페이지로 이동
             navigate(convertPath('/'));
           })
-          .catch(() => {
+          .catch((err) => {
+            console.log(err);
             // 승인 오류
           });
         break;
     }
   };
 
-  return (
+  return isDone ? (
+    <InvitationDone />
+  ) : (
     <div>
       {isModal && <div>로그인 모달</div>}
       <ErrorBoundary fallback={<p>유효하지 않은 초대입니다</p>}>
