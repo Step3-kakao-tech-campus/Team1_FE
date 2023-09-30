@@ -71,8 +71,10 @@ const Invitation = ({ invitationKey }: Props): JSX.Element => {
   );
   return <p>{obj?.data.groupName} 에 초대되었습니다</p>;
 };
-const navigate = useNavigate();
+
 const InvitationDone = (): JSX.Element => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <p>가입을 축하합니다</p>
