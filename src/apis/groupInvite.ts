@@ -1,15 +1,15 @@
 import instance from 'apis/instance';
 
 // 헤더: 토큰, 바디: 키
-export const postGroupJoin = (key: string) => {
-  return instance.post(`/group/invitation`, {
+export const postGroupJoin = async (key: string) => {
+  return await instance.post(`/group/invitation`, {
     invitationKey: key,
   });
 };
 
 // 그룹 프사, 그룹 이름
-export const getGroupInvitation = (key: string) => {
-  return instance.post(`/group`, {
+export const getGroupInvitation = async (key: string) => {
+  return await instance.post(`/group`, {
     invitationKey: key,
   });
 };
