@@ -7,8 +7,6 @@ import SignupPage from 'pages/SignupPage';
 import InvitedPage from 'pages/InvitedPage';
 
 import { convertPath } from 'apis/convertURI';
-import LoginOrSignup from 'components/organisms/LoginOrSignup';
-import HeaderNB from 'components/organisms/HeaderNB';
 import MainPage from 'pages/MainPage';
 
 function App(): JSX.Element {

@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import LoginOrSignup from 'components/organisms/LoginOrSignup';
 import { convertPath } from 'apis/convertURI';
+import useModal from 'hooks/useModal';
 
 interface Component {}
 
@@ -15,14 +16,15 @@ const InvitedPage = ({}: Component): JSX.Element => {
   const invitationKey: string = !!param ? param : '';
 
   const loginState = useSelector((state: RootState) => state.login);
-  const [isModal, setIsModal] = useState(false);
   const [isDone, setisDone] = useState(false);
+
+  const { modalOnHandler, modalOffHandler, ModalComponent } = useModal();
 
   // 초대 승인 클릭 시
   const AcceptBtnHandler = (): void => {
     switch (loginState.islogin) {
       case false: // 비로그인 상태일 때
-        setIsModal((prev) => true); // 로그인/회원가입 모달
+        modalOnHandler(); // 로그인/회원가입 모달
         break;
 
       case true: // 로그인 상태일 때
@@ -41,7 +43,11 @@ const InvitedPage = ({}: Component): JSX.Element => {
     <InvitationDone />
   ) : (
     <div>
-      {isModal && <LoginOrSignup redirectPage={'/invited/' + invitationKey} />}
+      <ModalComponent>
+        <LoginOrSignup redirectPage={'/invited/' + invitationKey} />
+        <button onClick={modalOffHandler}>닫기</button>
+      </ModalComponent>
+
       <ErrorBoundary fallback={<p>유효하지 않은 초대입니다</p>}>
         <Suspense fallback={<div>초대장 로딩</div>}>
           <Invitation invitationKey={invitationKey} />
@@ -71,8 +77,10 @@ const Invitation = ({ invitationKey }: Props): JSX.Element => {
   );
   return <p>{obj?.data.groupName} 에 초대되었습니다</p>;
 };
-const navigate = useNavigate();
+
 const InvitationDone = (): JSX.Element => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <p>가입을 축하합니다</p>
