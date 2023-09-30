@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 type Props = {};
 
-const HeaderBar = (props: Props) => {
+const HeaderNB = (props: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -15,4 +15,4 @@ const HeaderBar = (props: Props) => {
   );
 };
 
-export default HeaderBar;
+export default HeaderNB;
