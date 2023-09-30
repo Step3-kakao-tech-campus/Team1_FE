@@ -8,6 +8,8 @@ export const postGroupJoin = (key: string) => {
 };
 
 // 그룹 프사, 그룹 이름
-export const getGroupInvitation = () => {
-  return instance.get(`/group`);
+export const getGroupInvitation = (key: string) => {
+  return instance.post(`/group`, {
+    invitationKey: key,
+  });
 };
