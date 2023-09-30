@@ -19,7 +19,7 @@ const KakaoAuthPage = (): JSX.Element => {
         // 비회원일 경우
         if (error.response && error.response.status === 404) {
           // 회원가입 처리를 하러 간다.
-          navigate('/signin');
+          navigate('/signup');
         }
       });
   }, [code]);

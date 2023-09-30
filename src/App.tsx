@@ -3,7 +3,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import KakaoAuthPage from 'pages/KakaoAuthPage';
-import SigninPage from 'pages/SigninPage';
+import SignupPage from 'pages/SignupPage';
 import InvitedPage from 'pages/InvitedPage';
 
 import { convertPath } from 'apis/convertURI';
@@ -19,7 +19,7 @@ function App(): JSX.Element {
           <Routes>
             <Route path={convertPath('/')} element={<MainPage />} />
             <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
-            <Route path={convertPath('/signin')} element={<SigninPage />} />
+            <Route path={convertPath('/signup')} element={<SignupPage />} />
             <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
           </Routes>
         </Suspense>
