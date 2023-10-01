@@ -3,11 +3,30 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     color: {
-      backgrounds: string;
+      yellow: string;
+      lightGray: string;
+      lightBlue: string;
+      gray: string;
+      backgroundColor: string;
+      textColor: string;
+      open: string;
+      middle: string;
+      close: string;
     };
     fonts: {
-      fontSize: string;
-      fontWeight: number;
+      fontSize: {
+        xs: string;
+        sm: string;
+        base: string;
+        md: string;
+        lg: string;
+      };
+      fontWeight: {
+        extraBold: number;
+        bold: number;
+        reguler: number;
+        thin: number;
+      };
     };
   }
 }
