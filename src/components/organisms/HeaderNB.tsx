@@ -1,17 +1,54 @@
 import React from 'react';
-import instance from 'apis/instance';
-import { useNavigate } from 'react-router-dom';
+import {
+  HeaderNBContainer,
+  HeaderNBInnerBox,
+  HeaderNBButton,
+  HeaderNBLeftMenuGroup,
+  HeaderNBRightMenuGroup,
+  Logobox,
+} from 'components/atoms/HeaderNB';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from 'states/store';
+import useLogin from 'hooks/useLogin';
+import getInfoByToken from 'utils/getInfoByToken';
 
-type Props = {};
-
-const HeaderNB = (props: Props) => {
+const HeaderNB = (): JSX.Element => {
   const navigate = useNavigate();
+  const loginState = useSelector((state: RootState) => state.login);
+  const { logout } = useLogin();
+  if (loginState.islogin && getInfoByToken(loginState.token) === null) {
+    logout();
+  }
 
   return (
-    <div className="sm: flex align-middle">
-      <img src="/images/albba_5pt.png" width={100} onClick={() => navigate('/')} />
-      <img src="/images/alarm.png" width={40} onClick={() => navigate('/notification')} />
-    </div>
+    <HeaderNBContainer>
+      <HeaderNBInnerBox>
+        <HeaderNBLeftMenuGroup>
+          <Link to="/">
+            <Logobox />
+          </Link>
+        </HeaderNBLeftMenuGroup>
+
+        <HeaderNBRightMenuGroup className="ml-auto">
+          {loginState.islogin ? (
+            <>
+              <span>{getInfoByToken(loginState.token)?.userName} 님</span>
+              <HeaderNBButton onClick={logout}>로그아웃</HeaderNBButton>
+            </>
+          ) : (
+            <HeaderNBButton
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
+              로그인
+            </HeaderNBButton>
+          )}
+          
+        </HeaderNBRightMenuGroup>
+      </HeaderNBInnerBox>
+    </HeaderNBContainer>
   );
 };
 
