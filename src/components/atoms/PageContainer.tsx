@@ -1,3 +1,4 @@
+import HeaderNB from 'components/organisms/HeaderNB';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -24,17 +25,20 @@ const WholeConatiner = styled.div`
   height: 100%;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
 `;
 
 const StyledContainer = styled.div`
   background-color: ${({ theme }) => theme.color.backgroundColor};
   width: 100%;
+  max-width: 585px;
   height: 100%;
-  max-width: 500px;
 
   display: flex;
   flex-direction: column;
+  flex-shrink: 1;
   align-items: stretch;
+  justify: center;
 `;
