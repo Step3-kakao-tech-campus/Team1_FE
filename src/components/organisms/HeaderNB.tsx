@@ -13,9 +13,7 @@ import { RootState } from 'states/store';
 import useLogin from 'hooks/useLogin';
 import getInfoByToken from 'utils/getInfoByToken';
 
-interface Component {}
-
-const HeaderNB = ({}: Component): JSX.Element => {
+const HeaderNB = (): JSX.Element => {
   const navigate = useNavigate();
   const loginState = useSelector((state: RootState) => state.login);
   const { logout } = useLogin();
@@ -47,6 +45,7 @@ const HeaderNB = ({}: Component): JSX.Element => {
               로그인
             </HeaderNBButton>
           )}
+          
         </HeaderNBRightMenuGroup>
       </HeaderNBInnerBox>
     </HeaderNBContainer>
