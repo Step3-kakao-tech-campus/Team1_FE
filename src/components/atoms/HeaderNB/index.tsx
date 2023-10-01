@@ -12,13 +12,14 @@ export const HeaderNBRightMenuGroup = styled.div`
 `;
 
 export const HeaderNBInnerBox = styled.div`
-  width: 1200px;
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 0 7px;
 `;
 
 export const HeaderNBContainer = styled.header`
+  width: 100%;
   height: 60px;
   display: flex;
   justify-content: center;
