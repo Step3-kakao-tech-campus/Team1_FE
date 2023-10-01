@@ -1,3 +1,6 @@
+import MainContainer from 'components/atoms/MainContainer';
+import PageContainer from 'components/atoms/PageContainer';
+import SubmitButton from 'components/atoms/SubmitButton';
 import HeaderNB from 'components/organisms/HeaderNB';
 import LoginOrSignup from 'components/organisms/LoginOrSignup';
 import React, { useEffect } from 'react';
@@ -12,9 +15,12 @@ const MainPage = ({}: Component): JSX.Element => {
   return loginState.islogin ? (
     <HeaderNB />
   ) : (
-    <div>
-      <LoginOrSignup />
-    </div>
+    <PageContainer>
+      <MainContainer>
+        <div className="w-full bg-slate-400 h-80 mb-8">온보딩 컴포넌트</div>
+        <LoginOrSignup />
+      </MainContainer>
+    </PageContainer>
   );
 };
 
