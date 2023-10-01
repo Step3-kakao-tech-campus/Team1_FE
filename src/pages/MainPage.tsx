@@ -1,5 +1,5 @@
 import PageContainer from 'components/atoms/PageContainer';
-import LoginOrSignup from 'components/organisms/LoginOrSignup';
+import LoginOrSignup from 'components/molecules/LoginOrSignup';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
@@ -12,7 +12,7 @@ const MainPage = ({}: Component): JSX.Element => {
   return (
     <PageContainer isHeader={islogin} isBottonBar={false}>
       <div className="w-full bg-slate-400 h-80 mb-8">임시 온보딩 컴포넌트</div>
-      <LoginOrSignup />
+      {islogin ? '로그인됨' : <LoginOrSignup />}
     </PageContainer>
   );
 };
