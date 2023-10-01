@@ -5,7 +5,7 @@ const myTheme: DefaultTheme = {
     yellow: '#FFDF39',
     lightGray: '#F2F2F2',
     lightBlue: '#D8F2FF',
-    gray: 'BEBEBE',
+    gray: '#BEBEBE',
     backgroundColor: '#ffffff',
     textColor: '#000000',
     open: '#DEFFE1',
@@ -23,7 +23,7 @@ const myTheme: DefaultTheme = {
     fontWeight: {
       extraBold: 800,
       bold: 600,
-      reguler: 400,
+      regular: 400,
       thin: 300,
     },
   },
