@@ -11,8 +11,14 @@ const MainPage = ({}: Component): JSX.Element => {
 
   return (
     <PageContainer isHeader={islogin} isBottonBar={false}>
-      <div className="w-full bg-slate-400 h-80 mb-8">임시 온보딩 컴포넌트</div>
-      {islogin ? '로그인됨' : <LoginOrSignup />}
+      {islogin ? (
+        '로그인됨'
+      ) : (
+        <>
+          <div className="w-full bg-slate-400 h-80 mb-8">임시 온보딩 컴포넌트</div>
+          <LoginOrSignup />
+        </>
+      )}
     </PageContainer>
   );
 };
