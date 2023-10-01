@@ -3,23 +3,24 @@ import styled from 'styled-components';
 
 interface Props {
   children?: any;
-  flexDirenction?: string;
+  fromTop?: boolean;
 }
 
-const MainContainer = ({ children }: Props): JSX.Element => {
-  return <StyledContainer>{children}</StyledContainer>;
+const MainContainer = ({ children, fromTop }: Props): JSX.Element => {
+  return <StyledContainer fromTop={fromTop}>{children}</StyledContainer>;
 };
 
 export default MainContainer;
 
 const StyledContainer = styled.main<{
-  flexDirenction?: string;
+  fromTop?: boolean;
 }>`
   background-color: ${({ theme }) => theme.color.backgroundColor};
-  width: 100%;
-  max-width: 500px;
-
   display: flex;
-  flex-direction: ${(props) => (props.flexDirenction ? props.flexDirenction : 'column')};
+  flex-direction: column;
+  justify-content: ${(props) => (props.fromTop === true ? 'start' : 'center')};
+  height: 100%;
+
   align-items: center;
+  padding: 0 24px 0 24px;
 `;
