@@ -8,6 +8,9 @@ import { ErrorBoundary } from 'react-error-boundary';
 import LoginOrSignup from 'components/molecules/LoginOrSignup';
 import { convertPath } from 'apis/convertURI';
 import useModal from 'hooks/useModal';
+import FlexContainer from 'components/atoms/FlexContainer';
+import SubmitButton from 'components/atoms/SubmitButton';
+import PageContainer from 'components/atoms/PageContainer';
 
 interface Component {}
 
@@ -39,22 +42,24 @@ const InvitedPage = ({}: Component): JSX.Element => {
     }
   };
 
-  return isDone ? (
+  return !isDone ? (
     <InvitationDone />
   ) : (
-    <div>
+    <PageContainer>
       <ModalComponent>
         <LoginOrSignup redirectPage={'/invited/' + invitationKey} />
         <button onClick={modalOffHandler}>닫기</button>
       </ModalComponent>
 
-      <ErrorBoundary fallback={<p>유효하지 않은 초대입니다</p>}>
-        <Suspense fallback={<div>초대장 로딩</div>}>
-          <Invitation invitationKey={invitationKey} />
-        </Suspense>
-        <button onClick={AcceptBtnHandler}>승인하기</button>
-      </ErrorBoundary>
-    </div>
+      <FlexContainer wFull={true} padding="80px" gap="60px">
+        <ErrorBoundary fallback={<p>유효하지 않은 초대입니다</p>}>
+          <Suspense fallback={<div>초대장 로딩</div>}>
+            <Invitation invitationKey={invitationKey} />
+          </Suspense>
+          <SubmitButton onClick={AcceptBtnHandler}>승인하기</SubmitButton>
+        </ErrorBoundary>
+      </FlexContainer>
+    </PageContainer>
   );
 };
 
@@ -75,16 +80,32 @@ const Invitation = ({ invitationKey }: Props): JSX.Element => {
       suspense: true,
     },
   );
-  return <p>{obj?.data.groupName} 에 초대되었습니다</p>;
+  return (
+    <FlexContainer>
+      <FlexContainer align="center" padding="20px">
+        <div className="w-20 h-20 rounded-full bg-blue-600">임시 프로필</div>
+      </FlexContainer>
+      <FlexContainer>
+        <span className="text-center font-bold text-3xl">{obj?.data.groupName}</span>
+      </FlexContainer>
+      <FlexContainer wFull={true}>
+        <span className="text-center">그룹에 초대되었습니다.</span>
+      </FlexContainer>
+    </FlexContainer>
+  );
 };
 
 const InvitationDone = (): JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <p>가입을 축하합니다</p>
-      <button onClick={() => navigate(convertPath('/'))}>이동하기</button>
-    </div>
+    <PageContainer>
+      <FlexContainer wFull padding="60px" align="center">
+        <span className="text-center text-xl font-bold">가입을 축하합니다</span>
+        <div className="w-full h-[500px] bg-black"> 임시 기능 소개 화면 </div>
+
+        <SubmitButton onClick={() => navigate(convertPath('/'))}>메인 페이지로 이동하기</SubmitButton>
+      </FlexContainer>
+    </PageContainer>
   );
 };
