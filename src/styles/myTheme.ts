@@ -22,9 +22,11 @@ const myTheme: DefaultTheme = {
     },
     fontWeight: {
       extraBold: 800,
-      bold: 600,
+      bold: 700,
+      semiBold: 600,
+      medium: 500,
       regular: 400,
-      thin: 300,
+      light: 300,
     },
   },
 };

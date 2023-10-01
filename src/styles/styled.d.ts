@@ -24,8 +24,10 @@ declare module 'styled-components' {
       fontWeight: {
         extraBold: number;
         bold: number;
+        semiBold: number;
         regular: number;
-        thin: number;
+        medium: number;
+        light: number;
       };
     };
   }

@@ -1,20 +1,19 @@
-import HeaderNB from 'components/organisms/HeaderNB';
+import PageContainer from 'components/atoms/PageContainer';
 import LoginOrSignup from 'components/organisms/LoginOrSignup';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
 
 interface Component {}
 
 const MainPage = ({}: Component): JSX.Element => {
-  const loginState = useSelector((state: RootState) => state.login);
+  const islogin = useSelector((state: RootState) => state.login).islogin;
 
-  return loginState.islogin ? (
-    <HeaderNB />
-  ) : (
-    <div>
+  return (
+    <PageContainer isHeader={islogin} isBottonBar={false}>
+      <div className="w-full bg-slate-400 h-80 mb-8">임시 온보딩 컴포넌트</div>
       <LoginOrSignup />
-    </div>
+    </PageContainer>
   );
 };
 
