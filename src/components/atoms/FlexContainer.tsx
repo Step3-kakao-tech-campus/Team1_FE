@@ -30,7 +30,7 @@ const FlexContainer = ({ children, gap, padding, direction, wFull, hFull, justif
 
 export default FlexContainer;
 
-const Container = styled.section<{
+const Container = styled.div<{
   gap?: string;
   padding?: string;
   direction?: string;
