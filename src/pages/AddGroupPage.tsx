@@ -1,6 +1,12 @@
+import { convertPath } from 'apis/convertURI';
 import { addNewGroup } from 'apis/manageGroup';
+import FlexContainer from 'components/atoms/FlexContainer';
+import PageContainer from 'components/atoms/PageContainer';
+import SubmitButton from 'components/atoms/SubmitButton';
 import useForm from 'hooks/useForm';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 interface MarketInfo {
   marketName: string;
@@ -28,31 +34,57 @@ const AddGroupPage = (): JSX.Element => {
         // 에러 처리
       });
   };
+  const navigate = useNavigate();
   return (
-    <div>
+    <PageContainer>
       {isDone ? (
-        <div> 그룹 가입 완료</div>
+        <FlexContainer wFull={true} align="stretch" gap="60px" padding="24px">
+          <FlexContainer>
+            <span className="text-center text-2xl font-bold">그룹 생성에 성공했습니다</span>
+            <span className="text-center text-xl">이제 근무일정을 관리하세요</span>
+          </FlexContainer>
+
+          <SubmitButton onClick={() => navigate(convertPath('/'))}>메인으로 이동</SubmitButton>
+        </FlexContainer>
       ) : (
-        <div>
-          <label htmlFor="marketName">매장 이름을 입력하세요</label>
-          <input id="marketName" onChange={formHandler} />
-
-          <label htmlFor="marketNumber">사업자 번호를 입력하세요</label>
-          <input id="marketNumber" onChange={formHandler} />
-
-          <label htmlFor="mainAddress">이름을 입력하세요</label>
-          <input id="mainAddress" onChange={formHandler} />
-
-          <label htmlFor="detailAddress">이름을 입력하세요</label>
-          <input id="detailAddress" onChange={formHandler} />
-
-          <button onClick={submitHandler}>그룹 생성하기</button>
-        </div>
+        <>
+          <GradationBox>
+            <InputGroup id="marketName" onChange={formHandler} labelName="상호명" />
+            <InputGroup id="marketNumber" onChange={formHandler} labelName="사업자 번호" />
+            <InputGroup id="mainAddress" onChange={formHandler} labelName="주소1" />
+            <InputGroup id="detailAddress" onChange={formHandler} labelName="주소2" />
+          </GradationBox>
+          <SubmitButton onClick={submitHandler}>그룹 생성하기</SubmitButton>
+        </>
       )}
-
-      <p>{JSON.stringify(obj)}</p>
-    </div>
+    </PageContainer>
   );
 };
 
 export default AddGroupPage;
+
+const GradationBox = styled.div`
+  background: ${({ theme }) => theme.color.backgroundColor};
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  padding: 20px;
+`;
+
+interface InputProps {
+  onChange: any;
+  id: string;
+  labelName?: string;
+}
+const InputGroup = ({ onChange, id, labelName }: InputProps): JSX.Element => {
+  return (
+    <div className="flex h-8 items-center">
+      <label className="w-32" htmlFor={id}>
+        {labelName}
+      </label>
+      <input className="w-full h-full" id={id} onChange={onChange} />
+    </div>
+  );
+};
