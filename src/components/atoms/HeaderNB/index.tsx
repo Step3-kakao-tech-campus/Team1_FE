@@ -26,7 +26,6 @@ export const HeaderNBContainer = styled.header`
   align-items: center;
   box-shadow: 0px 0px 5px rgb(199, 199, 199);
   background-color: white;
-  margin-bottom: 30px;
 `;
 
 export const HeaderNBButton = styled.button`
