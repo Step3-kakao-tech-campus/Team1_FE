@@ -3,24 +3,35 @@ import styled from 'styled-components';
 
 interface Props {
   children?: any;
-  fromTop?: boolean;
+  isFromTop?: boolean;
+  isHeader?: boolean;
+  isBottonBar?: boolean;
+  gap?: string;
 }
 
-const MainContainer = ({ children, fromTop }: Props): JSX.Element => {
-  return <StyledContainer fromTop={fromTop}>{children}</StyledContainer>;
+const MainContainer = ({ children, isFromTop, isHeader, isBottonBar, gap }: Props): JSX.Element => {
+  return (
+    <StyledContainer isFromTop={isFromTop} isHeader={isHeader} isBottonBar={isBottonBar} gap={gap}>
+      {children}
+    </StyledContainer>
+  );
 };
 
 export default MainContainer;
 
 const StyledContainer = styled.main<{
-  fromTop?: boolean;
+  isFromTop?: boolean;
+  isHeader?: boolean;
+  isBottonBar?: boolean;
+  gap?: string;
 }>`
-  background-color: ${({ theme }) => theme.color.backgroundColor};
   display: flex;
   flex-direction: column;
-  justify-content: ${(props) => (props.fromTop === true ? 'start' : 'center')};
+  justify-content: center;
+  align-items: center;
+
   height: 100%;
 
-  align-items: center;
-  padding: 0 24px 0 24px;
+  gap: ${(props) => (props.gap ? props.gap : '20px')};
+  padding: 24px;
 `;
