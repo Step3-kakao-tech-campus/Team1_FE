@@ -1,9 +1,6 @@
-import Header from 'components/organisms/HeaderNB';
 import React, { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HeaderNB from 'components/organisms/HeaderNB';
-import TestPage from 'pages/TestPage';
 
 import { ThemeProvider } from 'styled-components';
 import { myTheme } from 'styles/myTheme';
