@@ -1,5 +1,6 @@
 import { postsignup } from 'apis/signup';
-import MainContainer from 'components/atoms/MainContainer';
+import FlexContainer from 'components/atoms/FlexContainer';
+
 import PageContainer from 'components/atoms/PageContainer';
 import SubmitButton from 'components/atoms/SubmitButton';
 import useForm from 'hooks/useForm';
@@ -47,79 +48,65 @@ const signupPage = (): JSX.Element => {
   };
 
   return (
-    <PageContainer>
+    <>
       {isAdmin === null ? (
-        <MainContainer gap="40px">
-          <div className="w-[300px] h-[300px]  bg-black"> 로고 </div>
-          <div>
-            <p className="align-middle">업장에서 본인의 역할을 골라주세요</p>
-          </div>
-          <Container>
+        <PageContainer gap="36px">
+          <div className="w-[300px] h-[300px] bg-black"> 임시 로고 박스 </div>
+          <FlexContainer direction="row" wFull={true}>
+            <p className="align-middle text-xl">업장에서 본인의 역할을 선택해주세요</p>
+          </FlexContainer>
+          <FlexContainer direction="row" wFull={true} padding="0 60px">
             <Button id="admin" onClick={() => selectTypeHandler(true)} color="lightGray">
-              매니저
+              매니저로 <br /> 시작하기
             </Button>
             <Button id="employee" onClick={() => selectTypeHandler(false)}>
-              알바생
+              알바생으로 <br /> 시작하기
             </Button>
-          </Container>
-        </MainContainer>
+          </FlexContainer>
+        </PageContainer>
       ) : (
-        <MainContainer>
-          <SectionContainer>
-            <div className="flex flex-col w-full items-stretch gap-3">
-              <label htmlFor="name">회원 가입을 위해 추가 정보를 입력해주세요 </label>
-              <input className="border border-black" id="name" onChange={formHandler} />
-            </div>
-            <div className="flex flex-row w-full">
-              <input id="agreement" onChange={toggleHandler} type="checkbox" />
-              <label htmlFor="agreement">약관동의</label>
-            </div>
+        <PageContainer>
+          <FlexContainer wFull={true} padding="0 40px">
+            <FlexContainer wFull={true}>
+              <span className="text-center">
+                회원 가입을 위해 <br /> 추가 정보를 입력해주세요
+              </span>
+              <Input className="border border-black" id="name" onChange={formHandler} placeholder="이름" />
 
+              <FlexContainer direction="row" justify="start" padding="0 16px">
+                <input id="agreement" onChange={toggleHandler} type="checkbox" />
+                <label htmlFor="agreement">약관동의</label>
+              </FlexContainer>
+            </FlexContainer>
             <SubmitButton onClick={signupHandler} disabled={!signupValidator(userInfo)}>
               가입 완료
             </SubmitButton>
-          </SectionContainer>
-        </MainContainer>
+          </FlexContainer>
+        </PageContainer>
       )}
-    </PageContainer>
+    </>
   );
 };
 
 export default signupPage;
 
 const Input = styled.input`
-  border: 1;
-`;
-
-const SectionContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 30px 4px;
-  gap: 32px;
-`;
-
-const Container = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: 0 40px;
-  gap: 24px;
-  max-height: 10rem;
+  background: #ffffff;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 10px 12px;
 `;
 
 const Button = styled.button<{ color?: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 56px 10px;
 
   width: 100%;
-  height: 100%;
 
-  background: ${(props) => (props.color === 'lightGray' ? props.theme.color.lightGray : props.theme.color.lightBlue)};
+  background: ${(props) =>
+    props.color && props.color === 'lightGray' ? props.theme.color.lightGray : props.theme.color.lightBlue};
   border: 1px solid #000000;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
