@@ -1,4 +1,4 @@
-import { Background, Box } from 'components/organisms/ModalStyle';
+import { Background, Box } from 'components/atoms/modal';
 import React, { useCallback, useState } from 'react';
 
 const useModal = () => {
