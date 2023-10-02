@@ -35,18 +35,10 @@ const signupPage = (): JSX.Element => {
   const { obj: userInfo, formHandler, toggleHandler, selectOneHandler } = useForm(initalInfo);
 
   // 2. 로그인 요청 보내기
-  const { saveLogin } = useLogin();
+  const { signup } = useLogin();
 
-  const signupHandler = () => {
-    if (userInfo.isAdmin === null) return;
-    postsignup(userInfo.userName, userInfo.isAdmin)
-      .then((response) => {
-        // 로그인, 토큰 저장
-        saveLogin(response.headers.authorization, response.data);
-      })
-      .catch((error) => {
-        // 에러 처리
-      });
+  const signupBtnHandler = () => {
+    signup(userInfo);
   };
 
   return (
@@ -77,7 +69,7 @@ const signupPage = (): JSX.Element => {
             </FlexContainer>
           </FlexContainer>
 
-          <SubmitButton onClick={signupHandler} disabled={!signupValidator(userInfo)}>
+          <SubmitButton onClick={signupBtnHandler} disabled={!signupValidator(userInfo)}>
             가입 완료
           </SubmitButton>
         </FlexContainer>
