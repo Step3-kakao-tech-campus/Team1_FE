@@ -11,13 +11,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
 import useLogin from 'hooks/useLogin';
-import getInfoByToken from 'utils/getInfoByToken';
+import tokenValidator from 'utils/tokenValidator';
 
 const HeaderNB = (): JSX.Element => {
   const navigate = useNavigate();
   const loginState = useSelector((state: RootState) => state.login);
   const { logout } = useLogin();
-  if (loginState.islogin && getInfoByToken(loginState.token) === null) {
+  if (loginState.islogin && !tokenValidator(loginState.token)) {
     logout();
   }
 
@@ -33,7 +33,7 @@ const HeaderNB = (): JSX.Element => {
         <HeaderNBRightMenuGroup className="ml-auto">
           {loginState.islogin ? (
             <>
-              <span>{getInfoByToken(loginState.token)?.userName} 님</span>
+              <span>{loginState.userData.userName} 님</span>
               <HeaderNBButton onClick={logout}>로그아웃</HeaderNBButton>
             </>
           ) : (
@@ -45,7 +45,6 @@ const HeaderNB = (): JSX.Element => {
               로그인
             </HeaderNBButton>
           )}
-          
         </HeaderNBRightMenuGroup>
       </HeaderNBInnerBox>
     </HeaderNBContainer>
