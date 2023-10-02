@@ -13,7 +13,7 @@ const KakaoAuthPage = (): JSX.Element => {
     postLogin(code)
       .then((response) => {
         // 회원일 경우 로그인
-        saveLogin(response);
+        saveLogin(response.headers.authorization, response.data);
       })
       .catch((error) => {
         // 비회원일 경우
