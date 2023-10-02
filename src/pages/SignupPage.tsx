@@ -40,7 +40,7 @@ const signupPage = (): JSX.Element => {
     postsignup(userInfo.name, isAdmin)
       .then((response) => {
         // 로그인, 토큰 저장
-        saveLogin(response);
+        saveLogin(response.headers.authorization, response.data);
       })
       .catch((error) => {
         // 에러 처리
