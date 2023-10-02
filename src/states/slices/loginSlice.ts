@@ -59,19 +59,17 @@ export const loginSlice = createSlice({
     },
 
     clearUserReducer: (state: LoginState) => {
-      state = initialState;
+      state.token = '';
+      state.loginTime = 0;
+      state.islogin = false;
 
-      // state.token = '';
-      // state.loginTime = 0;
-      // state.islogin = false;
-
-      // state.userData = {
-      //   userName: '',
-      //   userId: 0,
-      //   groupName: '',
-      //   groupId: 0,
-      //   isAdmin: false,
-      // };
+      state.userData = {
+        userName: '',
+        userId: 0,
+        groupName: '',
+        groupId: 0,
+        isAdmin: false,
+      };
     },
   },
 });

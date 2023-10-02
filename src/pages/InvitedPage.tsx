@@ -42,7 +42,7 @@ const InvitedPage = ({}: Component): JSX.Element => {
     }
   };
 
-  return !isDone ? (
+  return isDone ? (
     <InvitationDone />
   ) : (
     <PageContainer>
