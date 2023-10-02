@@ -4,11 +4,23 @@ import { setUserReducer, clearUserReducer } from 'states/slices/loginSlice';
 import { AppDispatch } from 'states/store';
 import { convertPath } from 'apis/convertURI';
 
+interface User {
+  userName: string;
+  userId: number;
+  userData: {
+    userName: '';
+    userId: 0;
+    groupName: '';
+    groupId: 0;
+    isAdmin: false;
+  };
+}
+
 const useLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
-  const saveLogin = (token: any) => {
+  const saveLogin = (token: string, userData: User) => {
     let redirect: string | null = localStorage.getItem('beforeLoginURL');
     if (redirect === null) {
       redirect = '/';
@@ -20,6 +32,7 @@ const useLogin = () => {
         token: token,
         loginTime: Date.now(),
         islogin: true,
+        userData: userData,
       }),
     );
 
