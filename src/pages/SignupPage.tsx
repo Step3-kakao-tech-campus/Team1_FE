@@ -10,14 +10,6 @@ import styled from 'styled-components';
 import signupValidator from 'utils/signupValidator';
 
 const signupPage = (): JSX.Element => {
-  // // 1. 알바/매니저 선택
-  // type adminType = boolean | null;
-
-  // const [isAdmin, setIsAdmin] = useState<adminType>(null);
-  // const selectTypeHandler = (isAdminParam: adminType): void => {
-  //   setIsAdmin((prev: adminType) => isAdminParam);
-  // };
-
   // 1. 폼 입력 상태 관리
   interface StateType {
     [index: string]: string | boolean | null;
@@ -58,6 +50,12 @@ const signupPage = (): JSX.Element => {
       </FlexContainer>
 
       {userInfo.isAdmin !== null && (
+        // <AddInfo
+        //   formHandler={formHandler}
+        //   toggleHandler={toggleHandler}
+        //   signupBtnHandler={signupBtnHandler}
+        //   userInfo={userInfo}
+        // />
         <FlexContainer wFull={true} padding="0 40px">
           <FlexContainer wFull={true}>
             <span className="text-center">회원 가입을 위해 추가 정보를 입력해주세요</span>
@@ -79,6 +77,33 @@ const signupPage = (): JSX.Element => {
 };
 
 export default signupPage;
+
+// interface Props {
+//   formHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+//   toggleHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+//   signupBtnHandler: () => void;
+//   userInfo: any;
+// }
+
+// const AddInfo = ({ formHandler, toggleHandler, signupBtnHandler, userInfo }: Props): JSX.Element => {
+//   return (
+//     <FlexContainer wFull={true} padding="0 40px">
+//       <FlexContainer wFull={true}>
+//         <span className="text-center">회원 가입을 위해 추가 정보를 입력해주세요</span>
+//         <Input id="userName" onChange={formHandler} placeholder="이름" />
+
+//         <FlexContainer direction="row" justify="start" padding="0 16px">
+//           <input id="agreement" onChange={toggleHandler} type="checkbox" />
+//           <label htmlFor="agreement">약관동의</label>
+//         </FlexContainer>
+//       </FlexContainer>
+
+//       <SubmitButton onClick={signupBtnHandler} disabled={!signupValidator(userInfo)}>
+//         가입 완료
+//       </SubmitButton>
+//     </FlexContainer>
+//   );
+// };
 
 const Input = styled.input`
   background: ${({ theme }) => theme.color.backgroundColor};
