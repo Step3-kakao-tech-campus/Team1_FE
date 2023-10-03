@@ -8,9 +8,9 @@ import { ErrorBoundary } from 'react-error-boundary';
 import LoginOrSignup from 'components/molecules/LoginOrSignup';
 import { convertPath } from 'apis/convertURI';
 import useModal from 'hooks/useModal';
-import FlexContainer from 'components/atoms/FlexContainer';
-import SubmitButton from 'components/atoms/SubmitButton';
-import PageContainer from 'components/atoms/PageContainer';
+import FlexContainer from 'components/@commons/FlexContainer';
+import SubmitButton from 'components/@commons/SubmitButton';
+import PageContainer from 'components/@commons/PageContainer';
 
 interface Component {}
 

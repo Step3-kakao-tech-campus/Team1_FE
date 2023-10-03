@@ -1,12 +1,12 @@
-import { postsignup } from 'apis/signup';
-import FlexContainer from 'components/atoms/FlexContainer';
+import FlexContainer from 'components/@commons/FlexContainer';
+import PageContainer from 'components/@commons/PageContainer';
+import SubmitButton from 'components/@commons/SubmitButton';
 
-import PageContainer from 'components/atoms/PageContainer';
-import SubmitButton from 'components/atoms/SubmitButton';
 import useForm from 'hooks/useForm';
 import useLogin from 'hooks/useLogin';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { myTheme } from 'styles/myTheme';
 import signupValidator from 'utils/signupValidator';
 
 const signupPage = (): JSX.Element => {

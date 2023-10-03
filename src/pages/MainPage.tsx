@@ -1,4 +1,4 @@
-import PageContainer from 'components/atoms/PageContainer';
+import PageContainer from 'components/@commons/PageContainer';
 import LoginOrSignup from 'components/molecules/LoginOrSignup';
 import React from 'react';
 import { useSelector } from 'react-redux';
