@@ -1,5 +1,5 @@
 import PageContainer from 'components/@commons/PageContainer';
-import LoginOrSignup from 'components/molecules/LoginOrSignup';
+import LoginOrSignup from 'components/@commons/LoginOrSignup';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';

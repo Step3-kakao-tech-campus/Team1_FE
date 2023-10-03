@@ -5,7 +5,7 @@ import { RootState } from 'states/store';
 import { getGroupInvitation, postGroupJoin } from 'apis/groupInvite';
 import { useQuery } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
-import LoginOrSignup from 'components/molecules/LoginOrSignup';
+import LoginOrSignup from 'components/@commons/LoginOrSignup';
 import { convertPath } from 'apis/convertURI';
 import useModal from 'hooks/useModal';
 import FlexContainer from 'components/@commons/FlexContainer';
