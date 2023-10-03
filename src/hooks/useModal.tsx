@@ -1,4 +1,4 @@
-import { Background, Box } from 'components/atoms/modal';
+import { Background, Box } from 'components/@commons/modal';
 import React, { useCallback, useState } from 'react';
 
 const useModal = () => {

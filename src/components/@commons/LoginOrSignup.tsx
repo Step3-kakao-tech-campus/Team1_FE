@@ -1,4 +1,4 @@
-import SubmitButton from 'components/atoms/SubmitButton';
+import SubmitButton from 'components/@commons/SubmitButton';
 import React from 'react';
 
 interface Props {

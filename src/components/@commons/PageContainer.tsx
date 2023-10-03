@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import HeaderNB from 'components/molecules/HeaderNB';
+import HeaderNB from 'components/HeaderNB/HeaderNB';
 
 interface Props {
   children?: any;

@@ -1,7 +1,5 @@
-import { postLogin } from 'apis/login';
 import useLogin from 'hooks/useLogin';
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const KakaoAuthPage = (): JSX.Element => {
   const { login } = useLogin();

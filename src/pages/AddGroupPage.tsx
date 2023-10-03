@@ -1,8 +1,7 @@
-import { convertPath } from 'apis/convertURI';
 import { addNewGroup } from 'apis/manageGroup';
-import FlexContainer from 'components/atoms/FlexContainer';
-import PageContainer from 'components/atoms/PageContainer';
-import SubmitButton from 'components/atoms/SubmitButton';
+import FlexContainer from 'components/@commons/FlexContainer';
+import PageContainer from 'components/@commons/PageContainer';
+import SubmitButton from 'components/@commons/SubmitButton';
 import useForm from 'hooks/useForm';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -38,13 +37,13 @@ const AddGroupPage = (): JSX.Element => {
   return (
     <PageContainer>
       {isDone ? (
-        <FlexContainer wFull={true} align="stretch" gap="60px" padding="24px">
-          <FlexContainer>
+        <FlexContainer $wFull={true} $align="stretch" $gap="60px" $padding="24px">
+          {/* <FlexContainer>
             <span className="text-center text-2xl font-bold">그룹 생성에 성공했습니다</span>
             <span className="text-center text-xl">이제 근무일정을 관리하세요</span>
           </FlexContainer>
 
-          <SubmitButton onClick={() => navigate(convertPath('/'))}>메인으로 이동</SubmitButton>
+          <SubmitButton onClick={() => navigate(convertPath('/'))}>메인으로 이동</SubmitButton> */}
         </FlexContainer>
       ) : (
         <>
