@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiOutlineUserAdd, HiOutlineHome, HiOutlineUserCircle } from 'react-icons/hi';
 
-type Props = {};
+interface Props {}
 
 const BottomNB = (props: Props) => {
   const navigate = useNavigate();
