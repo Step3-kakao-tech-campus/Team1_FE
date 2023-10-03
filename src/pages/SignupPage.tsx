@@ -10,6 +10,8 @@ import useLogin from 'hooks/useLogin';
 import signupValidator from 'utils/signupValidator';
 
 const signupPage = (): JSX.Element => {
+  // 이미 가입된 유저인 경우 : 리다이렉트 "/"
+
   // 1. 폼 입력 상태 관리
   interface StateType {
     [index: string]: string | boolean | null;
