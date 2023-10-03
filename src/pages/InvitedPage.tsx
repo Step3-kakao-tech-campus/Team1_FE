@@ -51,7 +51,7 @@ const InvitedPage = ({}: Component): JSX.Element => {
         <button onClick={modalOffHandler}>닫기</button>
       </ModalComponent>
 
-      <FlexContainer wFull={true} padding="80px" gap="60px">
+      <FlexContainer $wFull={true} $padding="80px" $gap="60px">
         <ErrorBoundary fallback={<p>유효하지 않은 초대입니다</p>}>
           <Suspense fallback={<div>초대장 로딩</div>}>
             <Invitation invitationKey={invitationKey} />
@@ -82,13 +82,13 @@ const Invitation = ({ invitationKey }: Props): JSX.Element => {
   );
   return (
     <FlexContainer>
-      <FlexContainer align="center" padding="20px">
+      <FlexContainer $align="center" $padding="20px">
         <div className="w-20 h-20 rounded-full bg-blue-600">임시 프로필</div>
       </FlexContainer>
       <FlexContainer>
         <span className="text-center font-bold text-3xl">{obj?.data.groupName}</span>
       </FlexContainer>
-      <FlexContainer wFull={true}>
+      <FlexContainer $wFull={true}>
         <span className="text-center">그룹에 초대되었습니다.</span>
       </FlexContainer>
     </FlexContainer>
@@ -100,7 +100,7 @@ const InvitationDone = (): JSX.Element => {
 
   return (
     <PageContainer>
-      <FlexContainer wFull padding="60px" align="center">
+      <FlexContainer $wFull $padding="60px" $align="center">
         <span className="text-center text-xl font-bold">가입을 축하합니다</span>
         <div className="w-full h-[500px] bg-black"> 임시 기능 소개 화면 </div>
 

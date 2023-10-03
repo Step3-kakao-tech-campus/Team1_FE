@@ -36,11 +36,11 @@ const signupPage = (): JSX.Element => {
   return (
     <PageContainer gap="36px">
       {/* <div className="w-[300px] h-[300px] bg-black"> 임시 로고 박스 </div> */}
-      <FlexContainer direction="row" wFull={true}>
+      <FlexContainer $direction="row" $wFull={true}>
         <p className="align-middle text-xl">가입하기</p>
       </FlexContainer>
 
-      <FlexContainer direction="row" wFull={true} padding="0 40px">
+      <FlexContainer $direction="row" $wFull={true} $padding="0 40px">
         <Button id="isAdmin" onClick={(e) => selectOneHandler(e, true)} $isSelected={userInfo.isAdmin === true}>
           매니저로 <br /> 시작하기
         </Button>
@@ -56,12 +56,12 @@ const signupPage = (): JSX.Element => {
         //   signupBtnHandler={signupBtnHandler}
         //   userInfo={userInfo}
         // />
-        <FlexContainer wFull={true} padding="0 40px">
-          <FlexContainer wFull={true}>
+        <FlexContainer $wFull={true} $padding="0 40px">
+          <FlexContainer $wFull={true}>
             <span className="text-center">회원 가입을 위해 추가 정보를 입력해주세요</span>
             <Input id="userName" onChange={formHandler} placeholder="이름" />
 
-            <FlexContainer direction="row" justify="start" padding="0 16px">
+            <FlexContainer $direction="row" $justify="start" $padding="0 16px">
               <input id="agreement" onChange={toggleHandler} type="checkbox" />
               <label htmlFor="agreement">약관동의</label>
             </FlexContainer>
