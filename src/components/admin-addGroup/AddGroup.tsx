@@ -1,4 +1,6 @@
 import { addNewGroup } from 'apis/manageGroup';
+import FlexContainer from 'components/@commons/FlexContainer';
+import GradationBox from 'components/@commons/GradationBox';
 import SubmitButton from 'components/@commons/SubmitButton';
 import useForm from 'hooks/useForm';
 import React from 'react';
@@ -36,11 +38,13 @@ const AddGroup = ({ doneStateHandler }: Props): JSX.Element => {
   return (
     <>
       <span className="text-center text-xl font-bold">그룹 생성</span>
-      <GradationBox>
-        <InputGroup id="marketName" onChange={formHandler} labelName="상호명" />
-        <InputGroup id="marketNumber" onChange={formHandler} labelName="사업자 번호" />
-        <InputGroup id="mainAddress" onChange={formHandler} labelName="주소1" />
-        <InputGroup id="detailAddress" onChange={formHandler} labelName="주소2" />
+      <GradationBox width="100%">
+        <FlexContainer $gap="0">
+          <InputGroup id="marketName" onChange={formHandler} labelName="상호명" />
+          <InputGroup id="marketNumber" onChange={formHandler} labelName="사업자 번호" />
+          <InputGroup id="mainAddress" onChange={formHandler} labelName="주소1" />
+          <InputGroup id="detailAddress" onChange={formHandler} labelName="주소2" />
+        </FlexContainer>
       </GradationBox>
       <SubmitButton onClick={submitHandler}>그룹 생성하기</SubmitButton>
     </>
@@ -49,28 +53,30 @@ const AddGroup = ({ doneStateHandler }: Props): JSX.Element => {
 
 export default AddGroup;
 
-const GradationBox = styled.div`
-  background: ${({ theme }) => theme.color.backgroundColor};
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 10px;
-  padding: 20px;
-`;
-
 const InputGroup = ({ onChange, id, labelName }: InputProps): JSX.Element => {
   return (
-    <div className="flex h-8 items-center">
-      <label className="w-32" htmlFor={id}>
-        {labelName}
-      </label>
-      <input className="w-full h-full" id={id} onChange={onChange} />
-    </div>
+    <InputBox $direction="row" $padding="0">
+      <Label htmlFor={id}>{labelName}</Label>
+      <input className="w-full h-full pl-2" id={id} onChange={onChange} />
+    </InputBox>
   );
 };
+
 interface InputProps {
   onChange: any;
   id: string;
   labelName?: string;
 }
+
+const InputBox = styled(FlexContainer)`
+  border-bottom: 1px lightgray solid;
+  height: 40px;
+`;
+
+const Label = styled.label`
+  width: 128px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  font-size: ${({ theme }) => theme.fonts.fontSize.sm};
+`;
