@@ -6,7 +6,7 @@ import {
   HeaderNBLeftMenuGroup,
   HeaderNBRightMenuGroup,
   Logobox,
-} from 'components/atoms/HeaderNB';
+} from 'components/HeaderNB';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
