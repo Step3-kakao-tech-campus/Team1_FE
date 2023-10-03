@@ -13,7 +13,7 @@ interface MemberType {
 }
 
 /* 미완성입니다 */
-const Dropdown = ({ className, members }: Props) => {
+const Dropdown = ({ className, members }: Props): JSX.Element => {
   const [isOpen, setIsOpen] = useState(true);
   const [Selected, setSelected] = useState<string | null>(null);
 
@@ -36,7 +36,7 @@ const Dropdown = ({ className, members }: Props) => {
         <Contents>
           {members &&
             members.map((member, index) => (
-              <ol onClick={() => itemOnClick(member)} key={index}>
+              <ol onClick={() => itemOnClick(member)} key={member.name}>
                 {member.name}
               </ol>
             ))}
