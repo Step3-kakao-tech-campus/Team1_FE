@@ -8,7 +8,7 @@ const AddGroupPage = (): JSX.Element => {
   const [isDone, setIsDone] = useState(false);
 
   return (
-    <PageContainer withoutHeader withoutBottonBar>
+    <PageContainer withoutHeader withoutBottonBar padding="0 40px">
       {isDone ? <AddGroupDone /> : <AddGroup doneStateHandler={() => setIsDone((prev) => true)} />}
     </PageContainer>
   );
