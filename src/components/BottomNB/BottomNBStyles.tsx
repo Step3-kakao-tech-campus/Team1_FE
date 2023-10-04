@@ -3,6 +3,7 @@ export const Box = styled.div`
   position: fixed;
   z-index: 998;
   bottom: 0;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -12,6 +13,7 @@ export const Box = styled.div`
 
   width: 100%;
   height: 70px;
+  max-width: 585px;
 
   background: ${({ theme }) => theme.color.lightGray};
   border-radius: 25px 25px 0px 0px;
