@@ -4,7 +4,7 @@ import styled from 'styled-components';
 interface Props {
   children?: any;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   className?: string;
   id?: string;
   activeColor?: string;

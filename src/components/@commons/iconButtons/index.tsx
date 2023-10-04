@@ -9,8 +9,9 @@ import { myTheme } from 'styles/myTheme';
 interface Props {
   onClick: any;
   size?: string;
-  color: string;
+  color?: string;
 }
+
 const defaultSize: string = '24px';
 const defaultColor: string = myTheme.color.textColor;
 
