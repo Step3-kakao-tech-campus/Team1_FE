@@ -23,7 +23,13 @@ interface UserGetBySignup {
   isAdmin: boolean | null;
 }
 
-const useLogin = () => {
+const useLogin = (redirectPage?: string) => {
+  const loginBtnHandler = (): void => {
+    if (redirectPage === undefined) return;
+    localStorage.setItem('beforeLoginURL', redirectPage);
+    location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
+  };
+
   const signup = (userInfo: UserGetBySignup): void => {
     if (userInfo.isAdmin === null) return;
     postsignup(userInfo.userName, userInfo.isAdmin)
@@ -78,7 +84,7 @@ const useLogin = () => {
     navigate(convertPath('/'));
   };
 
-  return { logout, signup, login };
+  return { logout, signup, login, loginBtnHandler };
 };
 
 export default useLogin;
