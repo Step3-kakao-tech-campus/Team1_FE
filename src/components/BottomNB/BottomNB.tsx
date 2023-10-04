@@ -4,7 +4,7 @@ import { HiOutlineUserAdd, HiOutlineHome, HiOutlineUserCircle } from 'react-icon
 
 interface Props {}
 
-const BottomNB = (props: Props) => {
+const BottomNB = (props: Props): JSX.Element => {
   const navigate = useNavigate();
 
   return (
