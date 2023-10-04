@@ -2,37 +2,47 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 
-type Props = {
-  className?: string;
-  children?: string;
-  members: string[];
-};
+interface Props {
+  members?: MemberType[];
+}
 
-const Dropdown = ({ className, children, members }: Props) => {
+interface MemberType {
+  memberId: number;
+  name: string;
+}
+
+const Dropdown = ({ members }: Props) => {
   const [isOpen, setIsOpen] = useState(true);
-  const [isSelected, setIsSelected] = useState(false);
+  const [selected, setSelected] = useState<string | null>(null);
 
   const handleOnClick = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
-  const Contents = styled.div`
-    display: flex;
-    flex-direction: column;
-  `;
+  const itemOnClick = (member: MemberType) => {
+    setSelected((prev) => member.name);
+    setIsOpen((prev) => false);
+  };
 
   return (
-    <div className={className}>
+    <div>
       <div className="flex justify-between items-center align-middle" onClick={handleOnClick}>
-        <span>{isSelected ? isSelected : '선택'}</span>
+        <span>{selected ? selected : '선택'}</span>
         <span>{isOpen ? <IoMdArrowDropdown /> : <IoMdArrowDropup />}</span>
       </div>
-      {isOpen && (
-        // open
-        <Contents>{members && members.map((member, index) => <ol key={index}>{member}</ol>)}</Contents>
-      )}
+      {members &&
+        members.map((member, index) => (
+          <ol onClick={() => itemOnClick(member)} key={member.name}>
+            {member.name}
+          </ol>
+        ))}
     </div>
   );
 };
 
 export default Dropdown;
+
+const Contents = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
