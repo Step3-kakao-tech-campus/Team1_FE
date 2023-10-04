@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import HeaderNB from 'components/HeaderNB/HeaderNB';
+import BottomNB from 'components/BottomNB/BottomNB';
 
 interface Props {
   children?: any;
@@ -18,7 +19,7 @@ const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar
         <MainContainer $gap={gap} $padding={padding}>
           {children}
         </MainContainer>
-        {!withoutBottonBar && <HeaderNB />}
+        {!withoutBottonBar && <BottomNB />}
       </ColumnContainer>
     </WholeConatiner>
   );
