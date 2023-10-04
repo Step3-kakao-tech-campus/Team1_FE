@@ -7,16 +7,17 @@ interface Props {
   children?: any;
   gap?: string;
   padding?: string;
+  justify?: string;
   withoutHeader?: boolean;
   withoutBottonBar?: boolean;
 }
 
-const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar }: Props): JSX.Element => {
+const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar, justify }: Props): JSX.Element => {
   return (
     <WholeConatiner>
       <ColumnContainer>
         {!withoutHeader && <HeaderNB />}
-        <MainContainer $gap={gap} $padding={padding}>
+        <MainContainer $gap={gap} $padding={padding} $justify={justify}>
           {children}
         </MainContainer>
         {!withoutBottonBar && <BottomNB />}
@@ -31,7 +32,6 @@ const WholeConatiner = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,6 +55,7 @@ const ColumnContainer = styled.div`
 const MainContainer = styled.main<{
   $gap?: string;
   $padding?: string;
+  $justify?: string;
 }>`
   flex-grow: 1;
 
@@ -63,6 +64,6 @@ const MainContainer = styled.main<{
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: ${(props) => (props.$justify ? props.$justify : 'center')};
   align-items: center;
 `;
