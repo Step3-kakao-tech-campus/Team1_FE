@@ -15,6 +15,15 @@ const useForm = <T extends StateType>(initialStateObject: T) => {
     [obj],
   );
 
+  const selectOneHandler = useCallback(
+    (event: React.MouseEvent<any>, value: any) => {
+      console.log(event.currentTarget.id, value);
+      const newObj = { ...obj, [event.currentTarget.id]: value };
+      setObj((prev: T) => newObj);
+    },
+    [obj],
+  );
+
   const toggleHandler = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const newObj = { ...obj, [event.target.id]: !obj[event.target.id] };
@@ -23,7 +32,7 @@ const useForm = <T extends StateType>(initialStateObject: T) => {
     [obj],
   );
 
-  return { obj, formHandler, toggleHandler };
+  return { obj, formHandler, toggleHandler, selectOneHandler };
 };
 
 export default useForm;

@@ -1,21 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import HeaderNB from 'components/molecules/HeaderNB';
+import HeaderNB from 'components/HeaderNB/HeaderNB';
 
 interface Props {
   children?: any;
   gap?: string;
-  isHeader?: boolean;
-  isBottonBar?: boolean;
+  padding?: string;
+  withoutHeader?: boolean;
+  withoutBottonBar?: boolean;
 }
 
-const PageContainer = ({ children, gap, isHeader, isBottonBar }: Props): JSX.Element => {
+const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar }: Props): JSX.Element => {
   return (
     <WholeConatiner>
       <ColumnContainer>
-        {isHeader && <HeaderNB />}
-        <MainContainer gap={gap}>{children}</MainContainer>
-        {isBottonBar && <HeaderNB />}
+        {!withoutHeader && <HeaderNB />}
+        <MainContainer $gap={gap} $padding={padding}>
+          {children}
+        </MainContainer>
+        {!withoutBottonBar && <HeaderNB />}
       </ColumnContainer>
     </WholeConatiner>
   );
@@ -49,12 +52,13 @@ const ColumnContainer = styled.div`
 `;
 
 const MainContainer = styled.main<{
-  gap?: string;
+  $gap?: string;
+  $padding?: string;
 }>`
   flex-grow: 1;
 
-  gap: ${(props) => (props.gap ? props.gap : '20px')};
-  padding: 28px;
+  gap: ${(props) => (props.$gap ? props.$gap : '20px')};
+  padding: ${(props) => (props.$padding ? props.$padding : '28px')};
 
   display: flex;
   flex-direction: column;

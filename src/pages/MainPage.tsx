@@ -1,16 +1,14 @@
-import PageContainer from 'components/atoms/PageContainer';
-import LoginOrSignup from 'components/molecules/LoginOrSignup';
+import PageContainer from 'components/@commons/PageContainer';
+import LoginOrSignup from 'components/@commons/LoginOrSignup';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
 
-interface Component {}
-
-const MainPage = ({}: Component): JSX.Element => {
+const MainPage = (): JSX.Element => {
   const islogin = useSelector((state: RootState) => state.login).islogin;
 
   return (
-    <PageContainer isHeader={islogin} isBottonBar={false}>
+    <PageContainer withoutHeader={!islogin} withoutBottonBar>
       {islogin ? (
         '로그인됨'
       ) : (
