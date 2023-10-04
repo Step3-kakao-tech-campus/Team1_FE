@@ -1,53 +1,42 @@
 import React from 'react';
 import {
-  HeaderNBContainer,
-  HeaderNBInnerBox,
-  HeaderNBButton,
-  HeaderNBLeftMenuGroup,
-  HeaderNBRightMenuGroup,
-  Logobox,
-} from 'components/HeaderNB';
-import { Link, useNavigate } from 'react-router-dom';
+  HeaderContainer,
+  HeaderInnerBox,
+  HeaderButton,
+  HeaderLeftMenuGroup,
+  HeaderRightMenuGroup,
+} from 'components/HeaderNB/HeaderNBStyels';
 import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
 import useLogin from 'hooks/useLogin';
 import tokenValidator from 'utils/tokenValidator';
+import { Alarm, Hamburger } from './icons';
 
 const HeaderNB = (): JSX.Element => {
-  const navigate = useNavigate();
   const loginState = useSelector((state: RootState) => state.login);
-  const { logout } = useLogin();
+  const { logout, loginBtnHandler } = useLogin('/');
   if (loginState.islogin && !tokenValidator(loginState.token)) {
     logout();
   }
-
   return (
-    <HeaderNBContainer>
-      <HeaderNBInnerBox>
-        <HeaderNBLeftMenuGroup>
-          <Link to="/">
-            <Logobox />
-          </Link>
-        </HeaderNBLeftMenuGroup>
+    <HeaderContainer>
+      <HeaderInnerBox>
+        <HeaderLeftMenuGroup>
+          <button>
+            <Hamburger />
+          </button>
+        </HeaderLeftMenuGroup>
 
-        <HeaderNBRightMenuGroup className="ml-auto">
+        <HeaderRightMenuGroup>
+          <Alarm />
           {loginState.islogin ? (
-            <>
-              <span>{loginState.userData.userName} 님</span>
-              <HeaderNBButton onClick={logout}>로그아웃</HeaderNBButton>
-            </>
+            <HeaderButton onClick={logout}>임시로그아웃</HeaderButton>
           ) : (
-            <HeaderNBButton
-              onClick={() => {
-                navigate('/login');
-              }}
-            >
-              로그인
-            </HeaderNBButton>
+            <HeaderButton onClick={loginBtnHandler}>임시로그인버튼</HeaderButton>
           )}
-        </HeaderNBRightMenuGroup>
-      </HeaderNBInnerBox>
-    </HeaderNBContainer>
+        </HeaderRightMenuGroup>
+      </HeaderInnerBox>
+    </HeaderContainer>
   );
 };
 
