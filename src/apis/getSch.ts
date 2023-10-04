@@ -1,8 +1,5 @@
 import instance from 'apis/instance';
 
-interface Return {}
-
-// 헤더: 토큰, 바디: 키
 export const getMonthly = async (year: number, month: number) => {
   const response = await instance.post(`/scheduler/home`, {
     month: month,
@@ -11,6 +8,7 @@ export const getMonthly = async (year: number, month: number) => {
   return await nowMonthDate(month, year, response.data.response.schedule);
 };
 
+// 받은 객체를 3차원 배열로
 const nowMonthDate = (year: number, month: number, data: any) => {
   const firstDay = new Date(year, month, 1).getDay();
   const lastDate = new Date(year, month + 1, 0).getDate();
