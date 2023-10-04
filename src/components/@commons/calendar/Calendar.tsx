@@ -2,99 +2,73 @@ import React, { useEffect } from 'react';
 import FlexContainer from '../FlexContainer';
 import PageContainer from '../PageContainer';
 import styled from 'styled-components';
+import { getMonthly } from 'apis/getSch';
+import { useQuery } from '@tanstack/react-query';
 
-interface Props {}
-
-const mapGenerator = (n: number): number[] => {
-  const arr = [];
-  for (let i = 0; i < n; i++) {
-    arr.push(i);
-  }
-  return arr;
-};
-
-interface DataType {
-  [index: string]: string[];
-}
-const dataGenerator = (lastDate: number): DataType => {
-  const obj: DataType = {};
-  for (let i = 1; i <= lastDate; i++) {
-    obj[`${i}`] = ['오픈'];
-  }
-  return obj;
-};
-
-const nowMonthDate = (year: number, month: number, data: DataType) => {
-  const firstDay = new Date(year, month, 1).getDay();
-  const lastDate = new Date(year, month + 1, 0).getDate();
-
-  const dates = [];
-  // 저번달 끝부분
-  for (let i = -firstDay + 1; i <= 0; i++) {
-    dates.push(i);
-  }
-  // 이번달
-  for (let i = 1; i <= lastDate; i++) {
-    dates.push(i);
-  }
-
-  // 다음달 시작부분
-  const leftDates = 35 - dates.length;
-  for (let i = lastDate + 1; i <= leftDates + lastDate; i++) {
-    dates.push(i);
-  }
-
-  // 요일로 자르기
-  const monthArr = [];
-  for (let i = 0; i < 5; i++) {
-    const weekArr = dates.slice(i * 7, (i + 1) * 7);
-    const weeklyDataArr = weekArr.map((date) => ({ date: date, time: data[`${date}`] }));
-    monthArr.push(weeklyDataArr);
-  }
-  console.log(monthArr);
-  return monthArr;
-};
-
-const Calendar = ({}: Props): JSX.Element => {
+const Calendar = (): JSX.Element => {
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
-  const date = today.getDate();
 
-  const data = dataGenerator(new Date(year, month, 0).getDate());
-  const dateArr = nowMonthDate(year, month, data);
+  const { data: obj, isFetching } = useQuery(['getMonthly', month, year], () => getMonthly(year, month));
 
   return (
-    <PageContainer>
+    <PageContainer justify="start">
       <div>{`${month + 1} 월`}</div>
-      <MonthBox $wFull>
-        {dateArr.map((weekArray, i) => (
-          <WeekBox $wFull key={`${i}주`}>
-            {weekArray.map((obj) => (
-              <DayBox key={obj.date} date={new Date(year, month, obj.date).getDate()} time={obj.time}></DayBox>
-            ))}
-          </WeekBox>
-        ))}
-      </MonthBox>
+      {!!obj && (
+        <MonthBox $wFull>
+          {obj.map((weekArray, i) => (
+            <WeekBox $wFull key={`${i}주`}>
+              {weekArray.map((e) => (
+                <DayBox key={e.date} date={new Date(year, month, e.date).getDate()} timeList={e.timeList}></DayBox>
+              ))}
+            </WeekBox>
+          ))}
+        </MonthBox>
+      )}
     </PageContainer>
   );
 };
 
 export default Calendar;
 
-interface DayProps {
-  date: number;
-  time: string[];
-  children?: any;
-}
-const DayBox = ({ date, time }: DayProps): JSX.Element => {
+const DayBox = ({ date, timeList }: DayProps): JSX.Element => {
   return (
     <StyeldDayBox>
-      <div>{date}</div>
-      <div>{time}</div>
+      <BadgeCont>{date}</BadgeCont>
+      {!!timeList && (
+        <BadgeCont>
+          {timeList.map((t) => (
+            <Badge key={t} $time={t}>
+              {t}
+            </Badge>
+          ))}
+        </BadgeCont>
+      )}
     </StyeldDayBox>
   );
 };
+
+interface DayProps {
+  date: number;
+  timeList: string[];
+  children?: any;
+}
+
+const Badge = styled.div<{ $time?: string }>`
+  width: 100%;
+  background-color: ${(props) =>
+    props.$time &&
+    (props.$time === '오픈'
+      ? props.theme.color.open
+      : props.$time === '미들'
+      ? props.theme.color.middle
+      : props.theme.color.close)};
+`;
+
+const BadgeCont = styled.div`
+  width: 100%;
+`;
 
 const StyeldDayBox = styled(FlexContainer)`
   width: 100%;
