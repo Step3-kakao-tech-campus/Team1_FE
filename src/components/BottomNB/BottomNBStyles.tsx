@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 export const Box = styled.div`
+  position: fixed;
+  z-index: 998;
+  bottom: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
