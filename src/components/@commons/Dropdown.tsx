@@ -11,7 +11,7 @@ interface MemberType {
   name: string;
 }
 
-const Dropdown = ({ members }: Props) => {
+const Dropdown = ({ members }: Props): JSX.Element => {
   const [isOpen, setIsOpen] = useState(true);
   const [selected, setSelected] = useState<string | null>(null);
 
