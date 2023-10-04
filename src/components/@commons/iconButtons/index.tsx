@@ -5,17 +5,21 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoIosArrowBack } from 'react-icons/io';
+import { myTheme } from 'styles/myTheme';
 
 interface Props {
-  onClick: () => void;
-  size: string;
-  color: string;
+  onClick?: () => void;
+  size?: string;
+  color?: string;
 }
+
+const defaultSize: string = '24px';
+const defaultColor: string = myTheme.color.textColor;
 
 export const BackButton = ({ onClick, size, color }: Props) => {
   return (
     <button onClick={onClick}>
-      <IoMdArrowRoundBack size={size} color={color} />
+      <IoMdArrowRoundBack size={size ? size : defaultSize} color={color ? color : defaultColor} />
     </button>
   );
 };
@@ -23,7 +27,7 @@ export const BackButton = ({ onClick, size, color }: Props) => {
 export const CloseButton = ({ onClick, size, color }: Props) => {
   return (
     <div onClick={onClick}>
-      <IoIosCloseCircleOutline size={size} color={color} />
+      <IoIosCloseCircleOutline size={size ? size : defaultSize} color={color ? color : defaultColor} />
     </div>
   );
 };
@@ -31,7 +35,7 @@ export const CloseButton = ({ onClick, size, color }: Props) => {
 export const NextButton = ({ onClick, size, color }: Props) => {
   return (
     <button onClick={onClick}>
-      <IoIosArrowForward size={size} color={color} />
+      <IoIosArrowForward size={size ? size : defaultSize} color={color ? color : defaultColor} />
     </button>
   );
 };
@@ -39,7 +43,7 @@ export const NextButton = ({ onClick, size, color }: Props) => {
 export const PrevButton = ({ onClick, size, color }: Props) => {
   return (
     <button onClick={onClick}>
-      <IoIosArrowBack size={size} color={color} />
+      <IoIosArrowBack size={size ? size : defaultSize} color={color ? color : defaultColor} />
     </button>
   );
 };
