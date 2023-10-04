@@ -6,15 +6,15 @@ import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoIosArrowBack } from 'react-icons/io';
 
-type Props = {
+interface Props {
   onClick: () => void;
   size: string;
   color: string;
-};
+}
 
 export const BackButton = ({ onClick, size, color }: Props) => {
   return (
-    <button onClick={() => onClick()}>
+    <button onClick={onClick}>
       <IoMdArrowRoundBack size={size} color={color} />
     </button>
   );
@@ -22,7 +22,7 @@ export const BackButton = ({ onClick, size, color }: Props) => {
 
 export const CloseButton = ({ onClick, size, color }: Props) => {
   return (
-    <div onClick={() => onClick()}>
+    <div onClick={onClick}>
       <IoIosCloseCircleOutline size={size} color={color} />
     </div>
   );
@@ -30,7 +30,7 @@ export const CloseButton = ({ onClick, size, color }: Props) => {
 
 export const NextButton = ({ onClick, size, color }: Props) => {
   return (
-    <button onClick={() => onClick()}>
+    <button onClick={onClick}>
       <IoIosArrowForward size={size} color={color} />
     </button>
   );
@@ -38,7 +38,7 @@ export const NextButton = ({ onClick, size, color }: Props) => {
 
 export const PrevButton = ({ onClick, size, color }: Props) => {
   return (
-    <button onClick={() => onClick()}>
+    <button onClick={onClick}>
       <IoIosArrowBack size={size} color={color} />
     </button>
   );
