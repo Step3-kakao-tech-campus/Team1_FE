@@ -6,7 +6,7 @@ interface Props {
   color?: string;
 }
 
-const ProfileImage = ({ size, color }: Props) => {
+const ProfileImage = ({ size, color }: Props): JSX.Element => {
   return <HiUserCircle size={size ? size : '30'} color={color ? color : '#828282'} />;
 };
 
