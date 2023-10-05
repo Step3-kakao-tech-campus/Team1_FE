@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
 
 const MainPage = (): JSX.Element => {
-  const islogin = useSelector((state: RootState) => state.login).islogin;
+  const loginState = useSelector((state: RootState) => state.login);
 
   return (
-    <PageContainer withoutHeader={!islogin} withoutBottonBar>
-      {islogin ? (
+    <PageContainer withoutHeader={!loginState.islogin} withoutBottonBar={loginState.userData?.groupId === 0}>
+      {loginState.islogin ? (
         '로그인됨'
       ) : (
         <>
