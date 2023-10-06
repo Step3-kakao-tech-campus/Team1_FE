@@ -1,18 +1,27 @@
 import instance from 'apis/instance';
 
-export const getMonthly = async (year: number, month: number) => {
-  const response = await instance.post(`/scheduler/home`, {
+export const getMonthly = async (year: number, month: number, memberId: number) => {
+  const response = await instance.post(`/schedule/monthly`, {
+    memberId: memberId,
     month: month,
     year: year,
   });
-  return await nowMonthDate(month, year, response.data.response.schedule);
+  return await nowMonthDate(year, month, response.data.schedule);
+};
+
+export const getDaily = async (year: number, month: number, date: number) => {
+  return await instance.post(`/schedule/daily`, {
+    date: date,
+    month: month,
+    year: year,
+  });
 };
 
 // 받은 객체를 3차원 배열로
 const nowMonthDate = (year: number, month: number, data: any) => {
   const firstDay = new Date(year, month, 1).getDay();
   const lastDate = new Date(year, month + 1, 0).getDate();
-
+  console.log(year, month, 1, firstDay);
   const dates = [];
   // 저번달 끝부분
   for (let i = -firstDay + 1; i <= 0; i++) {
