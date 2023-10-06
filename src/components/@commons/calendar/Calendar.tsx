@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import FlexContainer from '../FlexContainer';
 import PageContainer from '../PageContainer';
 import styled from 'styled-components';
-import { getMonthly } from 'apis/getSch';
+import { getDaily, getMonthly } from 'apis/getSch';
 import { useQuery } from '@tanstack/react-query';
 
 const Calendar = (): JSX.Element => {
@@ -10,7 +10,7 @@ const Calendar = (): JSX.Element => {
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
 
-  const { data: obj, isFetching } = useQuery(['getMonthly', month, year], () => getMonthly(year, month));
+  const { data: obj, isFetching } = useQuery(['getMonthly', month, year], () => getMonthly(year, month, 1));
 
   return (
     <PageContainer justify="start">
@@ -20,7 +20,7 @@ const Calendar = (): JSX.Element => {
           {obj.map((weekArray, i) => (
             <WeekBox $wFull key={`${i}주`}>
               {weekArray.map((e) => (
-                <DayBox key={e.date} date={new Date(year, month, e.date).getDate()} timeList={e.timeList}></DayBox>
+                <DayBox key={e.date} dateObject={new Date(year, month, e.date)} timeList={e.timeList}></DayBox>
               ))}
             </WeekBox>
           ))}
@@ -32,10 +32,10 @@ const Calendar = (): JSX.Element => {
 
 export default Calendar;
 
-const DayBox = ({ date, timeList }: DayProps): JSX.Element => {
+const DayBox = ({ dateObject, timeList }: DayProps): JSX.Element => {
   return (
-    <StyeldDayBox>
-      <BadgeCont>{date}</BadgeCont>
+    <StyeldDayBox onClick={() => getDaily(dateObject.getFullYear(), dateObject.getMonth(), dateObject.getDate())}>
+      <BadgeCont>{dateObject.getDate()}</BadgeCont>
       {!!timeList && (
         <BadgeCont>
           {timeList.map((t) => (
@@ -50,7 +50,7 @@ const DayBox = ({ date, timeList }: DayProps): JSX.Element => {
 };
 
 interface DayProps {
-  date: number;
+  dateObject: Date;
   timeList: string[];
   children?: any;
 }
