@@ -6,10 +6,6 @@ import useForm from 'hooks/useForm';
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props {
-  doneStateHandler: () => void;
-}
-
 const AddGroup = ({ doneStateHandler }: Props): JSX.Element => {
   interface MarketInfo {
     marketName: string;
@@ -40,10 +36,10 @@ const AddGroup = ({ doneStateHandler }: Props): JSX.Element => {
       <span className="text-center text-xl font-bold">그룹 생성</span>
       <GradationBox width="100%">
         <FlexContainer $gap="0">
-          <InputGroup id="marketName" onChange={formHandler} labelName="상호명" />
-          <InputGroup id="marketNumber" onChange={formHandler} labelName="사업자 번호" />
-          <InputGroup id="mainAddress" onChange={formHandler} labelName="주소1" />
-          <InputGroup id="detailAddress" onChange={formHandler} labelName="주소2" />
+          <InputBar id="marketName" onChange={formHandler} labelName="상호명" />
+          <InputBar id="marketNumber" onChange={formHandler} labelName="사업자 번호" />
+          <InputBar id="mainAddress" onChange={formHandler} labelName="주소1" />
+          <InputBar id="detailAddress" onChange={formHandler} labelName="주소2" />
         </FlexContainer>
       </GradationBox>
       <SubmitButton onClick={submitHandler}>그룹 생성하기</SubmitButton>
@@ -53,7 +49,7 @@ const AddGroup = ({ doneStateHandler }: Props): JSX.Element => {
 
 export default AddGroup;
 
-const InputGroup = ({ onChange, id, labelName }: InputProps): JSX.Element => {
+const InputBar = ({ onChange, id, labelName }: InputProps): JSX.Element => {
   return (
     <InputBox $direction="row" $padding="0">
       <Label htmlFor={id}>{labelName}</Label>
@@ -61,6 +57,10 @@ const InputGroup = ({ onChange, id, labelName }: InputProps): JSX.Element => {
     </InputBox>
   );
 };
+
+interface Props {
+  doneStateHandler: () => void;
+}
 
 interface InputProps {
   onChange: any;
