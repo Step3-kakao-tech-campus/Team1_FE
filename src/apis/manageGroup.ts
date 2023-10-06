@@ -7,7 +7,7 @@ interface MarketInfo {
   detailAddress: string;
 }
 
-const addNewGroup = async ({ marketName, marketNumber, mainAddress, detailAddress }: MarketInfo) => {
+export const addNewGroup = async ({ marketName, marketNumber, mainAddress, detailAddress }: MarketInfo) => {
   return await instance.post(`/group`, {
     marketName: marketName,
     marketNumber: marketNumber,
@@ -16,4 +16,6 @@ const addNewGroup = async ({ marketName, marketNumber, mainAddress, detailAddres
   });
 };
 
-export { addNewGroup };
+export const getGroupMemberList = async () => {
+  return await instance.get(`/group`);
+};
