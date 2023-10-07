@@ -10,7 +10,7 @@ import OnBoardingSection from 'components/OnBoardingSection';
 const MainPage = (): JSX.Element => {
   const loginState = useSelector((state: RootState) => state.login);
   const isLogin: boolean = loginState.islogin;
-  const isGroup: boolean = loginState.userData?.groupId !== 0;
+  const isGroup: boolean = loginState.userData?.groupName.length > 0;
 
   return (
     <PageContainer withoutHeader={!isLogin} withoutBottonBar={!isGroup}>
