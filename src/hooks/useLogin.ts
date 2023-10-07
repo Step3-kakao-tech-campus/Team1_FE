@@ -10,8 +10,8 @@ interface UserGiveToSlice {
   userName: string;
   userId: number;
   userData: {
-    userName: '';
-    groupName: '';
+    userName: string;
+    groupName: string;
     isAdmin: null;
   };
 }
