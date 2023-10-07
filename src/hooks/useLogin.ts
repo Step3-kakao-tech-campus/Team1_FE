@@ -11,9 +11,7 @@ interface UserGiveToSlice {
   userId: number;
   userData: {
     userName: '';
-    userId: 0;
     groupName: '';
-    groupId: 0;
     isAdmin: null;
   };
 }
