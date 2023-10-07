@@ -5,17 +5,9 @@ interface LoginState {
   loginTime: number;
   islogin: boolean;
 
-  // userName: string;
-  // userId: number;
-  // groupName: string;
-  // groupId: number;
-  // isAdmin: boolean;
-
   userData: {
     userName: string;
-    userId: number;
     groupName: string;
-    groupId: number;
     isAdmin: boolean;
   };
 }
@@ -25,17 +17,9 @@ const initialState: LoginState = {
   loginTime: 0,
   islogin: false,
 
-  // userName: '',
-  // userId: 0,
-  // groupName: '',
-  // groupId: 0,
-  // isAdmin: false,
-
   userData: {
     userName: '',
-    userId: 0,
     groupName: '',
-    groupId: 0,
     isAdmin: false,
   },
 };
@@ -48,14 +32,7 @@ export const loginSlice = createSlice({
       state.token = action.payload.token;
       state.loginTime = action.payload.loginTime;
       state.islogin = action.payload.islogin;
-
       state.userData = action.payload.userData;
-
-      // state.userName = action.payload.userName;
-      // state.userId = action.payload.userId;
-      // state.groupName = action.payload.groupName;
-      // state.groupId = action.payload.groupId;
-      // state.isAdmin = action.payload.isAdmin;
     },
 
     clearUserReducer: (state: LoginState) => {
@@ -65,9 +42,7 @@ export const loginSlice = createSlice({
 
       state.userData = {
         userName: '',
-        userId: 0,
         groupName: '',
-        groupId: 0,
         isAdmin: false,
       };
     },
