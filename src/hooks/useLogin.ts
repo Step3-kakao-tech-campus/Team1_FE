@@ -6,14 +6,10 @@ import { convertPath } from 'apis/convertURI';
 import { postsignup } from 'apis/signup';
 import { postLogin } from 'apis/login';
 
-interface UserGiveToSlice {
+interface UserDataType {
   userName: string;
-  userId: number;
-  userData: {
-    userName: string;
-    groupName: string;
-    isAdmin: null;
-  };
+  groupName: string;
+  isAdmin: boolean;
 }
 
 interface UserGetBySignup {
@@ -58,7 +54,7 @@ const useLogin = (redirectPage?: string) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
-  const saveLogin = (token: string, userData: UserGiveToSlice) => {
+  const saveLogin = (token: string, userData: UserDataType) => {
     let redirect: string | null = localStorage.getItem('beforeLoginURL');
     if (redirect === null) {
       redirect = '/';
