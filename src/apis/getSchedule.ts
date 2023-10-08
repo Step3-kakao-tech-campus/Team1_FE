@@ -10,10 +10,10 @@ export const getDailyWorkers = async (year: number, month: number, date: number)
 
 export const getMonthly = async (year: number, month: number, memberId: number) => {
   const params = {
-    startWeekDate: `${year}-${month + 1}`,
+    month: `${year}-${month + 1}`,
     memberId: memberId,
   };
-  const response = await instance.get(`/schedule/fix/month/`, { params });
+  const response = await instance.get(`/schedule/fix/month`, { params });
   const worktime = response.data.work_summary;
   const monthly = response.data.schedule;
 
@@ -21,7 +21,6 @@ export const getMonthly = async (year: number, month: number, memberId: number) 
 
   // 1. 첫번째 월요일 찾기
   const dayOf1st = new Date(year, month, 1).getDay();
-  console.log(new Date(year, month, 1).toDateString());
   if (dayOf1st > 1) {
     firstMonday = 1 - dayOf1st;
   } else if (dayOf1st === 0) {
@@ -40,7 +39,7 @@ export const getMonthly = async (year: number, month: number, memberId: number) 
       const weekly = [];
       for (let j = i + firstMonday; j < i + firstMonday + 7; j++) {
         const emptyDaily = {
-          date: dateToString(new Date(year, month, j)),
+          date: dateToString(new Date(year, month, j + 1)),
           workTime: null,
         };
         weekly.push(emptyDaily);
