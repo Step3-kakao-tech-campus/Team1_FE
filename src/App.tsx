@@ -12,7 +12,7 @@ import SignupPage from 'pages/SignupPage';
 import InvitedPage from 'pages/InvitedPage';
 import AddGroupPage from 'pages/AddGroupPage';
 import HomePrivate from 'auth/HomePrivate';
-import OnBoardingPage from 'components/OnBoardingPage';
+import OnBoardingPage from 'pages/OnBoardingPage';
 import LogoutOnlyPrivate from 'auth/LogoutOnlyPrivate';
 
 function App(): JSX.Element {
