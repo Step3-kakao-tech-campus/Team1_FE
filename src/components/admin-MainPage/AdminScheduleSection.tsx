@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMonthly } from 'apis/getSchedule';
-import Dropdown from 'components/admin-home/Dropdown';
+import Dropdown from 'components/admin-MainPage/Dropdown';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Calendar from 'components/@commons/calendar/Calendar';
 import React, { Suspense } from 'react';
