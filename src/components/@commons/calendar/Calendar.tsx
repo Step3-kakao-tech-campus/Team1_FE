@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
-import FlexContainer from '../FlexContainer';
-import PageContainer from '../PageContainer';
-import styled from 'styled-components';
-import { getDailyWorkers, getMonthly } from 'apis/getSchedule';
+import React from 'react';
+import { getMonthly } from 'apis/getSchedule';
 import { useQuery } from '@tanstack/react-query';
+import Text from 'components/@commons/Text';
+import { Badge, BadgeCont, DateCont, InnerDayBox, MonthBox, OutterDayBox, WeekGrid } from './CalendarStyle';
+import FlexContainer from '../FlexContainer';
+import { NextButton, PrevButton } from '../iconButtons';
+import { dateAtom } from 'components/admin-MainPage/AdminScheduleSection';
+import { useAtom } from 'jotai';
 
 interface Props {
   selectedId: number;
@@ -21,24 +24,32 @@ const Calendar = ({ selectedId }: Props): JSX.Element => {
 
   const { data: obj } = useQuery(['getMonthly', year, month, selectedId], () => getMonthly(year, month, selectedId), {
     suspense: true,
-    enabled: selectedId !== null && selectedId !== 0,
+    enabled: selectedId !== 0,
   });
 
-  useEffect(() => {
-    console.log(obj?.table);
-  }, [obj]);
+  const [selectedDate, setSelectedDate] = useAtom(dateAtom);
 
   return (
     <>
-      <div>{`${month + 1} 월`}</div>
+      <FlexContainer $direction="row" $justify="space-between">
+        <PrevButton />
+        <Text size="lg" weight="bold">{`${year}  ${month + 1} 월`}</Text>
+        <NextButton />
+      </FlexContainer>
       {!!obj && (
         <MonthBox $wFull>
           {obj.table.map((weekArray: DailyData[], i) => (
-            <WeekBox $wFull key={`${i}주`}>
+            <WeekGrid key={`${i}주`}>
               {weekArray.map((e: DailyData) => (
-                <DayBox key={e.date} dateString={e.date} timeList={e.workTime}></DayBox>
+                <DayBox
+                  key={e.date}
+                  dateString={e.date}
+                  timeList={e.workTime}
+                  onClick={() => setSelectedDate((prev) => e.date)}
+                  isSelected={selectedDate === e.date}
+                />
               ))}
-            </WeekBox>
+            </WeekGrid>
           ))}
         </MonthBox>
       )}
@@ -51,62 +62,30 @@ export default Calendar;
 interface DayBoxProps {
   dateString: string;
   timeList: string[] | null;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+  isSelected: boolean;
 }
 
-const DayBox = ({ dateString, timeList }: DayBoxProps): JSX.Element => {
+const DayBox = ({ dateString, timeList, onClick, isSelected }: DayBoxProps): JSX.Element => {
   const [year, month, date] = dateString.split('-').map((e) => Number.parseInt(e));
 
   return (
-    <StyeldDayBox onClick={() => getDailyWorkers(year, month, date)} active={!timeList}>
-      <div>{date}</div>
-      {!!timeList && (
+    <OutterDayBox onClick={onClick} $disabled={timeList === null}>
+      <InnerDayBox $isSelected={isSelected}>
+        <DateCont $isToday={date === new Date().getDate()}>
+          <Text size="xs" weight="regular">
+            {date}
+          </Text>
+        </DateCont>
         <BadgeCont>
-          {timeList.map((t) => (
-            <Badge key={t} $time={t}>
-              {t}
-            </Badge>
-          ))}
+          {!!timeList &&
+            timeList.map((t) => (
+              <Badge key={t} $time={t}>
+                <Text size="sm">{t}</Text>
+              </Badge>
+            ))}
         </BadgeCont>
-      )}
-    </StyeldDayBox>
+      </InnerDayBox>
+    </OutterDayBox>
   );
 };
-
-const Badge = styled.div<{ $time?: string }>`
-  width: 100%;
-  height: 100%;
-  background-color: ${(props) =>
-    props.$time &&
-    (props.$time === '오픈'
-      ? props.theme.color.open
-      : props.$time === '미들'
-      ? props.theme.color.middle
-      : props.theme.color.close)};
-`;
-
-const BadgeCont = styled.div`
-  width: 100%;
-  height: 24px;
-`;
-
-const StyeldDayBox = styled(FlexContainer)<{ active?: boolean }>`
-  width: 100%;
-  border: 0.35px solid;
-  border-color: ${({ theme }) => theme.color.lightGray};
-  background-color: ${(props) => (props.active ? props.theme.color.lightGray : props.theme.color.backgroundColor)};
-  aspect-ratio: 0.75;
-  justify-content: start;
-  gap: 0;
-`;
-
-const WeekBox = styled(FlexContainer)`
-  gap: 0;
-  flex-direction: row;
-`;
-
-const MonthBox = styled(FlexContainer)`
-  gap: 0;
-  flex-direction: column;
-  border: 0.35px solid;
-  border-color: ${({ theme }) => theme.color.lightGray};
-`;
