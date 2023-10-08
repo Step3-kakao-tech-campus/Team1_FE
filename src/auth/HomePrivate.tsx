@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
 import AdminHomePage from 'components/admin-home/AdminHomePage';
 import NoGroupPage from 'components/admin-home/NoGroupPage';
+import OnBoardingPage from 'pages/OnBoardingPage';
 
 const HomePrivate = () => {
   const loginState = useSelector((state: RootState) => state.login);
@@ -26,7 +27,7 @@ const HomePrivate = () => {
           <div>매니저에게 초대받으세요</div>
         )
       ) : (
-        <Outlet />
+        <OnBoardingPage />
       )}
     </>
   );

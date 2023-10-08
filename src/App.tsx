@@ -19,11 +19,11 @@ function App(): JSX.Element {
   return (
     <ThemeProvider theme={myTheme}>
       <BrowserRouter>
-        <ErrorBoundary fallback={<p>에러...</p>}>
-          <Suspense fallback={<p>로딩...</p>}>
+        <ErrorBoundary fallback={<p>에러... app.tsx</p>}>
+          <Suspense fallback={<p>로딩... app.tsx</p>}>
             <Routes>
               <Route element={<HomePrivate />}>
-                <Route path={convertPath('/')} element={<OnBoardingPage />} />
+                <Route path={convertPath('/')} />
               </Route>
 
               <Route element={<LogoutOnlyPrivate />}>
