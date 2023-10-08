@@ -29,8 +29,8 @@ export const responseInterceptors = instance.interceptors.response.use(
   (response) => {
     console.log(response);
     // ----------------------------------- mockServer 테스트 용 dummyToken ---------------------------------------------
-    if (apiURL.includes('pstmn.io')) {
-      response.headers.authorization = 'Bearer eyJhbGciOiJIUzI1NiJ9.e30.njMZIzJGvFZh0w4vPwJ_ayCQUUKrp2-jkRrc0U8PwpA';
+    if (apiURL.includes('pstmn.io') && response.config.url?.includes('auth')) {
+      response.headers.authorization = process.env.REACT_APP_DUMMY_TOKEN;
     }
     // ----------------------------------------------------------------------------------------------------------------
     return response;
