@@ -10,8 +10,10 @@ import { convertPath } from 'apis/convertURI';
 import KakaoAuthPage from 'pages/KakaoAuthPage';
 import SignupPage from 'pages/SignupPage';
 import InvitedPage from 'pages/InvitedPage';
-import MainPage from 'pages/MainPage';
 import AddGroupPage from 'pages/AddGroupPage';
+import HomePrivate from 'auth/HomePrivate';
+import OnBoardingPage from 'components/OnBoardingPage';
+import LogoutOnlyPrivate from 'auth/LogoutOnlyPrivate';
 
 function App(): JSX.Element {
   return (
@@ -20,9 +22,15 @@ function App(): JSX.Element {
         <ErrorBoundary fallback={<p>에러...</p>}>
           <Suspense fallback={<p>로딩...</p>}>
             <Routes>
-              <Route path={convertPath('/')} element={<MainPage />} />
-              <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
-              <Route path={convertPath('/signup')} element={<SignupPage />} />
+              <Route element={<HomePrivate />}>
+                <Route path={convertPath('/')} element={<OnBoardingPage />} />
+              </Route>
+
+              <Route element={<LogoutOnlyPrivate />}>
+                <Route path={convertPath('/signup')} element={<SignupPage />} />
+                <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
+              </Route>
+
               <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
               <Route path={convertPath('/addGroup')} element={<AddGroupPage />} />
             </Routes>
