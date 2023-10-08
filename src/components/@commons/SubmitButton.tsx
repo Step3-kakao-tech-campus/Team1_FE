@@ -6,6 +6,7 @@ const SubmitButton = styled.button<{
   $disabledColor?: string;
   $disabled?: boolean;
   $width?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }>`
   display: flex;
   flex-direction: row;

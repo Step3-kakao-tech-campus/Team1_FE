@@ -14,7 +14,7 @@ interface Props {
   afterJoinHandler: any;
 }
 
-const InvitationTemplate = ({ invitationKey, afterJoinHandler }: Props): JSX.Element => {
+const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Element => {
   const loginState = useSelector((state: RootState) => state.login);
 
   const { modalOnHandler, modalOffHandler, ModalComponent } = useModal();
@@ -58,4 +58,4 @@ const InvitationTemplate = ({ invitationKey, afterJoinHandler }: Props): JSX.Ele
   );
 };
 
-export default InvitationTemplate;
+export default InvitationSection;
