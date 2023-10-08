@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getGroupInvitation } from 'apis/groupInvite';
+import { getGroupInfo } from 'apis/groupInvite';
 import FlexContainer from 'components/@commons/FlexContainer';
 import React from 'react';
 
@@ -12,7 +12,7 @@ const InvitationContent = ({ invitationKey }: Props): JSX.Element => {
   const { data: obj } = useQuery(
     ['invitation', invitationKey],
     () => {
-      return getGroupInvitation(invitationKey);
+      return getGroupInfo(invitationKey);
     },
     {
       suspense: true,

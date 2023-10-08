@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import FlexContainer from '../FlexContainer';
 import PageContainer from '../PageContainer';
 import styled from 'styled-components';
-import { getDaily, getMonthly } from 'apis/getSch';
+import { getDailyWorkers, getMonthly } from 'apis/getSchedule';
 import { useQuery } from '@tanstack/react-query';
 
 const Calendar = (): JSX.Element => {
@@ -10,17 +10,17 @@ const Calendar = (): JSX.Element => {
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
 
-  const { data: obj, isFetching } = useQuery(['getMonthly', month, year], () => getMonthly(year, month, 1));
+  const { data: obj } = useQuery(['getMonthly', month, year], () => getMonthly(year, month, 1));
 
   return (
     <PageContainer justify="start">
       <div>{`${month + 1} 월`}</div>
       {!!obj && (
         <MonthBox $wFull>
-          {obj.map((weekArray, i) => (
+          {obj.table.map((weekArray, i) => (
             <WeekBox $wFull key={`${i}주`}>
-              {weekArray.map((e) => (
-                <DayBox key={e.date} dateObject={new Date(year, month, e.date)} timeList={e.timeList}></DayBox>
+              {weekArray.map((e: any) => (
+                <DayBox key={e.date} dateString={e.date} timeList={e.workTime}></DayBox>
               ))}
             </WeekBox>
           ))}
@@ -32,10 +32,12 @@ const Calendar = (): JSX.Element => {
 
 export default Calendar;
 
-const DayBox = ({ dateObject, timeList }: DayProps): JSX.Element => {
+const DayBox = ({ dateString, timeList }: DayBoxProps): JSX.Element => {
+  const [year, month, date] = dateString.split('-').map((e) => Number.parseInt(e));
+
   return (
-    <StyeldDayBox onClick={() => getDaily(dateObject.getFullYear(), dateObject.getMonth(), dateObject.getDate())}>
-      <BadgeCont>{dateObject.getDate()}</BadgeCont>
+    <StyeldDayBox onClick={() => getDailyWorkers(year, month, date)}>
+      <BadgeCont>{date}</BadgeCont>
       {!!timeList && (
         <BadgeCont>
           {timeList.map((t) => (
@@ -49,8 +51,8 @@ const DayBox = ({ dateObject, timeList }: DayProps): JSX.Element => {
   );
 };
 
-interface DayProps {
-  dateObject: Date;
+interface DayBoxProps {
+  dateString: string;
   timeList: string[];
   children?: any;
 }
