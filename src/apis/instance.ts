@@ -12,12 +12,12 @@ const instance = axios.create({
 
 export const requestDefault = instance.interceptors.request.use(
   (config) => {
-    console.log(config);
-
     const loginState = store.getState().login;
     if (loginState.islogin) {
       config.headers.Authorization = loginState.token;
     }
+
+    console.log(config);
     return config;
   },
   (error) => {
@@ -28,11 +28,6 @@ export const requestDefault = instance.interceptors.request.use(
 export const responseInterceptors = instance.interceptors.response.use(
   (response) => {
     console.log(response);
-    // ----------------------------------- mockServer 테스트 용 dummyToken ---------------------------------------------
-    if (apiURL.includes('pstmn.io') && response.config.url?.includes('auth')) {
-      response.headers.authorization = process.env.REACT_APP_DUMMY_TOKEN;
-    }
-    // ----------------------------------------------------------------------------------------------------------------
     return response;
   },
   (error) => {
