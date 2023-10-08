@@ -5,7 +5,7 @@ import SubmitButton from 'components/@commons/SubmitButton';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const NoGroupPage = (): JSX.Element => {
+const AdminNoGroupPage = (): JSX.Element => {
   const navigate = useNavigate();
 
   return (
@@ -18,4 +18,4 @@ const NoGroupPage = (): JSX.Element => {
   );
 };
 
-export default NoGroupPage;
+export default AdminNoGroupPage;
