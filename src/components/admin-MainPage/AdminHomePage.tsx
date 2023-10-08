@@ -7,8 +7,8 @@ import AdminScheduleSection from './AdminScheduleSection';
 import PageContainer from 'components/@commons/PageContainer';
 
 const AdminHomePage = (): JSX.Element => {
-  const { data: obj } = useQuery(['getGroupMembersabcd'], getGroupMemberList, { suspense: true });
-  console.log(obj);
+  const { data: obj } = useQuery(['getGroupMembers'], getGroupMemberList, { suspense: true });
+
   return (
     <PageContainer justify="start">
       <FlexContainer $wFull>
