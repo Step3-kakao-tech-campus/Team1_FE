@@ -2,39 +2,38 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 
-interface Props {
-  members?: MemberType[];
+interface Props<T> {
+  members: T[];
+  selected: T | null;
+  setSelected: React.Dispatch<React.SetStateAction<T | null>>;
 }
 
 interface MemberType {
-  memberId: number;
   name: string;
 }
 
-/* 미완성입니다 */
-const Dropdown = ({ members }: Props): JSX.Element => {
+const Dropdown = <T extends MemberType>({ members, selected, setSelected }: Props<T>): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
-  const [Selected, setSelected] = useState<string | null>(null);
 
   const handleOnClick = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const itemOnClick = (member: MemberType) => {
-    setSelected((prev) => member.name);
+  const itemOnClick = (member: T) => {
+    setSelected((prev) => member);
     setIsOpen((prev) => false);
   };
 
   return (
     <div>
       <div className="flex justify-between items-center align-middle" onClick={handleOnClick}>
-        <span>{Selected !== null ? Selected : '선택'}</span>
+        <span>{!!selected ? selected.name : '선택'}</span>
         <span>{isOpen ? <IoMdArrowDropdown /> : <IoMdArrowDropup />}</span>
       </div>
       {isOpen && (
         <Contents>
           {members &&
-            members.map((member, index) => (
+            members.map((member: T) => (
               <ol onClick={() => itemOnClick(member)} key={member.name}>
                 {member.name}
               </ol>
