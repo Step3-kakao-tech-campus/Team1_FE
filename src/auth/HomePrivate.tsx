@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
 import AdminHomePage from 'components/admin-home/AdminHomePage';
 import NoGroupPage from 'components/admin-home/NoGroupPage';
-import OnBoardingPage from 'components/OnBoardingPage';
 
 const HomePrivate = () => {
   const loginState = useSelector((state: RootState) => state.login);
