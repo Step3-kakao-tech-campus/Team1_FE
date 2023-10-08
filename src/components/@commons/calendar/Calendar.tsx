@@ -5,28 +5,32 @@ import styled from 'styled-components';
 import { getDailyWorkers, getMonthly } from 'apis/getSchedule';
 import { useQuery } from '@tanstack/react-query';
 
-const Calendar = (): JSX.Element => {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
+interface Props {
+  table: DailyData[][];
+  month: number;
+}
 
-  const { data: obj } = useQuery(['getMonthly', month, year], () => getMonthly(year, month, 1));
+interface DailyData {
+  date: string;
+  workTime: string[];
+}
 
+const Calendar = ({ table, month }: Props): JSX.Element => {
   return (
-    <PageContainer justify="start">
+    <>
       <div>{`${month + 1} 월`}</div>
-      {!!obj && (
+      {!!table && (
         <MonthBox $wFull>
-          {obj.table.map((weekArray, i) => (
+          {table.map((weekArray: DailyData[], i) => (
             <WeekBox $wFull key={`${i}주`}>
-              {weekArray.map((e: any) => (
+              {weekArray.map((e: DailyData) => (
                 <DayBox key={e.date} dateString={e.date} timeList={e.workTime}></DayBox>
               ))}
             </WeekBox>
           ))}
         </MonthBox>
       )}
-    </PageContainer>
+    </>
   );
 };
 
