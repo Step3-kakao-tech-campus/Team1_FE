@@ -3,7 +3,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
 import AdminHomePage from 'components/admin-MainPage/AdminHomePage';
-import NoGroupPage from 'components/admin-MainPage/NoGroupPage';
+import NoGroupPage from 'components/admin-MainPage/AdminNoGroupPage';
 import OnBoardingPage from 'pages/OnBoardingPage';
 
 const HomePrivate = () => {
