@@ -55,10 +55,7 @@ const useLogin = (redirectPage?: string) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const saveLogin = (token: string, userData: UserDataType) => {
-    let redirect: string | null = localStorage.getItem('beforeLoginURL');
-    if (redirect === null) {
-      redirect = '/';
-    }
+    const redirect: string = localStorage.getItem('beforeLoginURL') || '/';
 
     if (typeof token !== 'string') return;
     dispatch(

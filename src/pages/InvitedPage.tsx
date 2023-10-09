@@ -8,7 +8,7 @@ const InvitedPage = (): JSX.Element => {
   // 로그인상태인 유저가 이미 그룹에 소속된 경우 : 리다이렉트 "/" 또는 에러페이지
 
   const param = useParams()?.invitationKey;
-  const invitationKey: string = !!param ? param : '';
+  const invitationKey: string = param || '';
 
   const [isDone, setisDone] = useState(false);
 
