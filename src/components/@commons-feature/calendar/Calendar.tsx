@@ -22,39 +22,50 @@ const Calendar = ({ selectedId }: Props): JSX.Element => {
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
 
-  const { data: obj } = useQuery(['getMonthly', year, month, selectedId], () => getMonthly(year, month, selectedId), {
-    suspense: true,
-    enabled: selectedId !== 0,
-  });
+  const { data: scheduleData } = useQuery(
+    ['getMonthly', year, month, selectedId],
+    () => getMonthly(year, month, selectedId),
+    {
+      suspense: true,
+      enabled: selectedId !== 0,
+    },
+  );
 
   const [selectedDate, setSelectedDate] = useAtom(dateAtom);
 
-  return (
-    <>
-      <FlexContainer $direction="row" $justify="space-between">
-        <PrevButton />
-        <Text size="lg" weight="bold">{`${year}  ${month + 1} 월`}</Text>
-        <NextButton />
-      </FlexContainer>
-      {!!obj && (
+  const dateOnClick = (isFixed: boolean, date: string) => {
+    const newObj = { date: date, isFixed: isFixed };
+    setSelectedDate((prev) => newObj);
+  };
+
+  if (!!scheduleData) {
+    return (
+      <>
+        <FlexContainer $direction="row" $justify="space-between">
+          <PrevButton />
+          <Text size="lg" weight="bold">{`${year}  ${month + 1} 월`}</Text>
+          <NextButton />
+        </FlexContainer>
+
         <MonthBox $wFull>
-          {obj.table.map((weekArray: DailyData[], i) => (
+          {scheduleData.table.map((weekArray: DailyData[], i) => (
             <WeekGrid key={`${i}주`}>
               {weekArray.map((e: DailyData) => (
                 <DayBox
                   key={e.date}
                   dateString={e.date}
                   timeList={e.workTime}
-                  onClick={() => setSelectedDate((prev) => e.date)}
-                  isSelected={selectedDate === e.date}
+                  onClick={() => dateOnClick(e.workTime !== null, e.date)}
+                  isSelected={selectedDate.date === e.date}
                 />
               ))}
             </WeekGrid>
           ))}
         </MonthBox>
-      )}
-    </>
-  );
+      </>
+    );
+  }
+  return <></>;
 };
 
 export default Calendar;
@@ -67,7 +78,7 @@ interface DayBoxProps {
 }
 
 const DayBox = ({ dateString, timeList, onClick, isSelected }: DayBoxProps): JSX.Element => {
-  const [year, month, date] = dateString.split('-').map((e) => Number.parseInt(e));
+  const date = dateString.split('-').map((e) => Number.parseInt(e))[2];
 
   return (
     <OutterDayBox onClick={onClick} $disabled={timeList === null}>
