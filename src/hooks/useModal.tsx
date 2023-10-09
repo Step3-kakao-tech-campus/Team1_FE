@@ -11,10 +11,6 @@ const useModal = () => {
     setIsOn((prev) => false);
   }, [isOn]);
 
-  interface ModalProps {
-    children: React.ReactNode;
-  }
-
   const ModalComponent = ({ children }: ModalProps): JSX.Element => {
     return isOn ? (
       <Background>
@@ -29,3 +25,7 @@ const useModal = () => {
 };
 
 export default useModal;
+
+interface ModalProps {
+  children: React.ReactNode;
+}

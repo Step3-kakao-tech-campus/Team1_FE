@@ -6,14 +6,14 @@ import useForm from 'hooks/useForm';
 import React from 'react';
 import styled from 'styled-components';
 
-const AddGroup = ({ doneStateHandler }: Props): JSX.Element => {
-  interface MarketInfo {
-    marketName: string;
-    marketNumber: string;
-    mainAddress: string;
-    detailAddress: string;
-  }
+interface MarketInfo {
+  marketName: string;
+  marketNumber: string;
+  mainAddress: string;
+  detailAddress: string;
+}
 
+const AddGroup = ({ doneStateHandler }: Props): JSX.Element => {
   const initialInfo: MarketInfo = {
     marketName: '',
     marketNumber: '',
