@@ -16,7 +16,7 @@ const useForm = <T extends StateType>(initialStateObject: T) => {
   );
 
   const selectOneHandler = useCallback(
-    (event: React.MouseEvent<any>, value: any) => {
+    (event: React.MouseEvent<HTMLElement>, value: any) => {
       console.log(event.currentTarget.id, value);
       const newObj = { ...obj, [event.currentTarget.id]: value };
       setObj((prev: T) => newObj);
