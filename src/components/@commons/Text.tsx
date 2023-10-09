@@ -7,7 +7,7 @@ interface Props {
   color?: string;
   weight?: 'bold' | 'semiBold' | 'medium' | 'regular' | 'light';
   block?: boolean;
-  children: any;
+  children: string | string[];
 }
 
 const Text = ({ size, color, weight, block, children }: Props): JSX.Element => {

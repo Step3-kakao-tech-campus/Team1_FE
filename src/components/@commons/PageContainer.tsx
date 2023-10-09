@@ -4,7 +4,7 @@ import HeaderNB from 'components/HeaderNB/HeaderNB';
 import BottomNB from 'components/BottomNB/BottomNB';
 
 interface Props {
-  children?: any;
+  children: React.ReactNode;
   gap?: string;
   padding?: string;
   justify?: string;

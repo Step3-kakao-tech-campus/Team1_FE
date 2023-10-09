@@ -12,7 +12,7 @@ const useModal = () => {
   }, [isOn]);
 
   interface ModalProps {
-    children: React.ReactNode | React.ReactNode[] | string;
+    children: React.ReactNode;
   }
 
   const ModalComponent = ({ children }: ModalProps): JSX.Element => {
