@@ -1,6 +1,6 @@
 import PageContainer from 'components/@commons/PageContainer';
-import AddGroup from 'components/admin-addGroup/AddGroup';
-import AddGroupDone from 'components/admin-addGroup/AddGroupDone';
+import AddGroup from 'components/admin-AddGroupPage/AddGroup';
+import AddGroupDone from 'components/admin-AddGroupPage/AddGroupDone';
 import React, { useState } from 'react';
 
 const AddGroupPage = (): JSX.Element => {

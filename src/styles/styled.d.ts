@@ -18,7 +18,7 @@ declare module 'styled-components' {
         xs: string;
         sm: string;
         base: string;
-        md: string;
+        xl: string;
         lg: string;
       };
       fontWeight: {

@@ -14,11 +14,11 @@ const myTheme: DefaultTheme = {
   },
   fonts: {
     fontSize: {
-      xs: '0.5rem',
-      sm: '0.75rem',
+      xs: '0.75rem',
+      sm: '0.875rem',
       base: '1rem',
-      md: '1.25rem',
-      lg: '1.5rem',
+      lg: '1.125rem',
+      xl: '1.25rem',
     },
     fontWeight: {
       extraBold: 800,
