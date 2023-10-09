@@ -11,7 +11,7 @@ import LoginOrSignup from 'components/@commons-feature/LoginOrSignup';
 
 interface Props {
   invitationKey: string;
-  afterJoinHandler: any;
+  afterJoinHandler: () => void;
 }
 
 const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Element => {
