@@ -1,8 +1,8 @@
 import Dropdown from 'components/admin-MainPage/Dropdown';
 import FlexContainer from 'components/@commons/FlexContainer';
-import Calendar from 'components/@commons/calendar/Calendar';
+import Calendar from 'components/@commons-feature/calendar/Calendar';
 import React, { Suspense } from 'react';
-import DailyWorkers from 'components/@commons/calendar/DailyWorkers';
+import DailyWorkers from 'components/@commons-feature/calendar/DailyWorkers';
 import { atom, useAtomValue } from 'jotai';
 
 interface Props {

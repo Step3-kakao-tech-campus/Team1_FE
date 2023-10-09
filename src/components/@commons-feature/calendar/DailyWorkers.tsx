@@ -1,9 +1,9 @@
 import React from 'react';
-import FlexContainer from '../FlexContainer';
+import FlexContainer from '../../@commons/FlexContainer';
 import { useQuery } from '@tanstack/react-query';
 import { getDailyWorkers } from 'apis/getSchedule';
 import styled from 'styled-components';
-import Text from '../Text';
+import Text from '../../@commons/Text';
 
 interface Props {
   date: string;

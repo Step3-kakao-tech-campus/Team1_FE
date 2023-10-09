@@ -3,8 +3,8 @@ import { getMonthly } from 'apis/getSchedule';
 import { useQuery } from '@tanstack/react-query';
 import Text from 'components/@commons/Text';
 import { Badge, BadgeCont, DateCont, InnerDayBox, MonthBox, OutterDayBox, WeekGrid } from './CalendarStyle';
-import FlexContainer from '../FlexContainer';
-import { NextButton, PrevButton } from '../iconButtons';
+import FlexContainer from '../../@commons/FlexContainer';
+import { NextButton, PrevButton } from '../../@commons/iconButtons';
 import { dateAtom } from 'components/admin-MainPage/AdminScheduleSection';
 import { useAtom } from 'jotai';
 
