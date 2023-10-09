@@ -20,29 +20,28 @@ const Dropdown = <T extends MemberType>({ members }: Props<T>): JSX.Element => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOnClick = () => {
+  const dropdownOnClick = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const itemOnClick = (m: T) => {
+  const contentOnClick = (m: T) => {
     setMember((prev) => m);
     setIsOpen((prev) => false);
   };
 
   return (
     <Container>
-      <FlexContainer $direction="row" onClick={handleOnClick} $align="center" $justify="space-between">
+      <FlexContainer $direction="row" onClick={dropdownOnClick} $align="center" $justify="space-between">
         <Text>{member.name !== '' ? member.name : '선택'}</Text>
         <Text>{isOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}</Text>
       </FlexContainer>
       {isOpen && (
         <FlexContainer $gap="0" $padding="8px 0">
-          {members &&
-            members.map((member: T) => (
-              <ol onClick={() => itemOnClick(member)} key={member.name}>
-                <Text>{member.name}</Text>
-              </ol>
-            ))}
+          {members?.map((member: T) => (
+            <ol onClick={() => contentOnClick(member)} key={member.name}>
+              <Text>{member.name}</Text>
+            </ol>
+          ))}
         </FlexContainer>
       )}
     </Container>
