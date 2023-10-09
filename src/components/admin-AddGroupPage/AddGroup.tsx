@@ -21,9 +21,9 @@ const AddGroup = ({ doneStateHandler }: Props): JSX.Element => {
     detailAddress: '',
   };
 
-  const { obj, formHandler } = useForm(initialInfo);
+  const { obj: marketInfo, formHandler } = useForm(initialInfo);
   const submitHandler = (): void => {
-    addNewGroup(obj)
+    addNewGroup(marketInfo)
       .then((res) => {
         doneStateHandler();
       })

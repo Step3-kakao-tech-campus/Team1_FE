@@ -24,13 +24,13 @@ interface Worker {
 
 const DailyWorkers = ({ date }: Props): JSX.Element => {
   const [y, m, d] = date.split('-').map((e) => Number.parseInt(e));
-  const { data: obj } = useQuery([date], () => getDailyWorkers(y, m, d), { suspense: true });
+  const { data: dailyData } = useQuery([date], () => getDailyWorkers(y, m, d), { suspense: true });
 
   return (
     <FlexContainer $wFull>
-      {obj && (
+      {dailyData && (
         <FlexContainer $direction="row">
-          {obj.data.schedule.map((timeData: TimeData) => (
+          {dailyData.data.schedule.map((timeData: TimeData) => (
             <FlexContainer key={timeData.title} $wFull $gap="10px">
               <TitleBox $time={timeData.title}>
                 <Text block size="lg" weight="semiBold">
