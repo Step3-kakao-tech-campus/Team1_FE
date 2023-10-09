@@ -29,11 +29,11 @@ const AdminScheduleSection = ({ members }: Props): JSX.Element => {
         </div>
         {nowMember.name !== '' && <div> 근무시간</div>}
       </FlexContainer>
-      <Suspense>
+      <Suspense fallback={<div>캘린더 로딩</div>}>
         <Calendar selectedId={nowMember.memberId} />
       </Suspense>
       {nowDate !== '' && (
-        <Suspense>
+        <Suspense fallback={<div>데일리 근무표 로딩</div>}>
           <DailyWorkers date={nowDate} />
         </Suspense>
       )}
