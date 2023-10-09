@@ -5,8 +5,6 @@ import styled from 'styled-components';
 interface Props {
   formHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
   toggleHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  signupBtnHandler: () => void;
-  userInfo: any;
 }
 
 const Addinfo = ({ formHandler, toggleHandler }: Props): JSX.Element => {
