@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
@@ -17,7 +17,9 @@ const HomePrivate = () => {
       {isLogin ? (
         isAdmin ? (
           hasGroup ? (
-            <AdminHomePage />
+            <Suspense fallback={<div>전체 페이지 로딩..........</div>}>
+              <AdminHomePage />
+            </Suspense>
           ) : (
             <AdminNoGroupPage />
           )
