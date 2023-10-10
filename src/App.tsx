@@ -22,21 +22,19 @@ function App(): JSX.Element {
       <Provider>
         <BrowserRouter>
           <ErrorBoundary fallback={<p>에러... app.tsx</p>}>
-            <Suspense fallback={<p>로딩... app.tsx</p>}>
-              <Routes>
-                <Route element={<HomePrivate />}>
-                  <Route path={convertPath('/')} element={<OnBoardingPage />} />
-                </Route>
+            <Routes>
+              <Route element={<HomePrivate />}>
+                <Route path={convertPath('/')} element={<OnBoardingPage />} />
+              </Route>
 
-                <Route element={<LogoutOnlyPrivate />}>
-                  <Route path={convertPath('/signup')} element={<SignupPage />} />
-                  <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
-                </Route>
+              <Route element={<LogoutOnlyPrivate />}>
+                <Route path={convertPath('/signup')} element={<SignupPage />} />
+                <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
+              </Route>
 
-                <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
-                <Route path={convertPath('/addGroup')} element={<AddGroupPage />} />
-              </Routes>
-            </Suspense>
+              <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
+              <Route path={convertPath('/addGroup')} element={<AddGroupPage />} />
+            </Routes>
           </ErrorBoundary>
         </BrowserRouter>
       </Provider>

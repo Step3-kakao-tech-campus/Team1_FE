@@ -1,9 +1,7 @@
 import instance from 'apis/instance';
 
-const postLogin = async (kakaoCode: string) => {
-  return await instance.post(`/auth/login`, {
-    code: kakaoCode,
-  });
+const postLogin = (body: { kakaoCode: string }) => {
+  return instance.post(`/auth/login`, body);
 };
 
 export { postLogin };

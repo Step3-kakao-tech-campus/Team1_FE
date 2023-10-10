@@ -1,10 +1,7 @@
 import instance from 'apis/instance';
 
-const postsignup = async (name: string, admin: boolean) => {
-  return await instance.post(`/auth/join`, {
-    userName: name,
-    isAdmin: admin,
-  });
+const postsignup = <T>(userInfo: T) => {
+  return instance.post(`/auth/join`, userInfo);
 };
 
 export { postsignup };

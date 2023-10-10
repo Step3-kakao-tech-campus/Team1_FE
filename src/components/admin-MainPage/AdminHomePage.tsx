@@ -7,12 +7,16 @@ import AdminScheduleSection from './AdminScheduleSection';
 import PageContainer from 'components/@commons/PageContainer';
 
 const AdminHomePage = (): JSX.Element => {
-  const { data: obj } = useQuery(['getGroupMembers'], getGroupMemberList, { suspense: true });
+  const { data: membersData } = useQuery(['getGroupMembers'], getGroupMemberList, { suspense: true });
 
   return (
     <PageContainer justify="start">
       <FlexContainer $wFull>
-        {obj?.data.members.length > 0 ? <AdminScheduleSection members={obj?.data.members} /> : <AdminNoMemberSection />}
+        {membersData?.data.members.length > 0 ? (
+          <AdminScheduleSection members={membersData?.data.members} />
+        ) : (
+          <AdminNoMemberSection />
+        )}
       </FlexContainer>
     </PageContainer>
   );

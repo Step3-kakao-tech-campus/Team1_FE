@@ -3,7 +3,7 @@ import FlexContainer from './FlexContainer';
 import styled from 'styled-components';
 
 interface Props {
-  children: any;
+  children: React.ReactNode;
 }
 
 const GrayBox = ({ children }: Props): JSX.Element => {

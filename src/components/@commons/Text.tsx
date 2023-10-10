@@ -7,11 +7,11 @@ interface Props {
   color?: string;
   weight?: 'bold' | 'semiBold' | 'medium' | 'regular' | 'light';
   block?: boolean;
-  children: any;
+  children: React.ReactNode;
 }
 
 const Text = ({ size, color, weight, block, children }: Props): JSX.Element => {
-  let fontSize = size === undefined ? 'base' : size;
+  let fontSize = size || 'base';
   switch (size) {
     case 'sm':
       fontSize = myTheme.fonts.fontSize.sm;
@@ -50,7 +50,7 @@ const Text = ({ size, color, weight, block, children }: Props): JSX.Element => {
       break;
   }
 
-  let fontColor = color === undefined ? myTheme.color.textColor : color;
+  let fontColor = color || myTheme.color.textColor;
 
   return (
     <StyledSpan $size={fontSize} $color={fontColor} $weight={fontweight} $block={block}>

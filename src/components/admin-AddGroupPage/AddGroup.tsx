@@ -6,14 +6,14 @@ import useForm from 'hooks/useForm';
 import React from 'react';
 import styled from 'styled-components';
 
-const AddGroup = ({ doneStateHandler }: Props): JSX.Element => {
-  interface MarketInfo {
-    marketName: string;
-    marketNumber: string;
-    mainAddress: string;
-    detailAddress: string;
-  }
+interface MarketInfo {
+  marketName: string;
+  marketNumber: string;
+  mainAddress: string;
+  detailAddress: string;
+}
 
+const AddGroup = ({ doneStateHandler }: Props): JSX.Element => {
   const initialInfo: MarketInfo = {
     marketName: '',
     marketNumber: '',
@@ -21,9 +21,9 @@ const AddGroup = ({ doneStateHandler }: Props): JSX.Element => {
     detailAddress: '',
   };
 
-  const { obj, formHandler } = useForm(initialInfo);
+  const { obj: marketInfo, formHandler } = useForm(initialInfo);
   const submitHandler = (): void => {
-    addNewGroup(obj)
+    addNewGroup<MarketInfo>(marketInfo)
       .then((res) => {
         doneStateHandler();
       })
@@ -63,7 +63,7 @@ interface Props {
 }
 
 interface InputProps {
-  onChange: any;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   id: string;
   labelName?: string;
 }

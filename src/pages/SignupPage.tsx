@@ -9,17 +9,22 @@ import useForm from 'hooks/useForm';
 import useLogin from 'hooks/useLogin';
 import signupValidator from 'utils/signupValidator';
 
+interface StateType {
+  [index: string]: string | boolean | null;
+  isAdmin: boolean | null;
+  userName: string;
+  agreement: boolean;
+}
+
+interface RequestBodyType {
+  isAdmin: boolean;
+  userName: string;
+}
+
 const signupPage = (): JSX.Element => {
   // 이미 가입된 유저인 경우 : 리다이렉트 "/"
 
   // 1. 폼 입력 상태 관리
-  interface StateType {
-    [index: string]: string | boolean | null;
-    isAdmin: boolean | null;
-    userName: string;
-    agreement: boolean;
-  }
-
   const initalInfo: StateType = {
     isAdmin: null,
     userName: '',
@@ -32,7 +37,7 @@ const signupPage = (): JSX.Element => {
   const { signup } = useLogin();
 
   const signupBtnHandler = () => {
-    signup(userInfo);
+    userInfo.isAdmin !== null && signup(userInfo);
   };
 
   return (
@@ -41,17 +46,12 @@ const signupPage = (): JSX.Element => {
         <p className="align-middle text-xl">가입하기</p>
       </FlexContainer>
 
-      <SelectType selectOneHandler={selectOneHandler} userInfo={userInfo} />
+      <SelectType<StateType> selectOneHandler={selectOneHandler<boolean>} userInfo={userInfo} />
 
       {userInfo.isAdmin !== null && (
         <FlexContainer $wFull $padding="0 40px">
-          <Addinfo
-            formHandler={formHandler}
-            toggleHandler={toggleHandler}
-            signupBtnHandler={signupBtnHandler}
-            userInfo={userInfo}
-          />
-          <SubmitButton onClick={signupBtnHandler} disabled={!signupValidator(userInfo)}>
+          <Addinfo formHandler={formHandler} toggleHandler={toggleHandler} />
+          <SubmitButton onClick={signupBtnHandler} disabled={!signupValidator<StateType>(userInfo)}>
             가입 완료
           </SubmitButton>
         </FlexContainer>

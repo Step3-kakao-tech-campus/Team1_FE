@@ -11,7 +11,7 @@ import LoginOrSignup from 'components/@commons-feature/LoginOrSignup';
 
 interface Props {
   invitationKey: string;
-  afterJoinHandler: any;
+  afterJoinHandler: () => void;
 }
 
 const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Element => {
@@ -20,21 +20,17 @@ const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Elem
   const { modalOnHandler, modalOffHandler, ModalComponent } = useModal();
 
   // 초대 승인 클릭 시
-  const AcceptBtnHandler = (): void => {
-    switch (loginState.islogin) {
-      case false: // 비로그인 상태일 때
-        modalOnHandler(); // 로그인/회원가입 모달
-        break;
-
-      case true: // 로그인 상태일 때
-        postGroupJoin(invitationKey)
-          .then((res) => {
-            afterJoinHandler(); // 그룹 가입 완료 페이지로 이동
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        break;
+  const acceptBtnHandler = (): void => {
+    if (loginState.islogin) {
+      postGroupJoin(invitationKey)
+        .then((res) => {
+          afterJoinHandler(); // 그룹 가입 완료 페이지로 이동
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      modalOnHandler();
     }
   };
 
@@ -51,7 +47,7 @@ const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Elem
             <InvitationContent invitationKey={invitationKey} />
           </Suspense>
 
-          <SubmitButton onClick={AcceptBtnHandler}>승인하기</SubmitButton>
+          <SubmitButton onClick={acceptBtnHandler}>승인하기</SubmitButton>
         </ErrorBoundary>
       </FlexContainer>
     </>

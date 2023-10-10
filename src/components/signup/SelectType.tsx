@@ -2,12 +2,16 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props {
-  selectOneHandler: any;
-  userInfo: any;
+interface Props<T> {
+  selectOneHandler: (event: React.MouseEvent<HTMLElement>, value: boolean) => void;
+  userInfo: T;
 }
 
-const SelectType = ({ selectOneHandler, userInfo }: Props): JSX.Element => {
+interface UserType {
+  isAdmin: boolean | null;
+}
+
+const SelectType = <T extends UserType>({ selectOneHandler, userInfo }: Props<T>): JSX.Element => {
   return (
     <FlexContainer $direction="row" $wFull={true} $padding="0 40px">
       <Button id="isAdmin" onClick={(e) => selectOneHandler(e, true)} $isSelected={userInfo.isAdmin === true}>
