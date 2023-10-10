@@ -2,8 +2,8 @@ import React from 'react';
 import FlexContainer from 'components/@commons/FlexContainer';
 import PageContainer from 'components/@commons/PageContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
-import Addinfo from 'components/signup/Addinfo';
-import SelectType from 'components/signup/SelectType';
+import Addinfo from 'pages/SignupPage/Addinfo';
+import SelectType from 'pages/SignupPage/SelectType';
 
 import useForm from 'hooks/useForm';
 import useLogin from 'hooks/useLogin';

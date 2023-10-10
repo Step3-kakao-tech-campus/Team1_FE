@@ -1,4 +1,4 @@
-import Dropdown from 'components/admin-MainPage/Dropdown';
+import Dropdown from 'pages/admin-MainPage/Dropdown';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Calendar from 'components/@commons-feature/calendar/Calendar';
 import React, { Suspense } from 'react';
