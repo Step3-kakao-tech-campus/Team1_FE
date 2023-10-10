@@ -9,9 +9,13 @@ interface Props {
 
 const InvitationContent = ({ invitationKey }: Props): JSX.Element => {
   // 초대링크 페이지 접속 시
-  const { data: marketData } = useQuery(['invitation', invitationKey], () => getGroupInfo(invitationKey), {
-    suspense: true,
-  });
+  const { data: marketData } = useQuery(
+    ['invitation', invitationKey],
+    () => getGroupInfo({ inviteKey: invitationKey }),
+    {
+      suspense: true,
+    },
+  );
   return (
     <FlexContainer>
       <FlexContainer $align="center" $padding="20px">
