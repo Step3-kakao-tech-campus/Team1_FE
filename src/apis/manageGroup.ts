@@ -1,19 +1,7 @@
 import instance from 'apis/instance';
 
-interface MarketInfo {
-  marketName: string;
-  marketNumber: string;
-  mainAddress: string;
-  detailAddress: string;
-}
-
-export const addNewGroup = ({ marketName, marketNumber, mainAddress, detailAddress }: MarketInfo) => {
-  return instance.post(`/group`, {
-    marketName: marketName,
-    marketNumber: marketNumber,
-    mainAddress: mainAddress,
-    detailAddress: detailAddress,
-  });
+export const addNewGroup = <T>(marketInfo: T) => {
+  return instance.post(`/group`, marketInfo);
 };
 
 export const getGroupMemberList = () => {

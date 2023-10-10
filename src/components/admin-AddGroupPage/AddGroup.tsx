@@ -23,7 +23,7 @@ const AddGroup = ({ doneStateHandler }: Props): JSX.Element => {
 
   const { obj: marketInfo, formHandler } = useForm(initialInfo);
   const submitHandler = (): void => {
-    addNewGroup(marketInfo)
+    addNewGroup<MarketInfo>(marketInfo)
       .then((res) => {
         doneStateHandler();
       })
