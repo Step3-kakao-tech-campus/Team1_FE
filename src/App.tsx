@@ -8,9 +8,9 @@ import { myTheme } from 'styles/myTheme';
 import { convertPath } from 'apis/convertURI';
 
 import KakaoAuthPage from 'pages/KakaoAuthPage';
-import SignupPage from 'pages/SignupPage';
-import InvitedPage from 'pages/InvitedPage';
-import AddGroupPage from 'pages/AddGroupPage';
+import SignupPage from 'pages/SignupPage/SignupPage';
+import InvitedPage from 'pages/alba-InvitedPage/InvitedPage';
+import AddGroupPage from 'pages/admin-AddGroupPage/AddGroupPage';
 import HomePrivate from 'auth/HomePrivate';
 import LogoutOnlyPrivate from 'auth/LogoutOnlyPrivate';
 import OnBoardingPage from 'pages/OnBoardingPage';
