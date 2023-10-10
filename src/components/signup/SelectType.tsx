@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface Props<T> {
-  selectOneHandler: (event: React.MouseEvent<HTMLElement>, value: any) => void;
+  selectOneHandler: (event: React.MouseEvent<HTMLElement>, value: boolean) => void;
   userInfo: T;
 }
 
