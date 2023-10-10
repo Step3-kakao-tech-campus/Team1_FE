@@ -16,6 +16,11 @@ interface StateType {
   agreement: boolean;
 }
 
+interface RequestBodyType {
+  isAdmin: boolean;
+  userName: string;
+}
+
 const signupPage = (): JSX.Element => {
   // 이미 가입된 유저인 경우 : 리다이렉트 "/"
 
@@ -32,7 +37,7 @@ const signupPage = (): JSX.Element => {
   const { signup } = useLogin();
 
   const signupBtnHandler = () => {
-    signup(userInfo);
+    userInfo.isAdmin !== null && signup(userInfo);
   };
 
   return (

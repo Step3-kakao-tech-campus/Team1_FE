@@ -25,8 +25,7 @@ const useLogin = (redirectPage?: string) => {
   };
 
   const signup = (userInfo: UserGetBySignup): void => {
-    if (userInfo.isAdmin === null) return;
-    postsignup(userInfo.userName, userInfo.isAdmin)
+    postsignup(userInfo)
       .then((response) => {
         // 로그인, 토큰 저장
         saveLogin(response.headers.authorization, response.data);
@@ -37,7 +36,7 @@ const useLogin = (redirectPage?: string) => {
   };
 
   const login = (code: string) => {
-    postLogin(code)
+    postLogin({ kakaoCode: code })
       .then((response) => {
         // 회원일 경우 로그인
         saveLogin(response.headers.authorization, response.data);
