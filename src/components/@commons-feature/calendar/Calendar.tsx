@@ -24,7 +24,7 @@ const Calendar = ({ selectedId }: Props): JSX.Element => {
 
   const { data: scheduleData } = useQuery(
     ['getMonthly', year, month, selectedId],
-    () => getMonthly(year, month, selectedId),
+    () => getMonthly({ year: year, month: month, memberId: selectedId }),
     {
       suspense: true,
       enabled: selectedId !== 0,

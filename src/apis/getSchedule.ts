@@ -1,18 +1,22 @@
 import instance from 'apis/instance';
 import { dateToString } from 'utils/dateToString';
 
-export const getDailyWorkers = (year: number, month: number, date: number) => {
+export const getDailyWorkers = (info: { year: number; month: number; date: number }) => {
+  const { year, month, date } = { ...info };
+
   const params = {
     startWeekDate: `${year}-${month + 1}-${date}`,
   };
   return instance.get(`/schedule/fix/day`, { params });
 };
 
-export const getMonthly = async (year: number, month: number, memberId: number) => {
+export const getMonthly = async (info: { year: number; month: number; memberId: number }) => {
+  const { year, month } = { ...info };
   const params = {
     month: `${year}-${month + 1}`,
-    memberId: memberId,
+    memberId: info.memberId,
   };
+
   const response = await instance.get(`/schedule/fix/month`, { params });
   const worktime = response.data.work_summary;
   const monthly = response.data.schedule;

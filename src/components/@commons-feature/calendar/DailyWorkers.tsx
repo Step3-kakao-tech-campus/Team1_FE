@@ -24,7 +24,9 @@ interface Worker {
 
 const DailyWorkers = ({ date }: Props): JSX.Element => {
   const [y, m, d] = date.split('-').map((e) => Number.parseInt(e));
-  const { data: dailyData } = useQuery([date], () => getDailyWorkers(y, m, d), { suspense: true });
+  const { data: dailyData } = useQuery([date], () => getDailyWorkers({ year: y, month: m, date: d }), {
+    suspense: true,
+  });
 
   return (
     <FlexContainer $wFull>
