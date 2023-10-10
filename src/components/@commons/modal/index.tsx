@@ -16,7 +16,8 @@ export const Background = styled.div`
 export const Box = styled.div`
   background-color: #ffffff;
   min-width: 250px;
-  width: 70%;
+  width: 85%;
+  max-width: 500px;
   padding: 15px;
 
   display: flex;
