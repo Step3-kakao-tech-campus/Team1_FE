@@ -11,7 +11,7 @@ const InvitationContent = ({ invitationKey }: Props): JSX.Element => {
   // 초대링크 페이지 접속 시
   const { data: marketData } = useQuery(
     ['invitation', invitationKey],
-    () => getGroupInfo({ inviteKey: invitationKey }),
+    () => getGroupInfo({ invitationKey: invitationKey }),
     {
       suspense: true,
     },

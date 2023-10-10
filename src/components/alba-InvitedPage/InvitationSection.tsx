@@ -22,7 +22,7 @@ const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Elem
   // 초대 승인 클릭 시
   const acceptBtnHandler = (): void => {
     if (loginState.islogin) {
-      postGroupJoin({ inviteKey: invitationKey })
+      postGroupJoin({ invitationKey: invitationKey })
         .then((res) => {
           afterJoinHandler(); // 그룹 가입 완료 페이지로 이동
         })
