@@ -41,7 +41,7 @@ const signupPage = (): JSX.Element => {
         <p className="align-middle text-xl">가입하기</p>
       </FlexContainer>
 
-      <SelectType<StateType> selectOneHandler={selectOneHandler} userInfo={userInfo} />
+      <SelectType<StateType> selectOneHandler={selectOneHandler<boolean>} userInfo={userInfo} />
 
       {userInfo.isAdmin !== null && (
         <FlexContainer $wFull $padding="0 40px">
