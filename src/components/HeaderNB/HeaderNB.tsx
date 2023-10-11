@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   HeaderContainer,
   HeaderInnerBox,
@@ -11,10 +11,18 @@ import { RootState } from 'states/store';
 import useLogin from 'hooks/useLogin';
 import tokenValidator from 'utils/tokenValidator';
 import { Alarm, Hamburger } from './icons';
+import Sidebar from 'components/@commons/sidebar/Sidebar';
+import { SidebarBackground, SidebarBox } from 'components/@commons/sidebar';
 
 const HeaderNB = (): JSX.Element => {
   const loginState = useSelector((state: RootState) => state.login);
   const { logout, loginBtnHandler } = useLogin('/');
+  const [openHamberger, setOpenHamberger] = useState<boolean>(false);
+
+  const sidebarHandler = () => {
+    setOpenHamberger(!openHamberger);
+  };
+
   if (loginState.islogin && !tokenValidator(loginState.token)) {
     logout();
   }
@@ -22,9 +30,16 @@ const HeaderNB = (): JSX.Element => {
     <HeaderContainer>
       <HeaderInnerBox>
         <HeaderLeftMenuGroup>
-          <button>
+          <button onClick={sidebarHandler}>
             <Hamburger />
           </button>
+          {openHamberger && (
+            <SidebarBackground onClick={sidebarHandler}>
+              <SidebarBox onClick={(e) => e.stopPropagation()}>
+                <Sidebar />
+              </SidebarBox>
+            </SidebarBackground>
+          )}
         </HeaderLeftMenuGroup>
 
         <HeaderRightMenuGroup>
