@@ -33,17 +33,24 @@ const MonthlyContents = (): JSX.Element => {
     setSelectedWeek((prev) => newObj);
   };
 
+  const statusConverter = (weekStatus: WeekStatus) => {
+    switch (weekStatus) {
+      case 'allocatable':
+        return '모집 전';
+      case 'inProgress':
+        return '모집 중';
+      case 'closed':
+        return '모집 마감';
+    }
+  };
+
   return (
     <MonthBox $wFull>
       {weekStatusData?.table.map((weekObj: WeekObj, i) => (
         <WeekContainer key={`${i}주`} onClick={() => weekOnClickHandler(weekObj)}>
           <StatusBar $status={weekObj.weekStatus}>
             <Text size="xs" weight="regular">
-              {weekObj.weekStatus === 'allocatable'
-                ? '모집 전'
-                : weekObj.weekStatus === 'inProgress'
-                ? '모집 중'
-                : '모집 마감됨'}
+              {statusConverter(weekObj.weekStatus)}
             </Text>
           </StatusBar>
           {weekObj.dates[0] === selectedWeek.startWeekDate && <BorderBox />}
