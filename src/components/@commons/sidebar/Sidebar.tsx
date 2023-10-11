@@ -6,6 +6,9 @@ import useLogin from 'hooks/useLogin';
 import useModal from 'hooks/useModal';
 import { CloseButton } from '../iconButtons';
 import { getGroupMemberList } from 'apis/manageGroup';
+import { getInviteKey } from 'apis/groupInvite';
+import { KeyContainer, ModalHeader } from '.';
+import SubmitButton from '../SubmitButton';
 
 interface Props {}
 
@@ -14,32 +17,37 @@ const Sidebar = ({}: Props): JSX.Element => {
   const navigate = useNavigate();
   const { logout } = useLogin('/');
   const { isOn, modalOnHandler, modalOffHandler, ModalComponent } = useModal();
-
-  const ModalContents = () => {
-    return (
-      <div>
-        스타일링이 덜 된 모달 컨텐츠 입니다!
-        <CloseButton onClick={modalOffHandler} />
-      </div>
-    );
+  // const inviteKey = getInviteKey();
+  const inviteKey = {
+    response: {
+      invitationKey: 'abcde',
+    },
   };
 
-  const memberList = getGroupMemberList();
-  // const memberList = {
-  //   groupName: '롯데월드 어드벤쳐 부산',
-  //   members: [
-  //     {
-  //       memberId: 1,
-  //       name: '라이언',
-  //       isAdmin: true,
-  //     },
-  //     {
-  //       memberId: 2,
-  //       name: '어피치',
-  //       isAdmin: false,
-  //     },
-  //   ],
-  // };
+  // const memberList = getGroupMemberList();
+  const memberList = {
+    success: true,
+    response: {
+      groupName: '롯데월드 어드벤쳐 부산',
+      members: [
+        {
+          memberId: 1,
+          name: '라이언',
+          isAdmin: true,
+        },
+        {
+          memberId: 2,
+          name: '어피치',
+          isAdmin: false,
+        },
+      ],
+    },
+    error: null,
+  };
+
+  const handleCopyKeys = async (text: string) => {
+    return await navigator.clipboard.writeText(text);
+  };
 
   return (
     <>
@@ -47,18 +55,18 @@ const Sidebar = ({}: Props): JSX.Element => {
       <div>
         <div>
           <span className="mr-3 font-bold">
-            {loginInfo.userData.userName}
-            {/* {'라이언'} */}
+            {/* {loginInfo.userData.userName} */}
+            {'라이언'}
           </span>
           <span>
-            {loginInfo.userData.isAdmin && 'Admin'}
-            {/* {'Admin'} */}
+            {/* {loginInfo.userData.isAdmin && 'Admin'} */}
+            {'Admin'}
           </span>
         </div>
 
         <div>
-          {loginInfo.userData.groupName}
-          {/* {'롯데리아'} */}
+          {/* {loginInfo.userData.groupName} */}
+          {'롯데리아'}
         </div>
       </div>
 
@@ -72,14 +80,20 @@ const Sidebar = ({}: Props): JSX.Element => {
       <div>
         우리 매장 직원 목록
         <div>
-          {memberList.members.map((member) => (
+          {memberList.response.members.map((member) => (
             <ol key={member.memberId}>{member.name}</ol>
           ))}
         </div>
       </div>
       {isOn && (
         <ModalComponent>
-          <ModalContents />
+          <ModalHeader>
+            <CloseButton onClick={modalOffHandler} />
+          </ModalHeader>
+          <div>초대 링크</div>
+          <div>아래 링크에 접속하면 그룹에 가입됩니다.</div>
+          <KeyContainer>초대 키에요</KeyContainer>
+          <SubmitButton onClick={() => handleCopyKeys(inviteKey.response.invitationKey)}>링크 복사</SubmitButton>
         </ModalComponent>
       )}
     </>
