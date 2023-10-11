@@ -17,10 +17,10 @@ import { SidebarBackground, SidebarBox } from 'components/@commons/sidebar';
 const HeaderNB = (): JSX.Element => {
   const loginState = useSelector((state: RootState) => state.login);
   const { logout, loginBtnHandler } = useLogin('/');
-  const [openHamberger, setOpenHamberger] = useState<boolean>(false);
+  const [openHamburger, setOpenHamburger] = useState<boolean>(false);
 
   const sidebarHandler = () => {
-    setOpenHamberger(!openHamberger);
+    setOpenHamburger(!openHamburger);
   };
 
   if (loginState.islogin && !tokenValidator(loginState.token)) {
@@ -33,7 +33,7 @@ const HeaderNB = (): JSX.Element => {
           <button onClick={sidebarHandler}>
             <Hamburger />
           </button>
-          {openHamberger && (
+          {openHamburger && (
             <SidebarBackground onClick={sidebarHandler}>
               <SidebarBox onClick={(e) => e.stopPropagation()}>
                 <Sidebar />
