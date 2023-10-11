@@ -3,7 +3,7 @@ import { getGroupMemberList } from 'apis/manageGroup';
 import FlexContainer from 'components/@commons/FlexContainer';
 import React from 'react';
 import AdminNoMemberSection from './AdminNoMemberSection';
-import AdminScheduleSection from './AdminScheduleSection';
+import AdminScheduleSection from './SchedulePage/AdminScheduleSection';
 import PageContainer from 'components/@commons/PageContainer';
 
 const AdminHomePage = (): JSX.Element => {

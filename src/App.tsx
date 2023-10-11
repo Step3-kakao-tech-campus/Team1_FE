@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { myTheme } from 'styles/myTheme';
 
 import { convertPath } from 'apis/convertURI';
+import { Provider } from 'jotai';
 
 import KakaoAuthPage from 'pages/KakaoAuthPage';
 import SignupPage from 'pages/SignupPage/SignupPage';
@@ -13,7 +14,6 @@ import InvitedPage from 'pages/alba-InvitedPage/InvitedPage';
 import AddGroupPage from 'pages/admin-AddGroupPage/AddGroupPage';
 import HomePage from 'pages/HomePage';
 import LogoutOnlyPrivate from 'auth/LogoutOnlyPrivate';
-import { Provider } from 'jotai';
 import SelectWeekPage from 'pages/admin-SelectWeekPage/SelectWeekPage';
 import AdminOnlyPrivate from 'auth/AdminOnlyPrivate';
 import AdminHasGroupPrivate from 'auth/AdminHasGroupPrivate';
