@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// SidebarBackgound는 Modal과 똑같은 백그라운드 사용했습니다.
 export const SidebarBackground = styled.div`
   width: 100%;
   height: 100%;
@@ -14,13 +15,19 @@ export const SidebarBox = styled.div`
   background-color: #ffffff;
   height: 100%;
   width: 75%;
-  padding: 15px;
-  transition: 0.4s ease-in-out;
+  padding: 2rem;
 
   display: flex;
   flex-direction: column;
   justify-content: left;
   align-items: start;
 
-  gap: 30px;
+  gap: 1rem;
+`;
+
+export const Contents = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: start;
 `;
