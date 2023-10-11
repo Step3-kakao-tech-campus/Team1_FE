@@ -23,8 +23,7 @@ interface Worker {
 }
 
 const DailyWorkers = ({ date }: Props): JSX.Element => {
-  const [y, m, d] = date.split('-').map((e) => Number.parseInt(e));
-  const { data: dailyData } = useQuery([date], () => getDailyWorkers({ year: y, month: m, date: d }), {
+  const { data: dailyData } = useQuery([date], () => getDailyWorkers({ date: date }), {
     suspense: true,
   });
 
