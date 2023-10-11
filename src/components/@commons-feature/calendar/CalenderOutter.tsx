@@ -3,6 +3,8 @@ import Text from 'components/@commons/Text';
 import { NextButton, PrevButton } from 'components/@commons/iconButtons';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import React from 'react';
+import { WeekGrid } from './CalendarStyle';
+import weekdayArray from 'utils/weekdayArray';
 
 interface Props {
   children: React.ReactNode;
@@ -29,10 +31,24 @@ const CalenderOutter = ({ children, monthDataAtom }: Props): JSX.Element => {
         <Text size="lg" weight="bold">{`${year}  ${month + 1} 월`}</Text>
         <NextButton onClick={() => monthMoveHandler(+1)} />
       </FlexContainer>
-
+      <DayTitle />
       <>{children}</>
     </>
   );
 };
 
 export default CalenderOutter;
+
+const DayTitle = () => {
+  return (
+    <WeekGrid>
+      {weekdayArray.map((e) => (
+        <FlexContainer $wFull $align="center" key={e.eng}>
+          <Text size="xs" weight="bold">
+            {e.eng}
+          </Text>
+        </FlexContainer>
+      ))}
+    </WeekGrid>
+  );
+};
