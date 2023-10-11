@@ -50,7 +50,7 @@ export const OutterDayBox = styled(FlexContainer)<{
   cursor: pointer;
 `;
 
-export const InnerDayBox = styled.div<{ $isSelected: boolean }>`
+export const InnerDayBox = styled.div<{ $isSelected?: boolean }>`
   height: 100%;
   justify-content: start;
   align-items: start;
