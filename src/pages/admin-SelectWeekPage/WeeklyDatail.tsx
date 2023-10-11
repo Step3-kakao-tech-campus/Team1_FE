@@ -36,7 +36,7 @@ const WeeklyDatail = (): JSX.Element => {
 
 export default WeeklyDatail;
 
-const OpenDetail = ({ startWeekDate }: { startWeekDate: string }) => {
+const OpenDetail = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const navigate = useNavigate();
   const openHandler = () => {
     navigate(convertPath('/newSchedule/open'), { state: { startWeekDate: startWeekDate } });
@@ -44,7 +44,7 @@ const OpenDetail = ({ startWeekDate }: { startWeekDate: string }) => {
   return <SubmitButton onClick={openHandler}>스케줄 모집 시작하기</SubmitButton>;
 };
 
-const InProgressDetail = ({ startWeekDate }: { startWeekDate: string }) => {
+const InProgressDetail = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { data: applicantsStatusRes } = useQuery(
     ['getApplyStatus', startWeekDate],
     () => getApplyStatus({ startWeekDate: startWeekDate }),
@@ -66,7 +66,7 @@ const InProgressDetail = ({ startWeekDate }: { startWeekDate: string }) => {
   );
 };
 
-const ClosedDetail = ({ startWeekDate }: { startWeekDate: string }) => {
+const ClosedDetail = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { day, WeekBarComponent } = useWeekSelector(0);
   const [y, m, d] = startWeekDate.split('-').map((e) => Number.parseInt(e));
   const date = dateToString(new Date(y, m, d + day));
