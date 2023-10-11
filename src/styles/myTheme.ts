@@ -3,6 +3,7 @@ import { DefaultTheme } from 'styled-components';
 const myTheme: DefaultTheme = {
   color: {
     yellow: '#FFDF39',
+    lightYellow: '#FFF3B2',
     lightGray: '#F2F2F2',
     lightBlue: '#D8F2FF',
     gray: '#BEBEBE',
@@ -19,6 +20,8 @@ const myTheme: DefaultTheme = {
       base: '1rem',
       lg: '1.125rem',
       xl: '1.25rem',
+      xxl: '1.5rem',
+      xxxl: '2rem',
     },
     fontWeight: {
       extraBold: 800,
