@@ -1,11 +1,13 @@
 import Dropdown from 'pages/admin-MainPage/SchedulePage/Dropdown';
 import FlexContainer from 'components/@commons/FlexContainer';
 import React, { Suspense } from 'react';
-import DailyWorkers from 'components/@commons-feature/calendar/DailyWorkers';
+import DailyWorkersTemplate from 'components/@commons-feature/calendar/DailyWorkersTemplate';
 import { atom, useAtomValue } from 'jotai';
 import NotFixedDateBox from 'components/@commons-feature/calendar/NotFixedDateBox';
 import CalenderOutter from 'components/@commons-feature/calendar/CalenderOutter';
-import MonthlyInner from 'pages/admin-MainPage/SchedulePage/MonthlyInner';
+import FixedMonthlyConents from 'pages/admin-MainPage/SchedulePage/FixedMonthlyConents';
+import { useQuery } from '@tanstack/react-query';
+import { getDailyWorkers } from 'apis/getSchedule';
 
 interface Props {
   members: MemberType[];
@@ -26,16 +28,16 @@ const AdminScheduleSection = ({ members }: Props): JSX.Element => {
 
   return (
     <FlexContainer $wFull>
-      <FlexContainer $direction="row" $justify="space-between" $align="center">
-        <FlexContainer $align="center">
-          <Dropdown<MemberType> members={members} />
+      <FlexContainer $direction="row" $justify="space-between" $align="center" $gap="0" $padding="0 0 30px">
+        <FlexContainer $wFull $align="flex-start">
+          {nowMember.name !== '' && <div>이번달 근무시간</div>}
         </FlexContainer>
-        {nowMember.name !== '' && <div> 근무시간</div>}
+        <Dropdown<MemberType> members={members} />
       </FlexContainer>
 
       <CalenderOutter monthDataAtom={monthAtom}>
         <Suspense fallback={<div>캘린더 로딩</div>}>
-          <MonthlyInner selectedId={nowMember.memberId} />
+          <FixedMonthlyConents selectedId={nowMember.memberId} />
         </Suspense>
       </CalenderOutter>
 
@@ -52,3 +54,14 @@ const AdminScheduleSection = ({ members }: Props): JSX.Element => {
 };
 
 export default AdminScheduleSection;
+
+const DailyWorkers = ({ date }: { date: string }): JSX.Element => {
+  const { data: scheduleResponse } = useQuery([date], () => getDailyWorkers({ date: date }), {
+    suspense: true,
+  });
+  return (
+    <FlexContainer $wFull>
+      {scheduleResponse && <DailyWorkersTemplate dailyData={scheduleResponse?.data.schedule} />}
+    </FlexContainer>
+  );
+};
