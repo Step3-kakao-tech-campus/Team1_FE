@@ -21,13 +21,4 @@ export const SidebarBox = styled.div`
   flex-direction: column;
   justify-content: left;
   align-items: start;
-
-  gap: 1rem;
-`;
-
-export const Contents = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  align-items: start;
 `;
