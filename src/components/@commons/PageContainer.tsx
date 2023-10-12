@@ -17,7 +17,7 @@ const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar
     <WholeConatiner>
       <ColumnContainer>
         {!withoutHeader && <HeaderNB />}
-        <MainContainer $gap={gap} $padding={padding} $justify={justify}>
+        <MainContainer $gap={gap} $padding={padding} $justify={justify} $bottom={!withoutBottonBar}>
           {children}
         </MainContainer>
         {!withoutBottonBar && <BottomNB />}
@@ -56,6 +56,7 @@ const MainContainer = styled.main<{
   $gap?: string;
   $padding?: string;
   $justify?: string;
+  $bottom?: boolean;
 }>`
   flex-grow: 1;
 
@@ -66,4 +67,6 @@ const MainContainer = styled.main<{
   flex-direction: column;
   justify-content: ${(props) => (props.$justify ? props.$justify : 'center')};
   align-items: center;
+
+  padding-bottom: ${(props) => (props.$bottom ? '80px' : '')};
 `;

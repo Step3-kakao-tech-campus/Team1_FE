@@ -7,7 +7,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { myTheme } from 'styles/myTheme';
 
 interface Props {
-  onClick: any;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   size?: string;
   color?: string;
 }

@@ -10,6 +10,7 @@ interface Props {
   $justify?: string;
   $align?: string;
   $backgroundColor?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 const FlexContainer = styled.div<Props>`

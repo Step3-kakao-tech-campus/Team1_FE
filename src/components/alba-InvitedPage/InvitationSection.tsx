@@ -7,7 +7,7 @@ import useModal from 'hooks/useModal';
 import { useSelector } from 'react-redux';
 import { RootState } from 'states/store';
 import { postGroupJoin } from 'apis/groupInvite';
-import LoginOrSignup from 'components/@commons/LoginOrSignup';
+import LoginOrSignup from 'components/@commons-feature/LoginOrSignup';
 
 interface Props {
   invitationKey: string;
