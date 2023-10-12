@@ -4,11 +4,9 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useLogin from 'hooks/useLogin';
 import useModal from 'hooks/useModal';
-import { CloseButton } from '../iconButtons';
 import { getGroupMemberList } from 'apis/manageGroup';
 import { getInviteKey } from 'apis/groupInvite';
-import { KeyContainer, ModalHeader } from '.';
-import SubmitButton from '../SubmitButton';
+import GetInviteKey from 'components/admin-etc/GetInviteKey';
 
 interface Props {}
 
@@ -87,13 +85,7 @@ const Sidebar = ({}: Props): JSX.Element => {
       </div>
       {isOn && (
         <ModalComponent>
-          <ModalHeader>
-            <CloseButton onClick={modalOffHandler} />
-          </ModalHeader>
-          <div>초대 링크</div>
-          <div>아래 링크에 접속하면 그룹에 가입됩니다.</div>
-          <KeyContainer>초대 키에요</KeyContainer>
-          <SubmitButton onClick={() => handleCopyKeys(inviteKey.response.invitationKey)}>링크 복사</SubmitButton>
+          <GetInviteKey modalOffHandler={modalOffHandler} />
         </ModalComponent>
       )}
     </>
