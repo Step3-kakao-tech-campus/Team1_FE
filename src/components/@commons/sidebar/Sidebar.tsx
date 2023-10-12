@@ -16,7 +16,7 @@ const Sidebar = ({}: Props): JSX.Element => {
   const { logout } = useLogin('/');
   const { isOn, modalOnHandler, modalOffHandler, ModalComponent } = useModal();
 
-  const { data: memberList } = getGroupMemberList();
+  const memberList = getGroupMemberList();
 
   return (
     <>
