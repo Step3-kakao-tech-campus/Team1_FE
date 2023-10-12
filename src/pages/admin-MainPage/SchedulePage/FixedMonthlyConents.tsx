@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMonthly } from 'apis/getSchedule';
 import { useAtom } from 'jotai';
-import { dateAtom, monthAtom } from 'pages/admin-MainPage/SchedulePage/AdminScheduleSection';
-import React from 'react';
+import { dateAtom, memberAtom, monthAtom } from 'pages/admin-MainPage/SchedulePage/AdminScheduleSection';
+import React, { useEffect } from 'react';
 import { MonthBox, WeekGrid } from 'components/@commons-feature/calendar/CalendarStyle';
 import FixedDailyBox from './FixedDailyBox';
 
@@ -28,6 +28,13 @@ const FixedMonthlyConents = ({ selectedId }: Props): JSX.Element => {
       enabled: selectedId !== 0,
     },
   );
+
+  const [, setNowMember] = useAtom(memberAtom);
+
+  useEffect(() => {
+    if (!scheduleData) return;
+    setNowMember((prev) => ({ ...prev, totalWorkTime: scheduleData?.totalTime }));
+  }, [scheduleData]);
 
   const dateOnClick = (isFixed: boolean, date: string) => {
     const newObj = { date: date, isFixed: isFixed };
