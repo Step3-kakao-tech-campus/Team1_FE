@@ -25,7 +25,8 @@ const Dropdown = <T extends MemberType>({ members }: Props<T>): JSX.Element => {
   };
 
   const contentOnClick = (m: T) => {
-    setMember((prev) => m);
+    const newObj = { ...member, memberId: m.memberId, name: m.name };
+    setMember((prev) => newObj);
     setIsOpen((prev) => false);
   };
 
@@ -70,7 +71,7 @@ const ContentCont = styled.div`
 
 const Container = styled.div`
   position: absolute;
-  top: 0%;
+  top: 20%;
 
   width: 100%;
   display: flex;

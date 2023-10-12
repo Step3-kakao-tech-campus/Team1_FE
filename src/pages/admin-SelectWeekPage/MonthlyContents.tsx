@@ -77,7 +77,6 @@ const BorderBox = styled.div`
 const WeekContainer = styled.div`
   position: relative;
   width: 100%;
-  cursor: pointer;
 `;
 
 const StatusBar = styled.div<{ $status: WeekStatus }>`
