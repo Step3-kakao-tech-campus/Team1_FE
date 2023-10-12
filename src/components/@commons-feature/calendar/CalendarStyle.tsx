@@ -68,7 +68,6 @@ export const OutterDayBox = styled.div<{
   justify-content: start;
   align-items: start;
   gap: 4px;
-  cursor: pointer;
 `;
 
 export const WeekGrid = styled.div`
