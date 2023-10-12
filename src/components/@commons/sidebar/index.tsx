@@ -32,11 +32,6 @@ export const Contents = styled.div`
   align-items: start;
 `;
 
-export const ModalHeader = styled.div`
-  display: flex;
-  justify-content: right;
-`;
-
 export const KeyContainer = styled.div`
   background-color: white;
   height: 2rem;
