@@ -5,10 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import useLogin from 'hooks/useLogin';
 import useModal from 'hooks/useModal';
 import { getGroupMemberList } from 'apis/manageGroup';
-import { getInviteKey } from 'apis/groupInvite';
 import GetInviteKey from 'components/admin-etc/GetInviteKey';
 import styled from 'styled-components';
-import { myTheme } from 'styles/myTheme';
 
 interface Props {}
 
@@ -18,11 +16,7 @@ const Sidebar = ({}: Props): JSX.Element => {
   const { logout } = useLogin('/');
   const { isOn, modalOnHandler, modalOffHandler, ModalComponent } = useModal();
 
-  const memberList = getGroupMemberList();
-
-  const handleCopyKeys = async (text: string) => {
-    return await navigator.clipboard.writeText(text);
-  };
+  const { data: memberList } = getGroupMemberList();
 
   return (
     <>
