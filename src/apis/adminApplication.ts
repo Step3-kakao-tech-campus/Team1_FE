@@ -1,10 +1,13 @@
 import instance from 'apis/instance';
+import { dateToString } from 'utils/dateToString';
+
+export const getTimeTemplate = (params: { startWeekDate: string }) => {
+  return instance.get(`/schedule/worktime`, { params });
+};
 
 export const getApplyStatus = (params: { startWeekDate: string }) => {
   return instance.get(`/schedule/remian/week`, { params });
 };
-
-import { dateToString } from 'utils/dateToString';
 
 export const getWeekProgress = async (info: { year: number; month: number }) => {
   const { year, month } = { ...info };
