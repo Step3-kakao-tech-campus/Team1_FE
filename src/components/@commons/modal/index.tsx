@@ -25,5 +25,7 @@ export const Box = styled.div`
   justify-content: center;
   align-items: center;
 
+  border-radius: 16pt;
+
   gap: 30px;
 `;
