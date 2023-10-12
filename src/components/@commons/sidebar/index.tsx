@@ -31,13 +31,3 @@ export const Contents = styled.div`
   justify-content: left;
   align-items: start;
 `;
-
-export const KeyContainer = styled.div`
-  background-color: white;
-  height: 2rem;
-  width: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px solid;
-`;
