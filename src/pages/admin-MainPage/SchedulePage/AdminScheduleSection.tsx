@@ -8,6 +8,8 @@ import CalenderOutter from 'components/@commons-feature/calendar/CalenderOutter'
 import FixedMonthlyConents from 'pages/admin-MainPage/SchedulePage/FixedMonthlyConents';
 import { useQuery } from '@tanstack/react-query';
 import { getDailyWorkers } from 'apis/getSchedule';
+import styled from 'styled-components';
+import TotalWorkTime from './TotalWorkTime';
 
 interface Props {
   members: MemberType[];
@@ -16,11 +18,12 @@ interface Props {
 interface MemberType {
   memberId: number;
   name: string;
+  totalWorkTime: { monthly: number; weekly: number };
 }
 
-export const memberAtom = atom<MemberType>({ memberId: 0, name: '' });
-export const dateAtom = atom({ date: '', isFixed: false });
-export const monthAtom = atom({ year: new Date().getFullYear(), month: new Date().getMonth() });
+export const memberAtom = atom<MemberType>({ memberId: 0, name: '', totalWorkTime: { monthly: 0, weekly: 0 } }); // 선택된 멤버 정보
+export const dateAtom = atom({ date: '', isFixed: false }); // 선택된 날짜 정보
+export const monthAtom = atom({ year: new Date().getFullYear(), month: new Date().getMonth() }); // 선택된 달 정보
 
 const AdminScheduleSection = ({ members }: Props): JSX.Element => {
   const nowMember = useAtomValue(memberAtom);
@@ -28,18 +31,20 @@ const AdminScheduleSection = ({ members }: Props): JSX.Element => {
 
   return (
     <FlexContainer $wFull>
-      <FlexContainer $direction="row" $justify="space-between" $align="center" $gap="0" $padding="0 0 30px">
+      <MainTopBarCont>
         <FlexContainer $wFull $align="flex-start">
-          {nowMember.name !== '' && <div>이번달 근무시간</div>}
+          {nowMember.name !== '' && <TotalWorkTime totalWorkTime={nowMember.totalWorkTime} />}
         </FlexContainer>
         <Dropdown<MemberType> members={members} />
-      </FlexContainer>
+      </MainTopBarCont>
 
-      <CalenderOutter monthDataAtom={monthAtom}>
-        <Suspense fallback={<div>캘린더 로딩</div>}>
-          <FixedMonthlyConents selectedId={nowMember.memberId} />
-        </Suspense>
-      </CalenderOutter>
+      {nowMember.name !== '' && (
+        <CalenderOutter monthDataAtom={monthAtom}>
+          <Suspense fallback={<div>캘린더 로딩</div>}>
+            <FixedMonthlyConents selectedId={nowMember.memberId} />
+          </Suspense>
+        </CalenderOutter>
+      )}
 
       {nowDate.date !== '' &&
         (nowDate.isFixed ? (
@@ -65,3 +70,11 @@ const DailyWorkers = ({ date }: { date: string }): JSX.Element => {
     </FlexContainer>
   );
 };
+
+const MainTopBarCont = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  height: 60px;
+`;
