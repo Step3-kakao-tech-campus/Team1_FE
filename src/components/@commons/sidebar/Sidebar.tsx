@@ -7,98 +7,86 @@ import useModal from 'hooks/useModal';
 import { getGroupMemberList } from 'apis/manageGroup';
 import GetInviteKey from 'components/admin-etc/GetInviteKey';
 import styled from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
+import Text from '../Text';
+import { convertPath } from 'apis/convertURI';
+import FlexContainer from '../FlexContainer';
 
-interface Props {}
-
-const Sidebar = ({}: Props): JSX.Element => {
+const Sidebar = (): JSX.Element => {
   const loginInfo = useSelector((state: RootState) => state.login);
   const navigate = useNavigate();
   const { logout } = useLogin('/');
-  const { isOn, modalOnHandler, modalOffHandler, ModalComponent } = useModal();
+  const { modalOnHandler, modalOffHandler, ModalComponent } = useModal();
 
-  const memberList = getGroupMemberList();
+  const { data: memberList } = useQuery(['members'], getGroupMemberList);
 
   return (
     <>
       {/* 프로필 부분 */}
-      <div>
-        <Profile>
-          <FontStyle bold="bold">{loginInfo.userData.userName}</FontStyle>
-          <FontStyle>{loginInfo.userData.isAdmin && 'Admin'}</FontStyle>
-        </Profile>
-        <FontStyle size="0.75rem">{loginInfo.userData.groupName}</FontStyle>
-      </div>
+      <FlexContainer $gap="0" $margin="0 0 1rem 0" $direction="column">
+        <FlexContainer $align="center" $direction="row" $justify="left">
+          <Text size="lg" weight="bold">
+            {loginInfo.userData.userName}
+          </Text>
+          <Text>{loginInfo.userData.isAdmin && 'Admin'}</Text>
+        </FlexContainer>
+        <FlexContainer>
+          <Text>{loginInfo.userData.groupName}</Text>
+        </FlexContainer>
+      </FlexContainer>
       <HorizontalLine />
 
       {/* 기능 버튼 부분 */}
-      <Features>
-        <Feature>
-          <div onClick={() => navigate('/')}>사용 가이드</div>
-        </Feature>
-        <Feature>
-          <div onClick={logout}>로그아웃</div>
-        </Feature>
-        {!loginInfo?.userData?.isAdmin && (
-          <Feature>
-            <div onClick={modalOnHandler}>직원 초대하기</div>
-          </Feature>
+      <FlexContainer $margin="1.5rem 0 2rem 0" $direction="column" $gap="0.5rem">
+        <FlexContainer $margin="0 0 0.1rem 0">
+          <div onClick={() => navigate(convertPath('/'))}>
+            <Text size="lg">사용 가이드</Text>
+          </div>
+        </FlexContainer>
+        <FlexContainer $margin="0 0 0.1rem 0">
+          <div onClick={logout}>
+            <Text size="lg">로그아웃</Text>
+          </div>
+        </FlexContainer>
+        {loginInfo.userData.isAdmin && (
+          <FlexContainer $margin="0 0 0.1rem 0">
+            <div onClick={modalOnHandler}>
+              <Text size="lg">직원 초대하기</Text>
+            </div>
+          </FlexContainer>
         )}
-      </Features>
+      </FlexContainer>
 
       {/* 그룹원 조회 부분 */}
-      <FontStyle size="0.75rem" bold="bold">
-        우리 매장 직원 목록
-      </FontStyle>
+      <FlexContainer $margin="0 0 0.5rem 0">
+        <Text weight="bold">우리 매장 직원 목록</Text>
+      </FlexContainer>
       <HorizontalLine />
-      <FontStyle>
-        {memberList.response.members.map((member) => (
+      <Text>
+        {memberList?.data.members.map((member: { memberId: number; name: string; isAdmin: boolean }) => (
           <ol key={member.memberId}>
-            <Tap>
-              {member.name}
-              {member.isAdmin && ' (Admin)'}
-            </Tap>
+            <FlexContainer $margin="0 0 0.5rem 1rem">
+              <Text size="lg">
+                {member.name}
+                {member.isAdmin && ' (Admin)'}
+              </Text>
+            </FlexContainer>
           </ol>
         ))}
-      </FontStyle>
-      {isOn && (
-        <ModalComponent>
-          <GetInviteKey modalOffHandler={modalOffHandler} />
-        </ModalComponent>
-      )}
+      </Text>
+
+      <ModalComponent>
+        <GetInviteKey modalOffHandler={modalOffHandler} />
+      </ModalComponent>
     </>
   );
 };
 
 export default Sidebar;
 
-const Profile = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
-
-const Features = styled.div`
-  margin-bottom: 1rem;
-`;
-
-const Feature = styled.div`
-  margin-block: 0.5rem;
-`;
-
-const Tap = styled.div`
-  margin-left: 1rem;
-`;
-
-const FontStyle = styled.div<{ size?: string; bold?: string }>`
-  font-size: ${(props) => props.size};
-  font-weight: ${(props) => props.bold};
-`;
-
 const HorizontalLine = styled.div`
   border-top: 0.05rem solid;
   border-color: gray;
   width: 100%;
   height: 0.5rem;
-  /* margin-bottom: 0.5rem; */
-  margin-top: 0.5rem;
 `;
