@@ -16,6 +16,7 @@ export const SidebarBox = styled.div`
   height: 100%;
   width: 75%;
   padding: 2rem;
+  max-width: 25rem;
 
   display: flex;
   flex-direction: column;
