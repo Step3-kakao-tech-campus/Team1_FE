@@ -1,8 +1,37 @@
 import instance from 'apis/instance';
 import { dateToString } from 'utils/dateToString';
 
-export const getTimeTemplate = (params: { startWeekDate: string }) => {
-  return instance.get(`/schedule/worktime`, { params });
+interface Time {
+  title: string;
+  startTime: string;
+  endTime: string;
+}
+
+export const postOpenApplication = (params: {
+  weeklyAmount: number[][];
+  timeTemplate: Time[];
+  startWeekDate: string;
+}) => {
+  const timeTemplate = params.timeTemplate.map((timeObject) => ({
+    ...timeObject,
+    startTime: `${timeObject.startTime}:00`,
+    endTime: `${timeObject.endTime}:00`,
+  }));
+  const weeklyData = params.weeklyAmount.map((dailyArr) => {
+    return dailyArr.map((amount, i) => ({ ...timeTemplate[i], amount: amount }));
+  });
+
+  return instance.post(`/schedule/worktime`, { startWeekDate: params.startWeekDate, weeklyAmount: weeklyData });
+};
+
+export const getTimeTemplate = async (params: { startWeekDate: string }) => {
+  const response = await instance.get(`/schedule/worktime`, { params });
+  const template = response.data.template.map((time: Time) => ({
+    ...time,
+    startTime: time.startTime.slice(0, -3),
+    endTime: time.endTime.slice(0, -3),
+  }));
+  return { template };
 };
 
 export const getApplyStatus = (params: { startWeekDate: string }) => {
