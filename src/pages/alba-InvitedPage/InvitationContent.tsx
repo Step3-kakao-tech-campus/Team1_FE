@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getGroupInfo } from 'apis/groupInvite';
 import FlexContainer from 'components/@commons/FlexContainer';
+import Text from 'components/@commons/Text';
 import React from 'react';
 
 interface Props {
@@ -22,10 +23,12 @@ const InvitationContent = ({ invitationKey }: Props): JSX.Element => {
         <div className="w-20 h-20 rounded-full bg-blue-600">임시 프로필</div>
       </FlexContainer>
       <FlexContainer>
-        <span className="text-center font-bold text-3xl">{marketData?.data.groupName}</span>
+        <Text size="xxxl" weight="bold">
+          {marketData?.data.groupName}
+        </Text>
       </FlexContainer>
       <FlexContainer $wFull={true}>
-        <span className="text-center">그룹에 초대되었습니다.</span>
+        <Text>그룹에 초대되었습니다.</Text>
       </FlexContainer>
     </FlexContainer>
   );
