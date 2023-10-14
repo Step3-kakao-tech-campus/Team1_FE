@@ -2,7 +2,7 @@ import { useAtom } from 'jotai';
 import React from 'react';
 import { selectedWeekAtom, weekStatusMonthAtom } from './SelectWeekPage';
 import { useQuery } from '@tanstack/react-query';
-import { getWeekProgress } from 'apis/getWeekProgress';
+import { getWeekProgress } from 'apis/adminApplication';
 import { MonthBox, WeekGrid } from 'components/@commons-feature/calendar/CalendarStyle';
 import Text from 'components/@commons/Text';
 import styled from 'styled-components';

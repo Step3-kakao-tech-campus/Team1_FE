@@ -8,15 +8,19 @@ import { myTheme } from 'styles/myTheme';
 import { convertPath } from 'apis/convertURI';
 import { Provider } from 'jotai';
 
-import KakaoAuthPage from 'pages/KakaoAuthPage';
-import SignupPage from 'pages/SignupPage/SignupPage';
-import InvitedPage from 'pages/alba-InvitedPage/InvitedPage';
-import AddGroupPage from 'pages/admin-AddGroupPage/AddGroupPage';
-import HomePage from 'pages/HomePage';
 import LogoutOnlyPrivate from 'auth/LogoutOnlyPrivate';
-import SelectWeekPage from 'pages/admin-SelectWeekPage/SelectWeekPage';
 import AdminOnlyPrivate from 'auth/AdminOnlyPrivate';
 import AdminHasGroupPrivate from 'auth/AdminHasGroupPrivate';
+
+import HomePage from 'pages/HomePage';
+import KakaoAuthPage from 'pages/KakaoAuthPage';
+import SignupPage from 'pages/SignupPage/SignupPage';
+
+import InvitedPage from 'pages/alba-InvitedPage/InvitedPage';
+
+import AddGroupPage from 'pages/admin-AddGroupPage/AddGroupPage';
+import SelectWeekPage from 'pages/admin-SelectWeekPage/SelectWeekPage';
+import ApplicationOpenPage from 'pages/admin-ApplicationOpenPage/ApplicationOpenPage';
 
 function App(): JSX.Element {
   return (
@@ -36,6 +40,7 @@ function App(): JSX.Element {
                 <Route path={convertPath('/addGroup')} element={<AddGroupPage />} />
                 <Route element={<AdminHasGroupPrivate />}>
                   <Route path={convertPath('/newSchedule')} element={<SelectWeekPage />} />
+                  <Route path={convertPath('/newSchedule/open')} element={<ApplicationOpenPage />} />
                 </Route>
               </Route>
 

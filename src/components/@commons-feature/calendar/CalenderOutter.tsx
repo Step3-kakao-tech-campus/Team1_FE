@@ -43,7 +43,7 @@ const DayTitle = () => {
   return (
     <WeekGrid>
       {weekdayArray.map((e) => (
-        <FlexContainer $wFull $align="center" key={e.eng}>
+        <FlexContainer $wFull key={e.eng}>
           <Text size="xs" weight="bold">
             {e.eng}
           </Text>
