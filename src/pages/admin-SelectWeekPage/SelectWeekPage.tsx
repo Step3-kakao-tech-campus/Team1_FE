@@ -19,7 +19,7 @@ const SelectWeekPage = (): JSX.Element => {
           </Suspense>
         </CalenderOutter>
       </FlexContainer>
-      <FlexContainer $wFull $align="center">
+      <FlexContainer $wFull>
         <WeeklyDatail />
       </FlexContainer>
     </PageContainer>

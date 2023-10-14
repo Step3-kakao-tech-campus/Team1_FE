@@ -16,7 +16,7 @@ const GetInviteKey = ({ modalOffHandler }: Props): JSX.Element => {
 
   return (
     <FlexContainer $wFull $padding="20px" $gap="30px">
-      <FlexContainer $align="center" $gap="10px">
+      <FlexContainer $gap="10px">
         <Text size="xl" weight="bold">
           초대 링크
         </Text>
