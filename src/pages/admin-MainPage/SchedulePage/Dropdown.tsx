@@ -25,8 +25,7 @@ const Dropdown = <T extends MemberType>({ members }: Props<T>): JSX.Element => {
   };
 
   const contentOnClick = (m: T) => {
-    const newObj = { ...member, memberId: m.memberId, name: m.name };
-    setMember((prev) => newObj);
+    setMember((prev) => ({ ...prev, memberId: m.memberId, name: m.name }));
     setIsOpen((prev) => false);
   };
 
@@ -34,15 +33,15 @@ const Dropdown = <T extends MemberType>({ members }: Props<T>): JSX.Element => {
     <Whole>
       <Container>
         <TitleCont onClick={dropdownOnClick}>
-          <Text>{member.name !== '' ? member.name : '선택'}</Text>
-          <Text>{isOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}</Text>
+          <Text margin="0">{member.name || '선택'}</Text>
+          <Text margin="0">{isOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}</Text>
         </TitleCont>
         {isOpen && (
           <ContentCont>
             {members?.map((member: T) => (
-              <ol onClick={() => contentOnClick(member)} key={member.name}>
-                <Text>{member.name}</Text>
-              </ol>
+              <FlexContainer $wFull onClick={() => contentOnClick(member)} key={member.name}>
+                <Text margin="0">{member.name}</Text>
+              </FlexContainer>
             ))}
           </ContentCont>
         )}
@@ -55,18 +54,16 @@ export default Dropdown;
 
 const TitleCont = styled.div`
   display: flex;
-
   align-items: center;
-  justify-content: space-between;
   padding: 4px 0;
 `;
 
 const ContentCont = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-items: space-between;
-  padding: 8px 0;
+  padding: 16px 0;
+  gap: 10px;
 `;
 
 const Container = styled.div`
