@@ -8,17 +8,13 @@ import SelectType from 'pages/SignupPage/SelectType';
 import useForm from 'hooks/useForm';
 import useLogin from 'hooks/useLogin';
 import signupValidator from 'utils/signupValidator';
+import Logo from 'assets/schedule_albbaim.png';
 
 interface StateType {
   [index: string]: string | boolean | null;
   isAdmin: boolean | null;
   userName: string;
   agreement: boolean;
-}
-
-interface RequestBodyType {
-  isAdmin: boolean;
-  userName: string;
 }
 
 const signupPage = (): JSX.Element => {
@@ -41,15 +37,17 @@ const signupPage = (): JSX.Element => {
   };
 
   return (
-    <PageContainer gap="36px" withoutHeader withoutBottonBar>
-      <FlexContainer $direction="row" $wFull={true}>
-        <p className="align-middle text-xl">가입하기</p>
-      </FlexContainer>
+    <PageContainer withoutHeader withoutBottonBar gap="36px">
+      {userInfo.isAdmin === null && (
+        <FlexContainer $align="center" $padding="0 18%">
+          <img src={Logo} />
+        </FlexContainer>
+      )}
 
       <SelectType<StateType> selectOneHandler={selectOneHandler<boolean>} userInfo={userInfo} />
 
       {userInfo.isAdmin !== null && (
-        <FlexContainer $wFull $padding="0 40px">
+        <FlexContainer $wFull>
           <Addinfo formHandler={formHandler} toggleHandler={toggleHandler} />
           <SubmitButton onClick={signupBtnHandler} disabled={!signupValidator<StateType>(userInfo)}>
             가입 완료
