@@ -17,7 +17,7 @@ const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): 
   return (
     <>
       <ScrollContainer>
-        {recommendsRes?.data.recommends.map((candidateData: TimeData[][], candidateIndex: number) => (
+        {recommendsRes?.data.recommends.map((candidateData: object[][], candidateIndex: number) => (
           <FlexContainer
             $shrink="0"
             $width="32%"
@@ -41,15 +41,3 @@ const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): 
 };
 
 export default SelectRecommendsSection;
-
-interface TimeData {
-  title: string;
-  workerList: Worker[];
-  startTime: string;
-  endTime: string;
-}
-
-interface Worker {
-  name: string;
-  memberId: number;
-}
