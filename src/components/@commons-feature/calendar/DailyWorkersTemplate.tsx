@@ -30,8 +30,8 @@ const DailyWorkersTemplate = ({ dailyData }: { dailyData: TimeData[] }): JSX.Ele
             </Text>
           </TitleBox>
           <FlexContainer $gap="8px">
-            {timeData.workerList.map((w: Worker) => (
-              <NameBox key={w.name}>
+            {timeData.workerList.map((w: Worker, i) => (
+              <NameBox key={w.name + i}>
                 <Text>{w.name}</Text>
               </NameBox>
             ))}

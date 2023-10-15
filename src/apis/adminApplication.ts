@@ -7,6 +7,14 @@ interface Time {
   endTime: string;
 }
 
+export const postRecommends = (params: { selection: number }) => {
+  return instance.post(`/schedule/recommend`, { selection: params.selection });
+};
+
+export const getRecommends = (params: { startWeekDate: string }) => {
+  return instance.get(`/schedule/recommend`, { params });
+};
+
 export const postOpenApplication = (params: {
   weeklyAmount: number[][];
   timeTemplate: Time[];
@@ -17,9 +25,9 @@ export const postOpenApplication = (params: {
     startTime: `${timeObject.startTime}:00`,
     endTime: `${timeObject.endTime}:00`,
   }));
-  const weeklyData = params.weeklyAmount.map((dailyArr) => {
-    return dailyArr.map((amount, i) => ({ ...timeTemplate[i], amount: amount }));
-  });
+  const weeklyData = params.weeklyAmount.map((dailyArr) =>
+    dailyArr.map((amount, i) => ({ ...timeTemplate[i], amount: amount })),
+  );
 
   return instance.post(`/schedule/worktime`, { startWeekDate: params.startWeekDate, weeklyAmount: weeklyData });
 };

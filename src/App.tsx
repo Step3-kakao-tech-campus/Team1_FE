@@ -21,6 +21,7 @@ import InvitedPage from 'pages/alba-InvitedPage/InvitedPage';
 import AddGroupPage from 'pages/admin-AddGroupPage/AddGroupPage';
 import SelectWeekPage from 'pages/admin-SelectWeekPage/SelectWeekPage';
 import ApplicationOpenPage from 'pages/admin-ApplicationOpenPage/ApplicationOpenPage';
+import ApplicationClosePage from 'pages/admin-ApplicationClosePage/ApplicationClosePage';
 
 function App(): JSX.Element {
   return (
@@ -38,9 +39,11 @@ function App(): JSX.Element {
 
               <Route element={<AdminOnlyPrivate />}>
                 <Route path={convertPath('/addGroup')} element={<AddGroupPage />} />
+
                 <Route element={<AdminHasGroupPrivate />}>
                   <Route path={convertPath('/newSchedule')} element={<SelectWeekPage />} />
                   <Route path={convertPath('/newSchedule/open')} element={<ApplicationOpenPage />} />
+                  <Route path={convertPath('/newSchedule/close')} element={<ApplicationClosePage />} />
                 </Route>
               </Route>
 
