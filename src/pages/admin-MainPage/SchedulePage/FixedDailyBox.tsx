@@ -9,6 +9,7 @@ import {
 } from 'components/@commons-feature/calendar/CalendarStyle';
 import Text from 'components/@commons/Text';
 import { dateToString } from 'utils/dateToString';
+import { stringDateMove } from 'utils/stringDateMove';
 
 interface DayBoxProps {
   dateString: string;
@@ -18,7 +19,7 @@ interface DayBoxProps {
 }
 
 const FixedDailyBox = ({ dateString, timeList, onClick, isSelected }: DayBoxProps): JSX.Element => {
-  const date = dateString.split('-').map((e) => Number.parseInt(e))[2];
+  const date = Number.parseInt(dateString.split('-')[2]);
 
   return (
     <OutterDayBox onClick={onClick} $disabled={timeList === null}>
