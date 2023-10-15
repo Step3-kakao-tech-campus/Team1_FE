@@ -35,7 +35,9 @@ const AdminScheduleSection = ({ members }: Props): JSX.Element => {
         <FlexContainer $wFull $align="flex-start">
           {nowMember.name !== '' && <TotalWorkTime totalWorkTime={nowMember.totalWorkTime} />}
         </FlexContainer>
-        <Dropdown<MemberType> members={members} />
+        <FlexContainer $hFull $wFull $position="relative">
+          <Dropdown<MemberType> members={members} />
+        </FlexContainer>
       </MainTopBarCont>
 
       {nowMember.name !== '' && (
