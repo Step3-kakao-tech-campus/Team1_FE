@@ -7,7 +7,7 @@ const OnBoardingPage = (): JSX.Element => {
   return (
     <PageContainer withoutBottonBar withoutHeader>
       <FlexContainer $wFull>
-        <div className="w-full bg-slate-400 h-80 mb-8">임시 온보딩 컴포넌트</div>
+        <div>임시 온보딩 컴포넌트</div>
         <LoginOrSignup />
       </FlexContainer>
     </PageContainer>

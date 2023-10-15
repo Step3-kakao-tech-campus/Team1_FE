@@ -4,7 +4,6 @@ import { apiURL } from 'apis/convertURI';
 
 const instance = axios.create({
   baseURL: apiURL,
-  timeout: 3000,
   headers: {
     'Content-Type': 'application/json',
   },

@@ -7,7 +7,7 @@ import { Box, IconCont, MenuBtn, TextCont } from './BottomNBStyles';
 const BottomNB = (): JSX.Element => {
   return (
     <Box>
-      <Menu text="모집 시작" icon={<Start />} iconFill={<StartFill />} path="/newSchedule/open" />
+      <Menu text="모집 시작" icon={<Start />} iconFill={<StartFill />} path="/newSchedule" />
       <Menu text="모집 현황" icon={<Status />} iconFill={<StatusFill />} path="/newSchedule/status" />
       <Menu text="모집 마감" icon={<Close />} iconFill={<CloseFill />} path="/newSchedule/close" />
       <Menu text="확정 스케줄" icon={<MySch />} iconFill={<MySchFill />} path="/" />
