@@ -36,7 +36,7 @@ const useLogin = (redirectPage?: string) => {
   };
 
   const login = (code: string) => {
-    postLogin({ kakaoCode: code })
+    postLogin({ code: code })
       .then((response) => {
         // 회원일 경우 로그인
         saveLogin(response.headers.authorization, response.data);
