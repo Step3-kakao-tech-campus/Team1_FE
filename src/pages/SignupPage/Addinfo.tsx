@@ -10,7 +10,7 @@ interface Props {
 
 const Addinfo = ({ formHandler, toggleHandler }: Props): JSX.Element => {
   return (
-    <FlexContainer $wFull>
+    <FlexContainer $wFull $gap="30px">
       <Text>회원 가입을 위해 추가 정보를 입력해주세요</Text>
       <Input id="userName" onChange={formHandler} placeholder="이름" />
 
