@@ -4,7 +4,7 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
 import { memberAtom } from './AdminScheduleSection';
 import { useAtom } from 'jotai';
-import { DropDownCont } from 'components/admin-SchedulePage/Dropdown';
+import { DropDownCont } from 'components/PageStyledComponents/admin-SchedulePage/Dropdown';
 
 interface Props<T> {
   members: T[];

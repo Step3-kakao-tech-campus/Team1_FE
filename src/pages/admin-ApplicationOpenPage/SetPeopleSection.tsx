@@ -2,7 +2,7 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import GradationBox from 'components/@commons/GradationBox';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
-import { InputPeople } from 'components/admin-ApplicationOpenPage/setPeople';
+import { InputPeople } from 'components/PageStyledComponents/admin-ApplicationOpenPage/setPeople';
 import usePeopleAmount from 'hooks/admin-ApplicationOpenPage/usePeopleAmount';
 import React from 'react';
 

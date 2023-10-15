@@ -4,7 +4,11 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import { AddButton, CloseButton } from 'components/@commons/iconButtons';
-import { ButtonContainer, InputTime, InputTitle } from 'components/admin-ApplicationOpenPage/setTime';
+import {
+  ButtonContainer,
+  InputTime,
+  InputTitle,
+} from 'components/PageStyledComponents/admin-ApplicationOpenPage/setTime';
 import useTimeTemplate from 'hooks/admin-ApplicationOpenPage/useTimeTemplate';
 
 import { myTheme } from 'styles/myTheme';
