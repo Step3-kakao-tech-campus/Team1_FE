@@ -40,7 +40,7 @@ const signupPage = (): JSX.Element => {
     <PageContainer withoutHeader withoutBottonBar gap="36px">
       {userInfo.isAdmin === null && (
         <FlexContainer $align="center" $padding="0 18%">
-          <img src={Logo} />
+          <img src={Logo} width="100%" />
         </FlexContainer>
       )}
 
