@@ -1,6 +1,8 @@
+import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import useLogin from 'hooks/useLogin';
 import React from 'react';
+import styled from 'styled-components';
 
 interface Props {
   redirectPage?: string;
@@ -9,10 +11,12 @@ interface Props {
 const LoginOrSignup = ({ redirectPage = '/' }: Props): JSX.Element => {
   const { loginBtnHandler } = useLogin(redirectPage);
   return (
-    <div className="w-full flex flex-col gap-4">
-      <SubmitButton onClick={() => loginBtnHandler()}>카카오톡으로 로그인하기</SubmitButton>
-      <SubmitButton onClick={() => loginBtnHandler()}>카카오톡으로 시작하기</SubmitButton>
-    </div>
+    <FlexContainer $wFull>
+      <SubmitButton onClick={() => loginBtnHandler()}>카카오로 로그인하기</SubmitButton>
+      <SubmitButton $hasBorder $activeColor="white" onClick={() => loginBtnHandler()}>
+        카카오로 시작하기
+      </SubmitButton>
+    </FlexContainer>
   );
 };
 

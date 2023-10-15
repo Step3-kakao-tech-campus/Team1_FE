@@ -19,15 +19,12 @@ const InvitationContent = ({ invitationKey }: Props): JSX.Element => {
   );
   return (
     <FlexContainer>
-      <FlexContainer $align="center" $padding="20px">
-        <div className="w-20 h-20 rounded-full bg-blue-600">임시 프로필</div>
-      </FlexContainer>
       <FlexContainer>
         <Text size="xxxl" weight="bold">
           {marketData?.data.groupName}
         </Text>
       </FlexContainer>
-      <FlexContainer $wFull={true}>
+      <FlexContainer $wFull>
         <Text>그룹에 초대되었습니다.</Text>
       </FlexContainer>
     </FlexContainer>

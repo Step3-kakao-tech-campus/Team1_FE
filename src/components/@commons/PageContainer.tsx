@@ -38,8 +38,10 @@ const WholeConatiner = styled.div`
 `;
 
 const ColumnContainer = styled.div`
+  /* position: absolute;
   left: 50%;
-  transform: translateX('100%');
+  transform: translateX('-50%'); */
+  position: relative;
 
   width: 100%;
   height: 100%;
@@ -49,7 +51,6 @@ const ColumnContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: stretch;
 `;
 
 const MainContainer = styled.main<{
@@ -59,6 +60,7 @@ const MainContainer = styled.main<{
   $bottom?: boolean;
 }>`
   flex-grow: 1;
+  position: relative;
 
   gap: ${(props) => (props.$gap ? props.$gap : '20px')};
   padding: ${(props) => (props.$padding ? props.$padding : '28px')};
