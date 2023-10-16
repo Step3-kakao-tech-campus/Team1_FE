@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -36,11 +36,10 @@ function App(): JSX.Element {
 
               <Route element={<AdminOnlyPrivate />}>
                 <Route path={convertPath('/addGroup')} element={<AddGroupPage />} />
-                <ErrorBoundary fallback={<p></p>}>
-                  <Route path={convertPath('/newSchedule')} element={<SelectWeekPage />} />
-                  <Route path={convertPath('/newSchedule/open')} element={<ApplicationOpenPage />} />
-                  <Route path={convertPath('/newSchedule/close')} element={<ApplicationClosePage />} />
-                </ErrorBoundary>
+
+                <Route path={convertPath('/newSchedule')} element={<SelectWeekPage />} />
+                <Route path={convertPath('/newSchedule/open')} element={<ApplicationOpenPage />} />
+                <Route path={convertPath('/newSchedule/close')} element={<ApplicationClosePage />} />
               </Route>
 
               <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
