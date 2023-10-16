@@ -1,14 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setUserReducer, clearUserReducer } from 'states/slices/loginSlice';
-import { AppDispatch } from 'states/store';
 import { convertPath } from 'apis/convertURI';
 import { postsignup } from 'apis/signup';
 import { postLogin } from 'apis/login';
+import { atom, useAtom } from 'jotai';
+import React from 'react';
 
 interface UserDataType {
-  userName: string;
-  groupName: string;
   isAdmin: boolean;
 }
 
@@ -17,7 +14,14 @@ interface UserGetBySignup {
   isAdmin: boolean | null;
 }
 
+const defaultLoginState = { isLogin: false, token: '', isAdmin: false };
+// const loginAtom = atom(defaultLoginState);
+
 const useLogin = (redirectPage?: string) => {
+  const navigate = useNavigate();
+
+  /* ------------ 로그인 요청 부분 ------------ */
+
   const loginBtnHandler = (): void => {
     if (redirectPage === undefined) return;
     localStorage.setItem('beforeLoginURL', redirectPage);
@@ -28,7 +32,7 @@ const useLogin = (redirectPage?: string) => {
     postsignup(userInfo)
       .then((response) => {
         // 로그인, 토큰 저장
-        saveLogin(response.headers.authorization, response.data);
+        saveLoginData(response.headers.authorization, response.data);
       })
       .catch((error) => {
         // 에러 처리
@@ -39,7 +43,7 @@ const useLogin = (redirectPage?: string) => {
     postLogin({ code: code })
       .then((response) => {
         // 회원일 경우 로그인
-        saveLogin(response.headers.authorization, response.data);
+        saveLoginData(response.headers.authorization, response.data);
       })
       .catch((error) => {
         // 비회원일 경우
@@ -50,31 +54,39 @@ const useLogin = (redirectPage?: string) => {
       });
   };
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+  /* ------------ 로그인 상태 관리 부분 ------------ */
 
-  const saveLogin = (token: string, userData: UserDataType) => {
-    const redirect: string = localStorage.getItem('beforeLoginURL') || '/';
+  // const [loginState, setLoginState] = useAtom(loginAtom);
 
-    if (typeof token !== 'string') return;
-    dispatch(
-      setUserReducer({
-        token: token,
-        loginTime: Date.now(),
-        islogin: true,
-        userData: userData,
-      }),
-    );
+  const saveLoginData = (token: string, userData: UserDataType) => {
+    const redirect: string = sessionStorage.getItem('beforeLoginURL') || '/';
+    sessionStorage.removeItem('beforeLoginURL');
 
+    const loginData = {
+      token: token,
+      isLogin: true,
+      isAdmin: userData.isAdmin,
+    };
+
+    // setLoginState(loginData);
+    sessionStorage.setItem('login', JSON.stringify(loginData));
     navigate(convertPath(redirect));
   };
 
   const logout = () => {
-    dispatch(clearUserReducer());
+    sessionStorage.removeItem('login');
+    // setLoginState(defaultLoginState);
     navigate(convertPath('/'));
   };
 
-  return { logout, signup, login, loginBtnHandler };
+  const getLoginState = () => {
+    const stringData = sessionStorage.getItem('login');
+    if (stringData === null) return defaultLoginState;
+
+    return JSON.parse(stringData);
+  };
+
+  return { logout, signup, login, loginBtnHandler, getLoginState };
 };
 
 export default useLogin;

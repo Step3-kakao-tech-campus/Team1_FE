@@ -30,7 +30,7 @@ const AdminScheduleSection = ({ members }: Props): JSX.Element => {
   const nowDate = useAtomValue(dateAtom);
 
   return (
-    <FlexContainer $wFull>
+    <FlexContainer $wFull $hFull $justify="start">
       <MainTopBarCont>
         <FlexContainer $wFull $align="flex-start">
           {nowMember.name !== '' && <TotalWorkTime totalWorkTime={nowMember.totalWorkTime} />}

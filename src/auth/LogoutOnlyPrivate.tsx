@@ -1,12 +1,11 @@
-import { convertPath } from 'apis/convertURI';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
-import { RootState } from 'states/store';
+import { convertPath } from 'apis/convertURI';
+import useLogin from 'hooks/useLogin';
 
 const LogoutOnlyPrivate = (): JSX.Element => {
-  const loginState = useSelector((state: RootState) => state.login);
-  return loginState.islogin ? <Navigate to={convertPath('/')} /> : <Outlet />;
+  const loginState = useLogin().getLoginState();
+  return loginState.isLogin ? <Navigate to={convertPath('/')} /> : <Outlet />;
 };
 
 export default LogoutOnlyPrivate;

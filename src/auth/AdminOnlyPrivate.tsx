@@ -1,14 +1,15 @@
-import { convertPath } from 'apis/convertURI';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
-import { RootState } from 'states/store';
+import { convertPath } from 'apis/convertURI';
+import useLogin from 'hooks/useLogin';
 
 const AdminOnlyPrivate = (): JSX.Element => {
-  const loginState = useSelector((state: RootState) => state.login);
-  const isLogin: boolean = loginState.islogin;
-  const isAdmin: boolean = loginState.userData.isAdmin;
+  const loginState = useLogin().getLoginState();
 
+  const isLogin: boolean = loginState.isLogin;
+  const isAdmin: boolean = loginState.isAdmin;
+
+  console.log(isLogin, isAdmin);
   return <>{isLogin && isAdmin ? <Outlet /> : <Navigate to={convertPath('/')} />}</>;
 };
 
