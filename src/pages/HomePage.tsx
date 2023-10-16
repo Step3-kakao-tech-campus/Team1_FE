@@ -13,23 +13,21 @@ const HomePage = () => {
 
   return (
     <>
-      {isLogin ? (
-        isAdmin ? (
-          hasGroup ? (
-            <Suspense fallback={<div>전체 페이지 로딩..........</div>}>
-              <AdminHomePage />
-            </Suspense>
-          ) : (
-            <AdminNoGroupPage />
-          )
-        ) : hasGroup ? (
-          <div>알바홈</div>
-        ) : (
-          <div>매니저에게 초대받으세요</div>
-        )
-      ) : (
-        <OnBoardingPage />
+      {isLogin && isAdmin && hasGroup && (
+        <Suspense fallback={<div>전체 페이지 로딩...</div>}>
+          <AdminHomePage />
+        </Suspense>
       )}
+      {isLogin && !isAdmin && hasGroup && (
+        <Suspense fallback={<div>전체 페이지 로딩...</div>}>
+          <div>알바홈</div>
+        </Suspense>
+      )}
+
+      {isLogin && isAdmin && !hasGroup && <AdminNoGroupPage />}
+      {isLogin && !isAdmin && !hasGroup && <div>AlbaNoGroupPage 매니저에게 초대받으세요</div>}
+
+      {!isLogin && <OnBoardingPage />}
     </>
   );
 };
