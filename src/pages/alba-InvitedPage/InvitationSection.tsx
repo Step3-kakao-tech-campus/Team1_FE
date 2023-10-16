@@ -4,10 +4,9 @@ import { ErrorBoundary } from 'react-error-boundary';
 import InvitationContent from './InvitationContent';
 import SubmitButton from 'components/@commons/SubmitButton';
 import useModal from 'hooks/useModal';
-import { useSelector } from 'react-redux';
-import { RootState } from 'states/store';
 import { postGroupJoin } from 'apis/groupInvite';
 import LoginOrSignup from 'components/@commons-feature/LoginOrSignup';
+import useLogin from 'hooks/useLogin';
 
 interface Props {
   invitationKey: string;
@@ -15,19 +14,19 @@ interface Props {
 }
 
 const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Element => {
-  const loginState = useSelector((state: RootState) => state.login);
+  const loginState = useLogin().getLoginState();
 
   const { modalOnHandler, modalOffHandler, ModalComponent } = useModal();
 
   // 초대 승인 클릭 시
   const acceptBtnHandler = (): void => {
-    if (loginState.islogin) {
+    if (loginState.isLogin) {
       postGroupJoin({ invitationKey: invitationKey })
         .then((res) => {
           afterJoinHandler(); // 그룹 가입 완료 페이지로 이동
         })
         .catch((err) => {
-          console.log(err);
+          // 에러 처리
         });
     } else {
       modalOnHandler();

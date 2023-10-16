@@ -9,7 +9,6 @@ import {
 } from 'components/@commons-feature/calendar/CalendarStyle';
 import Text from 'components/@commons/Text';
 import { dateToString } from 'utils/dateToString';
-import { stringDateMove } from 'utils/stringDateMove';
 
 interface DayBoxProps {
   dateString: string;

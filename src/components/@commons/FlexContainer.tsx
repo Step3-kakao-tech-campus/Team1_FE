@@ -13,7 +13,7 @@ interface Props {
   $align?: string;
   $position?: string;
   $shrink?: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 const FlexContainer = styled.div<Props>`
