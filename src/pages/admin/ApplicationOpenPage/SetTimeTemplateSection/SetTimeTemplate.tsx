@@ -5,7 +5,7 @@ import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import { AddButton, CloseButton } from 'components/@commons/iconButtons';
 import { ButtonContainer, InputTime, InputTitle } from 'components/PageStyledComponents/admin/ApplicationOpenPage';
-import useTimeTemplate from 'hooks/admin-ApplicationOpenPage/useTimeTemplate';
+import useTimeTemplate from 'hooks/admin/ApplicationOpenPage/useTimeTemplate';
 
 import { myTheme } from 'styles/myTheme';
 

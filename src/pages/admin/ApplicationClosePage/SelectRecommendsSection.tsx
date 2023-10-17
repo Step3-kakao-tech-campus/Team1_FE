@@ -7,7 +7,7 @@ import Text from 'components/@commons/Text';
 import { myTheme } from 'styles/myTheme';
 import { stringDateMove } from 'utils/stringDateMove';
 import { ScrollContainer } from 'components/PageStyledComponents/admin/ApplicationClose';
-import useClose from 'hooks/admin-ApplicationClosePage/useClose';
+import useClose from 'hooks/admin/ApplicationClosePage/useClose';
 import useWeekSelector from 'hooks/useWeekSelector';
 
 const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {

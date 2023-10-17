@@ -3,7 +3,7 @@ import GradationBox from 'components/@commons/GradationBox';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import { InputPeople } from 'components/PageStyledComponents/admin/ApplicationOpenPage';
-import usePeopleAmount from 'hooks/admin-ApplicationOpenPage/usePeopleAmount';
+import usePeopleAmount from 'hooks/admin/ApplicationOpenPage/usePeopleAmount';
 import React from 'react';
 
 const SetPeopleSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
