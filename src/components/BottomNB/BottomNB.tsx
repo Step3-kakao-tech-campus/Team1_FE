@@ -1,21 +1,26 @@
 import { convertPath } from 'apis/convertURI';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Close, CloseFill, MySch, MySchFill, Start, StartFill, Status, StatusFill } from './Icons';
+import { MySch, MySchFill, Start, StartFill } from './Icons';
 import { Box, IconCont, MenuBtn, TextCont } from './BottomNBStyles';
 
-const BottomNB = (): JSX.Element => {
+export const AdminBottomNB = (): JSX.Element => {
   return (
     <Box>
       <Menu text="모집 시작" icon={<Start />} iconFill={<StartFill />} path="/newSchedule" />
-      <Menu text="모집 현황" icon={<Status />} iconFill={<StatusFill />} path="/newSchedule/status" />
-      <Menu text="모집 마감" icon={<Close />} iconFill={<CloseFill />} path="/newSchedule/close" />
       <Menu text="확정 스케줄" icon={<MySch />} iconFill={<MySchFill />} path="/" />
     </Box>
   );
 };
 
-export default BottomNB;
+export const AlbaBottomNB = (): JSX.Element => {
+  return (
+    <Box>
+      <Menu text="신청하기" icon={<Start />} iconFill={<StartFill />} path="/apply" />
+      <Menu text="확정 스케줄" icon={<MySch />} iconFill={<MySchFill />} path="/" />
+    </Box>
+  );
+};
 
 const Menu = ({ text, icon, iconFill, path }: MenuProps): JSX.Element => {
   const navigate = useNavigate();
