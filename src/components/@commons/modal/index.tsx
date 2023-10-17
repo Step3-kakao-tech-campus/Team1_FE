@@ -19,6 +19,7 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
+  z-index: 991;
 `;
 
 const Box = styled.div`
@@ -34,4 +35,5 @@ const Box = styled.div`
   align-items: center;
 
   gap: 30px;
+  z-index: 992;
 `;
