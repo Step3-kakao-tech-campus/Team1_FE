@@ -1,6 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
+export const HorizontalLine = styled.div`
+  border-top: 0.05rem solid;
+  border-color: gray;
+  width: 100%;
+  height: 0.5rem;
+  margin: 0.5rem 0;
+`;
+
 export const SidebarBackground = styled.div`
   width: 100%;
   height: 100%;

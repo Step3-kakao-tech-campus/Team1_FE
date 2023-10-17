@@ -9,7 +9,6 @@ import {
 import useLogin from 'hooks/useLogin';
 import { Alarm, Hamburger } from './icons';
 import Sidebar from 'components/Sidebar/Sidebar';
-import { SidebarBackground, SidebarBox } from 'components/Sidebar';
 
 const HeaderNB = (): JSX.Element => {
   /* ----------------------- ! 수정 중 입니다 ! ------------------------ */
@@ -36,13 +35,7 @@ const HeaderNB = (): JSX.Element => {
         </HeaderInnerBox>
       </HeaderContainer>
 
-      {isOpen && (
-        <SidebarBackground onClick={() => setIsOpen(false)}>
-          <SidebarBox onClick={(e) => e.stopPropagation()}>
-            <Sidebar />
-          </SidebarBox>
-        </SidebarBackground>
-      )}
+      {isOpen && <Sidebar closeHandler={() => setIsOpen(false)} />}
     </>
   );
 };
