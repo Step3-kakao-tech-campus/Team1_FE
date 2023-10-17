@@ -1,6 +1,6 @@
 import Text from 'components/@commons/Text';
 import React, { Suspense } from 'react';
-import SetTimeTemplate from './SetTimeTemplate';
+import EditTimeForm from './EditTimeForm';
 import { dateToString } from 'utils/dateToString';
 
 const SetTimeTemplateSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
@@ -15,7 +15,7 @@ const SetTimeTemplateSection = ({ startWeekDate }: { startWeekDate: string }): J
       <Text>근무 시간대를 설정하세요</Text>
       {startWeekDate && (
         <Suspense>
-          <SetTimeTemplate startWeekDate={startWeekDate} />
+          <EditTimeForm startWeekDate={startWeekDate} />
         </Suspense>
       )}
     </>

@@ -1,10 +1,10 @@
-import FlexContainer from 'components/@commons/FlexContainer';
-import PageContainer from 'components/@commons/PageContainer';
 import React, { Suspense } from 'react';
 import { atom } from 'jotai';
 import CalenderOutter from 'components/Calendar/CalenderOutter';
-import MonthlyContents from './MonthlyContents';
-import WeeklyDatail from './WeeklyDatail';
+import MonthlyContents from './Calendar/MonthlyContents';
+import WeeklyDatailSection from './WeeklyDetailSection';
+import FlexContainer from 'components/@commons/FlexContainer';
+import PageContainer from 'components/@commons/PageContainer';
 
 export const weekStatusMonthAtom = atom({ year: new Date().getFullYear(), month: new Date().getMonth() });
 export const selectedWeekAtom = atom({ startWeekDate: '', weekStatus: '' });
@@ -20,7 +20,7 @@ const SelectWeekPage = (): JSX.Element => {
         </CalenderOutter>
       </FlexContainer>
       <FlexContainer $wFull>
-        <WeeklyDatail />
+        <WeeklyDatailSection />
       </FlexContainer>
     </PageContainer>
   );

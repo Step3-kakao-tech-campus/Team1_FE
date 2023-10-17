@@ -15,7 +15,7 @@ interface TimeData {
   endTime: string;
 }
 
-const SetTimeTemplate = ({ startWeekDate }: { startWeekDate: string }) => {
+const EditTimeForm = ({ startWeekDate }: { startWeekDate: string }) => {
   const { timeTemplate, formChangeHandler, deleteHandler, addHandler, submitHandler } = useTimeTemplate(startWeekDate);
 
   return (
@@ -49,4 +49,4 @@ const SetTimeTemplate = ({ startWeekDate }: { startWeekDate: string }) => {
   );
 };
 
-export default SetTimeTemplate;
+export default EditTimeForm;

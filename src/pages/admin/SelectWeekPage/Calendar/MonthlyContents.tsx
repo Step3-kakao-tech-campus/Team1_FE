@@ -1,12 +1,12 @@
 import { useAtom } from 'jotai';
 import React from 'react';
-import { selectedWeekAtom, weekStatusMonthAtom } from '.';
+import { selectedWeekAtom, weekStatusMonthAtom } from '..';
 import { useQuery } from '@tanstack/react-query';
 import { getWeekProgress } from 'apis/adminApplication';
 import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
 import Text from 'components/@commons/Text';
-import styled from 'styled-components';
 import WeekBoxContents from './WeekBoxContents';
+import { BorderWeekBox, WeekStatusBar, WeekContainer } from 'components/PageStyledComponents/admin/SelectWeekPage';
 
 type WeekStatus = 'allocatable' | 'inProgress' | 'closed' | '';
 
@@ -48,12 +48,12 @@ const MonthlyContents = (): JSX.Element => {
     <MonthBox $wFull>
       {weekStatusData?.table.map((weekObj: WeekObj, i) => (
         <WeekContainer key={`${i}주`} onClick={() => weekOnClickHandler(weekObj)}>
-          <StatusBar $status={weekObj.weekStatus}>
+          <WeekStatusBar $status={weekObj.weekStatus}>
             <Text size="xs" weight="regular">
               {statusConverter(weekObj.weekStatus)}
             </Text>
-          </StatusBar>
-          {weekObj.dates[0] === selectedWeek.startWeekDate && <BorderBox />}
+          </WeekStatusBar>
+          {weekObj.dates[0] === selectedWeek.startWeekDate && <BorderWeekBox />}
 
           <WeekGrid>
             <WeekBoxContents dates={weekObj.dates} />
@@ -65,34 +65,3 @@ const MonthlyContents = (): JSX.Element => {
 };
 
 export default MonthlyContents;
-
-const BorderBox = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 11;
-  box-shadow: 0 0 0 3px #ffdf39 inset;
-`;
-
-const WeekContainer = styled.div`
-  position: relative;
-  width: 100%;
-`;
-
-const StatusBar = styled.div<{ $status: WeekStatus }>`
-  width: 100%;
-  position: absolute;
-  bottom: 10%;
-  z-index: 10;
-  background-color: ${(props) =>
-    props.$status === 'allocatable'
-      ? props.theme.color.lightBlue
-      : props.$status === 'inProgress'
-      ? props.theme.color.lightYellow
-      : props.theme.color.lightGray};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 2px;
-`;
