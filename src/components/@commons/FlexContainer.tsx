@@ -4,7 +4,6 @@ import styled from 'styled-components';
 interface Props {
   $gap?: string;
   $padding?: string;
-  $margin?: string;
   $direction?: string;
   $wFull?: boolean;
   $hFull?: boolean;
@@ -24,7 +23,6 @@ const FlexContainer = styled.div<Props>`
 
   gap: ${(props) => (props.$gap ? props.$gap : '20px')};
   padding: ${(props) => (props.$padding ? props.$padding : '0')};
-  margin: ${(props) => (props.$margin ? props.$margin : '0')};
 
   display: flex;
   flex-direction: ${(props) => (props.$direction ? props.$direction : 'column')};
