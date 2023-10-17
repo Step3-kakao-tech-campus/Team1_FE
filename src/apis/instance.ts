@@ -1,6 +1,6 @@
 import axios from 'axios';
-import store from 'states/store';
 import { apiURL } from 'apis/convertURI';
+import useLogin from 'hooks/useLogin';
 
 const instance = axios.create({
   baseURL: apiURL,
@@ -11,7 +11,7 @@ const instance = axios.create({
 
 export const requestDefault = instance.interceptors.request.use(
   (config) => {
-    const loginState = store.getState().login;
+    const loginState = useLogin().getLoginState();
     if (loginState.islogin) {
       config.headers.Authorization = loginState.token;
     }
