@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
 import { memberAtom } from './AdminScheduleSection';
 import { useAtom } from 'jotai';
+import { DropDownCont } from 'components/PageStyledComponents/admin-SchedulePage/Dropdown';
 
 interface Props<T> {
   members: T[];
@@ -25,36 +25,27 @@ const Dropdown = <T extends MemberType>({ members }: Props<T>): JSX.Element => {
   };
 
   const contentOnClick = (m: T) => {
-    setMember((prev) => m);
+    setMember((prev) => ({ ...prev, memberId: m.memberId, name: m.name }));
     setIsOpen((prev) => false);
   };
 
   return (
-    <Container>
-      <FlexContainer $direction="row" onClick={dropdownOnClick} $align="center" $justify="space-between">
-        <Text>{member.name !== '' ? member.name : '선택'}</Text>
-        <Text>{isOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}</Text>
+    <DropDownCont>
+      <FlexContainer onClick={dropdownOnClick} $wFull $direction="row" $justify="space-between" $padding="4px 0">
+        <Text margin="0">{member.name || '선택'}</Text>
+        <Text margin="0">{isOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}</Text>
       </FlexContainer>
       {isOpen && (
-        <FlexContainer $gap="0" $padding="8px 0">
+        <FlexContainer $wFull $gap="10px" $padding="16px 0">
           {members?.map((member: T) => (
-            <ol onClick={() => contentOnClick(member)} key={member.name}>
-              <Text>{member.name}</Text>
-            </ol>
+            <FlexContainer $wFull $align="flex-start" onClick={() => contentOnClick(member)} key={member.name}>
+              <Text margin="0">{member.name}</Text>
+            </FlexContainer>
           ))}
         </FlexContainer>
       )}
-    </Container>
+    </DropDownCont>
   );
 };
 
 export default Dropdown;
-
-const Container = styled.div`
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 2px 24px;
-  background-color: ${({ theme }) => theme.color.lightGray};
-`;

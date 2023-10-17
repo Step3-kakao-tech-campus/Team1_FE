@@ -1,4 +1,5 @@
 import FlexContainer from 'components/@commons/FlexContainer';
+import Text from 'components/@commons/Text';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -9,13 +10,15 @@ interface Props {
 
 const Addinfo = ({ formHandler, toggleHandler }: Props): JSX.Element => {
   return (
-    <FlexContainer $wFull>
-      <span className="text-center">회원 가입을 위해 추가 정보를 입력해주세요</span>
+    <FlexContainer $wFull $gap="30px">
+      <Text>회원 가입을 위해 추가 정보를 입력해주세요</Text>
       <Input id="userName" onChange={formHandler} placeholder="이름" />
 
-      <FlexContainer $direction="row" $justify="start" $padding="0 16px">
-        <input id="agreement" onChange={toggleHandler} type="checkbox" />
-        <label htmlFor="agreement">약관동의</label>
+      <FlexContainer $direction="row" $justify="start" $padding="0 16px" $align="center">
+        <CheckBox id="agreement" onChange={toggleHandler} type="checkbox" />
+        <label htmlFor="agreement">
+          <Text>약관동의</Text>
+        </label>
       </FlexContainer>
     </FlexContainer>
   );
@@ -29,4 +32,10 @@ const Input = styled.input`
   border-radius: 8px;
   padding: 10px 12px;
   border: 1px black;
+`;
+
+const CheckBox = styled.input`
+  width: 20px;
+  height: 20px;
+  accent-color: ${({ theme }) => theme.color.yellow};
 `;

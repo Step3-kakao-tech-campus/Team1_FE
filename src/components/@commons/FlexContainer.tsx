@@ -8,15 +8,19 @@ interface Props {
   $direction?: string;
   $wFull?: boolean;
   $hFull?: boolean;
+  $width?: string;
+  $height?: string;
   $justify?: string;
   $align?: string;
-  $backgroundColor?: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  $position?: string;
+  $shrink?: string;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 const FlexContainer = styled.div<Props>`
-  width: ${(props) => (props.$wFull ? '100%' : '')};
-  height: ${(props) => (props.$hFull ? '100%' : '')};
+  position: ${(props) => (props.$position ? props.$position : '')};
+  width: ${(props) => (props.$wFull ? '100%' : props.$width ? props.$width : '')};
+  height: ${(props) => (props.$hFull ? '100%' : props.$height ? props.$height : '')};
 
   gap: ${(props) => (props.$gap ? props.$gap : '20px')};
   padding: ${(props) => (props.$padding ? props.$padding : '0')};
@@ -27,8 +31,7 @@ const FlexContainer = styled.div<Props>`
 
   justify-content: ${(props) => (props.$justify ? props.$justify : 'center')};
   align-items: ${(props) => (props.$align ? props.$align : 'stretch')};
-
-  background-color: ${(props) => props.$backgroundColor};
+  flex-shrink: ${(props) => (props.$shrink ? props.$shrink : '')};
 `;
 
 export default FlexContainer;

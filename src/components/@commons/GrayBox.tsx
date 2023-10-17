@@ -1,20 +1,20 @@
 import React from 'react';
 import FlexContainer from './FlexContainer';
-import styled from 'styled-components';
+import ColorBox from './ColorBox';
+import { myTheme } from 'styles/myTheme';
 
 interface Props {
   children: React.ReactNode;
 }
 
 const GrayBox = ({ children }: Props): JSX.Element => {
-  return <Container>{children}</Container>;
+  return (
+    <FlexContainer $wFull $align="center">
+      <ColorBox $wFull $padding="50px 40px" $background={myTheme.color.lightGray}>
+        {children}
+      </ColorBox>
+    </FlexContainer>
+  );
 };
 
 export default GrayBox;
-
-const Container = styled(FlexContainer)`
-  width: auto;
-  padding: 50px 40px;
-  background-color: ${({ theme }) => theme.color.lightGray};
-  align-items: center;
-`;
