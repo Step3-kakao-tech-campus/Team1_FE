@@ -1,8 +1,8 @@
 import FlexContainer from 'components/@commons/FlexContainer';
 import React, { Suspense } from 'react';
 import { atom, useAtomValue } from 'jotai';
-import NotFixedDateBox from 'components/@commons-feature/calendar/NotFixedDateBox';
-import CalenderOutter from 'components/@commons-feature/calendar/CalenderOutter';
+import NotFixedDateBox from 'components/DailyWorkers/NotFixedDateBox';
+import CalenderOutter from 'components/Calendar/CalenderOutter';
 import CalenderConents from 'pages/admin/MainPage/ScheduleSection/components/CalenderConents';
 import { MainTopBarCont } from 'components/PageStyledComponents/admin/MainPage';
 import DailyWorkers from './components/DailyWorkers';

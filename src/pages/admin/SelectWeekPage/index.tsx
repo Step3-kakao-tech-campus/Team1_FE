@@ -2,7 +2,7 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import PageContainer from 'components/@commons/PageContainer';
 import React, { Suspense } from 'react';
 import { atom } from 'jotai';
-import CalenderOutter from 'components/@commons-feature/calendar/CalenderOutter';
+import CalenderOutter from 'components/Calendar/CalenderOutter';
 import MonthlyContents from './MonthlyContents';
 import WeeklyDatail from './WeeklyDatail';
 

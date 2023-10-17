@@ -1,4 +1,4 @@
-import { DateCircle, OutterDayBox } from 'components/@commons-feature/calendar/CalendarStyle';
+import { DateCircle, OutterDayBox } from 'components/Calendar/CalendarStyle';
 import Text from 'components/@commons/Text';
 import React from 'react';
 import styled from 'styled-components';

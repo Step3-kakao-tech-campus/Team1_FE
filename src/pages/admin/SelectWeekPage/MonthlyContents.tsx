@@ -3,7 +3,7 @@ import React from 'react';
 import { selectedWeekAtom, weekStatusMonthAtom } from '.';
 import { useQuery } from '@tanstack/react-query';
 import { getWeekProgress } from 'apis/adminApplication';
-import { MonthBox, WeekGrid } from 'components/@commons-feature/calendar/CalendarStyle';
+import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
 import Text from 'components/@commons/Text';
 import styled from 'styled-components';
 import WeekBoxContents from './WeekBoxContents';

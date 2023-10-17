@@ -1,5 +1,5 @@
 import React from 'react';
-import DailyWorkersTemplate from 'components/@commons-feature/calendar/DailyWorkersTemplate';
+import DailyWorkersTemplate from 'components/DailyWorkers/DailyWorkersTemplate';
 import ColorBox from 'components/@commons/ColorBox';
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';

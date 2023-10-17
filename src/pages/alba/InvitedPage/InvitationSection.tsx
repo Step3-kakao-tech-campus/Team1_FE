@@ -5,7 +5,7 @@ import InvitationContent from './InvitationContent';
 import SubmitButton from 'components/@commons/SubmitButton';
 import useModal from 'hooks/useModal';
 import { postGroupJoin } from 'apis/groupInvite';
-import LoginOrSignup from 'components/@commons-feature/LoginOrSignup';
+import LoginOrSignup from 'components/LoginSignUpButton/LoginOrSignup';
 import useLogin from 'hooks/useLogin';
 
 interface Props {

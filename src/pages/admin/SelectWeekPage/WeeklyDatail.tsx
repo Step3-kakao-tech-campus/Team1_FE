@@ -8,7 +8,7 @@ import Text from 'components/@commons/Text';
 import { useQuery } from '@tanstack/react-query';
 import useWeekSelector from 'hooks/useWeekSelector';
 import { getApplyStatus } from 'apis/adminApplication';
-import DailyWorkersTemplate from 'components/@commons-feature/calendar/DailyWorkersTemplate';
+import DailyWorkersTemplate from 'components/DailyWorkers/DailyWorkersTemplate';
 import { dateToString } from 'utils/dateToString';
 import { getDailyWorkers } from 'apis/getSchedule';
 

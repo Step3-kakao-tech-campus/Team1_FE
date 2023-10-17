@@ -1,5 +1,5 @@
 import React from 'react';
-import FlexContainer from '../../@commons/FlexContainer';
+import FlexContainer from '../@commons/FlexContainer';
 import styled from 'styled-components';
 
 export const DateCircle = styled.div<{ $isToday: boolean }>`

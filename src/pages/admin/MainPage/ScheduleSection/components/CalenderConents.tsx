@@ -3,7 +3,7 @@ import { getMonthly } from 'apis/getSchedule';
 import { useAtom } from 'jotai';
 import { dateAtom, memberAtom, monthAtom } from 'pages/admin/MainPage/ScheduleSection';
 import React, { useEffect } from 'react';
-import { MonthBox, WeekGrid } from 'components/@commons-feature/calendar/CalendarStyle';
+import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
 import CalendarDayBox from './CalendarDayBox';
 
 interface Props {

@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Badge,
-  BadgeCont,
-  BadgeText,
-  BorderBox,
-  DateCircle,
-  OutterDayBox,
-} from 'components/@commons-feature/calendar/CalendarStyle';
+import { Badge, BadgeCont, BadgeText, BorderBox, DateCircle, OutterDayBox } from 'components/Calendar/CalendarStyle';
 import Text from 'components/@commons/Text';
 import { dateToString } from 'utils/dateToString';
 
