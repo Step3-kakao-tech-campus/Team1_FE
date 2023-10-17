@@ -1,7 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const Background = styled.div`
+export const Modal = ({ children }: { children: React.ReactNode }): JSX.Element => {
+  return (
+    <Background>
+      <Box>{children}</Box>
+    </Background>
+  );
+};
+
+const Background = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
@@ -13,7 +21,7 @@ export const Background = styled.div`
   background: rgba(0, 0, 0, 0.5);
 `;
 
-export const Box = styled.div`
+const Box = styled.div`
   background-color: #ffffff;
   min-width: 250px;
   width: 85%;
