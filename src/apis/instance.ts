@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { apiURL } from 'apis/convertURI';
-import useLogin from 'hooks/useLogin';
 
 const instance = axios.create({
   baseURL: apiURL,
@@ -11,9 +10,13 @@ const instance = axios.create({
 
 export const requestDefault = instance.interceptors.request.use(
   (config) => {
-    const loginState = useLogin().getLoginState();
-    if (loginState.islogin) {
-      config.headers.Authorization = loginState.token;
+    // 로그인 상태일 때 토큰 싣기
+    const strData = sessionStorage.getItem('login');
+    if (strData !== null) {
+      const loginState = JSON.parse(strData);
+      if (loginState.isLogin) {
+        config.headers.Authorization = loginState.token;
+      }
     }
 
     console.log(config);
