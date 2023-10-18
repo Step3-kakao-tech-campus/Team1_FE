@@ -9,6 +9,7 @@ import useForm from 'hooks/useForm';
 import useLogin from 'hooks/useLogin';
 import signupValidator from 'utils/signupValidator';
 import Logo from 'assets/schedule_albbaim.png';
+import { useLocation } from 'react-router-dom';
 
 interface StateType {
   [index: string]: string | boolean | null;
@@ -18,23 +19,27 @@ interface StateType {
 }
 
 const signupPage = (): JSX.Element => {
-  // 이미 가입된 유저인 경우 : 리다이렉트 "/"
-
-  // 1. 폼 입력 상태 관리
-  const initalInfo: StateType = {
+  // 1. 입력폼 상태 관리
+  const {
+    obj: userInfo,
+    formHandler,
+    toggleHandler,
+    selectOneHandler,
+  } = useForm<StateType>({
     isAdmin: null,
     userName: '',
     agreement: false,
-  };
-
-  const { obj: userInfo, formHandler, toggleHandler, selectOneHandler } = useForm(initalInfo);
+  });
 
   // 2. 로그인 요청 보내기
   const { signup } = useLogin();
-
+  const code = useLocation().state.code;
   const signupBtnHandler = () => {
-    userInfo.isAdmin !== null && signup(userInfo);
+    if (userInfo.isAdmin === null) return;
+    signup({ isAdmin: userInfo.isAdmin, userName: userInfo.userName, code: code });
   };
+
+  // 코드 없이 접속했을 때 에러처리
 
   return (
     <PageContainer withoutHeader withoutBottonBar gap="36px">
