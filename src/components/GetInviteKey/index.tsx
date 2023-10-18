@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { getInviteKey } from 'apis/groupInvite';
+import { getInviteKey } from 'apis/admin/manageGroup';
+
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';

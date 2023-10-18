@@ -4,7 +4,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import InvitationContent from './InvitationContent';
 import SubmitButton from 'components/@commons/SubmitButton';
 import useModal from 'hooks/useModal';
-import { postGroupJoin } from 'apis/groupInvite';
+import { postGroupJoin } from 'apis/alba/joinGroup';
 import LoginOrSignup from 'components/LoginSignUpButton/LoginOrSignup';
 import useLogin from 'hooks/useLogin';
 

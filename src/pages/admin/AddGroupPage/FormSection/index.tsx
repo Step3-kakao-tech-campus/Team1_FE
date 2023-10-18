@@ -1,4 +1,4 @@
-import { addNewGroup } from 'apis/manageGroup';
+import { addNewGroup } from 'apis/admin/manageGroup';
 import FlexContainer from 'components/@commons/FlexContainer';
 import GradationBox from 'components/@commons/GradationBox';
 import SubmitButton from 'components/@commons/SubmitButton';

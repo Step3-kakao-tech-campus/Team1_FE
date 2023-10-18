@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getGroupInfo } from 'apis/groupInvite';
+import { getGroupInfo } from 'apis/alba/joinGroup';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
 import React from 'react';

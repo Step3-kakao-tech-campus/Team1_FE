@@ -1,13 +1,13 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getGroupMemberList } from 'apis/manageGroup';
+import { getMyInfo } from 'apis/userInfo';
 import PageContainer from 'components/@commons/PageContainer';
 import AdminNoGroupSection from './NoGroupSection';
 import AdminNoMemberSection from './NoMemberSection';
 import AdminScheduleSection from './ScheduleSection';
 
 const AdminMainPage = (): JSX.Element => {
-  const { data: membersData } = useQuery(['getGroupMembers'], getGroupMemberList, { suspense: true });
+  const { data: membersData } = useQuery(['getMyInfo'], getMyInfo, { suspense: true });
   const hasGroup = membersData?.data.groupName !== null;
   const hasMember = membersData?.data.members.length > 1;
 

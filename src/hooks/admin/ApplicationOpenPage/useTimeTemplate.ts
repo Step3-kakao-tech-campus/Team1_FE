@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getTimeTemplate } from 'apis/adminApplication';
+import { getTimeTemplate } from 'apis/admin/application';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage';
 import React, { useEffect } from 'react';

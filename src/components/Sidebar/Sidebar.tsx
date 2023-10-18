@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getGroupMemberList } from 'apis/manageGroup';
+import { getMyInfo } from 'apis/userInfo';
 import { convertPath } from 'apis/convertURI';
 import useLogin from 'hooks/useLogin';
 import useModal from 'hooks/useModal';
@@ -14,7 +14,7 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
   /* ----------------------- ! 수정 중 입니다 ! ------------------------ */
 
   // 이 부분을 변경된 API 구조에 맞게 바꿔주세요.
-  const { data: memberList } = useQuery(['members'], getGroupMemberList);
+  const { data: memberList } = useQuery(['members'], getMyInfo);
 
   // 로그인 상태를 가져오는 방법도 변경되었습니다 (지금은 임시로 해뒀는데 바꿔주세요)
   const loginInfo = { userData: { userName: 'aa', isAdmin: true, groupName: 'aa' } };
