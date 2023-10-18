@@ -1,28 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import { getMonthly } from 'apis/getSchedule';
+import { DailyScheduleData, getMonthly } from 'apis/getSchedule';
 import { useAtom } from 'jotai';
 import { dateAtom, memberAtom, monthAtom } from 'pages/admin/MainPage/ScheduleSection';
 import React, { useEffect } from 'react';
 import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
 import CalendarDayBox from './CalendarDayBox';
+import useLogin from 'hooks/useLogin';
 
-interface Props {
-  selectedId: number;
-}
-interface DailyData {
-  date: string;
-  workTime: string[] | null;
-}
-
-const CalenderConents = ({ selectedId }: Props): JSX.Element => {
+const CalenderConents = ({ selectedId }: { selectedId: number }): JSX.Element => {
   const [selectedDate, setSelectedDate] = useAtom(dateAtom);
   const [nowMonth] = useAtom(monthAtom);
 
   const { year, month } = { ...nowMonth };
-
+  const isAdmin = useLogin().getLoginState().isAdmin;
   const { data: scheduleData } = useQuery(
     ['getMonthly', year, month, selectedId],
-    () => getMonthly({ year: year, month: month, memberId: selectedId }),
+    () => getMonthly({ year: year, month: month, memberId: selectedId, isAdmin: isAdmin }),
     {
       suspense: true,
       enabled: selectedId !== 0,
@@ -43,9 +36,9 @@ const CalenderConents = ({ selectedId }: Props): JSX.Element => {
 
   return (
     <MonthBox $wFull>
-      {scheduleData?.table.map((weekArray: DailyData[], i) => (
+      {scheduleData?.table.map((weekArray: DailyScheduleData[], i) => (
         <WeekGrid key={`${i}주`}>
-          {weekArray.map((e: DailyData) => (
+          {weekArray.map((e: DailyScheduleData) => (
             <CalendarDayBox
               key={e.date}
               dateString={e.date}
