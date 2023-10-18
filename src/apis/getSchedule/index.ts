@@ -1,18 +1,38 @@
 import instance from 'apis/instance';
 import { dateToString } from 'utils/dateToString';
 
-export const getDailyWorkers = (params: { date: string }) => {
+export const getDailyWorkers = (params: GetDailyWorkersRequest): Promise<GetDailyWorkerResponse> => {
   return instance.get(`/schedule/fix/day`, { params });
 };
 
-export const getMonthly = async (info: { year: number; month: number; memberId: number }) => {
+export interface DailyWorkTimeData {
+  title: string;
+  startTime: string;
+  endTime: string;
+  workerList: WorkerData[];
+}
+
+export interface WorkerData {
+  memberId: number;
+  name: string;
+}
+
+interface GetDailyWorkersRequest {
+  date: string;
+}
+
+interface GetDailyWorkerResponse {
+  data: { schedule: DailyWorkTimeData[] };
+}
+
+export const getMonthly = async (info: GetMonthlyInfo): Promise<GetMonthlyResponse> => {
   const { year, month } = { ...info };
   const params = {
     month: `${year}-${month + 1}`,
     memberId: info.memberId,
   };
-
   const response = await instance.get(`/schedule/fix/month`, { params });
+
   const totalTime = response.data.work_summary;
   const monthly = response.data.schedule;
 
@@ -52,3 +72,25 @@ export const getMonthly = async (info: { year: number; month: number; memberId: 
 
   return { table, totalTime };
 };
+
+export interface DailyScheduleData {
+  date: string;
+  workTime: string[] | null;
+}
+
+export interface TotalWorkTimeData {
+  weekly: number;
+  monthly: number;
+}
+
+interface GetMonthlyInfo {
+  year: number;
+  month: number;
+  isAdmin: boolean;
+  memberId?: number;
+}
+
+interface GetMonthlyResponse {
+  table: DailyScheduleData[][];
+  totalTime: TotalWorkTimeData;
+}
