@@ -2,20 +2,13 @@ import { useAtom } from 'jotai';
 import React from 'react';
 import { selectedWeekAtom, weekStatusMonthAtom } from '..';
 import { useQuery } from '@tanstack/react-query';
-import { getWeekProgress } from 'apis/adminApplication';
+import { WeekProgressObject, WeekStatus, getWeekProgress } from 'apis/weekProgress';
 import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
-import Text from 'components/@commons/Text';
-import WeekBoxContents from './WeekBoxContents';
 import { BorderWeekBox, WeekStatusBar, WeekContainer } from 'components/PageStyledComponents/admin/SelectWeekPage';
+import Text from 'components/@commons/Text';
+import StatusDailyBox from './StatusDailyBox';
 
-type WeekStatus = 'allocatable' | 'inProgress' | 'closed' | '';
-
-interface WeekObj {
-  weekStatus: WeekStatus;
-  dates: string[];
-}
-
-const MonthlyContents = (): JSX.Element => {
+const StatusCalendar = (): JSX.Element => {
   const [selectedWeek, setSelectedWeek] = useAtom(selectedWeekAtom);
   const [nowMonth] = useAtom(weekStatusMonthAtom);
   const { year, month } = { ...nowMonth };
@@ -28,7 +21,7 @@ const MonthlyContents = (): JSX.Element => {
     },
   );
 
-  const weekOnClickHandler = (weekObj: WeekObj) => {
+  const weekOnClickHandler = (weekObj: WeekProgressObject) => {
     const newObj = { startWeekDate: weekObj.dates[0], weekStatus: weekObj.weekStatus };
     setSelectedWeek((prev) => newObj);
   };
@@ -46,7 +39,7 @@ const MonthlyContents = (): JSX.Element => {
 
   return (
     <MonthBox $wFull>
-      {weekStatusData?.table.map((weekObj: WeekObj, i) => (
+      {weekStatusData?.table.map((weekObj: WeekProgressObject, i) => (
         <WeekContainer key={`${i}주`} onClick={() => weekOnClickHandler(weekObj)}>
           <WeekStatusBar $status={weekObj.weekStatus}>
             <Text size="xs" weight="regular">
@@ -56,7 +49,9 @@ const MonthlyContents = (): JSX.Element => {
           {weekObj.dates[0] === selectedWeek.startWeekDate && <BorderWeekBox />}
 
           <WeekGrid>
-            <WeekBoxContents dates={weekObj.dates} />
+            {weekObj.dates.map((date: string) => (
+              <StatusDailyBox date={date} key={date} />
+            ))}
           </WeekGrid>
         </WeekContainer>
       ))}
@@ -64,4 +59,4 @@ const MonthlyContents = (): JSX.Element => {
   );
 };
 
-export default MonthlyContents;
+export default StatusCalendar;

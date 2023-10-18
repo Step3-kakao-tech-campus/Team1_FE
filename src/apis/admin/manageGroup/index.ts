@@ -4,6 +4,7 @@ export const addNewGroup = <T>(marketInfo: T) => {
   return instance.post(`/group`, marketInfo);
 };
 
-export const getGroupMemberList = () => {
-  return instance.get(`/group`);
+// 초대링크 발급
+export const getInviteKey = () => {
+  return instance.get(`/group/invitation`);
 };

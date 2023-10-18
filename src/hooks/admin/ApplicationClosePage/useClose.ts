@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
-import { getRecommends, postRecommends } from 'apis/adminApplication';
+import { getRecommends, postRecommends } from 'apis/admin/application';
 import { useQuery } from '@tanstack/react-query';
 
 const useClose = (startWeekDate: string) => {

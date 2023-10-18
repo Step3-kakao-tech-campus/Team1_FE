@@ -8,8 +8,8 @@ import { myTheme } from 'styles/myTheme';
 import { convertPath } from 'apis/convertURI';
 import { Provider } from 'jotai';
 
-import LogoutOnlyPrivate from 'auth/LogoutOnlyPrivate';
-import AdminOnlyPrivate from 'auth/AdminOnlyPrivate';
+import LogoutOnlyPrivate from 'privateRoutes/LogoutOnlyPrivate';
+import AdminOnlyPrivate from 'privateRoutes/AdminOnlyPrivate';
 
 import HomePage from 'pages/HomePage';
 import KakaoAuthPage from 'pages/KakaoAuthPage';

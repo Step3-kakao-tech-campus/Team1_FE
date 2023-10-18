@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getApplyStatus } from 'apis/adminApplication';
+import { getApplyStatus } from 'apis/admin/application';
 import { convertPath } from 'apis/convertURI';
 import SubmitButton from 'components/@commons/SubmitButton';
 import DailyWorkersTemplate from 'components/DailyWorkers/DailyWorkersTemplate';

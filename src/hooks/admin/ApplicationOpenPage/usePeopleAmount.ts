@@ -2,7 +2,7 @@ import useWeekSelector from 'hooks/useWeekSelector';
 import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage';
-import { postOpenApplication } from 'apis/adminApplication';
+import { postOpenApplication } from 'apis/admin/application';
 import { useNavigate } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
 

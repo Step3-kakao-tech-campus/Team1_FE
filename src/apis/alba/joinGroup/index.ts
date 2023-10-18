@@ -9,8 +9,3 @@ export const postGroupJoin = (body: { invitationKey: string }) => {
 export const getGroupInfo = (params: { invitationKey: string }) => {
   return instance.get(`/group/invitation/information`, { params });
 };
-
-// 초대링크 발급
-export const getInviteKey = () => {
-  return instance.get(`/group/invitation`);
-};
