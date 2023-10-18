@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import AdminMainPage from 'pages/admin/MainPage';
+import AdminMainIndex from 'pages/admin/AdminMainIndex';
 import OnBoardingPage from 'pages/OnBoardingPage';
 import useLogin from 'hooks/useLogin';
 
@@ -14,7 +14,7 @@ const HomePage = () => {
 
       {isLogin && isAdmin && (
         <Suspense fallback={<div>전체 페이지 로딩...</div>}>
-          <AdminMainPage />
+          <AdminMainIndex />
         </Suspense>
       )}
 

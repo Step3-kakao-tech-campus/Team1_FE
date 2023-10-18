@@ -1,13 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { DailyScheduleData, getMonthly } from 'apis/getSchedule';
+import { getMonthly } from 'apis/getSchedule';
 import { useAtom } from 'jotai';
-import { dateAtom, memberAtom, monthAtom } from 'pages/admin/MainPage/ScheduleSection';
+import { dateAtom, memberAtom, monthAtom } from 'pages/admin/SchedulePage';
 import React, { useEffect } from 'react';
-import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
-import CalendarDayBox from './CalendarDayBox';
 import useLogin from 'hooks/useLogin';
 
-const CalenderConents = ({ selectedId }: { selectedId: number }): JSX.Element => {
+const useSchedule = (selectedId: number) => {
   const [selectedDate, setSelectedDate] = useAtom(dateAtom);
   const [nowMonth] = useAtom(monthAtom);
 
@@ -34,23 +32,7 @@ const CalenderConents = ({ selectedId }: { selectedId: number }): JSX.Element =>
     setSelectedDate((prev) => newObj);
   };
 
-  return (
-    <MonthBox $wFull>
-      {scheduleData?.table.map((weekArray: DailyScheduleData[], i) => (
-        <WeekGrid key={`${i}주`}>
-          {weekArray.map((e: DailyScheduleData) => (
-            <CalendarDayBox
-              key={e.date}
-              dateString={e.date}
-              timeList={e.workTime}
-              onClick={() => dateOnClick(e.workTime !== null, e.date)}
-              isSelected={selectedDate.date === e.date}
-            />
-          ))}
-        </WeekGrid>
-      ))}
-    </MonthBox>
-  );
+  return { scheduleData, selectedDate, dateOnClick };
 };
 
-export default CalenderConents;
+export default useSchedule;

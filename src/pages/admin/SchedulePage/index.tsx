@@ -3,27 +3,24 @@ import React, { Suspense } from 'react';
 import { atom, useAtomValue } from 'jotai';
 import NotFixedDateBox from 'components/DailyWorkers/NotFixedDateBox';
 import CalenderOutter from 'components/Calendar/CalenderOutter';
-import CalenderConents from 'pages/admin/MainPage/ScheduleSection/components/CalenderConents';
+import CalenderConents from 'pages/admin/SchedulePage/CalendarSection/CalenderConents';
 import { MainTopBarCont } from 'components/PageStyledComponents/admin/MainPage';
-import DailyWorkers from './components/DailyWorkers';
-import Dropdown from './components/Dropdown';
-import TotalWorkTime from './components/TotalWorkTime';
-
-interface Props {
-  members: MemberType[];
-}
+import DailyWorkers from './DailyWorkerSection/DailyWorkers';
+import Dropdown from './HeaderSection/Dropdown';
+import TotalWorkTime from './HeaderSection/TotalWorkTime';
+import { TotalWorkTimeData } from 'apis/getSchedule';
 
 interface MemberType {
   memberId: number;
   name: string;
-  totalWorkTime: { monthly: number; weekly: number };
+  totalWorkTime: TotalWorkTimeData;
 }
 
 export const memberAtom = atom<MemberType>({ memberId: 0, name: '', totalWorkTime: { monthly: 0, weekly: 0 } }); // 선택된 멤버 정보
 export const dateAtom = atom({ date: '', isFixed: false }); // 선택된 날짜 정보
 export const monthAtom = atom({ year: new Date().getFullYear(), month: new Date().getMonth() }); // 선택된 달 정보
 
-const AdminScheduleSection = ({ members }: Props): JSX.Element => {
+const AdminSchedulePage = ({ members }: { members: MemberType[] }): JSX.Element => {
   const nowMember = useAtomValue(memberAtom);
   const nowDate = useAtomValue(dateAtom);
 
@@ -58,4 +55,4 @@ const AdminScheduleSection = ({ members }: Props): JSX.Element => {
   );
 };
 
-export default AdminScheduleSection;
+export default AdminSchedulePage;
