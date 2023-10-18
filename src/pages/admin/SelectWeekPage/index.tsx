@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { atom } from 'jotai';
 import CalenderOutter from 'components/Calendar/CalenderOutter';
-import MonthlyContents from './Calendar/MonthlyContents';
+import StatusCalendar from './Calendar/StatusCalendar';
 import WeeklyDatailSection from './WeeklyDetailSection';
 import FlexContainer from 'components/@commons/FlexContainer';
 import PageContainer from 'components/@commons/PageContainer';
@@ -15,7 +15,7 @@ const SelectWeekPage = (): JSX.Element => {
       <FlexContainer $wFull>
         <CalenderOutter monthDataAtom={weekStatusMonthAtom}>
           <Suspense>
-            <MonthlyContents />
+            <StatusCalendar />
           </Suspense>
         </CalenderOutter>
       </FlexContainer>
