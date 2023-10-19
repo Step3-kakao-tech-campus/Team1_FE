@@ -10,7 +10,7 @@ spec:
     metadata:
       labels:
         app: frontend
-    spec:
+    spec: 
       containers:
         - name: frontend
           # 여러분의 image 주소를 입력해주세요.
