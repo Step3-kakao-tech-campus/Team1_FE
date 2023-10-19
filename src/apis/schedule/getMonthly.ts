@@ -15,7 +15,7 @@ interface GetMonthlyInfo {
   year: number;
   month: number;
   isAdmin: boolean;
-  memberId: number | null;
+  memberId: number;
 }
 
 export const getMonthly = async (info: GetMonthlyInfo) => {

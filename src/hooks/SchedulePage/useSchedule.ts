@@ -1,22 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMonthly } from 'apis/schedule/getMonthly';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import React, { useEffect } from 'react';
 import useLogin from 'hooks/useLogin';
-import { dateAtom, monthAtom, workTimeAtom } from 'pages/SchedulePage/states';
+import { dateAtom, memberAtom, monthAtom, workTimeAtom } from 'pages/SchedulePage/states';
 
-const useSchedule = (selectedId: number | null) => {
+const useSchedule = () => {
   const [selectedDate, setSelectedDate] = useAtom(dateAtom);
-  const [nowMonth] = useAtom(monthAtom);
+  const nowMonth = useAtomValue(monthAtom);
+  const nowMember = useAtomValue(memberAtom);
 
   const { year, month } = { ...nowMonth };
   const isAdmin = useLogin().getLoginState().isAdmin;
   const { data: scheduleData } = useQuery(
-    ['getMonthly', year, month, selectedId],
-    () => getMonthly({ year: year, month: month, memberId: selectedId, isAdmin: isAdmin }),
+    ['getMonthly', year, month, nowMember.memberId],
+    () => getMonthly({ year: year, month: month, memberId: nowMember.memberId, isAdmin: isAdmin }),
     {
       suspense: true,
-      enabled: selectedId !== 0,
+      enabled: nowMember.isSelected === true,
     },
   );
 
