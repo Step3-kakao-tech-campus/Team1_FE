@@ -17,7 +17,7 @@ const Dropdown = ({ members }: { members: MemberData[] }): JSX.Element => {
   };
 
   const contentOnClick = (m: MemberData) => {
-    setMember({ memberId: m.memberId, name: m.name });
+    setMember({ memberId: m.memberId, name: m.name, isSelected: true });
     setIsOpen(false);
   };
 
