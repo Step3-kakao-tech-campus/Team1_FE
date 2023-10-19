@@ -17,33 +17,40 @@ import TotalWorkTime from 'pages/SchedulePage/HeaderSection/TotalWorkTime';
 
 const SchedulePage = ({ members }: { members: MemberData[] }): JSX.Element => {
   const isAdmin = useLogin().getLoginState().isAdmin;
+  const nowMonth = useAtomValue(monthAtom);
 
-  const nowDate = useAtomValue(dateAtom);
   const totalWorkTime = useAtomValue(workTimeAtom);
+  const [nowDate, setNowDate] = useAtom(dateAtom);
   const [nowMember, setNowMember] = useAtom(memberAtom);
 
   useEffect(() => {
     if (!isAdmin) {
-      setNowMember({ memberId: null, name: '' });
+      // 알바생일 때 : 항상 {memberId: 0, isSelected: true}
+      // 매니저일 때 : 직원 선택 안됐을 때 {memberId: 0, isSelected: false}
+      setNowMember({ memberId: 0, name: '', isSelected: true });
     }
   }, []);
+
+  useEffect(() => {
+    setNowDate({ date: '', isFixed: false });
+  }, [nowMember, nowMonth]);
 
   return (
     <PageContainer>
       <FlexContainer $wFull $hFull $justify="start">
         <MainTopBarCont>
           <FlexContainer $wFull $align="flex-start">
-            {nowMember.memberId !== 0 && <TotalWorkTime totalWorkTime={totalWorkTime} />}
+            {nowMember.isSelected && <TotalWorkTime totalWorkTime={totalWorkTime} />}
           </FlexContainer>
           <FlexContainer $hFull $wFull $position="relative">
             {isAdmin && <Dropdown members={members} />}
           </FlexContainer>
         </MainTopBarCont>
 
-        {nowMember.memberId !== 0 && (
+        {nowMember.isSelected && (
           <CalenderOutter monthDataAtom={monthAtom}>
             <Suspense fallback={<div>캘린더 로딩</div>}>
-              <CalenderConents selectedId={nowMember.memberId} />
+              <CalenderConents />
             </Suspense>
           </CalenderOutter>
         )}
