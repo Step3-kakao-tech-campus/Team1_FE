@@ -1,10 +1,10 @@
 import instance from 'apis/instance';
 
-export const postsignup = (userInfo: SignupRequest) => {
+export const postsignup = (userInfo: SignupRequest): Promise<LoginResponse> => {
   return instance.post(`/auth/join`, userInfo);
 };
 
-export const postLogin = (body: LoginRequest) => {
+export const postLogin = (body: LoginRequest): Promise<LoginResponse> => {
   return instance.post(`/auth/login`, body);
 };
 
@@ -14,14 +14,15 @@ export interface SignupRequest {
   isAdmin: boolean;
 }
 
-export interface SignupResponse {
-  isAdmin: boolean;
-}
-
-export interface LoginRequest {
+interface LoginRequest {
   code: string;
 }
 
-export interface LoginResponse {
-  isAdmin: boolean;
+interface LoginResponse {
+  headers: {
+    authorization: string;
+  };
+  data: {
+    isAdmin: boolean;
+  };
 }

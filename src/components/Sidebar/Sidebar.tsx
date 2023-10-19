@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getMyInfo } from 'apis/userInfo';
+import { MemberData, getMyInfo } from 'apis/userInfo';
 import { convertPath } from 'apis/convertURI';
 import useLogin from 'hooks/useLogin';
 import useModal from 'hooks/useModal';
@@ -68,12 +68,9 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
           <HorizontalLine />
 
           <FlexContainer $wFull $align="flex-start" $gap="0.5rem">
-            {memberList?.data.members.map((member: { memberId: number; name: string; isAdmin: boolean }) => (
+            {memberList?.data.members.map((member: MemberData) => (
               <ol key={member.memberId}>
-                <Text>
-                  {member.name}
-                  {member.isAdmin && ' (Admin)'}
-                </Text>
+                <Text>{member.name}</Text>
               </ol>
             ))}
           </FlexContainer>

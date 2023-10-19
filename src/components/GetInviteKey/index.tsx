@@ -27,7 +27,7 @@ const GetInviteKey = ({ modalOffHandler }: Props): JSX.Element => {
         <Text>{inviteKeyData?.data.invitationKey}</Text>
       </Box>
       <FlexContainer $gap="10px">
-        <CopyToClipboard text={inviteKeyData?.data.invitationKey}>
+        <CopyToClipboard text={inviteKeyData?.data.invitationKey as string}>
           <SubmitButton>복사하기</SubmitButton>
         </CopyToClipboard>
         <Button onClick={() => modalOffHandler()}>닫기</Button>

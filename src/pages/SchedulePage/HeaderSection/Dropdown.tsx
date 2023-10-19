@@ -2,20 +2,12 @@ import React, { useState } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
-import { memberAtom } from '..';
 import { useAtom } from 'jotai';
 import { DropDownCont } from 'components/PageStyledComponents/admin/MainPage';
+import { MemberData } from 'apis/userInfo';
+import { memberAtom } from 'pages/SchedulePage/states';
 
-interface Props<T> {
-  members: T[];
-}
-
-interface MemberType {
-  memberId: number;
-  name: string;
-}
-
-const Dropdown = <T extends MemberType>({ members }: Props<T>): JSX.Element => {
+const Dropdown = ({ members }: { members: MemberData[] }): JSX.Element => {
   const [member, setMember] = useAtom(memberAtom);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -24,9 +16,9 @@ const Dropdown = <T extends MemberType>({ members }: Props<T>): JSX.Element => {
     setIsOpen((prev) => !prev);
   };
 
-  const contentOnClick = (m: T) => {
-    setMember((prev) => ({ ...prev, memberId: m.memberId, name: m.name }));
-    setIsOpen((prev) => false);
+  const contentOnClick = (m: MemberData) => {
+    setMember({ memberId: m.memberId, name: m.name, isSelected: true });
+    setIsOpen(false);
   };
 
   return (
@@ -37,7 +29,7 @@ const Dropdown = <T extends MemberType>({ members }: Props<T>): JSX.Element => {
       </FlexContainer>
       {isOpen && (
         <FlexContainer $wFull $gap="10px" $padding="16px 0">
-          {members?.map((member: T) => (
+          {members.map((member: MemberData) => (
             <FlexContainer $wFull $align="flex-start" onClick={() => contentOnClick(member)} key={member.name}>
               <Text margin="0">{member.name}</Text>
             </FlexContainer>
