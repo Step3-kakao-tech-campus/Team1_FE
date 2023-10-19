@@ -2,9 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-data: 
-  .env:
-    REACT_APP_KAKAO_REDIRECT_URI=/login/kakao
 spec:
   selector:
     matchLabels:
