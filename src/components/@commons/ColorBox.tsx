@@ -4,6 +4,7 @@ import styled from 'styled-components';
 interface Props {
   $wFull?: boolean;
   $hFull?: boolean;
+  $padding?: string;
   $background?: string;
 }
 
@@ -15,8 +16,10 @@ const ColorBox = styled.div<Props>`
   flex-direction: column;
 
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
   background: ${(props) => (props.$background ? props.$background : 'none')};
+
+  padding: ${(props) => (props.$padding ? props.$padding : '0')};
 `;
 
 export default ColorBox;

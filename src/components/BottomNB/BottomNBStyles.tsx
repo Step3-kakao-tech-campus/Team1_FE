@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 export const Box = styled.div`
   position: fixed;
-  z-index: 998;
+  z-index: 90;
   bottom: 0;
 
   display: flex;

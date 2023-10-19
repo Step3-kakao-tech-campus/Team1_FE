@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginOrSignup from 'components/@commons-feature/LoginOrSignup';
+import LoginOrSignup from 'components/LoginSignUpButton/LoginOrSignup';
 import FlexContainer from 'components/@commons/FlexContainer';
 import PageContainer from '../components/@commons/PageContainer';
 
