@@ -19,8 +19,7 @@ import AddGroupPage from 'pages/admin/AddGroupPage';
 import ApplicationOpenPage from 'pages/admin/ApplicationOpenPage';
 import ApplicationClosePage from 'pages/admin/ApplicationClosePage';
 import ApplyPage from 'pages/alba/ApplyPage';
-import AdminWeeklyStatusPage from 'pages/admin/WeeklyStatusPage';
-import AlbaSelectWeekPage from 'pages/alba/WeeklyStatusPage';
+import SelectWeekPage from 'pages/SelectWeekPage';
 
 function App(): JSX.Element {
   return (
@@ -38,14 +37,14 @@ function App(): JSX.Element {
 
               <Route element={<UserTypePrivate when="admin" />}>
                 <Route path={convertPath('/addGroup')} element={<AddGroupPage />} />
-                <Route path={convertPath('/newSchedule')} element={<AdminWeeklyStatusPage />} />
+                <Route path={convertPath('/newSchedule')} element={<SelectWeekPage isAdmin />} />
                 <Route path={convertPath('/newSchedule/open')} element={<ApplicationOpenPage />} />
                 <Route path={convertPath('/newSchedule/close')} element={<ApplicationClosePage />} />
               </Route>
 
               <Route element={<UserTypePrivate when="alba" />}>
                 <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
-                <Route path={convertPath('/apply')} element={<AlbaSelectWeekPage />} />
+                <Route path={convertPath('/apply')} element={<SelectWeekPage isAdmin={false} />} />
                 <Route path={convertPath('/apply:startWeekDate')} element={<ApplyPage />} />
               </Route>
             </Routes>

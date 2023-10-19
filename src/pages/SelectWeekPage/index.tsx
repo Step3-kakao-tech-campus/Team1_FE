@@ -4,8 +4,8 @@ import CalenderOutter from 'components/Calendar/CalenderOutter';
 import StatusCalendar from './Calendar/StatusCalendar';
 import FlexContainer from 'components/@commons/FlexContainer';
 import PageContainer from 'components/@commons/PageContainer';
-import WeeklyDatailSection from 'pages/admin/WeeklyStatusPage/WeeklyDetailSection';
-import AlbaSelectButton from 'pages/alba/WeeklyStatusPage/SelectButton';
+import AdminDetailSect from 'pages/SelectWeekPage/AdminDetailSection';
+import AlbaSubmitButton from 'pages/SelectWeekPage/AlbaSubmitButton';
 
 export const weekStatusMonthAtom = atom({ year: new Date().getFullYear(), month: new Date().getMonth() });
 export const selectedWeekAtom = atom({ startWeekDate: '', weekStatus: '' });
@@ -21,8 +21,8 @@ const SelectWeekPage = ({ isAdmin }: { isAdmin: boolean }): JSX.Element => {
         </CalenderOutter>
       </FlexContainer>
       <FlexContainer $wFull>
-        {isAdmin && <WeeklyDatailSection />}
-        {!isAdmin && <AlbaSelectButton />}
+        {isAdmin && <AdminDetailSect />}
+        {!isAdmin && <AlbaSubmitButton />}
       </FlexContainer>
     </PageContainer>
   );

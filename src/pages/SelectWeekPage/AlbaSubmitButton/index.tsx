@@ -6,7 +6,7 @@ import React from 'react';
 import { useAtomValue } from 'jotai';
 import { selectedWeekAtom } from 'pages/SelectWeekPage';
 
-const AlbaSelectButton = (): JSX.Element => {
+const AlbaSubmitButton = (): JSX.Element => {
   const navigate = useNavigate();
   const selectedWeek = useAtomValue(selectedWeekAtom);
   const submitHandler = () => {
@@ -20,4 +20,4 @@ const AlbaSelectButton = (): JSX.Element => {
   );
 };
 
-export default AlbaSelectButton;
+export default AlbaSubmitButton;
