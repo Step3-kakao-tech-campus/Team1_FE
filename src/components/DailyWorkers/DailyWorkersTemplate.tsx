@@ -3,7 +3,7 @@ import FlexContainer from 'components/@commons/FlexContainer';
 
 import Text from 'components/@commons/Text';
 import { NameBox, TitleBox } from './DailyWorkersStyle';
-import { DailyWorkTimeData, WorkerData } from 'apis/getSchedule';
+import { DailyWorkTimeData, WorkerData } from 'apis/schedule/getDailyWorkers';
 
 const DailyWorkersTemplate = ({ dailyData }: { dailyData: DailyWorkTimeData[] | undefined }): JSX.Element => {
   return (

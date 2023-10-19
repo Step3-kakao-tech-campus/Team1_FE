@@ -1,37 +1,53 @@
 import instance from 'apis/instance';
 import { dateToString } from 'utils/dateToString';
 
-export const getDailyWorkers = (params: GetDailyWorkersRequest): Promise<GetDailyWorkerResponse> => {
-  return instance.get(`/schedule/fix/day`, { params });
+export interface DailyScheduleData {
+  date: string;
+  workTime: string[] | null;
+}
+
+export interface TotalWorkTimeData {
+  weekly: number;
+  monthly: number;
+}
+
+interface GetMonthlyInfo {
+  year: number;
+  month: number;
+  isAdmin: boolean;
+  memberId: number | null;
+}
+
+export const getMonthly = async (info: GetMonthlyInfo) => {
+  const { year, month } = { ...info };
+
+  let params = {};
+
+  if (info.isAdmin) {
+    params = {
+      month: `${year}-${month + 1}`,
+      memberId: info.memberId,
+    };
+  } else {
+    params = {
+      month: `${year}-${month + 1}`,
+    };
+  }
+
+  const response = await instance.get(`/schedule/fix/month`, { params });
+
+  return to2Dimension(info, response);
 };
 
-export interface DailyWorkTimeData {
-  title: string;
-  startTime: string;
-  endTime: string;
-  workerList: WorkerData[];
-}
-
-export interface WorkerData {
-  memberId: number;
-  name: string;
-}
-
-interface GetDailyWorkersRequest {
-  date: string;
-}
-
-interface GetDailyWorkerResponse {
-  data: { schedule: DailyWorkTimeData[] };
-}
-
-export const getMonthly = async (info: GetMonthlyInfo): Promise<GetMonthlyResponse> => {
-  const { year, month } = { ...info };
-  const params = {
-    month: `${year}-${month + 1}`,
-    memberId: info.memberId,
+interface GetMonthlyResponse {
+  data: {
+    schedule: DailyScheduleData[];
+    work_summary: TotalWorkTimeData;
   };
-  const response = await instance.get(`/schedule/fix/month`, { params });
+}
+
+const to2Dimension = (info: GetMonthlyInfo, response: GetMonthlyResponse) => {
+  const { year, month } = { ...info };
 
   const totalTime = response.data.work_summary;
   const monthly = response.data.schedule;
@@ -72,25 +88,3 @@ export const getMonthly = async (info: GetMonthlyInfo): Promise<GetMonthlyRespon
 
   return { table, totalTime };
 };
-
-export interface DailyScheduleData {
-  date: string;
-  workTime: string[] | null;
-}
-
-export interface TotalWorkTimeData {
-  weekly: number;
-  monthly: number;
-}
-
-interface GetMonthlyInfo {
-  year: number;
-  month: number;
-  isAdmin: boolean;
-  memberId?: number;
-}
-
-interface GetMonthlyResponse {
-  table: DailyScheduleData[][];
-  totalTime: TotalWorkTimeData;
-}

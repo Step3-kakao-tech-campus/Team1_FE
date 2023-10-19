@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { getMonthly } from 'apis/getSchedule';
+import { getMonthly } from 'apis/schedule/getMonthly';
 import { useAtom } from 'jotai';
-import { dateAtom, memberAtom, monthAtom } from 'pages/admin/SchedulePage';
 import React, { useEffect } from 'react';
 import useLogin from 'hooks/useLogin';
+import { dateAtom, monthAtom, workTimeAtom } from 'pages/SchedulePage/states';
 
-const useSchedule = (selectedId: number) => {
+const useSchedule = (selectedId: number | null) => {
   const [selectedDate, setSelectedDate] = useAtom(dateAtom);
   const [nowMonth] = useAtom(monthAtom);
 
@@ -20,11 +20,11 @@ const useSchedule = (selectedId: number) => {
     },
   );
 
-  const [, setNowMember] = useAtom(memberAtom);
+  const [, setWorkTime] = useAtom(workTimeAtom);
 
   useEffect(() => {
     if (!scheduleData) return;
-    setNowMember((prev) => ({ ...prev, totalWorkTime: scheduleData?.totalTime }));
+    setWorkTime((prev) => ({ ...scheduleData?.totalTime }));
   }, [scheduleData]);
 
   const dateOnClick = (isFixed: boolean, date: string) => {

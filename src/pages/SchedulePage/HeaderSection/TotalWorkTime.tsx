@@ -2,7 +2,7 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import React from 'react';
 
 import Text from 'components/@commons/Text';
-import { TotalWorkTimeData } from 'apis/getSchedule';
+import { TotalWorkTimeData } from 'apis/schedule/getMonthly';
 
 const TotalWorkTime = ({ totalWorkTime }: { totalWorkTime: TotalWorkTimeData }): JSX.Element => {
   return (

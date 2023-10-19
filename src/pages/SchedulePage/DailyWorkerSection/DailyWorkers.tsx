@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { getDailyWorkers } from 'apis/getSchedule';
+
 import DailyWorkersTemplate from 'components/DailyWorkers/DailyWorkersTemplate';
 import FlexContainer from 'components/@commons/FlexContainer';
 import React from 'react';
+import { getDailyWorkers } from 'apis/schedule/getDailyWorkers';
 
 const DailyWorkers = ({ date }: { date: string }): JSX.Element => {
   const { data: scheduleResponse } = useQuery([date], () => getDailyWorkers({ date: date }), {

@@ -1,12 +1,11 @@
 import React from 'react';
-import { DailyScheduleData } from 'apis/getSchedule';
+import { DailyScheduleData } from 'apis/schedule/getMonthly';
 import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
 import CalendarDayBox from './CalendarDayBox';
-import useSchedule from 'hooks/admin/SchedulePage/useSchedule';
+import useSchedule from 'hooks/SchedulePage/useSchedule';
 
-const CalenderConents = ({ selectedId }: { selectedId: number }): JSX.Element => {
+const CalenderConents = ({ selectedId }: { selectedId: number | null }): JSX.Element => {
   const { scheduleData, selectedDate, dateOnClick } = useSchedule(selectedId);
-
   return (
     <MonthBox $wFull>
       {scheduleData?.table.map((weekArray: DailyScheduleData[], i) => (

@@ -1,4 +1,4 @@
-import { addNewGroup } from 'apis/admin/manageGroup';
+import { AddGroupRequest, addNewGroup } from 'apis/admin/manageGroup';
 import FlexContainer from 'components/@commons/FlexContainer';
 import GradationBox from 'components/@commons/GradationBox';
 import SubmitButton from 'components/@commons/SubmitButton';
@@ -7,28 +7,21 @@ import useForm from 'hooks/useForm';
 import React from 'react';
 import styled from 'styled-components';
 
-interface MarketInfo {
-  marketName: string;
-  marketNumber: string;
-  mainAddress: string;
-  detailAddress: string;
-}
-
 interface Props {
   doneStateHandler: () => void;
 }
 
 const FormSection = ({ doneStateHandler }: Props): JSX.Element => {
-  const initialInfo: MarketInfo = {
+  const initialInfo: AddGroupRequest = {
     marketName: '',
     marketNumber: '',
     mainAddress: '',
     detailAddress: '',
   };
 
-  const { obj: marketInfo, formHandler } = useForm(initialInfo);
+  const { obj: marketInfo, formHandler } = useForm<AddGroupRequest>(initialInfo);
   const submitHandler = (): void => {
-    addNewGroup<MarketInfo>(marketInfo)
+    addNewGroup(marketInfo)
       .then((res) => {
         doneStateHandler();
       })
