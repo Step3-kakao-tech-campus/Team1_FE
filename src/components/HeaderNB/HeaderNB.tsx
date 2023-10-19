@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   HeaderContainer,
   HeaderInnerBox,
@@ -8,26 +8,35 @@ import {
 } from 'components/HeaderNB/HeaderNBStyels';
 import useLogin from 'hooks/useLogin';
 import { Alarm, Hamburger } from './icons';
+import Sidebar from 'components/Sidebar/Sidebar';
 
 const HeaderNB = (): JSX.Element => {
+  /* ----------------------- ! 수정 중 입니다 ! ------------------------ */
+
   const loginState = useLogin().getLoginState();
   const { logout } = useLogin('/');
 
-  return (
-    <HeaderContainer>
-      <HeaderInnerBox>
-        <HeaderLeftMenuGroup>
-          <button>
-            <Hamburger />
-          </button>
-        </HeaderLeftMenuGroup>
+  const [isOpen, setIsOpen] = useState(false);
 
-        <HeaderRightMenuGroup>
-          <Alarm />
-          {loginState.isLogin && <HeaderButton onClick={logout}>임시로그아웃</HeaderButton>}
-        </HeaderRightMenuGroup>
-      </HeaderInnerBox>
-    </HeaderContainer>
+  return (
+    <>
+      <HeaderContainer>
+        <HeaderInnerBox>
+          <HeaderLeftMenuGroup>
+            <HeaderButton onClick={() => setIsOpen(true)}>
+              <Hamburger />
+            </HeaderButton>
+          </HeaderLeftMenuGroup>
+
+          <HeaderRightMenuGroup>
+            <Alarm />
+            {loginState.isLogin && <HeaderButton onClick={logout}>임시로그아웃</HeaderButton>}
+          </HeaderRightMenuGroup>
+        </HeaderInnerBox>
+      </HeaderContainer>
+
+      {isOpen && <Sidebar closeHandler={() => setIsOpen(false)} />}
+    </>
   );
 };
 

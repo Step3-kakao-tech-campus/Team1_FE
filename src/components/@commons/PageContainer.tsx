@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import HeaderNB from 'components/HeaderNB/HeaderNB';
-import BottomNB from 'components/BottomNB/BottomNB';
+import { AlbaBottomNB, AdminBottomNB } from 'components/BottomNB/BottomNB';
+import useLogin from 'hooks/useLogin';
 
 interface Props {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar, justify }: Props): JSX.Element => {
+  const isAdmin = useLogin().getLoginState().isAdmin;
   return (
     <WholeConatiner>
       <ColumnContainer>
@@ -20,7 +22,8 @@ const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar
         <MainContainer $gap={gap} $padding={padding} $justify={justify} $bottom={!withoutBottonBar}>
           {children}
         </MainContainer>
-        {!withoutBottonBar && <BottomNB />}
+        {!withoutBottonBar && isAdmin && <AdminBottomNB />}
+        {!withoutBottonBar && !isAdmin && <AlbaBottomNB />}
       </ColumnContainer>
     </WholeConatiner>
   );
@@ -38,9 +41,6 @@ const WholeConatiner = styled.div`
 `;
 
 const ColumnContainer = styled.div`
-  /* position: absolute;
-  left: 50%;
-  transform: translateX('-50%'); */
   position: relative;
 
   width: 100%;

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import store from 'states/store';
 import { apiURL } from 'apis/convertURI';
 
 const instance = axios.create({
@@ -11,9 +10,13 @@ const instance = axios.create({
 
 export const requestDefault = instance.interceptors.request.use(
   (config) => {
-    const loginState = store.getState().login;
-    if (loginState.islogin) {
-      config.headers.Authorization = loginState.token;
+    // 로그인 상태일 때 토큰 싣기
+    const strData = sessionStorage.getItem('login');
+    if (strData !== null) {
+      const loginState = JSON.parse(strData);
+      if (loginState.isLogin) {
+        config.headers.Authorization = loginState.token;
+      }
     }
 
     console.log(config);

@@ -1,21 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
-import { postsignup } from 'apis/signup';
-import { postLogin } from 'apis/login';
-import { atom, useAtom } from 'jotai';
+import { postsignup, postLogin, SignupRequest } from 'apis/auth';
 import React from 'react';
 
 interface UserDataType {
   isAdmin: boolean;
 }
 
-interface UserGetBySignup {
-  userName: string;
-  isAdmin: boolean | null;
-}
-
 const defaultLoginState = { isLogin: false, token: '', isAdmin: false };
-// const loginAtom = atom(defaultLoginState);
 
 const useLogin = (redirectPage?: string) => {
   const navigate = useNavigate();
@@ -28,14 +20,15 @@ const useLogin = (redirectPage?: string) => {
     location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
   };
 
-  const signup = (userInfo: UserGetBySignup): void => {
-    postsignup(userInfo)
+  const signup = (requestBody: SignupRequest): void => {
+    postsignup(requestBody)
       .then((response) => {
         // 로그인, 토큰 저장
         saveLoginData(response.headers.authorization, response.data);
       })
       .catch((error) => {
         // 에러 처리
+        navigate(convertPath('/'));
       });
   };
 
@@ -49,7 +42,7 @@ const useLogin = (redirectPage?: string) => {
         // 비회원일 경우
         if (error.response && error.response.status === 404) {
           // 회원가입 처리를 하러 간다.
-          navigate('/signup');
+          navigate('/signup', { state: { code: code } });
         }
       });
   };

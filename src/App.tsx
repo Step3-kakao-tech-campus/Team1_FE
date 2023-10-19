@@ -8,17 +8,17 @@ import { myTheme } from 'styles/myTheme';
 import { convertPath } from 'apis/convertURI';
 import { Provider } from 'jotai';
 
-import LogoutOnlyPrivate from 'auth/LogoutOnlyPrivate';
-import AdminOnlyPrivate from 'auth/AdminOnlyPrivate';
+import LogoutOnlyPrivate from 'privateRoutes/LogoutOnlyPrivate';
+import AdminOnlyPrivate from 'privateRoutes/AdminOnlyPrivate';
 
-import HomePage from 'pages/HomePage';
+import HomeIndex from 'pages/HomeIndex';
 import KakaoAuthPage from 'pages/KakaoAuthPage';
-import SignupPage from 'pages/SignupPage/SignupPage';
-import InvitedPage from 'pages/alba-InvitedPage/InvitedPage';
-import AddGroupPage from 'pages/admin-AddGroupPage/AddGroupPage';
-import SelectWeekPage from 'pages/admin-SelectWeekPage/SelectWeekPage';
-import ApplicationOpenPage from 'pages/admin-ApplicationOpenPage/ApplicationOpenPage';
-import ApplicationClosePage from 'pages/admin-ApplicationClosePage/ApplicationClosePage';
+import SignupPage from 'pages/SignupPage';
+import InvitedPage from 'pages/alba/InvitedPage';
+import AddGroupPage from 'pages/admin/AddGroupPage';
+import SelectWeekPage from 'pages/admin/SelectWeekPage';
+import ApplicationOpenPage from 'pages/admin/ApplicationOpenPage';
+import ApplicationClosePage from 'pages/admin/ApplicationClosePage';
 
 function App(): JSX.Element {
   return (
@@ -27,7 +27,7 @@ function App(): JSX.Element {
         <BrowserRouter>
           <ErrorBoundary fallback={<p>에러... app.tsx</p>}>
             <Routes>
-              <Route path={convertPath('/')} element={<HomePage />} />
+              <Route path={convertPath('/')} element={<HomeIndex />} />
 
               <Route element={<LogoutOnlyPrivate />}>
                 <Route path={convertPath('/signup')} element={<SignupPage />} />
