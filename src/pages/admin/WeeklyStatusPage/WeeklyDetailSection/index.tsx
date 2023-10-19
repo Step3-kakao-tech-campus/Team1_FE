@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import React, { Suspense } from 'react';
-import { selectedWeekAtom } from '..';
+import { selectedWeekAtom } from '../../../SelectWeekPage';
 import Text from 'components/@commons/Text';
 import OpenDetail from './OpenDetail';
 import InProgressDetail from './InProgressDetail';
