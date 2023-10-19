@@ -16,10 +16,11 @@ import KakaoAuthPage from 'pages/KakaoAuthPage';
 import SignupPage from 'pages/SignupPage';
 import InvitedPage from 'pages/alba/InvitedPage';
 import AddGroupPage from 'pages/admin/AddGroupPage';
-import SelectWeekPage from 'pages/admin/SelectWeekPage';
 import ApplicationOpenPage from 'pages/admin/ApplicationOpenPage';
 import ApplicationClosePage from 'pages/admin/ApplicationClosePage';
 import ApplyPage from 'pages/alba/ApplyPage';
+import AdminWeeklyStatusPage from 'pages/admin/WeeklyStatusPage';
+import AlbaSelectWeekPage from 'pages/alba/WeeklyStatusPage';
 
 function App(): JSX.Element {
   return (
@@ -37,14 +38,15 @@ function App(): JSX.Element {
 
               <Route element={<UserTypePrivate when="admin" />}>
                 <Route path={convertPath('/addGroup')} element={<AddGroupPage />} />
-                <Route path={convertPath('/newSchedule')} element={<SelectWeekPage />} />
+                <Route path={convertPath('/newSchedule')} element={<AdminWeeklyStatusPage />} />
                 <Route path={convertPath('/newSchedule/open')} element={<ApplicationOpenPage />} />
                 <Route path={convertPath('/newSchedule/close')} element={<ApplicationClosePage />} />
               </Route>
 
               <Route element={<UserTypePrivate when="alba" />}>
                 <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
-                <Route path={convertPath('/apply')} element={<ApplyPage />} />
+                <Route path={convertPath('/apply')} element={<AlbaSelectWeekPage />} />
+                <Route path={convertPath('/apply:startWeekDate')} element={<ApplyPage />} />
               </Route>
             </Routes>
           </ErrorBoundary>
