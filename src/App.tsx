@@ -11,7 +11,7 @@ import { Provider } from 'jotai';
 import LogoutOnlyPrivate from 'privateRoutes/LogoutOnlyPrivate';
 import AdminOnlyPrivate from 'privateRoutes/AdminOnlyPrivate';
 
-import HomePage from 'pages/HomePage';
+import HomeIndex from 'pages/HomeIndex';
 import KakaoAuthPage from 'pages/KakaoAuthPage';
 import SignupPage from 'pages/SignupPage';
 import InvitedPage from 'pages/alba/InvitedPage';
@@ -27,7 +27,7 @@ function App(): JSX.Element {
         <BrowserRouter>
           <ErrorBoundary fallback={<p>에러... app.tsx</p>}>
             <Routes>
-              <Route path={convertPath('/')} element={<HomePage />} />
+              <Route path={convertPath('/')} element={<HomeIndex />} />
 
               <Route element={<LogoutOnlyPrivate />}>
                 <Route path={convertPath('/signup')} element={<SignupPage />} />
