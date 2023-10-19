@@ -4,8 +4,8 @@ import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
 import CalendarDayBox from './CalendarDayBox';
 import useSchedule from 'hooks/SchedulePage/useSchedule';
 
-const CalenderConents = ({ selectedId }: { selectedId: number | null }): JSX.Element => {
-  const { scheduleData, selectedDate, dateOnClick } = useSchedule(selectedId);
+const CalenderConents = (): JSX.Element => {
+  const { scheduleData, selectedDate, dateOnClick } = useSchedule();
   return (
     <MonthBox $wFull>
       {scheduleData?.table.map((weekArray: DailyScheduleData[], i) => (
