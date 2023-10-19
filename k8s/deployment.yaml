@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
+data: 
+  .env:
+    REACT_APP_KAKAO_REDIRECT_URI=/login/kakao
 spec:
   selector:
     matchLabels:
@@ -14,4 +17,4 @@ spec:
       containers:
         - name: frontend
           # 여러분의 image 주소를 입력해주세요.
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_b26216d17ec4
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_k5573ffcaf89ea
