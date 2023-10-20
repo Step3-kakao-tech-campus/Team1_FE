@@ -1,23 +1,32 @@
 import instance from 'apis/instance';
+import { AxiosResponse } from 'axios';
 
-export const getApplyForm = (params: { startWeekDate: string }) => {
+export const getApplyForm = (params: { startWeekDate: string }): Promise<AxiosResponse<GetApplyFormResponse>> => {
   return instance.get(`/application`, { params });
 };
 
-interface GetResponseBody {
-  template: [];
+interface GetApplyFormResponse {
+  template: TimeTemplateData[];
+  selected: SelectedSchedule[][];
 }
 
-export const putApply = (body: PutRequestBody) => {
+export interface TimeTemplateData {
+  title: string;
+  startTime: string;
+  endTime: string;
+  workTimeId: number;
+}
+
+export interface SelectedSchedule {
+  workTimeId: number;
+  isChecked: boolean;
+}
+
+export const putApply = (body: PutApplyRequest) => {
   return instance.put(`/application`, body);
 };
 
-interface PutRequestBody {
+interface PutApplyRequest {
   weekStartDate: string;
-  apply: SelectSchedule[][];
-}
-
-interface SelectSchedule {
-  workTimeId: number;
-  isChecked: boolean;
+  apply: SelectedSchedule[][];
 }
