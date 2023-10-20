@@ -8,12 +8,7 @@ import { ButtonContainer, InputTime, InputTitle } from 'components/PageStyledCom
 import useTimeTemplate from 'hooks/admin/ApplicationOpenPage/useTimeTemplate';
 
 import { myTheme } from 'styles/myTheme';
-
-interface TimeData {
-  title: string;
-  startTime: string;
-  endTime: string;
-}
+import { TimeData } from 'apis/admin/application';
 
 const EditTimeForm = ({ startWeekDate }: { startWeekDate: string }) => {
   const { timeTemplate, formChangeHandler, deleteHandler, addHandler, submitHandler } = useTimeTemplate(startWeekDate);

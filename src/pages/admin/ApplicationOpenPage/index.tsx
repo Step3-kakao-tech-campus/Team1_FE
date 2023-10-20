@@ -4,12 +4,7 @@ import { atom, useAtomValue } from 'jotai';
 import PageContainer from 'components/@commons/PageContainer';
 import SetPeopleSection from './SetPeopleSection';
 import SetTimeSection from './SetTimeTemplateSection';
-
-interface TimeData {
-  title: string;
-  startTime: string;
-  endTime: string;
-}
+import { TimeData } from 'apis/admin/application';
 
 export const timeTemplateAtom = atom<TimeData[]>([]);
 export const weeklyPeopleAtom = atom<number[][]>([[], [], [], [], [], [], []]);
