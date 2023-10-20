@@ -9,22 +9,17 @@ import useWeekSelector from 'hooks/useWeekSelector';
 import Text from 'components/@commons/Text';
 import { stringDateMove } from 'utils/stringDateMove';
 import BorderBox from 'components/@commons/BorderBox';
+import { useMutation } from '@tanstack/react-query';
 
 const TimeSelectSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { day, WeekBarComponent } = useWeekSelector(0);
-
   const weeklySelect = useAtomValue(weeklySelectAtom);
   const setStep = useSetAtom(applyStepAtom);
 
   // 미리보기 버튼 클릭
+  const mutation = useMutation(putApply, { onSuccess: () => setStep(2) });
   const previewHandler = () => {
-    putApply({ weekStartDate: startWeekDate, apply: weeklySelect })
-      .then(() => {
-        setStep(2);
-      })
-      .catch((err) => {
-        // 에러 처리
-      });
+    mutation.mutate({ weekStartDate: startWeekDate, apply: weeklySelect });
   };
 
   return (
