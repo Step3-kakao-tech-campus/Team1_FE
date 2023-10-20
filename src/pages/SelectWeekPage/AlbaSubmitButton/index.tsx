@@ -10,7 +10,7 @@ const AlbaSubmitButton = (): JSX.Element => {
   const navigate = useNavigate();
   const selectedWeek = useAtomValue(selectedWeekAtom);
   const submitHandler = () => {
-    navigate(convertPath(`/apply/${selectedWeek.startWeekDate}`));
+    navigate(convertPath('/apply/selectTimes'), { state: { startWeekDate: selectedWeek.startWeekDate } });
   };
   return (
     <>

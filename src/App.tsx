@@ -45,7 +45,7 @@ function App(): JSX.Element {
               <Route element={<UserTypePrivate when="alba" />}>
                 <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
                 <Route path={convertPath('/apply')} element={<SelectWeekPage isAdmin={false} />} />
-                <Route path={convertPath('/apply:startWeekDate')} element={<ApplyPage />} />
+                <Route path={convertPath('/apply/selectTimes')} element={<ApplyPage />} />
               </Route>
             </Routes>
           </ErrorBoundary>
