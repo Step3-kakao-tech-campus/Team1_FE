@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, BadgeCont, BadgeText, BorderBox, DateCircle, OutterDayBox } from 'components/Calendar/CalendarStyle';
+import { Badge, BadgeCont, BadgeText, BorderDayBox, DateCircle, OutterDayBox } from 'components/Calendar/CalendarStyle';
 import Text from 'components/@commons/Text';
 import { dateToString } from 'utils/dateToString';
 
@@ -15,7 +15,7 @@ const CalendarDayBox = ({ dateString, timeList, onClick, isSelected }: DayBoxPro
 
   return (
     <OutterDayBox onClick={onClick} $disabled={timeList === null}>
-      {isSelected && <BorderBox />}
+      {isSelected && <BorderDayBox />}
       <DateCircle $isToday={dateString === dateToString(new Date())}>
         <Text size="xs" weight="regular">
           {date}
