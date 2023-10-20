@@ -1,63 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
+import { putApply } from 'apis/alba/apply';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { applyStepAtom, weeklySelectAtom } from '..';
+import DailySelect from './DailySelect';
 import FlexContainer from 'components/@commons/FlexContainer';
-import BorderBox from 'components/@commons/BorderBox';
+import SubmitButton from 'components/@commons/SubmitButton';
+import useWeekSelector from 'hooks/useWeekSelector';
 import Text from 'components/@commons/Text';
+import { stringDateMove } from 'utils/stringDateMove';
+import BorderBox from 'components/@commons/BorderBox';
 
-import { useQuery } from '@tanstack/react-query';
-import { SelectedSchedule, TimeTemplateData, getApplyForm } from 'apis/alba/apply';
-import CheckBox from 'components/@commons/CheckBox';
+const TimeSelectSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
+  const { day, WeekBarComponent } = useWeekSelector(0);
 
-const TimeSelectSection = ({ startWeekDate, day }: { startWeekDate: string; day: number }): JSX.Element => {
-  const { data: applyFormRes } = useQuery(
-    ['getApplyForm', startWeekDate],
-    () => getApplyForm({ startWeekDate: startWeekDate }),
-    {
-      suspense: true,
-    },
-  );
+  const weeklySelect = useAtomValue(weeklySelectAtom);
+  const setStep = useSetAtom(applyStepAtom);
 
-  const [selectedState, setSelectedState] = useState<SelectedSchedule[][]>();
-
-  useEffect(() => {
-    setSelectedState(applyFormRes?.data.selected);
-  }, [applyFormRes?.data.selected]);
-
-  const isCheckedValue = (workTimeId: number) => {
-    if (selectedState === undefined) return false;
-
-    const time = selectedState[day].find((e, i) => e.workTimeId === workTimeId);
-    return time?.isChecked;
-  };
-
-  const selectHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (selectedState === undefined) return;
-
-    const id = Number.parseInt(event.currentTarget.id);
-    const newDaily = selectedState[day].map((time: SelectedSchedule) =>
-      time.workTimeId === id ? { ...time, isChecked: !time['isChecked'] } : time,
-    );
-    setSelectedState(
-      (prevWeekly) => prevWeekly?.map((daily: SelectedSchedule[], dayIndex) => (dayIndex === day ? newDaily : daily)),
-    );
+  // 미리보기 버튼 클릭
+  const previewHandler = () => {
+    putApply({ weekStartDate: startWeekDate, apply: weeklySelect })
+      .then(() => {
+        setStep(2);
+      })
+      .catch((err) => {
+        // 에러 처리
+      });
   };
 
   return (
-    <FlexContainer $wFull>
-      {applyFormRes?.data.template.map((timeData: TimeTemplateData, i) => (
-        <BorderBox width="100%" gradation={true} key={timeData.workTimeId}>
-          <FlexContainer $wFull $padding="20px" $direction="row" id={timeData.workTimeId} onClick={selectHandler}>
-            <CheckBox type="checkbox" checked={isCheckedValue(timeData.workTimeId)} readOnly />
-            <Text size="xl" margin="0">
-              {timeData.title}
-            </Text>
-            <Text margin="0 0 0 auto">
-              {timeData.startTime} ~ {timeData.endTime}
-            </Text>
-          </FlexContainer>
-        </BorderBox>
-      ))}
+    <FlexContainer $wFull $gap="40px">
+      <WeekBarComponent />
+      <BorderBox width="100%" border>
+        <FlexContainer $padding="20px">
+          <Text size="xl">{stringDateMove(startWeekDate, day)}</Text>
+        </FlexContainer>
+      </BorderBox>
+      <Suspense>
+        <FlexContainer $wFull>
+          <Suspense fallback={<div>체크 항목 로딩..</div>}>
+            <DailySelect day={day} startWeekDate={startWeekDate} />
+          </Suspense>
+        </FlexContainer>
+        <SubmitButton onClick={previewHandler}>미리보기</SubmitButton>
+      </Suspense>
     </FlexContainer>
   );
 };
-
 export default TimeSelectSection;
