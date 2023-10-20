@@ -4,18 +4,12 @@ import BorderBox from 'components/@commons/BorderBox';
 import Text from 'components/@commons/Text';
 import { SelectedSchedule, putApply } from 'apis/alba/apply';
 import CheckBox from 'components/@commons/CheckBox';
-import { TimeData } from 'apis/admin/application';
 import { useAtom } from 'jotai';
 import { weeklySelectAtom } from '..';
 import useApply from 'hooks/alba/useApply';
 import { useMutation } from '@tanstack/react-query';
 
-interface Props {
-  day: number;
-  startWeekDate: string;
-}
-
-const DailySelect = ({ day, startWeekDate }: Props): JSX.Element => {
+const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: string }): JSX.Element => {
   const { query, findTimeData } = useApply(startWeekDate);
 
   const [weeklySelect, setWeeklySelect] = useAtom(weeklySelectAtom);
