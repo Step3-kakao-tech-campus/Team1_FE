@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getApplyForm } from 'apis/alba/apply';
-import { useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { useQuery } from '@tanstack/react-query';
 import { weeklySelectAtom } from 'pages/alba/ApplyPage';
 import { TimeData } from 'apis/admin/application';
