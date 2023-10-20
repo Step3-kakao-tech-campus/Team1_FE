@@ -1,33 +1,33 @@
 import React, { Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
-
-import FlexContainer from 'components/@commons/FlexContainer';
-import BorderBox from 'components/@commons/BorderBox';
 import PageContainer from 'components/@commons/PageContainer';
-import Text from 'components/@commons/Text';
-import SubmitButton from 'components/@commons/SubmitButton';
-import useWeekSelector from 'hooks/useWeekSelector';
-import { stringDateMove } from 'utils/stringDateMove';
+import { atom, useAtomValue } from 'jotai';
+import { SelectedSchedule } from 'apis/alba/apply';
+import weekdayArray from 'utils/weekdayArray';
 import TimeSelectSection from './TimeSelectSection';
+import { TimeData } from 'apis/admin/application';
+import PreviewSection from './PreviewSection';
+
+export const weeklySelectAtom = atom<SelectedSchedule[][]>(weekdayArray.map(() => []));
+export const timeTemplateAtom = atom<{ [index: number]: TimeData }>({});
+export const applyStepAtom = atom(1);
 
 const ApplyPage = (): JSX.Element => {
   const startWeekDate = useLocation().state.startWeekDate;
-  const { day, WeekBarComponent } = useWeekSelector(0);
+  const step = useAtomValue(applyStepAtom);
 
   return (
-    <PageContainer>
-      <FlexContainer $wFull $gap="40px">
-        <WeekBarComponent />
-        <BorderBox width="100%" border>
-          <FlexContainer $padding="20px">
-            <Text size="xl">{stringDateMove(startWeekDate, day)}</Text>
-          </FlexContainer>
-        </BorderBox>
+    <PageContainer justify="start">
+      {step === 1 && (
         <Suspense>
-          <TimeSelectSection startWeekDate={startWeekDate} day={day} />
+          <TimeSelectSection startWeekDate={startWeekDate} />
         </Suspense>
-        <SubmitButton>미리보기</SubmitButton>
-      </FlexContainer>
+      )}
+      {step === 2 && (
+        <Suspense>
+          <PreviewSection startWeekDate={startWeekDate} />
+        </Suspense>
+      )}
     </PageContainer>
   );
 };
