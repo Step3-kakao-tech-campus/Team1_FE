@@ -1,22 +1,6 @@
 import instance from 'apis/instance';
+import { DailyWorkTimeData, TotalWorkedTimeData } from 'apis/types';
 import { dateToString } from 'utils/dateToString';
-
-export interface DailyScheduleData {
-  date: string;
-  workTime: string[] | null;
-}
-
-export interface TotalWorkTimeData {
-  weekly: number;
-  monthly: number;
-}
-
-interface GetMonthlyInfo {
-  year: number;
-  month: number;
-  isAdmin: boolean;
-  memberId: number;
-}
 
 export const getMonthly = async (info: GetMonthlyInfo): Promise<Return> => {
   const { year, month } = { ...info };
@@ -39,10 +23,22 @@ export const getMonthly = async (info: GetMonthlyInfo): Promise<Return> => {
   return to2Dimension(info, response);
 };
 
+interface Return {
+  table: DailyWorkTimeData[][];
+  totalTime: TotalWorkedTimeData;
+}
+
+interface GetMonthlyInfo {
+  year: number;
+  month: number;
+  isAdmin: boolean;
+  memberId: number;
+}
+
 interface GetMonthlyResponse {
   data: {
-    schedule: DailyScheduleData[];
-    work_summary: TotalWorkTimeData;
+    schedule: DailyWorkTimeData[];
+    work_summary: TotalWorkedTimeData;
   };
 }
 
@@ -88,8 +84,3 @@ const to2Dimension = (info: GetMonthlyInfo, response: GetMonthlyResponse): Retur
 
   return { table, totalTime };
 };
-
-interface Return {
-  table: DailyScheduleData[][];
-  totalTime: TotalWorkTimeData;
-}

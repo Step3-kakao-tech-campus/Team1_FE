@@ -1,17 +1,11 @@
 import instance from 'apis/instance';
+import { WeekStatusData } from 'apis/types';
 import { dateToString } from 'utils/dateToString';
 
 interface WeekProgressRequest {
   year: number;
   month: number;
 }
-
-export interface WeekProgressObject {
-  weekStatus: WeekStatus;
-  dates: string[];
-}
-
-export type WeekStatus = 'allocatable' | 'inProgress' | 'closed' | '';
 
 export const getWeekProgress = async (info: WeekProgressRequest) => {
   const { year, month } = { ...info };
@@ -27,7 +21,7 @@ export const getWeekProgress = async (info: WeekProgressRequest) => {
   }
 
   // 2. 2차원 빈 달력
-  const table: WeekProgressObject[] = [];
+  const table: WeekStatusData[] = [];
   for (let i = 0; i < 6; i++) {
     const weekly = [];
     const startWeekDate = i * 7 + firstMonday;

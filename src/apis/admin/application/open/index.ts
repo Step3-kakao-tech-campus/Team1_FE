@@ -1,10 +1,5 @@
 import instance from 'apis/instance';
-
-export interface TimeData {
-  title: string;
-  startTime: string;
-  endTime: string;
-}
+import { TimeData } from 'apis/types';
 
 export const getTimeTemplate = async (params: { startWeekDate: string }): Promise<{ template: TimeData[] }> => {
   const response = await instance.get(`/schedule/worktime`, { params });
