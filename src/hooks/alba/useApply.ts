@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { SelectedSchedule, getApplyForm, putApply } from 'apis/alba/apply';
+import { getApplyForm, putApply } from 'apis/alba/apply';
 import { useAtom, useSetAtom } from 'jotai';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { applyStepAtom, weeklySelectAtom } from 'pages/alba/ApplyPage';
-import { TimeData } from 'apis/admin/application';
+import { SelectedTimeData, TimeData } from 'apis/types';
 
 const useApply = (startWeekDate: string) => {
   /* -------------- 1. 공통 (데이터 불러오기) -------------- */
@@ -32,8 +32,8 @@ const useApply = (startWeekDate: string) => {
   /* -------------- 2. 시간 선택 섹션 -------------- */
 
   // 시간 체크 입력값 반영
-  const selectHandler = (timeObject: SelectedSchedule, timeIndex: number, nowDay: number) => {
-    const newDaily = weeklySelect[nowDay].map((selected: SelectedSchedule, i) =>
+  const selectHandler = (timeObject: SelectedTimeData, timeIndex: number, nowDay: number) => {
+    const newDaily = weeklySelect[nowDay].map((selected: SelectedTimeData, i) =>
       i === timeIndex ? { ...timeObject, isChecked: !timeObject.isChecked } : selected,
     );
     setWeeklySelect((prevWeekly) =>

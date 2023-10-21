@@ -1,3 +1,4 @@
+import { WeekStatusTypes } from 'apis/types';
 import styled from 'styled-components';
 
 export const BorderWeekBox = styled.div`
@@ -13,7 +14,7 @@ export const WeekContainer = styled.div`
   width: 100%;
 `;
 
-export const WeekStatusBar = styled.div<{ $status: WeekStatus }>`
+export const WeekStatusBar = styled.div<{ $status: WeekStatusTypes }>`
   width: 100%;
   position: absolute;
   bottom: 10%;
@@ -30,5 +31,3 @@ export const WeekStatusBar = styled.div<{ $status: WeekStatus }>`
 
   padding: 2px;
 `;
-
-type WeekStatus = 'allocatable' | 'inProgress' | 'closed' | '';

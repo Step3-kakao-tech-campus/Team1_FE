@@ -1,19 +1,9 @@
 import instance from 'apis/instance';
+import { WeekStatusData, WeekStatusTypes } from 'apis/types';
+import { AxiosResponse } from 'axios';
 import { dateToString } from 'utils/dateToString';
 
-interface WeekProgressRequest {
-  year: number;
-  month: number;
-}
-
-export interface WeekProgressObject {
-  weekStatus: WeekStatus;
-  dates: string[];
-}
-
-export type WeekStatus = 'allocatable' | 'inProgress' | 'closed' | '';
-
-export const getWeekProgress = async (info: WeekProgressRequest) => {
+export const getWeekProgress = async (info: Info): Promise<Return> => {
   const { year, month } = { ...info };
 
   let firstMonday = 1;
@@ -27,7 +17,7 @@ export const getWeekProgress = async (info: WeekProgressRequest) => {
   }
 
   // 2. 2차원 빈 달력
-  const table: WeekProgressObject[] = [];
+  const table: WeekStatusData[] = [];
   for (let i = 0; i < 6; i++) {
     const weekly = [];
     const startWeekDate = i * 7 + firstMonday;
@@ -40,11 +30,11 @@ export const getWeekProgress = async (info: WeekProgressRequest) => {
       weekly.push(dateToString(new Date(year, month, j)));
     }
 
-    const params = {
+    const params: Params = {
       startWeekDate: dateToString(new Date(year, month, startWeekDate)),
     };
-    const response = await instance.get(`/schedule/status`, { params });
-    const weekStatus = await response.data.weekStatus;
+    const response: AxiosResponse<Response> = await instance.get(`/schedule/status`, { params });
+    const weekStatus = response.data.weekStatus;
 
     const weekObject = {
       weekStatus: weekStatus,
@@ -56,3 +46,20 @@ export const getWeekProgress = async (info: WeekProgressRequest) => {
 
   return { table };
 };
+
+interface Info {
+  year: number;
+  month: number;
+}
+
+interface Params {
+  startWeekDate: string;
+}
+
+interface Return {
+  table: WeekStatusData[];
+}
+
+interface Response {
+  weekStatus: WeekStatusTypes;
+}

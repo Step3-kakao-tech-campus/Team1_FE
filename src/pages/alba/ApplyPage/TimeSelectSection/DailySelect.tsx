@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import FlexContainer from 'components/@commons/FlexContainer';
 import BorderBox from 'components/@commons/BorderBox';
 import Text from 'components/@commons/Text';
-import { SelectedSchedule } from 'apis/alba/apply';
+import { SelectedTimeData } from 'apis/types';
 import CheckBox from 'components/@commons/CheckBox';
 import useApply from 'hooks/alba/useApply';
 import SubmitButton from 'components/@commons/SubmitButton';
@@ -19,7 +19,7 @@ const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: strin
   return (
     <>
       <FlexContainer $wFull>
-        {weeklySelect[day].map((timeObject: SelectedSchedule, timeIndex) => (
+        {weeklySelect[day].map((timeObject: SelectedTimeData, timeIndex) => (
           <label key={timeObject.workTimeId}>
             <BorderBox width="100%" gradation={true}>
               <FlexContainer $wFull $padding="28px" $direction="row" $align="center">

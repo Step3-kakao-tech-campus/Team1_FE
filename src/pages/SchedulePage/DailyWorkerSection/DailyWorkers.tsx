@@ -6,7 +6,7 @@ import React from 'react';
 import { getDailyWorkers } from 'apis/schedule/getDailyWorkers';
 
 const DailyWorkers = ({ date }: { date: string }): JSX.Element => {
-  const { data: scheduleResponse } = useQuery([date], () => getDailyWorkers({ date: date }), {
+  const { data: scheduleResponse } = useQuery([date], () => getDailyWorkers({ selectedDate: date }), {
     suspense: true,
   });
   return (
