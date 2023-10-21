@@ -1,8 +1,11 @@
 import { convertPath } from 'apis/convertURI';
 import FlexContainer from 'components/@commons/FlexContainer';
+import GrayBox from 'components/@commons/GrayBox';
 import PageContainer from 'components/@commons/PageContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
+import GetInviteKey from 'components/GetInviteKey';
+import useModal from 'hooks/useModal';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,9 +23,16 @@ export const AdminNoGroupPage = (): JSX.Element => {
 };
 
 export const AdminNoMemberPage = (): JSX.Element => {
+  const { modalOnHandler, modalOffHandler, ModalComponent } = useModal();
   return (
-    <PageContainer withoutBottonBar>
-      <div>그룹에 직원이 없습니다 초대하기 버튼</div>
-    </PageContainer>
+    <>
+      <ModalComponent>
+        <GetInviteKey modalOffHandler={modalOffHandler} />
+      </ModalComponent>
+      <PageContainer withoutBottonBar>
+        <Text>그룹에 직원이 없습니다</Text>
+        <SubmitButton onClick={modalOnHandler}>초대링크 발급받기</SubmitButton>
+      </PageContainer>
+    </>
   );
 };
