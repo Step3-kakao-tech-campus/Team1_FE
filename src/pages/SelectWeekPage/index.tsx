@@ -2,14 +2,15 @@ import React, { Suspense } from 'react';
 import { atom } from 'jotai';
 import CalenderOutter from 'components/Calendar/CalenderOutter';
 import StatusCalendar from './Calendar/StatusCalendar';
-import WeeklyDatailSection from './WeeklyDetailSection';
 import FlexContainer from 'components/@commons/FlexContainer';
 import PageContainer from 'components/@commons/PageContainer';
+import AdminDetailSect from 'pages/SelectWeekPage/AdminDetailSection';
+import AlbaSubmitButton from 'pages/SelectWeekPage/AlbaSubmitButton';
 
 export const weekStatusMonthAtom = atom({ year: new Date().getFullYear(), month: new Date().getMonth() });
 export const selectedWeekAtom = atom({ startWeekDate: '', weekStatus: '' });
 
-const SelectWeekPage = (): JSX.Element => {
+const SelectWeekPage = ({ isAdmin }: { isAdmin: boolean }): JSX.Element => {
   return (
     <PageContainer justify="start">
       <FlexContainer $wFull>
@@ -20,7 +21,8 @@ const SelectWeekPage = (): JSX.Element => {
         </CalenderOutter>
       </FlexContainer>
       <FlexContainer $wFull>
-        <WeeklyDatailSection />
+        {isAdmin && <AdminDetailSect />}
+        {!isAdmin && <AlbaSubmitButton />}
       </FlexContainer>
     </PageContainer>
   );

@@ -1,5 +1,5 @@
 import FlexContainer from 'components/@commons/FlexContainer';
-import GradationBox from 'components/@commons/GradationBox';
+import BorderBox from 'components/@commons/BorderBox';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import { InputPeople } from 'components/PageStyledComponents/admin/ApplicationOpenPage';
@@ -15,7 +15,7 @@ const SetPeopleSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Ele
       <button onClick={goPrevHandler}>시간대 수정하기</button>
       <WeekBarComponent />
       {timeTemplate.map((timeData, timeIndex) => (
-        <GradationBox key={`${timeIndex}key`}>
+        <BorderBox gradation key={`${timeIndex}key`}>
           <FlexContainer $wFull $direction="row" $padding="32px 60px" $align="center">
             <Text size="xl" margin="0">
               {timeData.title}
@@ -33,7 +33,7 @@ const SetPeopleSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Ele
               명
             </Text>
           </FlexContainer>
-        </GradationBox>
+        </BorderBox>
       ))}
       <SubmitButton onClick={submitHandler}>스케줄 모집 시작하기 (그룹원에게 알림이 가요!)</SubmitButton>
     </FlexContainer>

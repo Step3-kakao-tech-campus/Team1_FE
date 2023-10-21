@@ -42,7 +42,7 @@ export const BadgeCont = styled.div`
   z-index: 11;
 `;
 
-export const BorderBox = styled.div`
+export const BorderDayBox = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;

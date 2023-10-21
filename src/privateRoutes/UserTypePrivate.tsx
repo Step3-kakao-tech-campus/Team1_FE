@@ -3,14 +3,14 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
 import useLogin from 'hooks/useLogin';
 
-const AdminOnlyPrivate = (): JSX.Element => {
+const UserTypePrivate = ({ when }: { when: 'admin' | 'alba' }): JSX.Element => {
   const loginState = useLogin().getLoginState();
 
   const isLogin: boolean = loginState.isLogin;
   const isAdmin: boolean = loginState.isAdmin;
+  const correctType: boolean = (when === 'admin' && isAdmin) || (when === 'alba' && !isAdmin);
 
-  console.log(isLogin, isAdmin);
-  return <>{isLogin && isAdmin ? <Outlet /> : <Navigate to={convertPath('/')} />}</>;
+  return <>{isLogin && correctType ? <Outlet /> : <Navigate to={convertPath('/')} />}</>;
 };
 
-export default AdminOnlyPrivate;
+export default UserTypePrivate;

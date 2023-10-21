@@ -1,6 +1,6 @@
 import instance from 'apis/instance';
 
-interface Time {
+export interface TimeData {
   title: string;
   startTime: string;
   endTime: string;
@@ -16,7 +16,7 @@ export const getRecommends = (params: { startWeekDate: string }) => {
 
 export const postOpenApplication = (params: {
   weeklyAmount: number[][];
-  timeTemplate: Time[];
+  timeTemplate: TimeData[];
   startWeekDate: string;
 }) => {
   const timeTemplate = params.timeTemplate.map((timeObject) => ({
@@ -33,7 +33,7 @@ export const postOpenApplication = (params: {
 
 export const getTimeTemplate = async (params: { startWeekDate: string }) => {
   const response = await instance.get(`/schedule/worktime`, { params });
-  const template = response.data.template.map((time: Time) => ({
+  const template = response.data.template.map((time: TimeData) => ({
     ...time,
     startTime: time.startTime.slice(0, -3),
     endTime: time.endTime.slice(0, -3),

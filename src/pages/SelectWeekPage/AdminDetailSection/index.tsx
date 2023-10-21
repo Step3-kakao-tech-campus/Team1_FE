@@ -6,7 +6,7 @@ import OpenDetail from './OpenDetail';
 import InProgressDetail from './InProgressDetail';
 import ClosedDetail from './ClosedDetail';
 
-const WeeklyDatailSection = (): JSX.Element => {
+const AdminDetailSection = (): JSX.Element => {
   const [selectedWeek] = useAtom(selectedWeekAtom);
 
   switch (selectedWeek.weekStatus) {
@@ -28,4 +28,4 @@ const WeeklyDatailSection = (): JSX.Element => {
   return <Text>주차를 선택해 주세요</Text>;
 };
 
-export default WeeklyDatailSection;
+export default AdminDetailSection;
