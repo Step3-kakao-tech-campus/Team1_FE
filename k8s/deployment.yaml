@@ -15,10 +15,14 @@ spec:
         - name: frontend
           # 여러분의 image 주소를 입력해주세요.
           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_dc7d1d6c6ec9
-          volumeMounts:
-          - name: config
-            mountPath: "/"
-      volumes:
-        - name: config
-          configMap:
-            name: kakao
+          env:
+            - name: REACT_APP_KAKAO_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: kakaosecret-env
+                  key: apikey
+            - name: REACT_APP_KAKAO_REDIRECT_URI
+              valueFrom:
+                secretKeyRef:
+                  name: kakaosecret-env
+                  key: redirect
