@@ -1,8 +1,9 @@
 import instance from 'apis/instance';
 import { DailyWorkTimeData, TotalWorkedTimeData } from 'apis/types';
+import { AxiosResponse } from 'axios';
 import { dateToString } from 'utils/dateToString';
 
-export const getMonthly = async (info: GetMonthlyInfo): Promise<Return> => {
+export const getMonthly = async (info: Info): Promise<Return> => {
   const { year, month } = { ...info };
 
   let params = {};
@@ -18,7 +19,7 @@ export const getMonthly = async (info: GetMonthlyInfo): Promise<Return> => {
     };
   }
 
-  const response = await instance.get(`/schedule/fix/month`, { params });
+  const response: AxiosResponse<Response> = await instance.get(`/schedule/fix/month`, { params });
 
   return to2Dimension(info, response);
 };
@@ -28,21 +29,19 @@ interface Return {
   totalTime: TotalWorkedTimeData;
 }
 
-interface GetMonthlyInfo {
+interface Response {
+  schedule: DailyWorkTimeData[];
+  work_summary: TotalWorkedTimeData;
+}
+
+interface Info {
   year: number;
   month: number;
   isAdmin: boolean;
   memberId: number;
 }
 
-interface GetMonthlyResponse {
-  data: {
-    schedule: DailyWorkTimeData[];
-    work_summary: TotalWorkedTimeData;
-  };
-}
-
-const to2Dimension = (info: GetMonthlyInfo, response: GetMonthlyResponse): Return => {
+const to2Dimension = (info: Info, response: AxiosResponse<Response>): Return => {
   const { year, month } = { ...info };
 
   const totalTime = response.data.work_summary;

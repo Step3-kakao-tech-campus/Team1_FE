@@ -1,8 +1,9 @@
 import instance from 'apis/instance';
 import { TimeData } from 'apis/types';
+import { AxiosResponse } from 'axios';
 
-export const getTimeTemplate = async (params: { startWeekDate: string }): Promise<{ template: TimeData[] }> => {
-  const response = await instance.get(`/schedule/worktime`, { params });
+export const getTimeTemplate = async (params: GetParams): Promise<GetReturn> => {
+  const response: AxiosResponse<GetResponse> = await instance.get(`/schedule/worktime`, { params });
   const template = response.data.template.map((time: TimeData) => ({
     ...time,
     startTime: time.startTime.slice(0, -3),
@@ -11,18 +12,26 @@ export const getTimeTemplate = async (params: { startWeekDate: string }): Promis
   return { template };
 };
 
-export const postOpenApplication = (params: {
-  weeklyAmount: number[][];
-  timeTemplate: TimeData[];
+interface GetParams {
   startWeekDate: string;
-}) => {
+}
+
+interface GetResponse {
+  template: TimeData[];
+}
+
+interface GetReturn {
+  template: TimeData[];
+}
+
+export const postOpenApplication = (params: PostParams) => {
   const newTemplate = params.timeTemplate.map((timeObject) => ({
     ...timeObject,
     startTime: `${timeObject.startTime}:00`,
     endTime: `${timeObject.endTime}:00`,
   }));
 
-  const requestBody: PostOpenRequest = {
+  const requestBody: PostRequest = {
     weekStartDate: params.startWeekDate,
     amount: params.weeklyAmount,
     template: newTemplate,
@@ -31,7 +40,13 @@ export const postOpenApplication = (params: {
   return instance.post(`/schedule/worktime`, requestBody);
 };
 
-interface PostOpenRequest {
+interface PostParams {
+  weeklyAmount: number[][];
+  timeTemplate: TimeData[];
+  startWeekDate: string;
+}
+
+interface PostRequest {
   weekStartDate: string;
   template: TimeData[];
   amount: number[][];

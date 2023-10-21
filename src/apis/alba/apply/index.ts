@@ -1,9 +1,8 @@
 import instance from 'apis/instance';
 import { SelectedTimeData, TimeData } from 'apis/types';
-import { AxiosResponse } from 'axios';
 
-export const getApplyForm = async (params: { startWeekDate: string }) => {
-  const response: AxiosResponse<GetApplyFormResponse> = await instance.get(`/schedule/application`, { params });
+export const getApplyForm = async (params: GetParams): Promise<GetReturn> => {
+  const response = await instance.get(`/schedule/application`, { params });
 
   const selected = response.data.selected;
   const arrTemplate = response.data.template;
@@ -21,21 +20,20 @@ export const getApplyForm = async (params: { startWeekDate: string }) => {
   return { selected, templates };
 };
 
-interface GetApplyFormResponse {
-  template: {
-    title: string;
-    startTime: string;
-    endTime: string;
-    workTimeId: number;
-  }[];
-  selected: SelectedTimeData[][];
+interface GetParams {
+  startWeekDate: string;
 }
 
-export const putApply = (body: PutApplyRequest) => {
+interface GetReturn {
+  selected: SelectedTimeData[][];
+  templates: { [index: number]: TimeData };
+}
+
+export const putApply = (body: PutRequest) => {
   return instance.put(`/schedule/application`, body);
 };
 
-interface PutApplyRequest {
+interface PutRequest {
   weekStartDate: string;
   apply: SelectedTimeData[][];
 }

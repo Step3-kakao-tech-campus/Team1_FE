@@ -2,14 +2,22 @@ import instance from 'apis/instance';
 import { TimeWorkerListData } from 'apis/types';
 import { AxiosResponse } from 'axios';
 
-export const postRecommends = (params: { selection: number }) => {
-  return instance.post(`/schedule/fix`, { selection: params.selection });
+export const postRecommends = (body: PostRequest) => {
+  return instance.post(`/schedule/fix`, body);
 };
 
-export const getRecommends = (params: { startWeekDate: string }): Promise<AxiosResponse<GetRecommendsResponse>> => {
+interface PostRequest {
+  selection: number;
+}
+
+export const getRecommends = (params: GetParams): Promise<AxiosResponse<GetResponse>> => {
   return instance.get(`/schedule/recommend`, { params });
 };
 
-interface GetRecommendsResponse {
+interface GetParams {
+  startWeekDate: string;
+}
+
+interface GetResponse {
   recommends: TimeWorkerListData[][][];
 }
