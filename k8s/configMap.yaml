@@ -1,7 +1,6 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: baseurl
+  name: configMap
 data:
-  .env: |
-    REACT_APP_BASE_URL=https://k3e1acd091b3da.user-app.krampoline.com
+  REACT_APP_BASE_URL: 'https://k3e1acd091b3da.user-app.krampoline.com'
