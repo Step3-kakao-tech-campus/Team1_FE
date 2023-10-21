@@ -3,7 +3,7 @@ import FlexContainer from 'components/@commons/FlexContainer';
 
 import Text from 'components/@commons/Text';
 import { NameBox, TitleBox } from './DailyWorkersStyle';
-import { TimeWorkerListData, WorkerData } from 'apis/types';
+import { TimeWorkerListData, UserData } from 'apis/types';
 
 const DailyWorkersTemplate = ({ dailyData }: { dailyData: TimeWorkerListData[] | undefined }): JSX.Element => {
   return (
@@ -19,7 +19,7 @@ const DailyWorkersTemplate = ({ dailyData }: { dailyData: TimeWorkerListData[] |
             </Text>
           </TitleBox>
           <FlexContainer $gap="8px">
-            {timeData.workerList.map((w: WorkerData, i) => (
+            {timeData.workerList.map((w: UserData, i) => (
               <NameBox key={w.name + i}>
                 <Text>{w.name}</Text>
               </NameBox>
