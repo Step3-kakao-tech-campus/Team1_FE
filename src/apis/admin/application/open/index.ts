@@ -21,14 +21,23 @@ export const postOpenApplication = (params: {
   timeTemplate: TimeData[];
   startWeekDate: string;
 }) => {
-  const timeTemplate = params.timeTemplate.map((timeObject) => ({
+  const newTemplate = params.timeTemplate.map((timeObject) => ({
     ...timeObject,
     startTime: `${timeObject.startTime}:00`,
     endTime: `${timeObject.endTime}:00`,
   }));
-  const weeklyData = params.weeklyAmount.map((dailyArr) =>
-    dailyArr.map((amount, i) => ({ ...timeTemplate[i], amount: amount })),
-  );
 
-  return instance.post(`/schedule/worktime`, { startWeekDate: params.startWeekDate, weeklyAmount: weeklyData });
+  const requestBody: PostOpenRequest = {
+    weekStartDate: params.startWeekDate,
+    amount: params.weeklyAmount,
+    template: newTemplate,
+  };
+
+  return instance.post(`/schedule/worktime`, requestBody);
 };
+
+interface PostOpenRequest {
+  weekStartDate: string;
+  template: TimeData[];
+  amount: number[][];
+}
