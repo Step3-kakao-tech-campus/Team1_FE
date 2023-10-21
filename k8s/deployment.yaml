@@ -19,10 +19,10 @@ spec:
             - name: REACT_APP_KAKAO_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: kakaosecret-env
+                  name: kakaosecret
                   key: apikey
             - name: REACT_APP_KAKAO_REDIRECT_URI
               valueFrom:
                 secretKeyRef:
-                  name: kakaosecret-env
+                  name: kakaosecret
                   key: redirect
