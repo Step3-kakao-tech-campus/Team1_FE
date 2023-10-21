@@ -1,4 +1,4 @@
-import { TimeData } from 'apis/admin/application';
+import { TimeData } from 'apis/admin/application/open';
 import instance from 'apis/instance';
 import { AxiosResponse } from 'axios';
 

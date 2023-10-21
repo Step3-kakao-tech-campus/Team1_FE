@@ -5,7 +5,7 @@ import { atom, useAtomValue } from 'jotai';
 import { SelectedSchedule } from 'apis/alba/apply';
 import weekdayArray from 'utils/weekdayArray';
 import TimeSelectSection from './TimeSelectSection';
-import { TimeData } from 'apis/admin/application';
+import { TimeData } from 'apis/admin/application/open';
 import PreviewSection from './PreviewSection';
 
 export const weeklySelectAtom = atom<SelectedSchedule[][]>(weekdayArray.map(() => []));
