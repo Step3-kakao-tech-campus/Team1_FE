@@ -3,7 +3,7 @@ import { SelectedSchedule, getApplyForm, putApply } from 'apis/alba/apply';
 import { useAtom, useSetAtom } from 'jotai';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { applyStepAtom, weeklySelectAtom } from 'pages/alba/ApplyPage';
-import { TimeData } from 'apis/admin/application';
+import { TimeData } from 'apis/admin/application/open';
 
 const useApply = (startWeekDate: string) => {
   /* -------------- 1. 공통 (데이터 불러오기) -------------- */
