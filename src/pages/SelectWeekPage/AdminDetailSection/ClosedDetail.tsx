@@ -10,7 +10,7 @@ const ClosedDetail = ({ startWeekDate }: { startWeekDate: string }): JSX.Element
   const { day, WeekBarComponent } = useWeekSelector(0);
   const date = stringDateMove(startWeekDate, day);
 
-  const { data: scheduleRes } = useQuery(['getDailyWorkers', day], () => getDailyWorkers({ date: date }), {
+  const { data: scheduleRes } = useQuery(['getDailyWorkers', day], () => getDailyWorkers({ selectedDate: date }), {
     suspense: true,
   });
 
