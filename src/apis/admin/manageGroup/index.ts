@@ -1,14 +1,14 @@
 import instance from 'apis/instance';
 import { AxiosResponse } from 'axios';
 
-export interface AddGroupRequest {
+export interface NewGroupRequest {
   marketName: string;
   marketNumber: string;
   mainAddress: string;
   detailAddress: string;
 }
 
-export const addNewGroup = (marketInfo: AddGroupRequest) => {
+export const postAddNewGroup = (marketInfo: NewGroupRequest) => {
   return instance.post(`/group`, marketInfo);
 };
 
