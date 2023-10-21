@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { dateAtom, memberAtom, monthAtom, workTimeAtom } from './states';
-import { MemberData } from 'apis/userInfo';
 import useLogin from 'hooks/useLogin';
 
 import PageContainer from 'components/@commons/PageContainer';
@@ -14,8 +13,9 @@ import CalenderConents from 'pages/SchedulePage/CalendarSection/CalenderConents'
 import DailyWorkers from 'pages/SchedulePage/DailyWorkerSection/DailyWorkers';
 import Dropdown from 'pages/SchedulePage/HeaderSection/Dropdown';
 import TotalWorkTime from 'pages/SchedulePage/HeaderSection/TotalWorkTime';
+import { UserData } from 'apis/types';
 
-const SchedulePage = ({ members }: { members: MemberData[] }): JSX.Element => {
+const SchedulePage = ({ members }: { members: UserData[] }): JSX.Element => {
   const isAdmin = useLogin().getLoginState().isAdmin;
   const nowMonth = useAtomValue(monthAtom);
 

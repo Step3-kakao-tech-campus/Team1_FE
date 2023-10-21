@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { MemberData, getMyInfo } from 'apis/userInfo';
+import { getMyInfo } from 'apis/userInfo';
 import { convertPath } from 'apis/convertURI';
 import useLogin from 'hooks/useLogin';
 import useModal from 'hooks/useModal';
@@ -9,6 +9,7 @@ import GetInviteKey from 'components/GetInviteKey';
 import { HorizontalLine, SidebarBackground, SidebarBox } from '.';
 import Text from '../@commons/Text';
 import FlexContainer from '../@commons/FlexContainer';
+import { UserData } from 'apis/types';
 
 const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element => {
   /* ----------------------- ! 수정 중 입니다 ! ------------------------ */
@@ -68,7 +69,7 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
           <HorizontalLine />
 
           <FlexContainer $wFull $align="flex-start" $gap="0.5rem">
-            {memberList?.data.members.map((member: MemberData) => (
+            {memberList?.data.members.map((member: UserData) => (
               <ol key={member.memberId}>
                 <Text>{member.name}</Text>
               </ol>
