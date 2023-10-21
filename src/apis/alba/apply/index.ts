@@ -1,5 +1,5 @@
-import { TimeData } from 'apis/admin/application/open';
 import instance from 'apis/instance';
+import { SelectedTimeData, TimeData } from 'apis/types';
 import { AxiosResponse } from 'axios';
 
 export const getApplyForm = async (params: { startWeekDate: string }) => {
@@ -22,20 +22,13 @@ export const getApplyForm = async (params: { startWeekDate: string }) => {
 };
 
 interface GetApplyFormResponse {
-  template: TimeTemplateData[];
-  selected: SelectedSchedule[][];
-}
-
-interface TimeTemplateData {
-  title: string;
-  startTime: string;
-  endTime: string;
-  workTimeId: number;
-}
-
-export interface SelectedSchedule {
-  workTimeId: number;
-  isChecked: boolean;
+  template: {
+    title: string;
+    startTime: string;
+    endTime: string;
+    workTimeId: number;
+  }[];
+  selected: SelectedTimeData[][];
 }
 
 export const putApply = (body: PutApplyRequest) => {
@@ -44,5 +37,5 @@ export const putApply = (body: PutApplyRequest) => {
 
 interface PutApplyRequest {
   weekStartDate: string;
-  apply: SelectedSchedule[][];
+  apply: SelectedTimeData[][];
 }

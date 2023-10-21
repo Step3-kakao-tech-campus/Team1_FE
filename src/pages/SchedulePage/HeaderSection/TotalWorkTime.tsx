@@ -2,9 +2,9 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import React from 'react';
 
 import Text from 'components/@commons/Text';
-import { TotalWorkTimeData } from 'apis/schedule/getMonthly';
+import { TotalWorkedTimeData } from 'apis/types';
 
-const TotalWorkTime = ({ totalWorkTime }: { totalWorkTime: TotalWorkTimeData }): JSX.Element => {
+const TotalWorkTime = ({ totalWorkTime }: { totalWorkTime: TotalWorkedTimeData }): JSX.Element => {
   return (
     <FlexContainer $direction="row">
       <FlexContainer $gap="0">

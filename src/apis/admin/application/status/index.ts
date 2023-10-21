@@ -1,5 +1,5 @@
 import instance from 'apis/instance';
-import { DailyWorkTimeData } from 'apis/schedule/getDailyWorkers';
+import { TimeWorkerListData } from 'apis/types';
 import { AxiosResponse } from 'axios';
 
 export const getApplyStatus = (params: { startWeekDate: string }): Promise<AxiosResponse<GetApplyStatusResponse>> => {
@@ -7,5 +7,5 @@ export const getApplyStatus = (params: { startWeekDate: string }): Promise<Axios
 };
 
 interface GetApplyStatusResponse {
-  applyStatus: DailyWorkTimeData[][];
+  applyStatus: TimeWorkerListData[][];
 }

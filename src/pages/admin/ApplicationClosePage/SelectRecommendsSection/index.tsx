@@ -9,7 +9,7 @@ import { stringDateMove } from 'utils/stringDateMove';
 import { ScrollContainer } from 'components/PageStyledComponents/admin/ApplicationClose';
 import useClose from 'hooks/admin/ApplicationClosePage/useClose';
 import useWeekSelector from 'hooks/useWeekSelector';
-import { DailyWorkTimeData } from 'apis/schedule/getDailyWorkers';
+import { TimeWorkerListData } from 'apis/types';
 import BorderBox from 'components/@commons/BorderBox';
 
 const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
@@ -19,7 +19,7 @@ const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): 
   return (
     <>
       <ScrollContainer>
-        {recommendsRes?.data.recommends.map((candidateData: DailyWorkTimeData[][], candidateIndex: number) => (
+        {recommendsRes?.data.recommends.map((candidateData: TimeWorkerListData[][], candidateIndex: number) => (
           <FlexContainer
             $shrink="0"
             $width="32%"

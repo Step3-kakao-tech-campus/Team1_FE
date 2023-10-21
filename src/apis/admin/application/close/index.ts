@@ -1,5 +1,5 @@
 import instance from 'apis/instance';
-import { DailyWorkTimeData } from 'apis/schedule/getDailyWorkers';
+import { TimeWorkerListData } from 'apis/types';
 import { AxiosResponse } from 'axios';
 
 export const postRecommends = (params: { selection: number }) => {
@@ -11,5 +11,5 @@ export const getRecommends = (params: { startWeekDate: string }): Promise<AxiosR
 };
 
 interface GetRecommendsResponse {
-  recommends: DailyWorkTimeData[][][];
+  recommends: TimeWorkerListData[][][];
 }
