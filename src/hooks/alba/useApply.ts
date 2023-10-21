@@ -70,12 +70,6 @@ const useApply = (startWeekDate: string) => {
     return processed.join(' | ');
   };
 
-  const stringDateToKor = (string: string, dayIndex: number) => {
-    const [y, m, d] = string.split('-').map((e) => Number.parseInt(e));
-    const date = new Date(y, m - 1, d + dayIndex);
-    return `${date.getMonth() + 1}월 ${date.getDate()}일`;
-  };
-
   return {
     weeklySelect,
     findTimeData,
@@ -84,7 +78,6 @@ const useApply = (startWeekDate: string) => {
     putSaveHandler,
     setStep,
     worktimeIdProcessor,
-    stringDateToKor,
   };
 };
 
