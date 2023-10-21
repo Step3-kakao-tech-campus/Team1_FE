@@ -18,7 +18,7 @@ interface GetMonthlyInfo {
   memberId: number;
 }
 
-export const getMonthly = async (info: GetMonthlyInfo) => {
+export const getMonthly = async (info: GetMonthlyInfo): Promise<Return> => {
   const { year, month } = { ...info };
 
   let params = {};
@@ -46,7 +46,7 @@ interface GetMonthlyResponse {
   };
 }
 
-const to2Dimension = (info: GetMonthlyInfo, response: GetMonthlyResponse) => {
+const to2Dimension = (info: GetMonthlyInfo, response: GetMonthlyResponse): Return => {
   const { year, month } = { ...info };
 
   const totalTime = response.data.work_summary;
@@ -88,3 +88,8 @@ const to2Dimension = (info: GetMonthlyInfo, response: GetMonthlyResponse) => {
 
   return { table, totalTime };
 };
+
+interface Return {
+  table: DailyScheduleData[][];
+  totalTime: TotalWorkTimeData;
+}
