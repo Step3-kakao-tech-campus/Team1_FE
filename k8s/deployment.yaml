@@ -17,7 +17,7 @@ spec:
           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_dc7d1d6c6ec9
           volumeMounts:
           - name: config
-            mountPath: "../"
+            mountPath: "/"
       volumes:
         - name: config
           configMap:
