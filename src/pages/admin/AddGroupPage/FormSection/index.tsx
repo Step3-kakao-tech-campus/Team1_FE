@@ -1,4 +1,4 @@
-import { AddGroupRequest, addNewGroup } from 'apis/admin/manageGroup';
+import { NewGroupRequest, postAddNewGroup } from 'apis/admin/manageGroup';
 import FlexContainer from 'components/@commons/FlexContainer';
 import BorderBox from 'components/@commons/BorderBox';
 import SubmitButton from 'components/@commons/SubmitButton';
@@ -12,16 +12,16 @@ interface Props {
 }
 
 const FormSection = ({ doneStateHandler }: Props): JSX.Element => {
-  const initialInfo: AddGroupRequest = {
+  const initialInfo: NewGroupRequest = {
     marketName: '',
     marketNumber: '',
     mainAddress: '',
     detailAddress: '',
   };
 
-  const { obj: marketInfo, formHandler } = useForm<AddGroupRequest>(initialInfo);
+  const { obj: marketInfo, formHandler } = useForm<NewGroupRequest>(initialInfo);
   const submitHandler = (): void => {
-    addNewGroup(marketInfo)
+    postAddNewGroup(marketInfo)
       .then((res) => {
         doneStateHandler();
       })
