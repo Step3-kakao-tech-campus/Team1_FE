@@ -21,7 +21,7 @@ const InvitationContent = ({ invitationKey }: Props): JSX.Element => {
     <FlexContainer>
       <FlexContainer>
         <Text size="xxxl" weight="bold">
-          {marketData?.data.groupName}
+          {marketData?.data.marketName}
         </Text>
       </FlexContainer>
       <FlexContainer $wFull>
