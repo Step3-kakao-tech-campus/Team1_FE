@@ -11,24 +11,8 @@ import { convertPath } from 'apis/convertURI';
 import { myTheme } from 'styles/myTheme';
 
 const PreviewSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
-  const { weeklySelect, findTimeData, setStep } = useApply(startWeekDate);
+  const { setStep, worktimeIdProcessor, stringDateToKor } = useApply(startWeekDate);
   const navigate = useNavigate();
-
-  const processTime = (dayIndex: number) => {
-    const processed = weeklySelect[dayIndex]
-      .filter((object) => object.isChecked)
-      .map((object) => findTimeData(object.workTimeId).title);
-
-    if (processed.length === 0) return '휴무';
-
-    return processed.join(' | ');
-  };
-
-  const stringDateToKor = (string: string, dayIndex: number) => {
-    const [y, m, d] = string.split('-').map((e) => Number.parseInt(e));
-    const date = new Date(y, m - 1, d + dayIndex);
-    return `${date.getMonth() + 1}월 ${date.getDate()}일`;
-  };
 
   return (
     <FlexContainer $wFull $gap="36px">
@@ -46,10 +30,10 @@ const PreviewSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Eleme
               <Text
                 margin="0 0 0 auto"
                 size="lg"
-                color={processTime(dayIndex) === '휴무' ? myTheme.color.gray : '#0066FF'}
+                color={worktimeIdProcessor(dayIndex) === '휴무' ? myTheme.color.gray : '#0066FF'}
                 weight="semiBold"
               >
-                {processTime(dayIndex)}
+                {worktimeIdProcessor(dayIndex)}
               </Text>
             </FlexContainer>
           </BorderBox>
