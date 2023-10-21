@@ -3,7 +3,7 @@ import instance from 'apis/instance';
 import { AxiosResponse } from 'axios';
 
 export const getApplyForm = async (params: { startWeekDate: string }) => {
-  const response: AxiosResponse<GetApplyFormResponse> = await instance.get(`/application`, { params });
+  const response: AxiosResponse<GetApplyFormResponse> = await instance.get(`/schedule/application`, { params });
 
   const selected = response.data.selected;
   const arrTemplate = response.data.template;
@@ -39,7 +39,7 @@ export interface SelectedSchedule {
 }
 
 export const putApply = (body: PutApplyRequest) => {
-  return instance.put(`/application`, body);
+  return instance.put(`/schedule/application`, body);
 };
 
 interface PutApplyRequest {
