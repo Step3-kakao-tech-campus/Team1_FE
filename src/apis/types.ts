@@ -3,10 +3,10 @@ export interface TimeWorkerListData {
   title: string;
   startTime: string;
   endTime: string;
-  workerList: WorkerData[];
+  workerList: UserData[];
 }
 
-export interface WorkerData {
+export interface UserData {
   memberId: number;
   name: string;
 }

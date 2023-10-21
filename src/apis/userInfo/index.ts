@@ -1,5 +1,5 @@
 import instance from 'apis/instance';
-import { WorkerData } from 'apis/types';
+import { UserData } from 'apis/types';
 import { AxiosResponse } from 'axios';
 
 export const getMyInfo = (): Promise<AxiosResponse<Response>> => {
@@ -9,5 +9,5 @@ export const getMyInfo = (): Promise<AxiosResponse<Response>> => {
 interface Response {
   userName: string;
   groupName: string;
-  members: WorkerData[];
+  members: UserData[];
 }
