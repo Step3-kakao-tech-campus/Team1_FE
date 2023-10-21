@@ -15,3 +15,10 @@ spec:
         - name: frontend
           # 여러분의 image 주소를 입력해주세요.
           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_dc7d1d6c6ec9
+          volumeMounts:
+          - name: baseurl-config
+            mountPath: /.env
+      volumes:
+      - name: baseurl-config
+        configMap:
+          name: baseurl
