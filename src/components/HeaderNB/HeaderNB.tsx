@@ -6,17 +6,27 @@ import {
   HeaderLeftMenuGroup,
   HeaderRightMenuGroup,
 } from 'components/HeaderNB/HeaderNBStyels';
-import useLogin from 'hooks/useLogin';
 import { Alarm, Hamburger } from './icons';
 import Sidebar from 'components/Sidebar/Sidebar';
+import Text from 'components/@commons/Text';
+import { useLocation } from 'react-router-dom';
 
 const HeaderNB = (): JSX.Element => {
-  /* ----------------------- ! 수정 중 입니다 ! ------------------------ */
-
-  const loginState = useLogin().getLoginState();
-  const { logout } = useLogin('/');
-
   const [isOpen, setIsOpen] = useState(false);
+  const nowPath = useLocation().pathname;
+
+  const albaTitle: { [index: string]: string } = {
+    '/': '내 스케줄',
+    '/apply': '신청하기',
+    '/apply/selectTimes': '신청하기',
+  };
+
+  const adminTitle: { [index: string]: string } = {
+    '/': '확정 스케줄',
+    '/newSchedule': '모집하기',
+    '/newSchedule/open': '모집 시작하기',
+    '/newSchedule/close': '모집 마감하기',
+  };
 
   return (
     <>
@@ -27,10 +37,11 @@ const HeaderNB = (): JSX.Element => {
               <Hamburger />
             </HeaderButton>
           </HeaderLeftMenuGroup>
-
+          <Text size="lg">{adminTitle[nowPath]}</Text>
           <HeaderRightMenuGroup>
-            <Alarm />
-            {loginState.isLogin && <HeaderButton onClick={logout}>임시로그아웃</HeaderButton>}
+            <HeaderButton>
+              <Alarm />
+            </HeaderButton>
           </HeaderRightMenuGroup>
         </HeaderInnerBox>
       </HeaderContainer>
