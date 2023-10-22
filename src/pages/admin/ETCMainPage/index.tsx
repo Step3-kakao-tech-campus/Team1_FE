@@ -15,8 +15,17 @@ export const AdminNoGroupPage = (): JSX.Element => {
   return (
     <PageContainer withoutBottonBar>
       <FlexContainer $wFull>
-        <Text>그룹을 생성하세요</Text>
-        <SubmitButton onClick={() => navigate(convertPath('/addGroup'))}>그룹 생성하기</SubmitButton>
+        <GrayBox>
+          <FlexContainer $wFull $gap="48px">
+            <FlexContainer $gap="10px">
+              <Text size="80px" weight="bold" color="red">
+                !
+              </Text>
+              <Text size="xl">그룹이 없습니다</Text>
+            </FlexContainer>
+            <SubmitButton onClick={() => navigate(convertPath('/addGroup'))}>그룹 생성하기</SubmitButton>
+          </FlexContainer>{' '}
+        </GrayBox>
       </FlexContainer>
     </PageContainer>
   );
@@ -30,8 +39,19 @@ export const AdminNoMemberPage = (): JSX.Element => {
         <GetInviteKey modalOffHandler={modalOffHandler} />
       </ModalComponent>
       <PageContainer withoutBottonBar>
-        <Text>그룹에 직원이 없습니다</Text>
-        <SubmitButton onClick={modalOnHandler}>초대링크 발급받기</SubmitButton>
+        <FlexContainer $wFull>
+          <GrayBox>
+            <FlexContainer $wFull $gap="48px">
+              <FlexContainer $gap="10px">
+                <Text size="80px" weight="bold" color="red">
+                  !
+                </Text>
+                <Text size="xl">그룹에 직원이 없습니다</Text>
+              </FlexContainer>
+              <SubmitButton onClick={modalOnHandler}>초대링크 발급받기</SubmitButton>
+            </FlexContainer>
+          </GrayBox>
+        </FlexContainer>
       </PageContainer>
     </>
   );
