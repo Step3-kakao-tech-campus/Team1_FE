@@ -2,13 +2,16 @@ import { useAtom } from 'jotai';
 import React from 'react';
 import { selectedWeekAtom, weekStatusMonthAtom } from '..';
 import { useQuery } from '@tanstack/react-query';
-import { WeekProgressObject, WeekStatus, getWeekProgress } from 'apis/weekProgress';
+import { getWeekProgress } from 'apis/weekProgress';
 import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
 import { BorderWeekBox, WeekStatusBar, WeekContainer } from 'components/PageStyledComponents/admin/SelectWeekPage';
 import Text from 'components/@commons/Text';
 import StatusDailyBox from './StatusDailyBox';
+import useLogin from 'hooks/useLogin';
+import { WeekStatusData, WeekStatusTypes } from 'apis/types';
 
 const StatusCalendar = (): JSX.Element => {
+  const isAdmin = useLogin().getLoginState().isAdmin;
   const [selectedWeek, setSelectedWeek] = useAtom(selectedWeekAtom);
   const [nowMonth] = useAtom(weekStatusMonthAtom);
   const { year, month } = { ...nowMonth };
@@ -21,12 +24,13 @@ const StatusCalendar = (): JSX.Element => {
     },
   );
 
-  const weekOnClickHandler = (weekObj: WeekProgressObject) => {
+  const weekOnClickHandler = (weekObj: WeekStatusData) => {
+    if (!isAdmin && weekObj.weekStatus !== 'inProgress') return;
     const newObj = { startWeekDate: weekObj.dates[0], weekStatus: weekObj.weekStatus };
-    setSelectedWeek((prev) => newObj);
+    setSelectedWeek(newObj);
   };
 
-  const statusConverter = (weekStatus: WeekStatus) => {
+  const statusConverter = (weekStatus: WeekStatusTypes) => {
     switch (weekStatus) {
       case 'allocatable':
         return '모집 전';
@@ -39,7 +43,7 @@ const StatusCalendar = (): JSX.Element => {
 
   return (
     <MonthBox $wFull>
-      {weekStatusData?.table.map((weekObj: WeekProgressObject, i) => (
+      {weekStatusData?.table.map((weekObj: WeekStatusData, i) => (
         <WeekContainer key={`${i}주`} onClick={() => weekOnClickHandler(weekObj)}>
           <WeekStatusBar $status={weekObj.weekStatus}>
             <Text size="xs" weight="regular">

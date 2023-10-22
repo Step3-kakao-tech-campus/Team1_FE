@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getTimeTemplate } from 'apis/admin/application';
+import { getTimeTemplate } from 'apis/admin/application/open';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage';
 import React, { useEffect } from 'react';
@@ -21,9 +21,9 @@ const useTimeTemplate = (startWeekDate: string) => {
 
   // 응답 값을 전역상태에 적용 (템플릿 / 인원수)
   useEffect(() => {
-    if (timeTemplate.length === 0) {
-      setTimeTemplate(templateRes?.template);
-      setWeeklyData(weekdayArray.map(() => templateRes?.template.map(() => 0)));
+    if (timeTemplate.length === 0 && !!templateRes) {
+      setTimeTemplate(templateRes.template);
+      setWeeklyData(weekdayArray.map(() => templateRes.template.map(() => 0)));
     }
   }, [templateRes]);
 

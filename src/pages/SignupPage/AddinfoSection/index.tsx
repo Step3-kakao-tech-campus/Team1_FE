@@ -1,3 +1,4 @@
+import CheckBox from 'components/@commons/CheckBox';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
 import React from 'react';
@@ -32,10 +33,4 @@ const Input = styled.input`
   border-radius: 8px;
   padding: 10px 12px;
   border: 1px black;
-`;
-
-const CheckBox = styled.input`
-  width: 20px;
-  height: 20px;
-  accent-color: ${({ theme }) => theme.color.yellow};
 `;

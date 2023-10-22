@@ -1,22 +1,22 @@
 import instance from 'apis/instance';
 import { AxiosResponse } from 'axios';
 
-export interface AddGroupRequest {
+export const postAddNewGroup = (body: postRequest) => {
+  return instance.post(`/group`, body);
+};
+
+export interface postRequest {
   marketName: string;
   marketNumber: string;
   mainAddress: string;
   detailAddress: string;
 }
 
-export const addNewGroup = (marketInfo: AddGroupRequest) => {
-  return instance.post(`/group`, marketInfo);
-};
-
 // 초대링크 발급
-export const getInviteKey = (): Promise<AxiosResponse<GetInviteKeyResponse>> => {
+export const getInviteKey = (): Promise<AxiosResponse<GetResponse>> => {
   return instance.get(`/group/invitation`);
 };
 
-interface GetInviteKeyResponse {
+interface GetResponse {
   invitationKey: string;
 }

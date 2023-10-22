@@ -1,6 +1,6 @@
-import { AddGroupRequest, addNewGroup } from 'apis/admin/manageGroup';
+import { postAddNewGroup } from 'apis/admin/manageGroup';
 import FlexContainer from 'components/@commons/FlexContainer';
-import GradationBox from 'components/@commons/GradationBox';
+import BorderBox from 'components/@commons/BorderBox';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import useForm from 'hooks/useForm';
@@ -12,16 +12,16 @@ interface Props {
 }
 
 const FormSection = ({ doneStateHandler }: Props): JSX.Element => {
-  const initialInfo: AddGroupRequest = {
+  const initialInfo = {
     marketName: '',
     marketNumber: '',
     mainAddress: '',
     detailAddress: '',
   };
 
-  const { obj: marketInfo, formHandler } = useForm<AddGroupRequest>(initialInfo);
+  const { obj: marketInfo, formHandler } = useForm(initialInfo);
   const submitHandler = (): void => {
-    addNewGroup(marketInfo)
+    postAddNewGroup(marketInfo)
       .then((res) => {
         doneStateHandler();
       })
@@ -34,14 +34,14 @@ const FormSection = ({ doneStateHandler }: Props): JSX.Element => {
       <Text size="xxl" weight="semiBold">
         그룹 생성하기
       </Text>
-      <GradationBox width="100%">
+      <BorderBox gradation width="100%">
         <FlexContainer $gap="0">
           <InputBar id="marketName" onChange={formHandler} labelName="상호명" />
           <InputBar id="marketNumber" onChange={formHandler} labelName="사업자 번호" />
           <InputBar id="mainAddress" onChange={formHandler} labelName="주소1" />
           <InputBar id="detailAddress" onChange={formHandler} labelName="주소2" />
         </FlexContainer>
-      </GradationBox>
+      </BorderBox>
       <SubmitButton onClick={submitHandler}>그룹 생성하기</SubmitButton>
     </>
   );

@@ -1,25 +1,15 @@
 import instance from 'apis/instance';
+import { TimeWorkerListData } from 'apis/types';
+import { AxiosResponse } from 'axios';
 
-export const getDailyWorkers = (params: GetDailyWorkersRequest): Promise<GetDailyWorkerResponse> => {
+export const getDailyWorkers = (params: Params): Promise<AxiosResponse<Response>> => {
   return instance.get(`/schedule/fix/day`, { params });
 };
 
-export interface DailyWorkTimeData {
-  title: string;
-  startTime: string;
-  endTime: string;
-  workerList: WorkerData[];
+interface Params {
+  selectedDate: string;
 }
 
-export interface WorkerData {
-  memberId: number;
-  name: string;
-}
-
-interface GetDailyWorkersRequest {
-  date: string;
-}
-
-interface GetDailyWorkerResponse {
-  data: { schedule: DailyWorkTimeData[] };
+interface Response {
+  schedule: TimeWorkerListData[];
 }
