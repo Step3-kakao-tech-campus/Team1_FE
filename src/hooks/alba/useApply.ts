@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { getApplyForm, putApply } from 'apis/alba/apply';
 import { useAtom, useSetAtom } from 'jotai';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -7,19 +7,17 @@ import { SelectedTimeData, TimeData } from 'apis/types';
 
 const useApply = (startWeekDate: string) => {
   /* -------------- 1. 공통 (데이터 불러오기) -------------- */
-
-  const query = useQuery(['getApplyForm', startWeekDate], () => getApplyForm({ startWeekDate: startWeekDate }), {
-    suspense: true,
-  });
-
   const [weeklySelect, setWeeklySelect] = useAtom(weeklySelectAtom);
   const [template, setTemplate] = useState<{ [index: number]: TimeData }>();
 
-  useEffect(() => {
-    if (query.data === undefined) return;
-    setWeeklySelect(query.data.selected);
-    setTemplate(query.data.templates);
-  }, [query.data]);
+  const query = useQuery(['getApplyForm', startWeekDate], () => getApplyForm({ startWeekDate: startWeekDate }), {
+    suspense: true,
+    onSuccess: (data) => {
+      if (data === undefined) return;
+      setWeeklySelect(data.selected);
+      setTemplate(data.templates);
+    },
+  });
 
   // workTimeID로 해당 시간대의 정보 찾기
   const findTimeData = (workTimeId: number): TimeData => {
