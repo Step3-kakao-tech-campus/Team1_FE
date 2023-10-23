@@ -42,8 +42,6 @@ const signupPage = (): JSX.Element => {
     });
   };
 
-  // 코드 없이 접속했을 때 에러처리
-
   return (
     <PageContainer withoutHeader withoutBottonBar>
       {userInfo.isAdmin === null && (
