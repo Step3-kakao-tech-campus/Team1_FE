@@ -20,15 +20,17 @@ import ApplicationOpenPage from 'pages/admin/ApplicationOpenPage';
 import ApplicationClosePage from 'pages/admin/ApplicationClosePage';
 import ApplyPage from 'pages/alba/ApplyPage';
 import SelectWeekPage from 'pages/SelectWeekPage';
+import ErrorFallback from 'error/ErrorFallback';
 
 function App(): JSX.Element {
   return (
     <ThemeProvider theme={myTheme}>
       <Provider>
         <BrowserRouter>
-          <ErrorBoundary fallback={<p>에러... app.tsx</p>}>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Routes>
               <Route path={convertPath('/')} element={<HomeIndex />} />
+              <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
 
               <Route element={<LogoutOnlyPrivate />}>
                 <Route path={convertPath('/signup')} element={<SignupPage />} />
@@ -43,7 +45,6 @@ function App(): JSX.Element {
               </Route>
 
               <Route element={<UserTypePrivate when="alba" />}>
-                <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
                 <Route path={convertPath('/apply')} element={<SelectWeekPage isAdmin={false} />} />
                 <Route path={convertPath('/apply/selectTimes')} element={<ApplyPage />} />
               </Route>
