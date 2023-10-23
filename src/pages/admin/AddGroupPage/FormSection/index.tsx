@@ -9,6 +9,7 @@ import { marketNoValidator, nameValidator } from 'utils/validators';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import useModal from 'hooks/useModal';
 import InputBar from './InputBar';
+import useErrorHandler from 'error/useErrorHandler';
 
 const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JSX.Element => {
   const initialInfo = {
@@ -19,14 +20,14 @@ const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JS
   };
 
   const { obj: marketInfo, formHandler, etcUpdateHandler } = useForm(initialInfo);
-
+  const { commonErrorHandler } = useErrorHandler();
   const submitHandler = (): void => {
     postAddNewGroup(marketInfo)
       .then((res) => {
         doneStateHandler();
       })
       .catch((err) => {
-        // 에러 처리
+        commonErrorHandler(err);
       });
   };
 

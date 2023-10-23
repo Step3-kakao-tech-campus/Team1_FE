@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
 import { useQuery } from '@tanstack/react-query';
 import { getRecommends, postRecommends } from 'apis/admin/application/close';
+import useErrorHandler from 'error/useErrorHandler';
 
 const useClose = (startWeekDate: string) => {
   // 후보 별 weekly 스케줄 정보 불러오기
@@ -20,13 +21,14 @@ const useClose = (startWeekDate: string) => {
 
   // 제출 클릭시 post 요청
   const navigate = useNavigate();
+  const { commonErrorHandler } = useErrorHandler();
   const submitHandler = () => {
     postRecommends({ selection: candidate + 1 })
       .then((res) => {
         navigate(convertPath('/'));
       })
       .catch((err) => {
-        // 에러 처리
+        commonErrorHandler(err);
       });
   };
 
