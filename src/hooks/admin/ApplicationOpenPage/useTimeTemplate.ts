@@ -57,6 +57,11 @@ const useTimeTemplate = (startWeekDate: string) => {
   const submitHandler = () => {
     const removeEmptyTime = timeTemplate.filter((e) => e.title.length > 0);
     if (removeEmptyTime.length === 0) return;
+    if (removeEmptyTime.some((e) => e.startTime === e.endTime)) {
+      alert('시간을 올바르게 입력하세요');
+      return;
+    }
+
     setTimeTemplate(removeEmptyTime);
     setStep(2);
   };
