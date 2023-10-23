@@ -24,9 +24,9 @@ const SchedulePage = ({ members }: { members: UserData[] }): JSX.Element => {
 
   useEffect(() => {
     if (!isAdmin) {
-      // 알바생일 때 : 항상 {memberId: 0, isSelected: true}
-      // 매니저일 때 : 직원 선택 안됐을 때 {memberId: 0, isSelected: false}
-      setNowMember({ memberId: 0, name: '', isSelected: true });
+      // 알바생일 때 : 항상 {userId: 0, isSelected: true}
+      // 매니저일 때 : 직원 선택 안됐을 때 {userId: 0, isSelected: false}
+      setNowMember({ userId: 0, name: '', isSelected: true });
     }
   }, []);
 

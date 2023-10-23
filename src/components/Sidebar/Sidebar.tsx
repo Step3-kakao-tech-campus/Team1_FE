@@ -70,7 +70,7 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
 
           <FlexContainer $wFull $align="flex-start" $gap="0.5rem">
             {memberList?.data.members.map((member: UserData) => (
-              <ol key={member.memberId}>
+              <ol key={member.userId}>
                 <Text>{member.name}</Text>
               </ol>
             ))}
