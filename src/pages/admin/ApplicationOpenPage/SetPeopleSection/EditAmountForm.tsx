@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { InputPeople } from 'components/PageStyledComponents/admin/ApplicationOpenPage';
 import { useAtom } from 'jotai';
 import { weeklyPeopleAtom } from '..';
+import { isOnlyNumber } from 'utils/validators';
 
 const EditAmountForm = ({ timeIndex, day }: { timeIndex: number; day: number }): JSX.Element => {
   const [weeklyAmount, SetWeeklyAmount] = useAtom(weeklyPeopleAtom);
   const [val, setVal] = useState(weeklyAmount[day][timeIndex].toString());
   const onBlurHandler = () => {
     // validation : 숫자가 아닌 값
-    const regEM = /^[0-9]+$/;
-    if (!regEM.test(val)) {
+    if (!isOnlyNumber(val)) {
       setVal(weeklyAmount[day][timeIndex].toString());
       return;
     }
