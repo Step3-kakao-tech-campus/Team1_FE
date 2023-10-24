@@ -4,8 +4,7 @@ COPY package*.json ./
 COPY . .
 
 ENV REACT_APP_KAKAO_API_KEY=d573e4a7b2fcae0f0289d5807605d726
-ENV REACT_APP_KAKAO_REDIRECT_URI=/login/kakao
-ENV REACT_APP_BASE_URL=https://k3e1acd091b3da.user-app.krampoline.com
+ENV REACT_APP_KAKAO_REDIRECT_URI=https://k3e1acd091b3da.user-app.krampoline.com/login/kakao
 
 RUN npm ci
 RUN npm run build
