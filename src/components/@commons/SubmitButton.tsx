@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const SubmitButton = styled.button<{
   $activeColor?: string;
   $disabledColor?: string;
-  $disabled?: boolean;
+  disabled?: boolean;
   $width?: string;
   $margin?: string;
   $padding?: string;
@@ -23,7 +23,7 @@ const SubmitButton = styled.button<{
 
   border-radius: 8px;
   background: ${(props) =>
-    props.$disabled
+    props.disabled
       ? props.$disabledColor
         ? props.$disabledColor
         : props.theme.color.gray

@@ -28,7 +28,11 @@ const CalenderOutter = ({ children, monthDataAtom }: Props): JSX.Element => {
     <>
       <FlexContainer $direction="row" $justify="space-between">
         <PrevButton onClick={() => monthMoveHandler(-1)} />
-        <Text size="lg" weight="bold">{`${year}  ${month + 1} 월`}</Text>
+        <FlexContainer $direction="row" $gap="12px">
+          <Text size="lg" weight="bold">{`${year} 년`}</Text>
+          <Text size="lg" weight="bold">{`${month + 1} 월`}</Text>
+        </FlexContainer>
+
         <NextButton onClick={() => monthMoveHandler(+1)} />
       </FlexContainer>
       <DayTitle />

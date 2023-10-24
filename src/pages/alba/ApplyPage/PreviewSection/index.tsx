@@ -3,15 +3,15 @@ import BorderBox from 'components/@commons/BorderBox';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
 import useApply from 'hooks/alba/useApply';
-import { stringDateMove } from 'utils/stringDateMove';
 import weekdayArray from 'utils/weekdayArray';
 import SubmitButton from 'components/@commons/SubmitButton';
 import { useNavigate } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
 import { myTheme } from 'styles/myTheme';
+import { stringDateMoveKor } from 'utils/stringDateMove';
 
 const PreviewSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
-  const { setStep, worktimeIdProcessor, stringDateToKor } = useApply(startWeekDate);
+  const { setStep, worktimeIdProcessor } = useApply(startWeekDate);
   const navigate = useNavigate();
 
   return (
@@ -22,7 +22,7 @@ const PreviewSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Eleme
           <BorderBox gradation key={`${dayIndex}요일`}>
             <FlexContainer $wFull $direction="row" $padding="20px 24px" $gap="0">
               <Text size="lg" margin="0">
-                {stringDateToKor(startWeekDate, dayIndex)}
+                {stringDateMoveKor(startWeekDate, dayIndex)}
               </Text>
               <Text size="lg" margin="0 auto 0 28px">
                 {weekday.kor}

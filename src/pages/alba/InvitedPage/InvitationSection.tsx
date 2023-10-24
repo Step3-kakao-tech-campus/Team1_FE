@@ -1,12 +1,14 @@
 import FlexContainer from 'components/@commons/FlexContainer';
 import React, { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 import InvitationContent from './InvitationContent';
 import SubmitButton from 'components/@commons/SubmitButton';
 import useModal from 'hooks/useModal';
 import { postGroupJoin } from 'apis/alba/joinGroup';
 import LoginOrSignup from 'components/LoginSignUpButton/LoginOrSignup';
 import useLogin from 'hooks/useLogin';
+import useErrorHandler from 'error/useErrorHandler';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorPage from 'error/ErrorPage';
 
 interface Props {
   invitationKey: string;
@@ -17,6 +19,7 @@ const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Elem
   const loginState = useLogin().getLoginState();
 
   const { modalOnHandler, modalOffHandler, ModalComponent } = useModal();
+  const { commonErrorHandler } = useErrorHandler();
 
   // 초대 승인 클릭 시
   const acceptBtnHandler = (): void => {
@@ -25,8 +28,8 @@ const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Elem
         .then((res) => {
           afterJoinHandler(); // 그룹 가입 완료 페이지로 이동
         })
-        .catch((err) => {
-          // 에러 처리
+        .catch((error) => {
+          commonErrorHandler(error);
         });
     } else {
       modalOnHandler();
@@ -40,13 +43,12 @@ const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Elem
         <button onClick={modalOffHandler}>닫기</button>
       </ModalComponent>
 
-      <FlexContainer $wFull={true} $padding="80px" $gap="60px">
-        <ErrorBoundary fallback={<p>유효하지 않은 초대입니다</p>}>
+      <FlexContainer $wFull={true} $padding="60px" $gap="60px">
+        <ErrorBoundary fallback={<ErrorPage message="유효하지 않은 초대입니다" goMain />}>
           <Suspense fallback={<div>초대장 로딩</div>}>
             <InvitationContent invitationKey={invitationKey} />
+            <SubmitButton onClick={acceptBtnHandler}>승인하기</SubmitButton>
           </Suspense>
-
-          <SubmitButton onClick={acceptBtnHandler}>승인하기</SubmitButton>
         </ErrorBoundary>
       </FlexContainer>
     </>

@@ -5,7 +5,7 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import { myTheme } from 'styles/myTheme';
-import { stringDateMove } from 'utils/stringDateMove';
+import { stringDateMoveKor } from 'utils/stringDateMove';
 import { ScrollContainer } from 'components/PageStyledComponents/admin/ApplicationClose';
 import useClose from 'hooks/admin/ApplicationClosePage/useClose';
 import useWeekSelector from 'hooks/useWeekSelector';
@@ -36,7 +36,13 @@ const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): 
       </ScrollContainer>
       <WeekBarComponent />
 
-      <Text>{stringDateMove(startWeekDate, day)}</Text>
+      <BorderBox width="100%" border>
+        <FlexContainer $wFull $padding="16px">
+          <Text size="lg" weight="semiBold">
+            {stringDateMoveKor(startWeekDate, day)}
+          </Text>
+        </FlexContainer>
+      </BorderBox>
 
       <DailyWorkersTemplate dailyData={recommendsRes?.data.recommends[candidate][day]} />
       <SubmitButton onClick={submitHandler}>스케줄 확정하기 (그룹원에게 알림이 가요!)</SubmitButton>

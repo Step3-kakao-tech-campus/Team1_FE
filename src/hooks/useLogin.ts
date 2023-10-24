@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
 import { postsignup, postLogin, SignupRequest } from 'apis/auth';
 import React from 'react';
+import useErrorHandler from 'error/useErrorHandler';
 
 interface UserDataType {
   isAdmin: boolean;
@@ -11,7 +12,7 @@ const defaultLoginState = { isLogin: false, token: '', isAdmin: false };
 
 const useLogin = (redirectPage?: string) => {
   const navigate = useNavigate();
-
+  const { commonErrorHandler } = useErrorHandler();
   /* ------------ 로그인 요청 부분 ------------ */
 
   const loginBtnHandler = (): void => {
@@ -27,8 +28,7 @@ const useLogin = (redirectPage?: string) => {
         saveLoginData(response.headers.authorization, response.data);
       })
       .catch((error) => {
-        // 에러 처리
-        navigate(convertPath('/'));
+        commonErrorHandler(error);
       });
   };
 
@@ -43,6 +43,8 @@ const useLogin = (redirectPage?: string) => {
         if (error.response && error.response.status === 404) {
           // 회원가입 처리를 하러 간다.
           navigate('/signup', { state: { code: code } });
+        } else {
+          commonErrorHandler(error);
         }
       });
   };

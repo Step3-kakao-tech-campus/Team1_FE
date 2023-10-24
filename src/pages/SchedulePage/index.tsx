@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
-import { dateAtom, memberAtom, monthAtom, workTimeAtom } from './states';
+import { dateAtom, memberAtom, monthAtom } from './states';
 import useLogin from 'hooks/useLogin';
 
 import PageContainer from 'components/@commons/PageContainer';
@@ -19,15 +19,14 @@ const SchedulePage = ({ members }: { members: UserData[] }): JSX.Element => {
   const isAdmin = useLogin().getLoginState().isAdmin;
   const nowMonth = useAtomValue(monthAtom);
 
-  const totalWorkTime = useAtomValue(workTimeAtom);
   const [nowDate, setNowDate] = useAtom(dateAtom);
   const [nowMember, setNowMember] = useAtom(memberAtom);
 
   useEffect(() => {
     if (!isAdmin) {
-      // 알바생일 때 : 항상 {memberId: 0, isSelected: true}
-      // 매니저일 때 : 직원 선택 안됐을 때 {memberId: 0, isSelected: false}
-      setNowMember({ memberId: 0, name: '', isSelected: true });
+      // 알바생일 때 : 항상 {userId: 0, isSelected: true}
+      // 매니저일 때 : 직원 선택 안됐을 때 {userId: 0, isSelected: false}
+      setNowMember({ userId: 0, name: '', isSelected: true });
     }
   }, []);
 
@@ -40,7 +39,7 @@ const SchedulePage = ({ members }: { members: UserData[] }): JSX.Element => {
       <FlexContainer $wFull $hFull $justify="start">
         <MainTopBarCont>
           <FlexContainer $wFull $align="flex-start">
-            {nowMember.isSelected && <TotalWorkTime totalWorkTime={totalWorkTime} />}
+            {nowMember.isSelected && <TotalWorkTime />}
           </FlexContainer>
           <FlexContainer $hFull $wFull $position="relative">
             {isAdmin && <Dropdown members={members} />}

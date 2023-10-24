@@ -11,7 +11,7 @@ export const getMonthly = async (info: Info): Promise<Return> => {
   if (info.isAdmin) {
     params = {
       month: `${year}-${month + 1}`,
-      memberId: info.memberId,
+      userId: info.userId,
     };
   } else {
     params = {
@@ -38,7 +38,7 @@ interface Info {
   year: number;
   month: number;
   isAdmin: boolean;
-  memberId: number;
+  userId: number;
 }
 
 const to2Dimension = (info: Info, response: AxiosResponse<Response>): Return => {

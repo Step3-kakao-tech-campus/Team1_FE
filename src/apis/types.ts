@@ -7,7 +7,7 @@ export interface TimeWorkerListData {
 }
 
 export interface UserData {
-  memberId: number;
+  userId: number;
   name: string;
 }
 

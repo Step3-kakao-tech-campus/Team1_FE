@@ -1,27 +1,14 @@
-import useWeekSelector from 'hooks/useWeekSelector';
 import React from 'react';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage';
 import { postOpenApplication } from 'apis/admin/application/open';
 import { useNavigate } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
+import useErrorHandler from 'error/useErrorHandler';
 
 const usePeopleAmount = (startWeekDate: string) => {
-  // 전역 상태 선언 (주간 인원수 배열)
-  const [weeklyAmount, setWeeklyData] = useAtom(weeklyPeopleAtom);
-
-  // 요일바 선언
-  const { day, WeekBarComponent } = useWeekSelector(0);
-
-  // 인원수 입력 값 반영
-  const formChangeHandler = (event: React.ChangeEvent<HTMLInputElement>, timeIndex: number): void => {
-    // 데일리 배열 새로 생성
-    const dailyNew = weeklyAmount[day].map((amount, index) =>
-      index === timeIndex ? Number.parseInt(event.target.value) : amount,
-    );
-    // 위클리 시간표 업데이트
-    setWeeklyData((prev) => prev.map((dailyOrigin, dayIndex) => (dayIndex === day ? dailyNew : dailyOrigin)));
-  };
+  // 전역 상태 가져오기 (주간 인원수 배열)
+  const [weeklyAmount, setWeeklyAmount] = useAtom(weeklyPeopleAtom);
 
   // 이전 단계로 넘어가기
   const [, setStep] = useAtom(openStepAtom);
@@ -30,19 +17,36 @@ const usePeopleAmount = (startWeekDate: string) => {
   };
 
   // 서버에 저장 (모집 시작 요청)
+
+  const [timeTemplate, setTimeTemplate] = useAtom(timeTemplateAtom);
+
+  const { commonErrorHandler } = useErrorHandler();
   const navigate = useNavigate();
-  const timeTemplate = useAtomValue(timeTemplateAtom);
   const submitHandler = () => {
     postOpenApplication({
       weeklyAmount: weeklyAmount,
       timeTemplate: timeTemplate,
       startWeekDate: startWeekDate,
-    }).then((res) => {
-      navigate(convertPath('/'));
-    });
+    })
+      .then((res) => {
+        navigate(convertPath('/'));
+
+        // 상태 초기화
+        setWeeklyAmount([[], [], [], [], [], [], []]);
+        setStep(1);
+        setTimeTemplate([]);
+      })
+      .catch((err) => {
+        commonErrorHandler(err);
+      });
   };
 
-  return { timeTemplate, submitHandler, goPrevHandler, formChangeHandler, weeklyAmount, day, WeekBarComponent };
+  return {
+    timeTemplate,
+    submitHandler,
+    goPrevHandler,
+    weeklyAmount,
+  };
 };
 
 export default usePeopleAmount;
