@@ -5,7 +5,7 @@ import { getMyInfo } from 'apis/userInfo';
 import { convertPath } from 'apis/convertURI';
 import useLogin from 'hooks/useLogin';
 import useModal from 'hooks/useModal';
-import GetInviteKey from 'components/GetInviteKey';
+import GetInviteKey from 'components/modals/GetInviteKey';
 import { HorizontalLine, SidebarBackground, SidebarBox } from '.';
 import Text from '../@commons/Text';
 import FlexContainer from '../@commons/FlexContainer';
@@ -22,7 +22,7 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
 
   const navigate = useNavigate();
   const { logout } = useLogin('/');
-  const { modalOnHandler, modalOffHandler, ModalComponent } = useModal();
+  const { modalOnHandler } = useModal();
 
   const guideHandler = () => {
     closeHandler();
@@ -54,7 +54,7 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
               <Text>로그아웃</Text>
             </FlexContainer>
             {loginInfo.userData.isAdmin && (
-              <FlexContainer onClick={modalOnHandler}>
+              <FlexContainer onClick={() => modalOnHandler(<GetInviteKey />)}>
                 <Text>직원 초대하기</Text>
               </FlexContainer>
             )}
@@ -76,10 +76,6 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
             ))}
           </FlexContainer>
         </FlexContainer>
-
-        <ModalComponent>
-          <GetInviteKey modalOffHandler={modalOffHandler} />
-        </ModalComponent>
       </SidebarBox>
     </SidebarBackground>
   );
