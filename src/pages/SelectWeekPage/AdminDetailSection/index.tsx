@@ -5,6 +5,7 @@ import Text from 'components/@commons/Text';
 import OpenDetail from './OpenDetail';
 import InProgressDetail from './InProgressDetail';
 import ClosedDetail from './ClosedDetail';
+import Loader from 'components/Suspenses/Loader';
 
 const AdminDetailSection = (): JSX.Element => {
   const [selectedWeek] = useAtom(selectedWeekAtom);
@@ -14,13 +15,13 @@ const AdminDetailSection = (): JSX.Element => {
       return <OpenDetail startWeekDate={selectedWeek.startWeekDate} />;
     case 'inProgress':
       return (
-        <Suspense>
+        <Suspense fallback={<Loader />}>
           <InProgressDetail startWeekDate={selectedWeek.startWeekDate} />
         </Suspense>
       );
     case 'closed':
       return (
-        <Suspense>
+        <Suspense fallback={<Loader />}>
           <ClosedDetail startWeekDate={selectedWeek.startWeekDate} />
         </Suspense>
       );

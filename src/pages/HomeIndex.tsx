@@ -3,6 +3,7 @@ import OnBoardingPage from 'pages/OnBoardingPage';
 import useLogin from 'hooks/useLogin';
 import AlbaMainIndex from './alba/AlbaMainIndex';
 import AdminMainIndex from 'pages/admin/AdminMainIndex';
+import Loader from 'components/Suspenses/Loader';
 
 const HomeIndex = () => {
   const loginState = useLogin().getLoginState();
@@ -14,13 +15,13 @@ const HomeIndex = () => {
       {!isLogin && <OnBoardingPage />}
 
       {isLogin && isAdmin && (
-        <Suspense fallback={<div>전체 페이지 로딩...</div>}>
+        <Suspense fallback={<Loader />}>
           <AdminMainIndex />
         </Suspense>
       )}
 
       {isLogin && !isAdmin && (
-        <Suspense fallback={<div>전체 페이지 로딩...</div>}>
+        <Suspense fallback={<Loader />}>
           <AlbaMainIndex />
         </Suspense>
       )}
