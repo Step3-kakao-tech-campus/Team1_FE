@@ -4,17 +4,14 @@ import { getInviteKey } from 'apis/admin/manageGroup';
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
+import useModal from 'hooks/useModal';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import styled from 'styled-components';
 
-interface Props {
-  modalOffHandler: () => void;
-}
-
-const GetInviteKey = ({ modalOffHandler }: Props): JSX.Element => {
-  const { data: inviteKeyData } = useQuery(['inviteKey'], getInviteKey, { suspense: true });
-
+const GetInviteKey = (): JSX.Element => {
+  const { data: inviteKeyData } = useQuery(['inviteKey'], getInviteKey);
+  const { modalOffHandler } = useModal();
   return (
     <FlexContainer $wFull $padding="20px" $gap="30px">
       <FlexContainer $gap="10px">

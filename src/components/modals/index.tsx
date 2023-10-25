@@ -1,10 +1,12 @@
+import useModal from 'hooks/useModal';
 import React from 'react';
 import styled from 'styled-components';
 
 export const Modal = ({ children }: { children: React.ReactNode }): JSX.Element => {
+  const { modalOffHandler } = useModal();
   return (
-    <Background>
-      <Box>{children}</Box>
+    <Background onClick={() => modalOffHandler()}>
+      <Box onClick={(e) => e.stopPropagation()}>{children}</Box>
     </Background>
   );
 };
