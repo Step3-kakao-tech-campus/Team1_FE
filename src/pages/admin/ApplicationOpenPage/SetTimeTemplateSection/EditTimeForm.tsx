@@ -14,7 +14,7 @@ const EditTimeForm = ({ startWeekDate }: { startWeekDate: string }) => {
   const { timeTemplate, formChangeHandler, deleteHandler, addHandler, submitHandler } = useTimeTemplate(startWeekDate);
 
   return (
-    <FlexContainer $wFull $align="center" $gap="30px">
+    <>
       {timeTemplate.map((time: TimeData, i: number) => (
         <ColorBox $wFull key={`key${i}`} $background={myTheme.color.lightYellow}>
           <FlexContainer $wFull $padding="20px">
@@ -40,7 +40,7 @@ const EditTimeForm = ({ startWeekDate }: { startWeekDate: string }) => {
       ))}
       <AddButton onClick={addHandler} />
       <SubmitButton onClick={submitHandler}>요일별 모집 인원 설정하기</SubmitButton>
-    </FlexContainer>
+    </>
   );
 };
 
