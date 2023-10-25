@@ -8,23 +8,21 @@ import { SelectedTimeData, TimeData } from 'apis/types';
 const useApply = (startWeekDate: string) => {
   /* -------------- 1. 공통 (데이터 불러오기) -------------- */
   const [weeklySelect, setWeeklySelect] = useAtom(weeklySelectAtom);
-  const [template, setTemplate] = useState<{ [index: number]: TimeData }>();
+  const [isLoading, setIsLoading] = useState(true);
 
   const query = useQuery(['getApplyForm', startWeekDate], () => getApplyForm({ startWeekDate: startWeekDate }), {
-    suspense: true,
     onSuccess: (data) => {
       if (data === undefined) return;
       setWeeklySelect(data.selected);
-      setTemplate(data.templates);
+      setIsLoading(false);
     },
   });
 
-  // workTimeID로 해당 시간대의 정보 찾기
-  const findTimeData = (workTimeId: number): TimeData => {
-    if (template === undefined) {
-      return { title: '', startTime: '', endTime: '' };
+  const findTimeData = (workTimeId: number): TimeData | null => {
+    if (query.data?.templates === undefined) {
+      return null;
     }
-    return template[workTimeId];
+    return query.data?.templates[workTimeId];
   };
 
   /* -------------- 2. 시간 선택 섹션 -------------- */
@@ -59,9 +57,10 @@ const useApply = (startWeekDate: string) => {
   /* -------------- 3. 미리보기 섹션 -------------- */
 
   const worktimeIdProcessor = (dayIndex: number) => {
+    if (isLoading) return '';
     const processed = weeklySelect[dayIndex]
       .filter((object) => object.isChecked)
-      .map((object) => findTimeData(object.workTimeId).title);
+      .map((object) => findTimeData(object.workTimeId)?.title);
 
     if (processed.length === 0) return '휴무';
 
@@ -76,6 +75,7 @@ const useApply = (startWeekDate: string) => {
     putSaveHandler,
     setStep,
     worktimeIdProcessor,
+    isLoading,
   };
 };
 
