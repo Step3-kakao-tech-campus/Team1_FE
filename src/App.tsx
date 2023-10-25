@@ -21,35 +21,38 @@ import ApplicationClosePage from 'pages/admin/ApplicationClosePage';
 import ApplyPage from 'pages/alba/ApplyPage';
 import SelectWeekPage from 'pages/SelectWeekPage';
 import ErrorFallback from 'error/ErrorFallback';
+import ViewPortContainer from 'components/@commons/ViewPortContainer';
 
 function App(): JSX.Element {
   return (
     <ThemeProvider theme={myTheme}>
       <Provider>
         <BrowserRouter>
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Routes>
-              <Route path={convertPath('/')} element={<HomeIndex />} />
-              <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
+          <ViewPortContainer>
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Routes>
+                <Route path={convertPath('/')} element={<HomeIndex />} />
+                <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
 
-              <Route element={<LogoutOnlyPrivate />}>
-                <Route path={convertPath('/signup')} element={<SignupPage />} />
-                <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
-              </Route>
+                <Route element={<LogoutOnlyPrivate />}>
+                  <Route path={convertPath('/signup')} element={<SignupPage />} />
+                  <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
+                </Route>
 
-              <Route element={<UserTypePrivate when="admin" />}>
-                <Route path={convertPath('/addGroup')} element={<AddGroupPage />} />
-                <Route path={convertPath('/newSchedule')} element={<SelectWeekPage isAdmin />} />
-                <Route path={convertPath('/newSchedule/open')} element={<ApplicationOpenPage />} />
-                <Route path={convertPath('/newSchedule/close')} element={<ApplicationClosePage />} />
-              </Route>
+                <Route element={<UserTypePrivate when="admin" />}>
+                  <Route path={convertPath('/addGroup')} element={<AddGroupPage />} />
+                  <Route path={convertPath('/newSchedule')} element={<SelectWeekPage isAdmin />} />
+                  <Route path={convertPath('/newSchedule/open')} element={<ApplicationOpenPage />} />
+                  <Route path={convertPath('/newSchedule/close')} element={<ApplicationClosePage />} />
+                </Route>
 
-              <Route element={<UserTypePrivate when="alba" />}>
-                <Route path={convertPath('/apply')} element={<SelectWeekPage isAdmin={false} />} />
-                <Route path={convertPath('/apply/selectTimes')} element={<ApplyPage />} />
-              </Route>
-            </Routes>
-          </ErrorBoundary>
+                <Route element={<UserTypePrivate when="alba" />}>
+                  <Route path={convertPath('/apply')} element={<SelectWeekPage isAdmin={false} />} />
+                  <Route path={convertPath('/apply/selectTimes')} element={<ApplyPage />} />
+                </Route>
+              </Routes>
+            </ErrorBoundary>
+          </ViewPortContainer>
         </BrowserRouter>
       </Provider>
     </ThemeProvider>
