@@ -19,7 +19,7 @@ interface Props {
 const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Element => {
   const loginState = useLogin().getLoginState();
 
-  const { modalOnHandler, modalOffHandler, ModalComponent } = useModal();
+  const { modalOnHandler, modalOffHandler } = useModal();
   const { apiErrorHandler } = useErrorHandler();
 
   // 초대 승인 클릭 시
@@ -33,17 +33,17 @@ const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Elem
           apiErrorHandler(error);
         });
     } else {
-      modalOnHandler();
+      modalOnHandler(
+        <>
+          <LoginOrSignup redirectPage={'/invited/' + invitationKey} />
+          <button onClick={modalOffHandler}>닫기</button>
+        </>,
+      );
     }
   };
 
   return (
     <>
-      <ModalComponent>
-        <LoginOrSignup redirectPage={'/invited/' + invitationKey} />
-        <button onClick={modalOffHandler}>닫기</button>
-      </ModalComponent>
-
       <FlexContainer $wFull $padding="60px" $gap="36px">
         <ErrorBoundary fallback={<ErrorPage message="유효하지 않은 초대입니다" goMain />}>
           <Suspense fallback={<InvitationSkeleton />}>
