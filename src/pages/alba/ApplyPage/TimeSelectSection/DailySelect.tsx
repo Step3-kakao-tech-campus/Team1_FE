@@ -6,15 +6,21 @@ import { SelectedTimeData } from 'apis/types';
 import CheckBox from 'components/@commons/CheckBox';
 import useApply from 'hooks/alba/useApply';
 import SubmitButton from 'components/@commons/SubmitButton';
+import TimeSelectSkeleton from 'components/Suspenses/PageSkeletons/TimeSelectSkeleton';
 
 const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: string }): JSX.Element => {
-  const { weeklySelect, findTimeData, selectHandler, previewHandler, putSaveHandler } = useApply(startWeekDate);
+  const { weeklySelect, findTimeData, selectHandler, previewHandler, putSaveHandler, isLoading } =
+    useApply(startWeekDate);
 
   // 요일 바뀔 때마다 서버에 저장
   useEffect(() => {
     if (!weeklySelect.some((e) => e.length > 0)) return;
     putSaveHandler(day);
   }, [day]);
+
+  if (isLoading) {
+    return <TimeSelectSkeleton />;
+  }
 
   return (
     <>
@@ -30,10 +36,10 @@ const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: strin
                   readOnly
                 />
                 <Text size="xl" margin="0">
-                  {findTimeData(timeObject.workTimeId).title}
+                  {findTimeData(timeObject.workTimeId)?.title}
                 </Text>
                 <Text size="xl" margin="0 0 0 auto">
-                  {findTimeData(timeObject.workTimeId).startTime} ~ {findTimeData(timeObject.workTimeId).endTime}
+                  {findTimeData(timeObject.workTimeId)?.startTime} ~ {findTimeData(timeObject.workTimeId)?.endTime}
                 </Text>
               </FlexContainer>
             </BorderBox>
