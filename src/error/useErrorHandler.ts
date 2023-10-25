@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const useErrorHandler = () => {
   const navigate = useNavigate();
+
   const apiErrorHandler = (error: any) => {
     if (error.response === undefined) {
       alert('서버와의 연결이 끊어졌습니다');
@@ -13,7 +14,7 @@ const useErrorHandler = () => {
 
     // 서버 에러 응답
     const code = error.response.status;
-    const errorMessage = error.response.data.message;
+
     console.log(error);
     const { logout } = useLogin();
 
