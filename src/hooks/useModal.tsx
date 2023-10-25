@@ -1,21 +1,29 @@
-import { Modal } from 'components/@commons/modal';
-import React, { useCallback, useState } from 'react';
+import { atom, useSetAtom } from 'jotai';
+import React from 'react';
+
+export const modalAtom = atom<{
+  isOn: boolean;
+  content: React.ReactNode;
+}>({
+  isOn: false,
+  content: <></>,
+});
 
 const useModal = () => {
-  const [isOn, setIsOn] = useState(false);
-  const modalOnHandler = useCallback(() => {
-    setIsOn((prev) => true);
-  }, [isOn]);
+  const setModal = useSetAtom(modalAtom);
 
-  const modalOffHandler = useCallback(() => {
-    setIsOn((prev) => false);
-  }, [isOn]);
-
-  const ModalComponent = ({ children }: { children: React.ReactNode }) => {
-    return <>{isOn && <Modal>{children}</Modal>}</>;
+  const modalOnHandler = (content: React.ReactNode) => {
+    setModal((prev) => ({ isOn: true, content: content }));
   };
 
-  return { isOn, modalOnHandler, modalOffHandler, ModalComponent };
+  const modalOffHandler = () => {
+    setModal({
+      isOn: false,
+      content: <></>,
+    });
+  };
+
+  return { modalOnHandler, modalOffHandler };
 };
 
 export default useModal;
