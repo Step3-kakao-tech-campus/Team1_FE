@@ -20,9 +20,7 @@ const TimeSelectSection = ({ startWeekDate }: { startWeekDate: string }): JSX.El
         </FlexContainer>
       </BorderBox>
 
-      <Suspense fallback={<div>체크 항목 로딩..</div>}>
-        <DailySelect day={day} startWeekDate={startWeekDate} />
-      </Suspense>
+      <DailySelect day={day} startWeekDate={startWeekDate} />
     </FlexContainer>
   );
 };
