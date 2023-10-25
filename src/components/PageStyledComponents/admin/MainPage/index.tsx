@@ -12,11 +12,3 @@ export const DropDownCont = styled.div`
   background-color: ${({ theme }) => theme.color.lightGray};
   z-index: 20;
 `;
-
-export const MainTopBarCont = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  height: 60px;
-`;
