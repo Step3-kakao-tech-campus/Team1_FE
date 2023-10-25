@@ -10,6 +10,7 @@ import DaumPostcodeEmbed from 'react-daum-postcode';
 import useModal from 'hooks/useModal';
 import InputBar from './InputBar';
 import useErrorHandler from 'error/useErrorHandler';
+import KakaoAddress from 'components/modals/KakaoAddress';
 
 const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JSX.Element => {
   const initialInfo = {
@@ -31,7 +32,7 @@ const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JS
       });
   };
 
-  const { modalOnHandler, ModalComponent, modalOffHandler } = useModal();
+  const { modalOnHandler, modalOffHandler } = useModal();
 
   return (
     <>
@@ -58,7 +59,16 @@ const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JS
           onChange={formHandler}
           labelName="주소1"
           validation={marketInfo.mainAddress.length > 0}
-          onClick={modalOnHandler}
+          onClick={() =>
+            modalOnHandler(
+              <KakaoAddress
+                onComplete={(data) => {
+                  etcUpdateHandler(data.address, 'mainAddress');
+                  modalOffHandler();
+                }}
+              />,
+            )
+          }
           value={marketInfo.mainAddress}
         />
 
@@ -75,17 +85,6 @@ const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JS
       >
         그룹 생성하기
       </SubmitButton>
-
-      <ModalComponent>
-        <DaumPostcodeEmbed
-          onComplete={(data) => {
-            etcUpdateHandler(data.address, 'mainAddress');
-            modalOffHandler();
-          }}
-          autoClose
-        />
-        <SubmitButton onClick={modalOffHandler}>닫기</SubmitButton>
-      </ModalComponent>
     </>
   );
 };
