@@ -7,13 +7,15 @@ import PageContainer from 'components/@commons/PageContainer';
 import FlexContainer from 'components/@commons/FlexContainer';
 import NotFixedDateBox from 'components/DailyWorkers/NotFixedDateBox';
 import CalenderOutter from 'components/Calendar/CalenderOutter';
-import { MainTopBarCont } from 'components/PageStyledComponents/admin/MainPage';
 
 import CalenderConents from 'pages/SchedulePage/CalendarSection/CalenderConents';
 import DailyWorkers from 'pages/SchedulePage/DailyWorkerSection/DailyWorkers';
 import Dropdown from 'pages/SchedulePage/HeaderSection/Dropdown';
 import TotalWorkTime from 'pages/SchedulePage/HeaderSection/TotalWorkTime';
 import { UserData } from 'apis/types';
+import SubmitButton from 'components/@commons/SubmitButton';
+import Loader from 'components/Suspenses/Loader';
+import Skeleton from 'components/Suspenses/Skeleton';
 
 const SchedulePage = ({ members }: { members: UserData[] }): JSX.Element => {
   const isAdmin = useLogin().getLoginState().isAdmin;
@@ -35,34 +37,36 @@ const SchedulePage = ({ members }: { members: UserData[] }): JSX.Element => {
   }, [nowMember, nowMonth]);
 
   return (
-    <PageContainer>
-      <FlexContainer $wFull $hFull $justify="start">
-        <MainTopBarCont>
-          <FlexContainer $wFull $align="flex-start">
-            {nowMember.isSelected && <TotalWorkTime />}
-          </FlexContainer>
-          <FlexContainer $hFull $wFull $position="relative">
-            {isAdmin && <Dropdown members={members} />}
-          </FlexContainer>
-        </MainTopBarCont>
-
-        {nowMember.isSelected && (
-          <CalenderOutter monthDataAtom={monthAtom}>
-            <Suspense fallback={<div>캘린더 로딩</div>}>
-              <CalenderConents />
-            </Suspense>
-          </CalenderOutter>
-        )}
-
-        {nowDate.date !== '' &&
-          (nowDate.isFixed ? (
-            <Suspense fallback={<div>데일리 근무표 로딩</div>}>
-              <DailyWorkers date={nowDate.date} />
-            </Suspense>
-          ) : (
-            <NotFixedDateBox />
-          ))}
+    <PageContainer justify="start">
+      <FlexContainer $direction="row" $wFull $justify="start">
+        <FlexContainer $wFull $align="flex-start">
+          {nowMember.isSelected && <TotalWorkTime />}
+        </FlexContainer>
+        <FlexContainer $hFull $wFull $position="relative">
+          {isAdmin && <Dropdown members={members} />}
+        </FlexContainer>
       </FlexContainer>
+
+      {nowMember.isSelected && (
+        <FlexContainer $wFull>
+          <CalenderOutter monthDataAtom={monthAtom} />
+          <Suspense fallback={<Skeleton aspectRatio="1.12" isDeffered />}>
+            <CalenderConents />
+          </Suspense>
+        </FlexContainer>
+      )}
+
+      {nowDate.date !== '' &&
+        (nowDate.isFixed ? (
+          <FlexContainer $wFull>
+            <Suspense fallback={<Loader />}>
+              <DailyWorkers date={nowDate.date} />
+              {!isAdmin && <SubmitButton>대타를 구하고 싶어요</SubmitButton>}
+            </Suspense>
+          </FlexContainer>
+        ) : (
+          <NotFixedDateBox />
+        ))}
     </PageContainer>
   );
 };
