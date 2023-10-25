@@ -12,13 +12,13 @@ const defaultLoginState = { isLogin: false, token: '', isAdmin: false };
 
 const useLogin = (redirectPage?: string) => {
   const navigate = useNavigate();
-  const { commonErrorHandler } = useErrorHandler();
+  const { apiErrorHandler } = useErrorHandler();
   /* ------------ 로그인 요청 부분 ------------ */
 
   const loginBtnHandler = (): void => {
-    if (redirectPage === undefined) return;
-    localStorage.setItem('beforeLoginURL', redirectPage);
-    location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
+    sessionStorage.setItem('beforeLoginURL', redirectPage || '/');
+    const redirectURI = new URL(window.location.href).origin + '/login/kakao';
+    location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_API_KEY}&redirect_uri=${redirectURI}&response_type=code`;
   };
 
   const signup = (requestBody: SignupRequest): void => {
@@ -28,7 +28,7 @@ const useLogin = (redirectPage?: string) => {
         saveLoginData(response.headers.authorization, response.data);
       })
       .catch((error) => {
-        commonErrorHandler(error);
+        apiErrorHandler(error);
       });
   };
 
@@ -44,7 +44,7 @@ const useLogin = (redirectPage?: string) => {
           // 회원가입 처리를 하러 간다.
           navigate('/signup', { state: { code: code } });
         } else {
-          commonErrorHandler(error);
+          apiErrorHandler(error);
         }
       });
   };
