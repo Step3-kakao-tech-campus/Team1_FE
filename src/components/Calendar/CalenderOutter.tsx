@@ -7,14 +7,13 @@ import { WeekGrid } from './CalendarStyle';
 import weekdayArray from 'utils/weekdayArray';
 
 interface Props {
-  children: React.ReactNode;
   monthDataAtom: PrimitiveAtom<{
     year: number;
     month: number;
   }>;
 }
 
-const CalenderOutter = ({ children, monthDataAtom }: Props): JSX.Element => {
+const CalenderOutter = ({ monthDataAtom }: Props): JSX.Element => {
   const [nowMonth, setNowMonth] = useAtom(monthDataAtom);
   const { year, month } = { ...nowMonth };
 
@@ -26,7 +25,7 @@ const CalenderOutter = ({ children, monthDataAtom }: Props): JSX.Element => {
 
   return (
     <>
-      <FlexContainer $direction="row" $justify="space-between">
+      <FlexContainer $direction="row" $justify="space-between" $wFull>
         <PrevButton onClick={() => monthMoveHandler(-1)} />
         <FlexContainer $direction="row" $gap="12px">
           <Text size="lg" weight="bold">{`${year} 년`}</Text>
@@ -35,8 +34,9 @@ const CalenderOutter = ({ children, monthDataAtom }: Props): JSX.Element => {
 
         <NextButton onClick={() => monthMoveHandler(+1)} />
       </FlexContainer>
-      <DayTitle />
-      <>{children}</>
+      <FlexContainer $direction="row" $wFull>
+        <DayTitle />
+      </FlexContainer>
     </>
   );
 };
