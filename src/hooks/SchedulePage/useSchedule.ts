@@ -10,6 +10,7 @@ const useSchedule = () => {
   const { year, month } = { ...useAtomValue(monthAtom) };
 
   const setWorkTime = useSetAtom(workTimeAtom);
+  const isAdmin = useLogin().getLoginState().isAdmin;
   const { data: scheduleData } = useQuery(
     ['getMonthly', year, month, nowMember.userId],
     () =>
@@ -17,7 +18,7 @@ const useSchedule = () => {
         year: year,
         month: month,
         userId: nowMember.userId,
-        isAdmin: useLogin().getLoginState().isAdmin,
+        isAdmin: isAdmin,
       }),
     {
       suspense: true,
