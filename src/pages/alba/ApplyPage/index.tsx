@@ -11,21 +11,17 @@ export const weeklySelectAtom = atom<SelectedTimeData[][]>(weekdayArray.map(() =
 export const applyStepAtom = atom(1);
 
 const ApplyPage = (): JSX.Element => {
-  const startWeekDate = useLocation().state.startWeekDate;
+  const state = useLocation().state;
+  if (state === null) {
+    throw { clientError: true };
+  }
+  const startWeekDate = state.startWeekDate;
   const step = useAtomValue(applyStepAtom);
 
   return (
     <PageContainer justify="start">
-      {step === 1 && (
-        <Suspense>
-          <TimeSelectSection startWeekDate={startWeekDate} />
-        </Suspense>
-      )}
-      {step === 2 && (
-        <Suspense>
-          <PreviewSection startWeekDate={startWeekDate} />
-        </Suspense>
-      )}
+      {step === 1 && <TimeSelectSection startWeekDate={startWeekDate} />}
+      {step === 2 && <PreviewSection startWeekDate={startWeekDate} />}
     </PageContainer>
   );
 };

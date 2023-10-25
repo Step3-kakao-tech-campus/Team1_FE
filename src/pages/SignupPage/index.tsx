@@ -33,7 +33,13 @@ const signupPage = (): JSX.Element => {
 
   // 2. 로그인 요청 보내기
   const { signup } = useLogin();
-  const code = useLocation().state.code;
+
+  const state = useLocation().state;
+  if (state === null) {
+    throw { clientError: true };
+  }
+  const code = state.code;
+
   const signupBtnHandler = () => {
     signup({
       isAdmin: userInfo.isAdmin as boolean,
