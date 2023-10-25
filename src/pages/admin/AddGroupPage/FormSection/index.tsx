@@ -20,14 +20,14 @@ const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JS
   };
 
   const { obj: marketInfo, formHandler, etcUpdateHandler } = useForm(initialInfo);
-  const { commonErrorHandler } = useErrorHandler();
+  const { apiErrorHandler } = useErrorHandler();
   const submitHandler = (): void => {
     postAddNewGroup(marketInfo)
       .then((res) => {
         doneStateHandler();
       })
       .catch((err) => {
-        commonErrorHandler(err);
+        apiErrorHandler(err);
       });
   };
 

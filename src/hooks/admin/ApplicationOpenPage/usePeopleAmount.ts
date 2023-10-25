@@ -20,7 +20,7 @@ const usePeopleAmount = (startWeekDate: string) => {
 
   const [timeTemplate, setTimeTemplate] = useAtom(timeTemplateAtom);
 
-  const { commonErrorHandler } = useErrorHandler();
+  const { apiErrorHandler } = useErrorHandler();
   const navigate = useNavigate();
   const submitHandler = () => {
     postOpenApplication({
@@ -37,7 +37,7 @@ const usePeopleAmount = (startWeekDate: string) => {
         setTimeTemplate([]);
       })
       .catch((err) => {
-        commonErrorHandler(err);
+        apiErrorHandler(err);
       });
   };
 

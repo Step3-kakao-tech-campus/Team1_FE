@@ -19,7 +19,7 @@ const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Elem
   const loginState = useLogin().getLoginState();
 
   const { modalOnHandler, modalOffHandler, ModalComponent } = useModal();
-  const { commonErrorHandler } = useErrorHandler();
+  const { apiErrorHandler } = useErrorHandler();
 
   // 초대 승인 클릭 시
   const acceptBtnHandler = (): void => {
@@ -29,7 +29,7 @@ const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Elem
           afterJoinHandler(); // 그룹 가입 완료 페이지로 이동
         })
         .catch((error) => {
-          commonErrorHandler(error);
+          apiErrorHandler(error);
         });
     } else {
       modalOnHandler();
@@ -45,7 +45,7 @@ const InvitationSection = ({ invitationKey, afterJoinHandler }: Props): JSX.Elem
 
       <FlexContainer $wFull={true} $padding="60px" $gap="60px">
         <ErrorBoundary fallback={<ErrorPage message="유효하지 않은 초대입니다" goMain />}>
-          <Suspense fallback={<div>초대장 로딩</div>}>
+          <Suspense fallback={<div>초대장 스켈레톤</div>}>
             <InvitationContent invitationKey={invitationKey} />
             <SubmitButton onClick={acceptBtnHandler}>승인하기</SubmitButton>
           </Suspense>
