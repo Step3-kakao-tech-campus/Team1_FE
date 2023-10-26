@@ -1,12 +1,11 @@
 import React from 'react';
 import { convertPath } from 'apis/convertURI';
-import useLogin from 'hooks/useLogin';
 import { useNavigate } from 'react-router-dom';
 import ErrorPage from './ErrorPage';
 import { ErrorData } from 'apis/types';
 import { AdminNoGroupPage, AdminNoMemberPage } from 'pages/admin/ETCMainPage';
 import { AlbaNoGroupPage } from 'pages/alba/AlbaMainIndex';
-import { getLoginData } from 'utils/loginDatahandlers';
+import { getLoginData, removeLoginData } from 'utils/loginDatahandlers';
 
 interface Props {
   error: ErrorData;
@@ -17,7 +16,6 @@ const ErrorFallback = ({ error, resetErrorBoundary }: Props) => {
   console.log(error);
 
   const navigate = useNavigate();
-  const { logout } = useLogin();
   const isAdmin = getLoginData().isAdmin;
 
   if (error.response === undefined || error.name === 'clientError') {
@@ -41,7 +39,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }: Props) => {
       // 토큰 유효하지 않음
       resetErrorBoundary();
       alert('로그인이 만료되었습니다. 다시 로그인 해주세요.');
-      logout();
+      removeLoginData();
       navigate(convertPath('/'));
       return <></>;
 
