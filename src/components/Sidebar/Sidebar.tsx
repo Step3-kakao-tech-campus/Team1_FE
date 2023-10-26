@@ -17,11 +17,13 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
   const { data: memberList } = useQuery(['members'], getGroupMemberList);
 
   // 로그인 상태를 가져오는 방법도 변경되었습니다 (지금은 임시로 해뒀는데 바꿔주세요)
-  const loginInfo = { userData: { userName: 'aa', isAdmin: true, groupName: 'aa' } };
+  // const loginInfo = { userData: { userName: 'aa', isAdmin: true, groupName: 'aa' } };
 
   const navigate = useNavigate();
   const { logout } = useLogin('/');
   const { modalOnHandler, modalOffHandler, ModalComponent } = useModal();
+
+  const loginInfo = useLogin().getLoginState();
 
   const guideHandler = () => {
     closeHandler();
@@ -36,23 +38,26 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
         <FlexContainer $wFull $gap="0" $direction="column">
           <FlexContainer $direction="row" $justify="start" $align="center">
             <Text size="lg" weight="bold" margin="0">
-              {loginInfo.userData.userName}
+              {loginInfo.token ? memberList?.data.username : '로그인이 필요합니다.'}
             </Text>
-            <Text margin="0">{loginInfo.userData.isAdmin && 'Admin'}</Text>
+            <Text margin="0">{loginInfo.isAdmin && 'Admin'}</Text>
           </FlexContainer>
           <FlexContainer $direction="row" $justify="start" $align="center">
-            <Text margin="0">{loginInfo.userData.groupName}</Text>
+            <Text margin="0">{memberList?.data.groupName}</Text>
           </FlexContainer>
           <HorizontalLine />
 
+          {/* 기능 부분*/}
           <FlexContainer $wFull $align="flex-start" $gap="0.5rem">
             <FlexContainer onClick={guideHandler}>
               <Text>사용 가이드</Text>
             </FlexContainer>
-            <FlexContainer onClick={logout}>
-              <Text>로그아웃</Text>
-            </FlexContainer>
-            {loginInfo.userData.isAdmin && (
+            {loginInfo.isLogin && (
+              <FlexContainer onClick={logout}>
+                <Text>로그아웃</Text>
+              </FlexContainer>
+            )}
+            {loginInfo.isAdmin && (
               <FlexContainer onClick={modalOnHandler}>
                 <Text>직원 초대하기</Text>
               </FlexContainer>
