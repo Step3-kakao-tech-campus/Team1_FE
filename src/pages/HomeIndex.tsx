@@ -1,12 +1,12 @@
 import React, { Suspense } from 'react';
 import OnBoardingPage from 'pages/OnBoardingPage';
-import useLogin from 'hooks/useLogin';
 import AlbaMainIndex from './alba/AlbaMainIndex';
 import AdminMainIndex from 'pages/admin/AdminMainIndex';
 import Loader from 'components/Suspenses/Loader';
+import { getLoginData } from 'utils/loginDatahandlers';
 
 const HomeIndex = () => {
-  const loginState = useLogin().getLoginState();
+  const loginState = getLoginData();
   const isLogin: boolean = loginState.isLogin;
   const isAdmin: boolean = loginState.isAdmin;
 

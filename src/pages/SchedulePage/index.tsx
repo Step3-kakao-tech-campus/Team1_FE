@@ -16,9 +16,10 @@ import { UserData } from 'apis/types';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Loader from 'components/Suspenses/Loader';
 import Skeleton from 'components/Suspenses/Skeleton';
+import { getLoginData } from 'utils/loginDatahandlers';
 
 const SchedulePage = ({ members }: { members: UserData[] }): JSX.Element => {
-  const isAdmin = useLogin().getLoginState().isAdmin;
+  const isAdmin = getLoginData().isAdmin;
   const nowMonth = useAtomValue(monthAtom);
 
   const [nowDate, setNowDate] = useAtom(dateAtom);

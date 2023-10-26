@@ -7,11 +7,11 @@ import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
 import { BorderWeekBox, WeekStatusBar, WeekContainer } from 'components/PageStyledComponents/admin/SelectWeekPage';
 import Text from 'components/@commons/Text';
 import StatusDailyBox from './StatusDailyBox';
-import useLogin from 'hooks/useLogin';
 import { WeekStatusData, WeekStatusTypes } from 'apis/types';
+import { getLoginData } from 'utils/loginDatahandlers';
 
 const StatusCalendar = (): JSX.Element => {
-  const isAdmin = useLogin().getLoginState().isAdmin;
+  const isAdmin = getLoginData().isAdmin;
   const [selectedWeek, setSelectedWeek] = useAtom(selectedWeekAtom);
   const [nowMonth] = useAtom(weekStatusMonthAtom);
   const { year, month } = { ...nowMonth };

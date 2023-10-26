@@ -1,10 +1,10 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
-import useLogin from 'hooks/useLogin';
+import { getLoginData } from 'utils/loginDatahandlers';
 
 const UserTypePrivate = ({ when }: { when: 'admin' | 'alba' }): JSX.Element => {
-  const loginState = useLogin().getLoginState();
+  const loginState = getLoginData();
 
   const isLogin: boolean = loginState.isLogin;
   const isAdmin: boolean = loginState.isAdmin;

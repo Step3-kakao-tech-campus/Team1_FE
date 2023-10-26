@@ -2,15 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import { getMonthly } from 'apis/schedule/getMonthly';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import React from 'react';
-import useLogin from 'hooks/useLogin';
 import { dateAtom, memberAtom, monthAtom, workTimeAtom } from 'pages/SchedulePage/states';
+import { getLoginData } from 'utils/loginDatahandlers';
 
 const useSchedule = () => {
   const nowMember = useAtomValue(memberAtom);
   const { year, month } = { ...useAtomValue(monthAtom) };
 
   const setWorkTime = useSetAtom(workTimeAtom);
-  const isAdmin = useLogin().getLoginState().isAdmin;
+  const isAdmin = getLoginData().isAdmin;
   const { data: scheduleData } = useQuery(
     ['getMonthly', year, month, nowMember.userId],
     () =>
