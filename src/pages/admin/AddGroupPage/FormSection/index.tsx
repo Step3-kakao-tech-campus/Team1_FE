@@ -4,9 +4,7 @@ import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import useForm from 'hooks/useForm';
 import React from 'react';
-
 import { marketNoValidator, nameValidator } from 'utils/validators';
-import DaumPostcodeEmbed from 'react-daum-postcode';
 import useModal from 'hooks/useModal';
 import InputBar from './InputBar';
 import useErrorHandler from 'error/useErrorHandler';
