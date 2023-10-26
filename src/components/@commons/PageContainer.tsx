@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import HeaderNB from 'components/HeaderNB/HeaderNB';
 import { AlbaBottomNB, AdminBottomNB } from 'components/BottomNB/BottomNB';
-import useLogin from 'hooks/useLogin';
+import { getLoginData } from 'utils/loginDatahandlers';
 
 interface Props {
   children: React.ReactNode;
@@ -14,44 +14,21 @@ interface Props {
 }
 
 const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar, justify }: Props): JSX.Element => {
-  const isAdmin = useLogin().getLoginState().isAdmin;
+  const isAdmin = getLoginData().isAdmin;
+
   return (
-    <WholeConatiner>
-      <ColumnContainer>
-        {!withoutHeader && <HeaderNB />}
-        <MainContainer $gap={gap} $padding={padding} $justify={justify} $bottom={!withoutBottonBar}>
-          {children}
-        </MainContainer>
-        {!withoutBottonBar && isAdmin && <AdminBottomNB />}
-        {!withoutBottonBar && !isAdmin && <AlbaBottomNB />}
-      </ColumnContainer>
-    </WholeConatiner>
+    <>
+      {!withoutHeader && <HeaderNB />}
+      <MainContainer $gap={gap} $padding={padding} $justify={justify} $bottom={!withoutBottonBar}>
+        {children}
+      </MainContainer>
+      {!withoutBottonBar && isAdmin && <AdminBottomNB />}
+      {!withoutBottonBar && !isAdmin && <AlbaBottomNB />}
+    </>
   );
 };
 
 export default PageContainer;
-
-const WholeConatiner = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ColumnContainer = styled.div`
-  position: relative;
-
-  width: 100%;
-  height: 100%;
-
-  max-width: 585px;
-  min-height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-`;
 
 const MainContainer = styled.main<{
   $gap?: string;

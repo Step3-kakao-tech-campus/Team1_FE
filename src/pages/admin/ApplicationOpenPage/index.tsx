@@ -11,7 +11,11 @@ export const weeklyPeopleAtom = atom<number[][]>([[], [], [], [], [], [], []]);
 export const openStepAtom = atom(1);
 
 const ApplicationOpenPage = (): JSX.Element => {
-  const startWeekDate = useLocation().state.startWeekDate;
+  const state = useLocation().state;
+  if (state === null) {
+    throw { name: 'clientError' };
+  }
+  const startWeekDate = state.startWeekDate;
   const step = useAtomValue(openStepAtom);
 
   return (

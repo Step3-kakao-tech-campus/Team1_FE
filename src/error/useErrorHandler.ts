@@ -1,47 +1,80 @@
 import { convertPath } from 'apis/convertURI';
-import useLogin from 'hooks/useLogin';
+import { ErrorData } from 'apis/types';
 import react from 'react';
 import { useNavigate } from 'react-router-dom';
+import { removeLoginData } from 'utils/loginDatahandlers';
 
 const useErrorHandler = () => {
   const navigate = useNavigate();
-  const commonErrorHandler = (error: any) => {
-    const code = error.response.status;
-    const errorMessage = error.response.data.message;
-    console.log(error);
-    const { logout } = useLogin();
 
+  const apiErrorHandler = (error: ErrorData) => {
+    if (error.response === undefined) {
+      alert('서버 오류');
+      return;
+    }
+
+    // 서버 에러 응답
+    const code = error.response.status;
     switch (code) {
-      case 401:
-        alert('로그인이 만료되었습니다');
-        logout();
-        navigate(convertPath('/'));
-        break;
-      case 404:
-        // 상황별로 다름
-        alert(`다시 시도하세요`);
-        navigate(convertPath('/'));
-        break;
-      case 408:
-        alert('timeout. 다시 시도하세요');
-        break;
-      case 422:
-        // validation
+      case -10000:
+        // 타임 아웃
+        alert(`일시적인 네트워크 오류가 발생했습니다. 다시 시도하세요`);
+        return;
+
+      case -10001:
+        // 알 수 없는 오류
+        alert(`서버 오류`);
+        return;
+
+      case -10005:
+        // 폼 validation
         alert(`입력값이 올바르지 않습니다`);
-        break;
+        return;
+
+      case -10007:
+        // 카카오 oauth api 오류
+        alert(`서버 오류`);
+        return;
+
+      case -20000:
+        // 이미 가입되었는데 가입 요청
+        alert('이미 가입되었습니다');
+        navigate(convertPath('/'));
+        return;
+
+      case -20001:
+        // 이미 그룹이 있는데 초대 승인 요청
+        alert('이미 소속된 그룹이 있습니다');
+        navigate(convertPath('/'));
+        return;
+
+      case -20002:
+        // 이미 모집 시작되었는데 모집 시작
+        alert('해당 주차 모집이 이미 시작되었습니다');
+        navigate(convertPath('/newSchedule'));
+        return;
+
+      case -20003:
+        // 이미 모집 마감되었는데 모집 마감
+        alert('해당 주차 모집이 이미 마감되었습니다');
+        navigate(convertPath('/newSchedule'));
+        return;
+
+      case -21000:
+        // 토큰 유효하지 않음
+        alert('로그인이 만료되었습니다.');
+        removeLoginData();
+        navigate(convertPath('/'));
+        return;
+
       default:
-        if (500 <= code) {
-          alert('서버 오류');
-        } else {
-          // 403
-          alert(`잘못된 접근입니다`);
-          navigate(convertPath('/'));
-        }
-        break;
+        alert(`잘못된 접근입니다`);
+        navigate(convertPath('/'));
+        return;
     }
   };
 
-  return { commonErrorHandler };
+  return { apiErrorHandler };
 };
 
 export default useErrorHandler;

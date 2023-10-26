@@ -14,7 +14,7 @@ const CalendarDayBox = ({ dateString, timeList, onClick, isSelected }: DayBoxPro
   const date = Number.parseInt(dateString.split('-')[2]);
 
   return (
-    <OutterDayBox onClick={onClick} $disabled={timeList === null}>
+    <OutterDayBox onClick={onClick} $aspectRatio="0.8" $disabled={timeList === null}>
       {isSelected && <BorderDayBox />}
       <DateCircle $isToday={dateString === dateToString(new Date())}>
         <Text size="xs" weight="regular">

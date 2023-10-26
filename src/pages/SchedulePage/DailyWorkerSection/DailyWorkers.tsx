@@ -9,11 +9,7 @@ const DailyWorkers = ({ date }: { date: string }): JSX.Element => {
   const { data: scheduleResponse } = useQuery([date], () => getDailyWorkers({ selectedDate: date }), {
     suspense: true,
   });
-  return (
-    <FlexContainer $wFull>
-      {scheduleResponse && <DailyWorkersTemplate dailyData={scheduleResponse?.data.schedule} />}
-    </FlexContainer>
-  );
+  return <>{scheduleResponse && <DailyWorkersTemplate dailyData={scheduleResponse?.data.schedule} />}</>;
 };
 
 export default DailyWorkers;

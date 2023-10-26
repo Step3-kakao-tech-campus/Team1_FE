@@ -21,14 +21,14 @@ const useClose = (startWeekDate: string) => {
 
   // 제출 클릭시 post 요청
   const navigate = useNavigate();
-  const { commonErrorHandler } = useErrorHandler();
+  const { apiErrorHandler } = useErrorHandler();
   const submitHandler = () => {
     postRecommends({ selection: candidate + 1 })
       .then((res) => {
         navigate(convertPath('/'));
       })
       .catch((err) => {
-        commonErrorHandler(err);
+        apiErrorHandler(err);
       });
   };
 

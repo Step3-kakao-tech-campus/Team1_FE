@@ -51,13 +51,14 @@ export const BorderDayBox = styled.div`
 `;
 
 export const OutterDayBox = styled.div<{
-  $disabled: boolean;
+  $disabled?: boolean;
+  $aspectRatio: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }>`
   position: relative;
 
   width: 100%;
-  aspect-ratio: 0.8;
+  aspect-ratio: ${(props) => (props.$aspectRatio ? props.$aspectRatio : 'none')};
 
   border: 0.35px solid;
   border-color: ${({ theme }) => theme.color.lightGray};
@@ -73,6 +74,7 @@ export const OutterDayBox = styled.div<{
 export const WeekGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  width: 100%;
 `;
 
 export const MonthBox = styled(FlexContainer)`

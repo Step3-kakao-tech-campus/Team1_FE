@@ -18,7 +18,7 @@ const InvitationContent = ({ invitationKey }: Props): JSX.Element => {
     },
   );
   return (
-    <FlexContainer>
+    <>
       <FlexContainer>
         <Text size="xxxl" weight="bold">
           {marketData?.data.marketName}
@@ -27,7 +27,7 @@ const InvitationContent = ({ invitationKey }: Props): JSX.Element => {
       <FlexContainer $wFull>
         <Text>그룹에 초대되었습니다.</Text>
       </FlexContainer>
-    </FlexContainer>
+    </>
   );
 };
 

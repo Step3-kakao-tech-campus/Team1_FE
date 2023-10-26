@@ -4,12 +4,11 @@ import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import useForm from 'hooks/useForm';
 import React from 'react';
-
 import { marketNoValidator, nameValidator } from 'utils/validators';
-import DaumPostcodeEmbed from 'react-daum-postcode';
 import useModal from 'hooks/useModal';
 import InputBar from './InputBar';
 import useErrorHandler from 'error/useErrorHandler';
+import KakaoAddress from 'components/modals/KakaoAddress';
 
 const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JSX.Element => {
   const initialInfo = {
@@ -20,18 +19,18 @@ const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JS
   };
 
   const { obj: marketInfo, formHandler, etcUpdateHandler } = useForm(initialInfo);
-  const { commonErrorHandler } = useErrorHandler();
+  const { apiErrorHandler } = useErrorHandler();
   const submitHandler = (): void => {
     postAddNewGroup(marketInfo)
       .then((res) => {
         doneStateHandler();
       })
       .catch((err) => {
-        commonErrorHandler(err);
+        apiErrorHandler(err);
       });
   };
 
-  const { modalOnHandler, ModalComponent, modalOffHandler } = useModal();
+  const { modalOnHandler, modalOffHandler } = useModal();
 
   return (
     <>
@@ -58,7 +57,16 @@ const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JS
           onChange={formHandler}
           labelName="주소1"
           validation={marketInfo.mainAddress.length > 0}
-          onClick={modalOnHandler}
+          onClick={() =>
+            modalOnHandler(
+              <KakaoAddress
+                onComplete={(data) => {
+                  etcUpdateHandler(data.address, 'mainAddress');
+                  modalOffHandler();
+                }}
+              />,
+            )
+          }
           value={marketInfo.mainAddress}
         />
 
@@ -75,17 +83,6 @@ const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JS
       >
         그룹 생성하기
       </SubmitButton>
-
-      <ModalComponent>
-        <DaumPostcodeEmbed
-          onComplete={(data) => {
-            etcUpdateHandler(data.address, 'mainAddress');
-            modalOffHandler();
-          }}
-          autoClose
-        />
-        <SubmitButton onClick={modalOffHandler}>닫기</SubmitButton>
-      </ModalComponent>
     </>
   );
 };

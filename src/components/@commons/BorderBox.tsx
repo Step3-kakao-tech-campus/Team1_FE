@@ -21,12 +21,14 @@ interface StyledProps {
   $width?: string;
   $gradation?: boolean;
   $border?: boolean;
+  $borderWidth?: string;
   $borderColor?: string;
 }
 
 const StyledBorderBox = styled.div<StyledProps>`
   background: ${({ theme }) => theme.color.backgroundColor};
-  border: ${(props) => (props.$border ? '1px solid' : 'none')};
+  border: ${(props) => (props.$border ? 'solid' : 'none')};
+  border-width: ${(props) => (props.$borderWidth ? props.$borderWidth : '1px')};
   border-color: ${(props) => (props.$borderColor ? props.$borderColor : props.theme.color.textColor)};
   box-shadow: ${(props) => (props.$gradation ? '0px 1px 5px rgba(0, 0, 0, 0.25)' : 'none')};
   width: ${(props) => (props.$width ? props.$width : '')};

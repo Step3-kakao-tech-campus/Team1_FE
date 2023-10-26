@@ -38,3 +38,13 @@ export interface WeekStatusData {
 }
 
 export type WeekStatusTypes = 'allocatable' | 'inProgress' | 'closed' | '';
+
+export interface ErrorData {
+  name?: string;
+  response?: {
+    status: number;
+    data?: {
+      code: number;
+    };
+  };
+}
