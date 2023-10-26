@@ -13,7 +13,7 @@ export const openStepAtom = atom(1);
 const ApplicationOpenPage = (): JSX.Element => {
   const state = useLocation().state;
   if (state === null) {
-    throw { clientError: true };
+    throw { name: 'clientError' };
   }
   const startWeekDate = state.startWeekDate;
   const step = useAtomValue(openStepAtom);

@@ -36,7 +36,7 @@ const signupPage = (): JSX.Element => {
 
   const state = useLocation().state;
   if (state === null) {
-    throw { clientError: true };
+    throw { name: 'clientError' };
   }
   const code = state.code;
 

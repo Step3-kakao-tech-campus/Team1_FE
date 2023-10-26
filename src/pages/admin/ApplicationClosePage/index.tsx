@@ -7,7 +7,7 @@ import Loader from 'components/Suspenses/Loader';
 const ApplicationClosePage = (): JSX.Element => {
   const state = useLocation().state;
   if (state === null) {
-    throw { clientError: true };
+    throw { name: 'clientError' };
   }
   const startWeekDate = state.startWeekDate;
 
