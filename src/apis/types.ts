@@ -43,5 +43,8 @@ export interface ErrorData {
   name?: string;
   response?: {
     status: number;
+    data?: {
+      code: number;
+    };
   };
 }
