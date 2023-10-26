@@ -22,14 +22,16 @@ import ApplyPage from 'pages/alba/ApplyPage';
 import SelectWeekPage from 'pages/SelectWeekPage';
 import ErrorFallback from 'error/ErrorFallback';
 import ViewPortContainer from 'components/@commons/ViewPortContainer';
+import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 
 function App(): JSX.Element {
+  const { reset } = useQueryErrorResetBoundary();
   return (
     <ThemeProvider theme={myTheme}>
       <Provider>
         <BrowserRouter>
           <ViewPortContainer>
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <ErrorBoundary FallbackComponent={ErrorFallback} onReset={reset}>
               <Routes>
                 <Route path={convertPath('/')} element={<HomeIndex />} />
                 <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
