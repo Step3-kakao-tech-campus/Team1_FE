@@ -6,6 +6,9 @@ const SubmitButton = styled.button<{
   $disabledColor?: string;
   $disabled?: boolean;
   $width?: string;
+  $margin?: string;
+  $padding?: string;
+  $hasBorder?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }>`
   display: flex;
@@ -14,7 +17,9 @@ const SubmitButton = styled.button<{
   align-items: center;
 
   width: ${(props) => (props.$width ? props.$width : '100%')};
-  padding: 12px 28px;
+
+  padding: ${(props) => (props.$padding ? props.$padding : '12px 28px')};
+  margin: ${(props) => (props.$margin ? props.$margin : '0')};
 
   border-radius: 8px;
   background: ${(props) =>
@@ -25,6 +30,9 @@ const SubmitButton = styled.button<{
       : props.$activeColor
       ? props.$activeColor
       : props.theme.color.yellow};
+
+  border: ${(props) => (props.$hasBorder ? '3px solid' : '')};
+  border-color: ${(props) => (props.$hasBorder ? props.theme.color.yellow : '')};
 
   font-weight: ${({ theme }) => theme.fonts.fontWeight.medium};
   font-size: ${({ theme }) => theme.fonts.fontSize.base};

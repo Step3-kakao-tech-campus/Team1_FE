@@ -1,4 +1,4 @@
-import { Background, Box } from 'components/@commons/modal';
+import { Modal } from 'components/@commons/modal';
 import React, { useCallback, useState } from 'react';
 
 const useModal = () => {
@@ -11,18 +11,8 @@ const useModal = () => {
     setIsOn((prev) => false);
   }, [isOn]);
 
-  interface ModalProps {
-    children: React.ReactNode | React.ReactNode[] | string;
-  }
-
-  const ModalComponent = ({ children }: ModalProps): JSX.Element => {
-    return isOn ? (
-      <Background>
-        <Box>{children}</Box>
-      </Background>
-    ) : (
-      <></>
-    );
+  const ModalComponent = ({ children }: { children: React.ReactNode }) => {
+    return <>{isOn && <Modal>{children}</Modal>}</>;
   };
 
   return { isOn, modalOnHandler, modalOffHandler, ModalComponent };

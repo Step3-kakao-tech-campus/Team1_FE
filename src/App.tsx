@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -6,15 +6,20 @@ import { ThemeProvider } from 'styled-components';
 import { myTheme } from 'styles/myTheme';
 
 import { convertPath } from 'apis/convertURI';
+import { Provider } from 'jotai';
 
+import LogoutOnlyPrivate from 'privateRoutes/LogoutOnlyPrivate';
+import UserTypePrivate from 'privateRoutes/UserTypePrivate';
+
+import HomeIndex from 'pages/HomeIndex';
 import KakaoAuthPage from 'pages/KakaoAuthPage';
 import SignupPage from 'pages/SignupPage';
-import InvitedPage from 'pages/InvitedPage';
-import AddGroupPage from 'pages/AddGroupPage';
-import HomePrivate from 'auth/HomePrivate';
-import LogoutOnlyPrivate from 'auth/LogoutOnlyPrivate';
-import OnBoardingPage from 'pages/OnBoardingPage';
-import { Provider } from 'jotai';
+import InvitedPage from 'pages/alba/InvitedPage';
+import AddGroupPage from 'pages/admin/AddGroupPage';
+import ApplicationOpenPage from 'pages/admin/ApplicationOpenPage';
+import ApplicationClosePage from 'pages/admin/ApplicationClosePage';
+import ApplyPage from 'pages/alba/ApplyPage';
+import SelectWeekPage from 'pages/SelectWeekPage';
 
 function App(): JSX.Element {
   return (
@@ -22,21 +27,27 @@ function App(): JSX.Element {
       <Provider>
         <BrowserRouter>
           <ErrorBoundary fallback={<p>에러... app.tsx</p>}>
-            <Suspense fallback={<p>로딩... app.tsx</p>}>
-              <Routes>
-                <Route element={<HomePrivate />}>
-                  <Route path={convertPath('/')} element={<OnBoardingPage />} />
-                </Route>
+            <Routes>
+              <Route path={convertPath('/')} element={<HomeIndex />} />
 
-                <Route element={<LogoutOnlyPrivate />}>
-                  <Route path={convertPath('/signup')} element={<SignupPage />} />
-                  <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
-                </Route>
+              <Route element={<LogoutOnlyPrivate />}>
+                <Route path={convertPath('/signup')} element={<SignupPage />} />
+                <Route path={convertPath('/login/kakao')} element={<KakaoAuthPage />} />
+              </Route>
 
-                <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
+              <Route element={<UserTypePrivate when="admin" />}>
                 <Route path={convertPath('/addGroup')} element={<AddGroupPage />} />
-              </Routes>
-            </Suspense>
+                <Route path={convertPath('/newSchedule')} element={<SelectWeekPage isAdmin />} />
+                <Route path={convertPath('/newSchedule/open')} element={<ApplicationOpenPage />} />
+                <Route path={convertPath('/newSchedule/close')} element={<ApplicationClosePage />} />
+              </Route>
+
+              <Route element={<UserTypePrivate when="alba" />}>
+                <Route path={convertPath('/invited/:invitationKey')} element={<InvitedPage />} />
+                <Route path={convertPath('/apply')} element={<SelectWeekPage isAdmin={false} />} />
+                <Route path={convertPath('/apply/selectTimes')} element={<ApplyPage />} />
+              </Route>
+            </Routes>
           </ErrorBoundary>
         </BrowserRouter>
       </Provider>

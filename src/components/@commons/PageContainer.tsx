@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import HeaderNB from 'components/HeaderNB/HeaderNB';
-import BottomNB from 'components/BottomNB/BottomNB';
+import { AlbaBottomNB, AdminBottomNB } from 'components/BottomNB/BottomNB';
+import useLogin from 'hooks/useLogin';
 
 interface Props {
-  children?: any;
+  children: React.ReactNode;
   gap?: string;
   padding?: string;
   justify?: string;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar, justify }: Props): JSX.Element => {
+  const isAdmin = useLogin().getLoginState().isAdmin;
   return (
     <WholeConatiner>
       <ColumnContainer>
@@ -20,7 +22,8 @@ const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar
         <MainContainer $gap={gap} $padding={padding} $justify={justify} $bottom={!withoutBottonBar}>
           {children}
         </MainContainer>
-        {!withoutBottonBar && <BottomNB />}
+        {!withoutBottonBar && isAdmin && <AdminBottomNB />}
+        {!withoutBottonBar && !isAdmin && <AlbaBottomNB />}
       </ColumnContainer>
     </WholeConatiner>
   );
@@ -38,8 +41,7 @@ const WholeConatiner = styled.div`
 `;
 
 const ColumnContainer = styled.div`
-  left: 50%;
-  transform: translateX('100%');
+  position: relative;
 
   width: 100%;
   height: 100%;
@@ -49,7 +51,6 @@ const ColumnContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: stretch;
 `;
 
 const MainContainer = styled.main<{
@@ -59,6 +60,7 @@ const MainContainer = styled.main<{
   $bottom?: boolean;
 }>`
   flex-grow: 1;
+  position: relative;
 
   gap: ${(props) => (props.$gap ? props.$gap : '20px')};
   padding: ${(props) => (props.$padding ? props.$padding : '28px')};

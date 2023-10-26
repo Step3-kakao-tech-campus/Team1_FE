@@ -7,11 +7,13 @@ interface Props {
   color?: string;
   weight?: 'bold' | 'semiBold' | 'medium' | 'regular' | 'light';
   block?: boolean;
-  children: any;
+  align?: string;
+  margin?: string;
+  children: React.ReactNode;
 }
 
-const Text = ({ size, color, weight, block, children }: Props): JSX.Element => {
-  let fontSize = size === undefined ? 'base' : size;
+const Text = ({ size, color, weight, block, align, margin, children }: Props): JSX.Element => {
+  let fontSize = size || 'base';
   switch (size) {
     case 'sm':
       fontSize = myTheme.fonts.fontSize.sm;
@@ -27,6 +29,12 @@ const Text = ({ size, color, weight, block, children }: Props): JSX.Element => {
       break;
     case 'xl':
       fontSize = myTheme.fonts.fontSize.xl;
+      break;
+    case 'xxl':
+      fontSize = myTheme.fonts.fontSize.xxl;
+      break;
+    case 'xxxl':
+      fontSize = myTheme.fonts.fontSize.xxxl;
       break;
   }
 
@@ -50,10 +58,10 @@ const Text = ({ size, color, weight, block, children }: Props): JSX.Element => {
       break;
   }
 
-  let fontColor = color === undefined ? myTheme.color.textColor : color;
+  const fontColor = color || myTheme.color.textColor;
 
   return (
-    <StyledSpan $size={fontSize} $color={fontColor} $weight={fontweight} $block={block}>
+    <StyledSpan $size={fontSize} $color={fontColor} $weight={fontweight} $block={block} $align={align} $margin={margin}>
       {children}
     </StyledSpan>
   );
@@ -61,9 +69,19 @@ const Text = ({ size, color, weight, block, children }: Props): JSX.Element => {
 
 export default Text;
 
-const StyledSpan = styled.span<{ $size: string; $color: string; $weight: number; $block?: boolean }>`
+interface StyledProps {
+  $size: string;
+  $color: string;
+  $weight: number;
+  $block?: boolean;
+  $align?: string;
+  $margin?: string;
+}
+const StyledSpan = styled.span<StyledProps>`
   font-size: ${(props) => props.$size};
   color: ${(props) => props.$color};
   font-weight: ${(props) => props.$weight};
   display: ${(props) => (props.$block ? 'block' : null)};
+  margin: ${(props) => (props.$margin ? props.$margin : '0 auto')};
+  text-align: ${(props) => (props.$align ? props.$align : 'center')};
 `;

@@ -34,5 +34,4 @@ export const HeaderButton = styled.button`
   align-items: center;
   text-decoration: none;
   margin: 0 10px;
-  cursor: pointer;
 `;

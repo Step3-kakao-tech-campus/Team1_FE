@@ -4,6 +4,7 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     color: {
       yellow: string;
+      lightYellow: string;
       lightGray: string;
       lightBlue: string;
       gray: string;
@@ -18,8 +19,10 @@ declare module 'styled-components' {
         xs: string;
         sm: string;
         base: string;
-        xl: string;
         lg: string;
+        xl: string;
+        xxl: string;
+        xxxl: string;
       };
       fontWeight: {
         extraBold: number;
