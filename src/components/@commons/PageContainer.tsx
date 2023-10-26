@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import HeaderNB from 'components/HeaderNB/HeaderNB';
 import { AlbaBottomNB, AdminBottomNB } from 'components/BottomNB/BottomNB';
-import useLogin from 'hooks/useLogin';
+import { getLoginData } from 'utils/loginDatahandlers';
 
 interface Props {
   children: React.ReactNode;
@@ -14,7 +14,8 @@ interface Props {
 }
 
 const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar, justify }: Props): JSX.Element => {
-  const isAdmin = useLogin().getLoginState().isAdmin;
+  const isAdmin = getLoginData().isAdmin;
+
   return (
     <>
       {!withoutHeader && <HeaderNB />}
