@@ -18,7 +18,6 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
   const { data: memberList } = useQuery(['members'], getMyInfo);
 
   // 로그인 상태를 가져오는 방법도 변경되었습니다 (지금은 임시로 해뒀는데 바꿔주세요)
-  // const loginInfo = { userData: { userName: 'aa', isAdmin: true, groupName: 'aa' } };
 
   const navigate = useNavigate();
   const { logout } = useLogin('/');
@@ -39,7 +38,7 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
         <FlexContainer $wFull $gap="0" $direction="column">
           <FlexContainer $direction="row" $justify="start" $align="center">
             <Text size="lg" weight="bold" margin="0">
-              {loginInfo.token ? memberList?.data.username : '로그인이 필요합니다.'}
+              {loginInfo.token ? memberList?.data.userName : '로그인이 필요합니다.'}
             </Text>
             <Text margin="0">{loginInfo.isAdmin && 'Admin'}</Text>
           </FlexContainer>
