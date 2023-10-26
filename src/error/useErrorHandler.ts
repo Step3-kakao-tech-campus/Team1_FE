@@ -9,7 +9,7 @@ const useErrorHandler = () => {
 
   const apiErrorHandler = (error: ErrorData) => {
     if (error.response === undefined) {
-      alert('서버와의 연결이 끊어졌습니다. 다시 시도하세요');
+      alert('서버 오류');
       return;
     }
 
@@ -34,6 +34,30 @@ const useErrorHandler = () => {
       case -10007:
         // 카카오 oauth api 오류
         alert(`서버 오류`);
+        return;
+
+      case -20000:
+        // 이미 가입되었는데 가입 요청
+        alert('이미 가입되었습니다');
+        navigate(convertPath('/'));
+        return;
+
+      case -20001:
+        // 이미 그룹이 있는데 초대 승인 요청
+        alert('이미 소속된 그룹이 있습니다');
+        navigate(convertPath('/'));
+        return;
+
+      case -20002:
+        // 이미 모집 시작되었는데 모집 시작
+        alert('해당 주차 모집이 이미 시작되었습니다');
+        navigate(convertPath('/newSchedule'));
+        return;
+
+      case -20003:
+        // 이미 모집 마감되었는데 모집 마감
+        alert('해당 주차 모집이 이미 마감되었습니다');
+        navigate(convertPath('/newSchedule'));
         return;
 
       case -21000:
