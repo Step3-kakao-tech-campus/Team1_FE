@@ -1,91 +1,93 @@
-import { addNewGroup } from 'apis/manageGroup';
+import { postAddNewGroup } from 'apis/admin/manageGroup';
 import FlexContainer from 'components/@commons/FlexContainer';
-import GradationBox from 'components/@commons/GradationBox';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import useForm from 'hooks/useForm';
 import React from 'react';
-import styled from 'styled-components';
 
-interface MarketInfo {
-  marketName: string;
-  marketNumber: string;
-  mainAddress: string;
-  detailAddress: string;
-}
+import { marketNoValidator, nameValidator } from 'utils/validators';
+import DaumPostcodeEmbed from 'react-daum-postcode';
+import useModal from 'hooks/useModal';
+import InputBar from './InputBar';
+import useErrorHandler from 'error/useErrorHandler';
 
-interface Props {
-  doneStateHandler: () => void;
-}
-
-const FormSection = ({ doneStateHandler }: Props): JSX.Element => {
-  const initialInfo: MarketInfo = {
+const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JSX.Element => {
+  const initialInfo = {
     marketName: '',
     marketNumber: '',
     mainAddress: '',
     detailAddress: '',
   };
 
-  const { obj: marketInfo, formHandler } = useForm(initialInfo);
+  const { obj: marketInfo, formHandler, etcUpdateHandler } = useForm(initialInfo);
+  const { commonErrorHandler } = useErrorHandler();
   const submitHandler = (): void => {
-    addNewGroup<MarketInfo>(marketInfo)
+    postAddNewGroup(marketInfo)
       .then((res) => {
         doneStateHandler();
       })
       .catch((err) => {
-        // 에러 처리
+        commonErrorHandler(err);
       });
   };
+
+  const { modalOnHandler, ModalComponent, modalOffHandler } = useModal();
+
   return (
     <>
       <Text size="xxl" weight="semiBold">
         그룹 생성하기
       </Text>
-      <GradationBox width="100%">
-        <FlexContainer $gap="0">
-          <InputBar id="marketName" onChange={formHandler} labelName="상호명" />
-          <InputBar id="marketNumber" onChange={formHandler} labelName="사업자 번호" />
-          <InputBar id="mainAddress" onChange={formHandler} labelName="주소1" />
-          <InputBar id="detailAddress" onChange={formHandler} labelName="주소2" />
-        </FlexContainer>
-      </GradationBox>
-      <SubmitButton onClick={submitHandler}>그룹 생성하기</SubmitButton>
+
+      <FlexContainer $gap="20px" $wFull>
+        <InputBar
+          id="marketName"
+          onChange={formHandler}
+          labelName="상호명"
+          validation={nameValidator(marketInfo.marketName)}
+        />
+        <InputBar
+          id="marketNumber"
+          onChange={formHandler}
+          labelName="사업자 번호"
+          validation={marketNoValidator(marketInfo.marketNumber)}
+          inputType="number"
+        />
+        <InputBar
+          id="mainAddress"
+          onChange={formHandler}
+          labelName="주소1"
+          validation={marketInfo.mainAddress.length > 0}
+          onClick={modalOnHandler}
+          value={marketInfo.mainAddress}
+        />
+
+        <InputBar id="detailAddress" onChange={formHandler} labelName="상세 주소" validation={false} />
+      </FlexContainer>
+
+      <SubmitButton
+        onClick={submitHandler}
+        disabled={
+          !nameValidator(marketInfo.marketName) ||
+          !marketNoValidator(marketInfo.marketNumber) ||
+          marketInfo.mainAddress.length === 0
+        }
+      >
+        그룹 생성하기
+      </SubmitButton>
+
+      <ModalComponent>
+        <DaumPostcodeEmbed
+          onComplete={(data) => {
+            etcUpdateHandler(data.address, 'mainAddress');
+            modalOffHandler();
+          }}
+          autoClose
+        />
+        <SubmitButton onClick={modalOffHandler}>닫기</SubmitButton>
+      </ModalComponent>
     </>
   );
 };
 
 export default FormSection;
-
-const InputBar = ({ onChange, id, labelName }: InputProps): JSX.Element => {
-  return (
-    <InputCont $direction="row" $padding="0">
-      <Label htmlFor={id}>{labelName}</Label>
-      <Input id={id} onChange={onChange} />
-    </InputCont>
-  );
-};
-
-interface InputProps {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  id: string;
-  labelName?: string;
-}
-
-const InputCont = styled(FlexContainer)`
-  border-bottom: 1px lightgray solid;
-  height: 40px;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 100%;
-  padding-left: 8px;
-`;
-
-const Label = styled.label`
-  width: 128px;
-  display: flex;
-  align-items: center;
-  padding-left: 8px;
-  font-size: ${({ theme }) => theme.fonts.fontSize.sm};
-`;

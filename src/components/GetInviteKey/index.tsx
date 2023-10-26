@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { getInviteKey } from 'apis/groupInvite';
+import { getInviteKey } from 'apis/admin/manageGroup';
+
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
@@ -26,7 +27,7 @@ const GetInviteKey = ({ modalOffHandler }: Props): JSX.Element => {
         <Text>{inviteKeyData?.data.invitationKey}</Text>
       </Box>
       <FlexContainer $gap="10px">
-        <CopyToClipboard text={inviteKeyData?.data.invitationKey}>
+        <CopyToClipboard text={inviteKeyData?.data.invitationKey as string}>
           <SubmitButton>복사하기</SubmitButton>
         </CopyToClipboard>
         <Button onClick={() => modalOffHandler()}>닫기</Button>

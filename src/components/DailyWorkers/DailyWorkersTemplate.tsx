@@ -3,23 +3,12 @@ import FlexContainer from 'components/@commons/FlexContainer';
 
 import Text from 'components/@commons/Text';
 import { NameBox, TitleBox } from './DailyWorkersStyle';
+import { TimeWorkerListData, UserData } from 'apis/types';
 
-interface TimeData {
-  title: string;
-  workerList: Worker[];
-  startTime: string;
-  endTime: string;
-}
-
-interface Worker {
-  name: string;
-  memberId: number;
-}
-
-const DailyWorkersTemplate = ({ dailyData }: { dailyData: TimeData[] }): JSX.Element => {
+const DailyWorkersTemplate = ({ dailyData }: { dailyData: TimeWorkerListData[] | undefined }): JSX.Element => {
   return (
     <FlexContainer $direction="row" $wFull $gap="3%">
-      {dailyData.map((timeData: TimeData) => (
+      {dailyData?.map((timeData: TimeWorkerListData) => (
         <FlexContainer key={timeData.title} $wFull $gap="10px">
           <TitleBox $time={timeData.title}>
             <Text block size="lg" weight="semiBold">
@@ -30,7 +19,7 @@ const DailyWorkersTemplate = ({ dailyData }: { dailyData: TimeData[] }): JSX.Ele
             </Text>
           </TitleBox>
           <FlexContainer $gap="8px">
-            {timeData.workerList.map((w: Worker, i) => (
+            {timeData.workerList.map((w: UserData, i) => (
               <NameBox key={w.name + i}>
                 <Text>{w.name}</Text>
               </NameBox>

@@ -5,10 +5,12 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import { myTheme } from 'styles/myTheme';
-import { stringDateMove } from 'utils/stringDateMove';
+import { stringDateMoveKor } from 'utils/stringDateMove';
 import { ScrollContainer } from 'components/PageStyledComponents/admin/ApplicationClose';
 import useClose from 'hooks/admin/ApplicationClosePage/useClose';
 import useWeekSelector from 'hooks/useWeekSelector';
+import { TimeWorkerListData } from 'apis/types';
+import BorderBox from 'components/@commons/BorderBox';
 
 const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { recommendsRes, selectHandler, candidate, submitHandler } = useClose(startWeekDate);
@@ -17,22 +19,30 @@ const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): 
   return (
     <>
       <ScrollContainer>
-        {recommendsRes?.data.recommends.map((candidateData: object[][], candidateIndex: number) => (
+        {recommendsRes?.data.recommends.map((candidateData: TimeWorkerListData[][], candidateIndex: number) => (
           <FlexContainer
             $shrink="0"
             $width="32%"
             key={`후보${candidateIndex}`}
             onClick={() => selectHandler(candidateIndex)}
           >
-            <ColorBox $wFull $background={myTheme.color.lightGray}>
-              <Text margin="30px 20px">후보{candidateIndex + 1}</Text>
-            </ColorBox>
+            <BorderBox width="100%" border={candidateIndex === candidate} borderColor={myTheme.color.yellow}>
+              <ColorBox $wFull $background={myTheme.color.lightGray}>
+                <Text margin="30px 20px">후보{candidateIndex + 1}</Text>
+              </ColorBox>
+            </BorderBox>
           </FlexContainer>
         ))}
       </ScrollContainer>
       <WeekBarComponent />
 
-      <Text>{stringDateMove(startWeekDate, day)}</Text>
+      <BorderBox width="100%" border>
+        <FlexContainer $wFull $padding="16px">
+          <Text size="lg" weight="semiBold">
+            {stringDateMoveKor(startWeekDate, day)}
+          </Text>
+        </FlexContainer>
+      </BorderBox>
 
       <DailyWorkersTemplate dailyData={recommendsRes?.data.recommends[candidate][day]} />
       <SubmitButton onClick={submitHandler}>스케줄 확정하기 (그룹원에게 알림이 가요!)</SubmitButton>

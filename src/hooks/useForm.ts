@@ -32,7 +32,11 @@ const useForm = <T extends StateType>(initialStateObject: T) => {
     [obj],
   );
 
-  return { obj, formHandler, toggleHandler, selectOneHandler };
+  const etcUpdateHandler = (value: string, index: string) => {
+    const newObj = { ...obj, [index]: value };
+    setObj(newObj);
+  };
+  return { obj, formHandler, toggleHandler, selectOneHandler, etcUpdateHandler };
 };
 
 export default useForm;

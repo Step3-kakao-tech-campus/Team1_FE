@@ -5,7 +5,7 @@ import { dateToString } from 'utils/dateToString';
 
 const SetTimeTemplateSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const [y, m, d] = startWeekDate.split('-').map((e: string) => Number.parseInt(e));
-  const endDate = dateToString(new Date(y, m, d + 6));
+  const endDate = dateToString(new Date(y, m - 1, d + 6));
 
   return (
     <>

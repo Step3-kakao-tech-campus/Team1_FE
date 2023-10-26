@@ -10,7 +10,7 @@ interface Props {
 const GrayBox = ({ children }: Props): JSX.Element => {
   return (
     <FlexContainer $wFull $align="center">
-      <ColorBox $wFull $padding="50px 40px" $background={myTheme.color.lightGray}>
+      <ColorBox $wFull $padding="40px 40px" $background={myTheme.color.lightGray}>
         {children}
       </ColorBox>
     </FlexContainer>

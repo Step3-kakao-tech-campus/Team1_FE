@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { getTimeTemplate } from 'apis/adminApplication';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { getTimeTemplate } from 'apis/admin/application/open';
+import { useAtom, useSetAtom } from 'jotai';
 import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage';
-import React, { useEffect } from 'react';
+import React from 'react';
 import weekdayArray from 'utils/weekdayArray';
 
 const useTimeTemplate = (startWeekDate: string) => {
@@ -13,19 +13,20 @@ const useTimeTemplate = (startWeekDate: string) => {
   const setWeeklyData = useSetAtom(weeklyPeopleAtom);
 
   // 이미 불러온 템플릿이 없을 때 : 서버에서 기본템플릿 불러오기
-  const { data: templateRes } = useQuery(
+  const { data } = useQuery(
     ['getTimeTemplate', startWeekDate],
     () => getTimeTemplate({ startWeekDate: startWeekDate }),
-    { suspense: true, enabled: timeTemplate.length === 0 },
+    {
+      suspense: true,
+      enabled: timeTemplate.length === 0,
+      onSuccess: (data) => {
+        if (timeTemplate.length === 0) {
+          setTimeTemplate(data.template);
+          setWeeklyData(weekdayArray.map(() => data.template.map(() => 0)));
+        }
+      },
+    },
   );
-
-  // 응답 값을 전역상태에 적용 (템플릿 / 인원수)
-  useEffect(() => {
-    if (timeTemplate.length === 0) {
-      setTimeTemplate(templateRes?.template);
-      setWeeklyData(weekdayArray.map(() => templateRes?.template.map(() => 0)));
-    }
-  }, [templateRes]);
 
   /* 2. 업데이트 */
 
@@ -56,6 +57,11 @@ const useTimeTemplate = (startWeekDate: string) => {
   const submitHandler = () => {
     const removeEmptyTime = timeTemplate.filter((e) => e.title.length > 0);
     if (removeEmptyTime.length === 0) return;
+    if (removeEmptyTime.some((e) => e.startTime === e.endTime)) {
+      alert('시간을 올바르게 입력하세요');
+      return;
+    }
+
     setTimeTemplate(removeEmptyTime);
     setStep(2);
   };
