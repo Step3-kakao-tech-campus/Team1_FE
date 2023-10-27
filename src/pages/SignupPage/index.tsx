@@ -41,8 +41,11 @@ const signupPage = (): JSX.Element => {
   const code = state.code;
 
   const signupBtnHandler = () => {
+    if (userInfo.isAdmin === null) {
+      throw { name: 'clientError' };
+    }
     signup({
-      isAdmin: userInfo.isAdmin as boolean,
+      isAdmin: userInfo.isAdmin,
       userName: userInfo.userName,
       code: code,
     });
