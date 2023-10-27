@@ -7,11 +7,9 @@ import Text from 'components/@commons/Text';
 import GetInviteKey from 'components/modals/GetInviteKey';
 import useModal from 'hooks/useModal';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const AdminNoGroupPage = (): JSX.Element => {
-  const navigate = useNavigate();
-
   return (
     <PageContainer withoutBottonBar>
       <FlexContainer $wFull>
@@ -23,8 +21,11 @@ export const AdminNoGroupPage = (): JSX.Element => {
               </Text>
               <Text size="xl">그룹이 없습니다</Text>
             </FlexContainer>
-            <SubmitButton onClick={() => navigate(convertPath('/addGroup'))}>그룹 생성하기</SubmitButton>
-          </FlexContainer>{' '}
+
+            <Link to={convertPath('/addGroup')}>
+              <SubmitButton>그룹 생성하기</SubmitButton>
+            </Link>
+          </FlexContainer>
         </GrayBox>
       </FlexContainer>
     </PageContainer>
