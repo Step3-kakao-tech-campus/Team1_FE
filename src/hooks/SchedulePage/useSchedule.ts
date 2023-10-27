@@ -7,7 +7,7 @@ import { getLoginData } from 'utils/loginDatahandlers';
 
 const useSchedule = () => {
   const nowMember = useAtomValue(memberAtom);
-  const { year, month } = { ...useAtomValue(monthAtom) };
+  const { year, month } = useAtomValue(monthAtom);
 
   const setWorkTime = useSetAtom(workTimeAtom);
   const isAdmin = getLoginData().isAdmin;
@@ -33,6 +33,10 @@ const useSchedule = () => {
   const dateOnClick = (isFixed: boolean, date: string) => {
     setSelectedDate({ date: date, isFixed: isFixed });
   };
+
+  React.useEffect(() => {
+    setSelectedDate({ date: '', isFixed: false });
+  }, [year, month]);
 
   return { scheduleData, selectedDate, dateOnClick };
 };
