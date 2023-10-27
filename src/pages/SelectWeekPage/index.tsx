@@ -19,10 +19,7 @@ const SelectWeekPage = ({ isAdmin }: { isAdmin: boolean }): JSX.Element => {
         <Suspense fallback={<Skeleton aspectRatio="1.54" isDeffered />}>
           <StatusCalendar />
 
-          <FlexContainer $wFull>
-            {isAdmin && <AdminDetailSect />}
-            {!isAdmin && <AlbaSubmitButton />}
-          </FlexContainer>
+          <FlexContainer $wFull>{isAdmin ? <AdminDetailSect /> : <AlbaSubmitButton />}</FlexContainer>
         </Suspense>
       </FlexContainer>
     </PageContainer>
