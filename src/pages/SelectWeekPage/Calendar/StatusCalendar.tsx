@@ -14,7 +14,7 @@ const StatusCalendar = (): JSX.Element => {
   const isAdmin = getLoginData().isAdmin;
   const [selectedWeek, setSelectedWeek] = useAtom(selectedWeekAtom);
   const [nowMonth] = useAtom(weekStatusMonthAtom);
-  const { year, month } = { ...nowMonth };
+  const { year, month } = nowMonth;
 
   const { data: weekStatusData } = useQuery(
     ['getWeekProgress', year, month, 1],
@@ -40,6 +40,10 @@ const StatusCalendar = (): JSX.Element => {
         return '모집 마감';
     }
   };
+
+  React.useEffect(() => {
+    setSelectedWeek({ startWeekDate: '', weekStatus: '' });
+  }, [year, month]);
 
   return (
     <MonthBox $wFull>

@@ -8,7 +8,7 @@ const useWeekSelector = (initial: number) => {
 
   const selectDayHandler = useCallback(
     (i: number) => {
-      setDay((prev) => i);
+      setDay(i);
     },
     [day],
   );

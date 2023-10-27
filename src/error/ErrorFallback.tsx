@@ -32,7 +32,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }: Props) => {
     );
   }
 
-  const code = error.response?.data?.code as number;
+  const code = error.response?.data?.code || 0;
 
   switch (code) {
     case -10000:

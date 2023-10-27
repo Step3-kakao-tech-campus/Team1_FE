@@ -8,7 +8,7 @@ import useWeekSelector from 'hooks/useWeekSelector';
 import EditAmountForm from './EditAmountForm';
 
 const SetPeopleSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
-  const { timeTemplate, submitHandler, goPrevHandler } = usePeopleAmount(startWeekDate);
+  const { timeTemplate, submitStartHandler, goPrevHandler } = usePeopleAmount(startWeekDate);
   const { day, WeekBarComponent } = useWeekSelector(0);
 
   return (
@@ -33,7 +33,7 @@ const SetPeopleSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Ele
           </BorderBox>
         ))}
       </FlexContainer>
-      <SubmitButton onClick={submitHandler}>스케줄 모집 시작하기 (그룹원에게 알림이 가요!)</SubmitButton>
+      <SubmitButton onClick={submitStartHandler}>스케줄 모집 시작하기 (그룹원에게 알림이 가요!)</SubmitButton>
     </FlexContainer>
   );
 };

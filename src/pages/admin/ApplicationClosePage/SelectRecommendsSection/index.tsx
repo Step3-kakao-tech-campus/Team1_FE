@@ -5,26 +5,25 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import { myTheme } from 'styles/myTheme';
-import { stringDateMoveKor } from 'utils/stringDateMove';
+import { stringDateMoveKor } from 'utils/dateToString';
 import { ScrollContainer } from 'components/PageStyledComponents/admin/ApplicationClose';
 import useClose from 'hooks/admin/ApplicationClosePage/useClose';
 import useWeekSelector from 'hooks/useWeekSelector';
-import { TimeWorkerListData } from 'apis/types';
 import BorderBox from 'components/@commons/BorderBox';
 
 const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
-  const { recommendsRes, selectHandler, candidate, submitHandler } = useClose(startWeekDate);
+  const { recommendsRes, setCandidate, candidate, submitHandler } = useClose(startWeekDate);
   const { day, WeekBarComponent } = useWeekSelector(0);
 
   return (
     <>
       <ScrollContainer>
-        {recommendsRes?.data.recommends.map((candidateData: TimeWorkerListData[][], candidateIndex: number) => (
+        {recommendsRes?.data.recommends.map((e, candidateIndex: number) => (
           <FlexContainer
             $shrink="0"
             $width="32%"
             key={`후보${candidateIndex}`}
-            onClick={() => selectHandler(candidateIndex)}
+            onClick={() => setCandidate(candidateIndex)}
           >
             <BorderBox width="100%" border={candidateIndex === candidate} borderColor={myTheme.color.yellow}>
               <ColorBox $wFull $background={myTheme.color.lightGray}>

@@ -15,9 +15,6 @@ const useClose = (startWeekDate: string) => {
 
   // 선택된 후보, 후보 선택시 상태 업데이트
   const [candidate, setCandidate] = useState(0);
-  const selectHandler = (candidateNo: number) => {
-    setCandidate(candidateNo);
-  };
 
   // 제출 클릭시 post 요청
   const navigate = useNavigate();
@@ -32,7 +29,7 @@ const useClose = (startWeekDate: string) => {
       });
   };
 
-  return { recommendsRes, selectHandler, candidate, submitHandler };
+  return { recommendsRes, candidate, setCandidate, submitHandler };
 };
 
 export default useClose;

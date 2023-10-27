@@ -15,12 +15,12 @@ interface Props {
 
 const CalenderOutter = ({ monthDataAtom }: Props): JSX.Element => {
   const [nowMonth, setNowMonth] = useAtom(monthDataAtom);
-  const { year, month } = { ...nowMonth };
+  const { year, month } = nowMonth;
 
   const monthMoveHandler = (dm: number) => {
     const newDateObj = new Date(nowMonth.year, nowMonth.month + dm, 1);
     const newObj = { year: newDateObj.getFullYear(), month: newDateObj.getMonth() };
-    setNowMonth((prev) => newObj);
+    setNowMonth(newObj);
   };
 
   return (

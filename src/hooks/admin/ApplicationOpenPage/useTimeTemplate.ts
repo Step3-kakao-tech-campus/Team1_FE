@@ -31,7 +31,7 @@ const useTimeTemplate = (startWeekDate: string) => {
   /* 2. 업데이트 */
 
   // 시간대 이름/시간 변경 (입력 값 반영)
-  const formChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, timeIndex: number): void => {
+  const updateTimeHandler = (e: React.ChangeEvent<HTMLInputElement>, timeIndex: number): void => {
     setTimeTemplate((prev) =>
       prev.map((object, index) => (timeIndex !== index ? object : { ...object, [e.target.id]: e.target.value })),
     );
@@ -53,8 +53,8 @@ const useTimeTemplate = (startWeekDate: string) => {
 
   /* 3. 다음 단계로 넘어가기 : 데이터 저장 */
 
-  const [, setStep] = useAtom(openStepAtom);
-  const submitHandler = () => {
+  const setStep = useSetAtom(openStepAtom);
+  const goNextHandler = () => {
     const removeEmptyTime = timeTemplate.filter((e) => e.title.length > 0);
     if (removeEmptyTime.length === 0) return;
     if (removeEmptyTime.some((e) => e.startTime === e.endTime)) {
@@ -63,10 +63,10 @@ const useTimeTemplate = (startWeekDate: string) => {
     }
 
     setTimeTemplate(removeEmptyTime);
-    setStep(2);
+    setStep('setAmount');
   };
 
-  return { timeTemplate, formChangeHandler, deleteHandler, addHandler, submitHandler };
+  return { timeTemplate, updateTimeHandler, deleteHandler, addHandler, goNextHandler };
 };
 
 export default useTimeTemplate;

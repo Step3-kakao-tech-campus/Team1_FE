@@ -8,6 +8,8 @@ const useErrorHandler = () => {
   const navigate = useNavigate();
 
   const apiErrorHandler = (error: ErrorData) => {
+    console.log(error);
+
     if (error.response === undefined) {
       alert('서버 오류');
       return;

@@ -5,18 +5,17 @@ import Text from 'components/@commons/Text';
 import useApply from 'hooks/alba/useApply';
 import weekdayArray from 'utils/weekdayArray';
 import SubmitButton from 'components/@commons/SubmitButton';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
 import { myTheme } from 'styles/myTheme';
-import { stringDateMoveKor } from 'utils/stringDateMove';
+import { stringDateMoveKor } from 'utils/dateToString';
 
 const PreviewSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { setStep, worktimeIdProcessor } = useApply(startWeekDate);
-  const navigate = useNavigate();
 
   return (
     <FlexContainer $wFull $gap="36px">
-      <button onClick={() => setStep(1)}> 편집하기 </button>
+      <button onClick={() => setStep('checkTime')}> 편집하기 </button>
       <FlexContainer $wFull>
         {weekdayArray.map((weekday, dayIndex) => (
           <BorderBox gradation key={`${dayIndex}요일`}>
@@ -39,7 +38,10 @@ const PreviewSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Eleme
           </BorderBox>
         ))}
       </FlexContainer>
-      <SubmitButton onClick={() => navigate(convertPath('/'))}>제출하기</SubmitButton>
+
+      <Link to={convertPath('/')}>
+        <SubmitButton>제출하기</SubmitButton>
+      </Link>
     </FlexContainer>
   );
 };
