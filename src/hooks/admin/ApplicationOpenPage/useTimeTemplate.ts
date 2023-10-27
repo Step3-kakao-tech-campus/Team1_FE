@@ -53,7 +53,7 @@ const useTimeTemplate = (startWeekDate: string) => {
 
   /* 3. 다음 단계로 넘어가기 : 데이터 저장 */
 
-  const [, setStep] = useAtom(openStepAtom);
+  const setStep = useSetAtom(openStepAtom);
   const submitHandler = () => {
     const removeEmptyTime = timeTemplate.filter((e) => e.title.length > 0);
     if (removeEmptyTime.length === 0) return;

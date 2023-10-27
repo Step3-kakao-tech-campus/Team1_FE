@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage';
 import { postOpenApplication } from 'apis/admin/application/open';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ const usePeopleAmount = (startWeekDate: string) => {
   const [weeklyAmount, setWeeklyAmount] = useAtom(weeklyPeopleAtom);
 
   // 이전 단계로 넘어가기
-  const [, setStep] = useAtom(openStepAtom);
+  const setStep = useSetAtom(openStepAtom);
   const goPrevHandler = () => {
     setStep(1);
   };
