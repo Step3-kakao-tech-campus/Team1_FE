@@ -22,12 +22,11 @@ const CalendarDayBox = ({ dateString, timeList, onClick, isSelected }: DayBoxPro
         </Text>
       </DateCircle>
       <BadgeCont>
-        {!!timeList &&
-          timeList.map((t) => (
-            <Badge key={t} $time={t}>
-              <BadgeText>{t}</BadgeText>
-            </Badge>
-          ))}
+        {timeList?.map((t) => (
+          <Badge key={t} $time={t}>
+            <BadgeText>{t}</BadgeText>
+          </Badge>
+        ))}
       </BadgeCont>
     </OutterDayBox>
   );
