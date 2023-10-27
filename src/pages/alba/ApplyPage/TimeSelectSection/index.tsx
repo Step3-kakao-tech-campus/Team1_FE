@@ -3,7 +3,7 @@ import DailySelect from './DailySelect';
 import FlexContainer from 'components/@commons/FlexContainer';
 import useWeekSelector from 'hooks/useWeekSelector';
 import Text from 'components/@commons/Text';
-import { stringDateMoveKor } from 'utils/stringDateMove';
+import { stringDateMoveKor } from 'utils/dateToString';
 import BorderBox from 'components/@commons/BorderBox';
 
 const TimeSelectSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {

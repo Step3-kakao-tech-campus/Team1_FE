@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import DailyWorkersTemplate from 'components/DailyWorkers/DailyWorkersTemplate';
 import useWeekSelector from 'hooks/useWeekSelector';
-import { stringDateMove } from 'utils/stringDateMove';
+import { stringDateMove } from 'utils/dateToString';
 import { getDailyWorkers } from 'apis/schedule/getDailyWorkers';
 
 const ClosedDetail = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {

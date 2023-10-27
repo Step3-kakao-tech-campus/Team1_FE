@@ -5,7 +5,7 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import { myTheme } from 'styles/myTheme';
-import { stringDateMoveKor } from 'utils/stringDateMove';
+import { stringDateMoveKor } from 'utils/dateToString';
 import { ScrollContainer } from 'components/PageStyledComponents/admin/ApplicationClose';
 import useClose from 'hooks/admin/ApplicationClosePage/useClose';
 import useWeekSelector from 'hooks/useWeekSelector';

@@ -8,7 +8,7 @@ import SubmitButton from 'components/@commons/SubmitButton';
 import { Link } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
 import { myTheme } from 'styles/myTheme';
-import { stringDateMoveKor } from 'utils/stringDateMove';
+import { stringDateMoveKor } from 'utils/dateToString';
 
 const PreviewSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { setStep, worktimeIdProcessor } = useApply(startWeekDate);
