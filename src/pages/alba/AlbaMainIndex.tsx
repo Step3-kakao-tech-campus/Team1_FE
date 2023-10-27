@@ -15,7 +15,7 @@ const AlbaMainIndex = (): JSX.Element => {
   return (
     <>
       {!hasGroup && <AlbaNoGroupPage />}
-      {hasGroup && <SchedulePage members={membersData?.data.members as UserData[]} />}
+      {hasGroup && <SchedulePage members={membersData?.data.members || []} />}
     </>
   );
 };
