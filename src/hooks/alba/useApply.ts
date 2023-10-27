@@ -28,7 +28,7 @@ const useApply = (startWeekDate: string) => {
   /* -------------- 2. 시간 선택 섹션 -------------- */
 
   // 시간 체크 입력값 반영
-  const selectHandler = (timeObject: SelectedTimeData, timeIndex: number, nowDay: number) => {
+  const selectTimeHandler = (timeObject: SelectedTimeData, timeIndex: number, nowDay: number) => {
     const newDaily = weeklySelect[nowDay].map((selected: SelectedTimeData, i) =>
       i === timeIndex ? { ...timeObject, isChecked: !timeObject.isChecked } : selected,
     );
@@ -42,7 +42,7 @@ const useApply = (startWeekDate: string) => {
   const nextStep = useMutation(putApply, {
     onSuccess: () => setStep('preview'),
   });
-  const previewHandler = () => {
+  const goPreviewHandler = () => {
     nextStep.mutate({ weekStartDate: startWeekDate, apply: weeklySelect });
   };
 
@@ -70,8 +70,8 @@ const useApply = (startWeekDate: string) => {
   return {
     weeklySelect,
     findTimeData,
-    selectHandler,
-    previewHandler,
+    selectTimeHandler,
+    goPreviewHandler,
     putSaveHandler,
     setStep,
     worktimeIdProcessor,

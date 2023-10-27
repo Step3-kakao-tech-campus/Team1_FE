@@ -8,7 +8,7 @@ import SubmitButton from 'components/@commons/SubmitButton';
 import TimeSelectSkeleton from 'components/Suspenses/PageSkeletons/TimeSelectSkeleton';
 
 const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: string }): JSX.Element => {
-  const { weeklySelect, findTimeData, selectHandler, previewHandler, putSaveHandler, isLoading } =
+  const { weeklySelect, findTimeData, selectTimeHandler, goPreviewHandler, putSaveHandler, isLoading } =
     useApply(startWeekDate);
 
   // 요일 바뀔 때마다 서버에 저장
@@ -30,7 +30,7 @@ const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: strin
               <FlexContainer $wFull $padding="28px" $direction="row" $align="center">
                 <CheckBox
                   type="checkbox"
-                  onClick={() => selectHandler(timeObject, timeIndex, day)}
+                  onClick={() => selectTimeHandler(timeObject, timeIndex, day)}
                   checked={timeObject.isChecked}
                   readOnly
                 />
@@ -45,7 +45,7 @@ const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: strin
           </label>
         ))}
       </FlexContainer>
-      <SubmitButton onClick={previewHandler}>미리보기</SubmitButton>
+      <SubmitButton onClick={goPreviewHandler}>미리보기</SubmitButton>
     </>
   );
 };
