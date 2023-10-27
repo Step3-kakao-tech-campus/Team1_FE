@@ -31,8 +31,7 @@ const useSchedule = () => {
 
   const [selectedDate, setSelectedDate] = useAtom(dateAtom);
   const dateOnClick = (isFixed: boolean, date: string) => {
-    const newObj = { date: date, isFixed: isFixed };
-    setSelectedDate(newObj);
+    setSelectedDate({ date: date, isFixed: isFixed });
   };
 
   return { scheduleData, selectedDate, dateOnClick };
