@@ -4,3 +4,7 @@ export const dateToString = (dateObject: Date) => {
   const date = String(dateObject.getDate()).padStart(2, '0');
   return `${year}-${month}-${date}`;
 };
+
+export const stringDateIsToday = (stringDate: string) => {
+  return stringDate === dateToString(new Date());
+};
