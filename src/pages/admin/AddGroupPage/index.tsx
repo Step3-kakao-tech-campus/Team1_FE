@@ -13,7 +13,7 @@ const AddGroupPage = (): JSX.Element => {
 
   return (
     <PageContainer withoutHeader withoutBottonBar padding="0 40px" gap="52px">
-      {!isDone && <FormSection doneStateHandler={() => setIsDone((prev) => true)} />}
+      {!isDone && <FormSection doneStateHandler={() => setIsDone(true)} />}
       {isDone && <DoneSection />}
     </PageContainer>
   );

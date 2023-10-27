@@ -24,7 +24,7 @@ const useSchedule = () => {
       suspense: true,
       enabled: nowMember.isSelected === true,
       onSuccess: (scheduleData) => {
-        setWorkTime((prev) => ({ ...scheduleData?.totalTime }));
+        setWorkTime({ ...scheduleData?.totalTime });
       },
     },
   );
@@ -32,7 +32,7 @@ const useSchedule = () => {
   const [selectedDate, setSelectedDate] = useAtom(dateAtom);
   const dateOnClick = (isFixed: boolean, date: string) => {
     const newObj = { date: date, isFixed: isFixed };
-    setSelectedDate((prev) => newObj);
+    setSelectedDate(newObj);
   };
 
   return { scheduleData, selectedDate, dateOnClick };

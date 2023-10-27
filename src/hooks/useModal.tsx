@@ -13,7 +13,7 @@ const useModal = () => {
   const setModal = useSetAtom(modalAtom);
 
   const modalOnHandler = (content: React.ReactNode) => {
-    setModal((prev) => ({ isOn: true, content: content }));
+    setModal({ isOn: true, content: content });
   };
 
   const modalOffHandler = () => {

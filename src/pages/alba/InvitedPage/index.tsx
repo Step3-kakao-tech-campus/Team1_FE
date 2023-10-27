@@ -17,7 +17,7 @@ const InvitedPage = (): JSX.Element => {
       {isDone ? (
         <JoinDone />
       ) : (
-        <InvitationSection invitationKey={invitationKey} afterJoinHandler={() => setisDone((prev) => true)} />
+        <InvitationSection invitationKey={invitationKey} afterJoinHandler={() => setisDone(true)} />
       )}
     </PageContainer>
   );

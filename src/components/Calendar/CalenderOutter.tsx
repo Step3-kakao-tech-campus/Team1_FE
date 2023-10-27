@@ -20,7 +20,7 @@ const CalenderOutter = ({ monthDataAtom }: Props): JSX.Element => {
   const monthMoveHandler = (dm: number) => {
     const newDateObj = new Date(nowMonth.year, nowMonth.month + dm, 1);
     const newObj = { year: newDateObj.getFullYear(), month: newDateObj.getMonth() };
-    setNowMonth((prev) => newObj);
+    setNowMonth(newObj);
   };
 
   return (
