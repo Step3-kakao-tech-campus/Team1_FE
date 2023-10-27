@@ -7,7 +7,7 @@ import SetTimeSection from './SetTimeTemplateSection';
 import { TimeData } from 'apis/types';
 
 export const timeTemplateAtom = atom<TimeData[]>([]);
-export const weeklyPeopleAtom = atom<number[][]>([[], [], [], [], [], [], []]);
+export const weeklyPeopleAtom = atom<number[][]>([new Array(7).fill([])]);
 export const openStepAtom = atom(1);
 
 const ApplicationOpenPage = (): JSX.Element => {
