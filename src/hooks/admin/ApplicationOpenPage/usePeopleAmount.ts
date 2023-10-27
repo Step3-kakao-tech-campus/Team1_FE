@@ -19,10 +19,9 @@ const usePeopleAmount = (startWeekDate: string) => {
   // 서버에 저장 (모집 시작 요청)
 
   const [timeTemplate, setTimeTemplate] = useAtom(timeTemplateAtom);
-
   const { apiErrorHandler } = useErrorHandler();
   const navigate = useNavigate();
-  const submitHandler = () => {
+  const submitStartHandler = () => {
     postOpenApplication({
       weeklyAmount: weeklyAmount,
       timeTemplate: timeTemplate,
@@ -43,7 +42,7 @@ const usePeopleAmount = (startWeekDate: string) => {
 
   return {
     timeTemplate,
-    submitHandler,
+    submitStartHandler,
     goPrevHandler,
     weeklyAmount,
   };
