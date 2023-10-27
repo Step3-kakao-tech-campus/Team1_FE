@@ -8,7 +8,7 @@ import PreviewSection from './PreviewSection';
 import { SelectedTimeData } from 'apis/types';
 
 export const weeklySelectAtom = atom<SelectedTimeData[][]>(weekdayArray.map(() => []));
-export const applyStepAtom = atom(1);
+export const applyStepAtom = atom<'checkTime' | 'preview'>('checkTime');
 
 const ApplyPage = (): JSX.Element => {
   const state = useLocation().state;
@@ -20,8 +20,8 @@ const ApplyPage = (): JSX.Element => {
 
   return (
     <PageContainer justify="start">
-      {step === 1 && <TimeSelectSection startWeekDate={startWeekDate} />}
-      {step === 2 && <PreviewSection startWeekDate={startWeekDate} />}
+      {step === 'checkTime' && <TimeSelectSection startWeekDate={startWeekDate} />}
+      {step === 'preview' && <PreviewSection startWeekDate={startWeekDate} />}
     </PageContainer>
   );
 };

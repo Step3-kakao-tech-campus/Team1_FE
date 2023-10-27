@@ -40,7 +40,7 @@ const useApply = (startWeekDate: string) => {
   // 미리보기 버튼 클릭
   const setStep = useSetAtom(applyStepAtom);
   const nextStep = useMutation(putApply, {
-    onSuccess: () => setStep(2),
+    onSuccess: () => setStep('preview'),
   });
   const previewHandler = () => {
     nextStep.mutate({ weekStartDate: startWeekDate, apply: weeklySelect });

@@ -15,7 +15,7 @@ const PreviewSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Eleme
 
   return (
     <FlexContainer $wFull $gap="36px">
-      <button onClick={() => setStep(1)}> 편집하기 </button>
+      <button onClick={() => setStep('checkTime')}> 편집하기 </button>
       <FlexContainer $wFull>
         {weekdayArray.map((weekday, dayIndex) => (
           <BorderBox gradation key={`${dayIndex}요일`}>
