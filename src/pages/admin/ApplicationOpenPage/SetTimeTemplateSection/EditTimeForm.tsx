@@ -11,7 +11,7 @@ import { myTheme } from 'styles/myTheme';
 import { TimeData } from 'apis/types';
 
 const EditTimeForm = ({ startWeekDate }: { startWeekDate: string }) => {
-  const { timeTemplate, formChangeHandler, deleteHandler, addHandler, submitHandler } = useTimeTemplate(startWeekDate);
+  const { timeTemplate, updateTimeHandler, deleteHandler, addHandler, goNextHandler } = useTimeTemplate(startWeekDate);
 
   return (
     <>
@@ -22,7 +22,7 @@ const EditTimeForm = ({ startWeekDate }: { startWeekDate: string }) => {
               <InputTitle
                 id="title"
                 value={time.title}
-                onChange={(e) => formChangeHandler(e, i)}
+                onChange={(e) => updateTimeHandler(e, i)}
                 placeholder="시간대 이름을 입력하세요"
               />
               <ButtonContainer>
@@ -31,15 +31,15 @@ const EditTimeForm = ({ startWeekDate }: { startWeekDate: string }) => {
             </FlexContainer>
 
             <FlexContainer $direction="row">
-              <InputTime id="startTime" type="time" value={time.startTime} onChange={(e) => formChangeHandler(e, i)} />
+              <InputTime id="startTime" type="time" value={time.startTime} onChange={(e) => updateTimeHandler(e, i)} />
               <Text margin="0">~</Text>
-              <InputTime id="endTime" type="time" value={time.endTime} onChange={(e) => formChangeHandler(e, i)} />
+              <InputTime id="endTime" type="time" value={time.endTime} onChange={(e) => updateTimeHandler(e, i)} />
             </FlexContainer>
           </FlexContainer>
         </ColorBox>
       ))}
       <AddButton onClick={addHandler} />
-      <SubmitButton onClick={submitHandler}>요일별 모집 인원 설정하기</SubmitButton>
+      <SubmitButton onClick={goNextHandler}>요일별 모집 인원 설정하기</SubmitButton>
     </>
   );
 };
