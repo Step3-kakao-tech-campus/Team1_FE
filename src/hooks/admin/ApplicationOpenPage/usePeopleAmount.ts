@@ -13,7 +13,7 @@ const usePeopleAmount = (startWeekDate: string) => {
   // 이전 단계로 넘어가기
   const setStep = useSetAtom(openStepAtom);
   const goPrevHandler = () => {
-    setStep(1);
+    setStep('setTime');
   };
 
   // 서버에 저장 (모집 시작 요청)
@@ -33,7 +33,7 @@ const usePeopleAmount = (startWeekDate: string) => {
 
         // 상태 초기화
         setWeeklyAmount([[], [], [], [], [], [], []]);
-        setStep(1);
+        setStep('setTime');
         setTimeTemplate([]);
       })
       .catch((err) => {

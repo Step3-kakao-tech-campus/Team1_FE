@@ -63,7 +63,7 @@ const useTimeTemplate = (startWeekDate: string) => {
     }
 
     setTimeTemplate(removeEmptyTime);
-    setStep(2);
+    setStep('setAmount');
   };
 
   return { timeTemplate, formChangeHandler, deleteHandler, addHandler, submitHandler };

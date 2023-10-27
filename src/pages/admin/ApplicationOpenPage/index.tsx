@@ -8,7 +8,7 @@ import { TimeData } from 'apis/types';
 
 export const timeTemplateAtom = atom<TimeData[]>([]);
 export const weeklyPeopleAtom = atom<number[][]>([new Array(7).fill([])]);
-export const openStepAtom = atom(1);
+export const openStepAtom = atom<'setTime' | 'setAmount'>('setTime');
 
 const ApplicationOpenPage = (): JSX.Element => {
   const state = useLocation().state;
@@ -20,8 +20,8 @@ const ApplicationOpenPage = (): JSX.Element => {
 
   return (
     <PageContainer justify="start">
-      {step === 1 && <SetTimeSection startWeekDate={startWeekDate} />}
-      {step === 2 && <SetPeopleSection startWeekDate={startWeekDate} />}
+      {step === 'setTime' && <SetTimeSection startWeekDate={startWeekDate} />}
+      {step === 'setAmount' && <SetPeopleSection startWeekDate={startWeekDate} />}
     </PageContainer>
   );
 };
