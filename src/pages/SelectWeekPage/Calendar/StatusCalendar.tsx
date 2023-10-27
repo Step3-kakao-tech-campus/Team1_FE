@@ -41,6 +41,10 @@ const StatusCalendar = (): JSX.Element => {
     }
   };
 
+  React.useEffect(() => {
+    setSelectedWeek({ startWeekDate: '', weekStatus: '' });
+  }, [year, month]);
+
   return (
     <MonthBox $wFull>
       {weekStatusData?.table.map((weekObj: WeekStatusData, i) => (
