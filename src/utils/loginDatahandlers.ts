@@ -12,6 +12,7 @@ export const saveLoginData = (token: string, userData: UserDataType) => {
 
 export const removeLoginData = () => {
   sessionStorage.removeItem('login');
+  location.reload();
 };
 
 const defaultLoginState = {
