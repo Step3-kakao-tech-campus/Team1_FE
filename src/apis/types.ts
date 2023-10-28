@@ -4,6 +4,10 @@ export interface TimeData {
   endTime: string;
 }
 
+export interface TimeWithIdData extends TimeData {
+  worktimeId: number;
+}
+
 export interface TimeWorkerListData extends TimeData {
   workerList: UserData[];
 }
