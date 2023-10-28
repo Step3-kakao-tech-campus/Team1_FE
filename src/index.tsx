@@ -3,11 +3,6 @@ import ReactDOM from 'react-dom/client';
 import 'styles/index.css';
 import App from 'App';
 
-if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('./mocks/browser');
-  worker.start();
-}
-
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
