@@ -4,6 +4,7 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
 import { NameBox, TitleBox } from './DailyWorkersStyle';
 import { TimeWorkerListData, UserData } from 'apis/types';
+import { strTimeProcessor } from 'utils/strTimeProcessor';
 
 const DailyWorkersTemplate = ({ dailyData }: { dailyData: TimeWorkerListData[] | undefined }): JSX.Element => {
   return (
@@ -15,7 +16,7 @@ const DailyWorkersTemplate = ({ dailyData }: { dailyData: TimeWorkerListData[] |
               {timeData.title + ' (' + timeData.workerList.length + ')'}
             </Text>
             <Text>
-              {timeData.startTime.slice(0, -3)} ~ {timeData.endTime.slice(0, -3)}
+              {strTimeProcessor(timeData.startTime)} ~ {strTimeProcessor(timeData.endTime)}
             </Text>
           </TitleBox>
           <FlexContainer $gap="8px">
