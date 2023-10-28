@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 export const handlers = [
-  rest.get('/login', (req, res, ctx) => {
+  rest.get('/group', (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -21,5 +21,8 @@ export const handlers = [
         ],
       }),
     );
+  }),
+  rest.get('/group/invitation', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ invitationKey: 'abcde' }));
   }),
 ];
