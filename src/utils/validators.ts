@@ -17,12 +17,3 @@ export const marketNoValidator = (string: string) => {
   const regex = /^[0-9]{10}$/;
   return regex.test(string);
 };
-
-export const signupValidator = (userInfo: Info): boolean => {
-  return userInfo.isAdmin !== null && nameValidator(userInfo.userName) && userInfo.agreement === true;
-};
-interface Info {
-  userName: string;
-  agreement: boolean;
-  isAdmin: boolean | null;
-}
