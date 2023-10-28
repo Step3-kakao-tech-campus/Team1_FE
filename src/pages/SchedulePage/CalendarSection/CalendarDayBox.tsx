@@ -3,14 +3,14 @@ import { Badge, BadgeCont, BadgeText, BorderDayBox, DateCircle, OutterDayBox } f
 import Text from 'components/@commons/Text';
 import { stringDateIsToday } from 'utils/dateToString';
 
-interface DayBoxProps {
+interface Props {
   dateString: string;
   timeList: string[] | null;
   onClick: React.MouseEventHandler<HTMLDivElement>;
   isSelected: boolean;
 }
 
-const CalendarDayBox = ({ dateString, timeList, onClick, isSelected }: DayBoxProps): JSX.Element => {
+const CalendarDayBox = ({ dateString, timeList, onClick, isSelected }: Props): JSX.Element => {
   const date = Number.parseInt(dateString.split('-')[2]);
 
   return (

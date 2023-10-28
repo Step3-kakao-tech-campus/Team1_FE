@@ -31,7 +31,7 @@ const DailyWorkers = (): JSX.Element => {
 
   return (
     <>
-      <DailyWorkersTemplate dailyData={scheduleResponse?.data.schedule} />
+      <DailyWorkersTemplate dailyData={scheduleResponse?.schedule} />
       {!isAdmin && <SubmitButton>대타를 구하고 싶어요</SubmitButton>}
     </>
   );

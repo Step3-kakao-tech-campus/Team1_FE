@@ -3,19 +3,15 @@ import Text from 'components/@commons/Text';
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props<T> {
+interface Props {
   selectOneHandler: (event: React.MouseEvent<HTMLElement>, value: boolean) => void;
-  userInfo: T;
-}
-
-interface UserType {
   isAdmin: boolean | null;
 }
 
-const SelectTypeSection = <T extends UserType>({ selectOneHandler, userInfo }: Props<T>): JSX.Element => {
+const SelectTypeSection = ({ selectOneHandler, isAdmin }: Props): JSX.Element => {
   return (
     <FlexContainer $direction="row" $wFull={true} $padding="20px 40px">
-      <Button id="isAdmin" onClick={(e) => selectOneHandler(e, true)} $isSelected={userInfo.isAdmin === true}>
+      <Button id="isAdmin" onClick={(e) => selectOneHandler(e, true)} $isSelected={isAdmin === true}>
         <Text size="lg" block>
           매니저로
         </Text>
@@ -23,7 +19,7 @@ const SelectTypeSection = <T extends UserType>({ selectOneHandler, userInfo }: P
           시작하기
         </Text>
       </Button>
-      <Button id="isAdmin" onClick={(e) => selectOneHandler(e, false)} $isSelected={userInfo.isAdmin === false}>
+      <Button id="isAdmin" onClick={(e) => selectOneHandler(e, false)} $isSelected={isAdmin === false}>
         <Text size="lg" block>
           알바생으로
         </Text>

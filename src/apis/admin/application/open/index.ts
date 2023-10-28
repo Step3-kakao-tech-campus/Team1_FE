@@ -1,13 +1,14 @@
 import instance from 'apis/instance';
 import { TimeData } from 'apis/types';
 import { AxiosResponse } from 'axios';
+import { strTimeProcessor } from 'utils/strTimeProcessor';
 
 export const getTimeTemplate = async (params: GetParams): Promise<GetReturn> => {
   const response: AxiosResponse<GetResponse> = await instance.get(`/schedule/worktime`, { params });
   const template = response.data.template.map((time: TimeData) => ({
     ...time,
-    startTime: time.startTime.slice(0, -3),
-    endTime: time.endTime.slice(0, -3),
+    startTime: strTimeProcessor(time.startTime),
+    endTime: strTimeProcessor(time.endTime),
   }));
   return { template };
 };

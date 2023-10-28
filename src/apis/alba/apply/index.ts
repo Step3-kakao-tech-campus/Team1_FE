@@ -1,19 +1,17 @@
 import instance from 'apis/instance';
 import { SelectedTimeData, TimeData } from 'apis/types';
+import { strTimeProcessor } from 'utils/strTimeProcessor';
 
 export const getApplyForm = async (params: GetParams): Promise<GetReturn> => {
   const response = await instance.get(`/schedule/application`, { params });
-
   const selected = response.data.selected;
-  const arrTemplate = response.data.template;
 
   const templates: { [index: number]: TimeData } = {};
-
-  for (let timeData of arrTemplate) {
-    templates[timeData.workTimeId] = {
-      title: timeData.title,
-      startTime: timeData.startTime.slice(0, -3),
-      endTime: timeData.endTime.slice(0, -3),
+  for (let timeObj of response.data.template) {
+    templates[timeObj.workTimeId] = {
+      title: timeObj.title,
+      startTime: strTimeProcessor(timeObj.startTime),
+      endTime: strTimeProcessor(timeObj.endTime),
     };
   }
 

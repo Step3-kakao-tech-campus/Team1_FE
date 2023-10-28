@@ -9,7 +9,7 @@ import useForm from 'hooks/useForm';
 import useLogin from 'hooks/useLogin';
 import Logo from 'assets/schedule_albbaim.png';
 import { useLocation } from 'react-router-dom';
-import { nameValidator, signupValidator } from 'utils/validators';
+import { nameValidator } from 'utils/validators';
 
 interface SignUpFormData {
   [index: string]: string | boolean | null;
@@ -59,7 +59,7 @@ const signupPage = (): JSX.Element => {
         </FlexContainer>
       )}
 
-      <SelectTypeSection<SignUpFormData> selectOneHandler={selectOneHandler<boolean>} userInfo={userInfo} />
+      <SelectTypeSection selectOneHandler={selectOneHandler<boolean>} isAdmin={userInfo.isAdmin} />
 
       {userInfo.isAdmin !== null && (
         <FlexContainer $wFull $gap="36px" $padding="0 40px">
@@ -69,7 +69,10 @@ const signupPage = (): JSX.Element => {
             isNameError={userInfo.userName.length > 0 && !nameValidator(userInfo.userName)}
           />
 
-          <SubmitButton onClick={signupBtnHandler} disabled={!signupValidator(userInfo)}>
+          <SubmitButton
+            onClick={signupBtnHandler}
+            disabled={userInfo.isAdmin === null || !nameValidator(userInfo.userName) || !userInfo.agreement}
+          >
             가입 완료
           </SubmitButton>
         </FlexContainer>

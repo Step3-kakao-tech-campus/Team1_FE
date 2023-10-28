@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import PageContainer from 'components/@commons/PageContainer';
 import { atom, useAtomValue } from 'jotai';

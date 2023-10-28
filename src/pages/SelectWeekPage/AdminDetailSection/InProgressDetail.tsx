@@ -24,7 +24,7 @@ const InProgressDetail = ({ startWeekDate }: { startWeekDate: string }): JSX.Ele
     <>
       <SubmitButton onClick={closeHandler}>모집 마감하고 배정하기</SubmitButton>
       <WeekBarComponent />
-      <DailyWorkersTemplate dailyData={applicantsStatusRes?.data.applyStatus[day]} />
+      <DailyWorkersTemplate dailyData={applicantsStatusRes?.applyStatus[day]} />
     </>
   );
 };
