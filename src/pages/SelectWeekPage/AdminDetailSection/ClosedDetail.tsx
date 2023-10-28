@@ -17,7 +17,7 @@ const ClosedDetail = ({ startWeekDate }: { startWeekDate: string }): JSX.Element
   return (
     <>
       <WeekBarComponent />
-      <DailyWorkersTemplate dailyData={scheduleRes?.data.schedule} />
+      <DailyWorkersTemplate dailyData={scheduleRes?.schedule} />
     </>
   );
 };
