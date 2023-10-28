@@ -1,20 +1,16 @@
-// TimeWorkersData
-export interface TimeWorkerListData {
+export interface TimeData {
   title: string;
   startTime: string;
   endTime: string;
+}
+
+export interface TimeWorkerListData extends TimeData {
   workerList: UserData[];
 }
 
 export interface UserData {
   userId: number;
   name: string;
-}
-
-export interface TimeData {
-  title: string;
-  startTime: string;
-  endTime: string;
 }
 
 export interface DailyWorkTimeData {
