@@ -18,13 +18,14 @@ export const Box = styled.div`
   border-radius: 25px 25px 0px 0px;
 
   @media screen and (min-width: ${({ theme }) => theme.window.tabletMax}) {
-    bottom: 66%;
-    left: 10%;
+    position: fixed;
+    top: 10%;
+    bottom: unset;
+    left: 15%;
     width: 70px;
     height: unset;
     border-radius: 15px;
     flex-direction: column;
-    transform: translateX(-100px);
     padding: 24px 0;
     gap: 40px;
   }
