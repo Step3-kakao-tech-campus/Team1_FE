@@ -40,12 +40,10 @@ const MainContainer = styled.main<{
   position: relative;
 
   gap: ${(props) => (props.$gap ? props.$gap : '20px')};
-  padding: ${(props) => (props.$padding ? props.$padding : '28px')};
+  padding: ${(props) => (props.$padding ? props.$padding : '20px')};
 
   display: flex;
   flex-direction: column;
   justify-content: ${(props) => (props.$justify ? props.$justify : 'center')};
   align-items: center;
-
-  padding-bottom: ${(props) => (props.$bottom ? '80px' : '')};
 `;
