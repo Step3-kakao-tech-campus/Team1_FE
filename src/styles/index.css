@@ -29,14 +29,10 @@ time, mark, audio, video, button, input {
   box-sizing: border-box;
   background-color: transparent;
   border: none;
-  font-size: 62.5%;
+
 }
 
-@media screen and (min-width:481px){
-  html{
-    font-size: 100%;
-  }
-}
+
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
