@@ -60,6 +60,10 @@ export const OutterDayBox = styled.div<{
   width: 100%;
   aspect-ratio: ${(props) => (props.$aspectRatio ? props.$aspectRatio : 'none')};
 
+  @media screen and (max-width: 340px) {
+    aspect-ratio: ${(props) => (props.$aspectRatio ? Number.parseInt(props.$aspectRatio) * 0.9 : 'none')};
+  }
+
   border: 0.35px solid;
   border-color: ${({ theme }) => theme.color.lightGray};
   background-color: ${(props) => (props.$disabled ? props.theme.color.lightGray : props.theme.color.backgroundColor)};
