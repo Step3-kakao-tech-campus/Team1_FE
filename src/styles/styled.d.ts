@@ -36,7 +36,9 @@ declare module 'styled-components' {
     window: {
       minWidth: string;
       mobileMax: string;
+      tabletMin: string;
       tabletMax: string;
+      desktopMin: string;
     };
   }
 }

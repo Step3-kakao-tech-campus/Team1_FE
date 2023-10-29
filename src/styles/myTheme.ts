@@ -35,7 +35,9 @@ const myTheme: DefaultTheme = {
   window: {
     minWidth: '280px',
     mobileMax: '480px',
+    tabletMin: '480.1px',
     tabletMax: '768px',
+    desktopMin: '768.1px',
   },
 };
 
