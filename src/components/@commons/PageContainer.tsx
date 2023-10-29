@@ -41,7 +41,7 @@ const MainContainer = styled.main<{
 
   gap: ${(props) => (props.$gap ? props.$gap : '20px')};
   padding: ${(props) => (props.$padding ? props.$padding : '20px')};
-
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   justify-content: ${(props) => (props.$justify ? props.$justify : 'center')};
