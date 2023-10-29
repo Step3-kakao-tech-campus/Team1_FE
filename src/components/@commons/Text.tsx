@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Text = ({ size, color, weight, block, align, margin, children }: Props): JSX.Element => {
-  let fontSize = size || 'base';
+  let fontSize = size || myTheme.fonts.fontSize.base;
   switch (size) {
     case 'sm':
       fontSize = myTheme.fonts.fontSize.sm;
