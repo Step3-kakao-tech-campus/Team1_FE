@@ -28,7 +28,7 @@ const WholeConatiner = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 `;
 
@@ -36,7 +36,7 @@ const ColumnContainer = styled.div`
   position: relative;
 
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 
   max-width: ${({ theme }) => theme.window.tabletMax};
   min-width: ${({ theme }) => theme.window.minWidth};
