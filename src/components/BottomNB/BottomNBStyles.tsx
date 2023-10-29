@@ -21,7 +21,8 @@ export const Box = styled.div`
     position: fixed;
     top: 10%;
     bottom: unset;
-    left: 15%;
+    left: 0;
+    margin-left: 100px;
     width: 70px;
     height: unset;
     border-radius: 15px;
