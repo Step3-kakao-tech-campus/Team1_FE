@@ -1,34 +1,38 @@
 import styled from 'styled-components';
 export const Box = styled.div`
-  position: sticky;
   z-index: 90;
   bottom: 0;
 
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 6px 0px 18px;
-  gap: 10px;
-
-  width: 100%;
-  height: 70px;
-
   background: ${({ theme }) => theme.color.lightGray};
-  border-radius: 25px 25px 0px 0px;
+
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (max-width: ${({ theme }) => theme.window.tabletMax}) {
+    position: sticky;
+
+    width: 100%;
+    height: 70px;
+    padding: 6px 0px 18px;
+    border-radius: 25px 25px 0px 0px;
+
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+  }
 
   @media screen and (min-width: ${({ theme }) => theme.window.tabletMax}) {
     position: fixed;
-    /* top: 10%;
-    bottom: unset; */
     left: 0;
-    /* margin-left: 100px; */
+
     width: 70px;
     height: unset;
+    padding: 40px 0;
     border-radius: 15px;
+
     flex-direction: column;
-    padding: 24px 0;
-    gap: 40px;
+    align-items: center;
+    gap: 60px;
   }
 `;
 
