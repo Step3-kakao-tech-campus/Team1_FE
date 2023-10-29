@@ -15,8 +15,8 @@ export const DateCircle = styled.div<{ $isToday: boolean }>`
 
 export const BadgeText = styled.span`
   font-size: 2vw;
-  @media screen and (min-width: 480px) {
-    font-size: 14px;
+  @media screen and (min-width: ${({ theme }) => theme.window.tabletMin}) {
+    font-size: ${({ theme }) => theme.fonts.fontSize.xs};
   }
 `;
 

@@ -36,12 +36,11 @@ const ColumnContainer = styled.div`
   position: relative;
 
   width: 100%;
-  /* height: 100%; */
 
   max-width: ${({ theme }) => theme.window.tabletMax};
   min-width: ${({ theme }) => theme.window.minWidth};
 
-  @media screen and (min-width: ${({ theme }) => theme.window.tabletMax}) {
+  @media screen and (min-width: ${({ theme }) => theme.window.desktopMin}) {
     max-width: 480px;
   }
   min-height: 100vh;

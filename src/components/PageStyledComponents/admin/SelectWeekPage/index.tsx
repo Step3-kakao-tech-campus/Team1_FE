@@ -30,4 +30,8 @@ export const WeekStatusBar = styled.div<{ $status: WeekStatusTypes }>`
   align-items: center;
 
   padding: 2px;
+  font-size: 2vw;
+  @media screen and (min-width: ${({ theme }) => theme.window.tabletMin}) {
+    font-size: ${({ theme }) => theme.fonts.fontSize.xs};
+  }
 `;

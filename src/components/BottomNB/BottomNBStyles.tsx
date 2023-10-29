@@ -21,7 +21,7 @@ export const Box = styled.div`
     gap: 10px;
   }
 
-  @media screen and (min-width: ${({ theme }) => theme.window.tabletMax}) {
+  @media screen and (min-width: ${({ theme }) => theme.window.desktopMin}) {
     position: fixed;
     left: 0;
 
