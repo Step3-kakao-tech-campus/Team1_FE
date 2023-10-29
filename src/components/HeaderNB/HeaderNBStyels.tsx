@@ -2,7 +2,9 @@ import { styled } from 'styled-components';
 import React from 'react';
 
 export const HeaderContainer = styled.header`
+  position: fixed;
   width: 100%;
+  left: 0%;
   height: 60px;
   padding: 16px;
   display: flex;

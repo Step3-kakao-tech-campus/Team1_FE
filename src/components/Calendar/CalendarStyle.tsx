@@ -15,8 +15,8 @@ export const DateCircle = styled.div<{ $isToday: boolean }>`
 
 export const BadgeText = styled.span`
   font-size: 2vw;
-  @media screen and (min-width: 480px) {
-    font-size: 14px;
+  @media screen and (min-width: ${({ theme }) => theme.window.tabletMin}) {
+    font-size: ${({ theme }) => theme.fonts.fontSize.xs};
   }
 `;
 
@@ -59,6 +59,10 @@ export const OutterDayBox = styled.div<{
 
   width: 100%;
   aspect-ratio: ${(props) => (props.$aspectRatio ? props.$aspectRatio : 'none')};
+
+  @media screen and (max-width: 340px) {
+    aspect-ratio: ${(props) => (props.$aspectRatio ? Number.parseInt(props.$aspectRatio) * 0.9 : 'none')};
+  }
 
   border: 0.35px solid;
   border-color: ${({ theme }) => theme.color.lightGray};

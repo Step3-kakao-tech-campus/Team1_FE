@@ -1,4 +1,5 @@
 import FlexContainer from 'components/@commons/FlexContainer';
+import Text from 'components/@commons/Text';
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import weekdayArray from 'utils/weekdayArray';
@@ -18,7 +19,7 @@ const useWeekSelector = (initial: number) => {
       <FlexContainer $direction="row" $wFull $justify="space-between" $padding="0 8px">
         {weekdayArray.map((e, i) => (
           <Button key={e.kor} onClick={() => selectDayHandler(i)} $isSelected={day === i}>
-            {e.kor}
+            <Text>{e.kor}</Text>
           </Button>
         ))}
       </FlexContainer>

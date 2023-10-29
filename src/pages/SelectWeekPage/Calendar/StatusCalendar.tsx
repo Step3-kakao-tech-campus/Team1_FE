@@ -49,11 +49,7 @@ const StatusCalendar = (): JSX.Element => {
     <MonthBox $wFull>
       {weekStatusData?.table.map((weekObj: WeekStatusData, i) => (
         <WeekContainer key={`${i}주`} onClick={() => weekOnClickHandler(weekObj)}>
-          <WeekStatusBar $status={weekObj.weekStatus}>
-            <Text size="xs" weight="regular">
-              {statusConverter(weekObj.weekStatus)}
-            </Text>
-          </WeekStatusBar>
+          <WeekStatusBar $status={weekObj.weekStatus}>{statusConverter(weekObj.weekStatus)}</WeekStatusBar>
           {weekObj.dates[0] === selectedWeek.startWeekDate && <BorderWeekBox />}
 
           <WeekGrid>

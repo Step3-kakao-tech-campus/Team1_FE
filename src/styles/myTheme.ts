@@ -32,6 +32,13 @@ const myTheme: DefaultTheme = {
       light: 300,
     },
   },
+  window: {
+    minWidth: '280px',
+    mobileMax: '480px',
+    tabletMin: '480.1px',
+    tabletMax: '768px',
+    desktopMin: '768.1px',
+  },
 };
 
 export { myTheme };

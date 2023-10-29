@@ -28,7 +28,10 @@ const Box = styled.div`
   background-color: #ffffff;
   min-width: 250px;
   width: 85%;
-  max-width: 500px;
+
+  max-width: ${({ theme }) => theme.window.mobileMax};
+  min-width: ${({ theme }) => theme.window.minWidth};
+
   padding: 15px;
 
   display: flex;

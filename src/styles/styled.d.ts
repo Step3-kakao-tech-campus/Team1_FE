@@ -33,5 +33,12 @@ declare module 'styled-components' {
         light: number;
       };
     };
+    window: {
+      minWidth: string;
+      mobileMax: string;
+      tabletMin: string;
+      tabletMax: string;
+      desktopMin: string;
+    };
   }
 }
