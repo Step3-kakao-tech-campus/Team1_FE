@@ -19,10 +19,10 @@ export const Box = styled.div`
 
   @media screen and (min-width: ${({ theme }) => theme.window.tabletMax}) {
     position: fixed;
-    top: 10%;
-    bottom: unset;
+    /* top: 10%;
+    bottom: unset; */
     left: 0;
-    margin-left: 100px;
+    /* margin-left: 100px; */
     width: 70px;
     height: unset;
     border-radius: 15px;
