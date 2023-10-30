@@ -11,20 +11,18 @@ interface Props {
 }
 
 const CalendarDayBox = ({ dateString, timeList, onClick, isSelected }: Props): JSX.Element => {
-  const date = Number.parseInt(dateString.split('-')[2]);
-
   return (
     <OutterDayBox onClick={onClick} $aspectRatio="0.8" $disabled={timeList === null}>
       {isSelected && <BorderDayBox />}
       <DateCircle $isToday={stringDateIsToday(dateString)}>
         <Text size="xs" weight="regular">
-          {date}
+          {dateString.split('-')[2]}
         </Text>
       </DateCircle>
       <BadgeCont>
-        {timeList?.map((t) => (
-          <Badge key={t} $time={t}>
-            <BadgeText>{t}</BadgeText>
+        {timeList?.map((title) => (
+          <Badge key={title} $time={title}>
+            <BadgeText>{title}</BadgeText>
           </Badge>
         ))}
       </BadgeCont>

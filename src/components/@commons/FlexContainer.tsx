@@ -9,6 +9,7 @@ interface Props {
   $hFull?: boolean;
   $width?: string;
   $height?: string;
+  $maxWidth?: string;
   $justify?: string;
   $align?: string;
   $position?: string;
@@ -20,6 +21,7 @@ const FlexContainer = styled.div<Props>`
   position: ${(props) => (props.$position ? props.$position : '')};
   width: ${(props) => (props.$wFull ? '100%' : props.$width ? props.$width : '')};
   height: ${(props) => (props.$hFull ? '100%' : props.$height ? props.$height : '')};
+  max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : 'none')};
 
   gap: ${(props) => (props.$gap ? props.$gap : '20px')};
   padding: ${(props) => (props.$padding ? props.$padding : '0')};

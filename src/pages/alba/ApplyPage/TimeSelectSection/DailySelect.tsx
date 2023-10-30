@@ -1,21 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FlexContainer from 'components/@commons/FlexContainer';
 import BorderBox from 'components/@commons/BorderBox';
 import Text from 'components/@commons/Text';
 import CheckBox from 'components/@commons/CheckBox';
-import useApply from 'hooks/alba/useApply';
+import useSelectTime from 'hooks/alba/apply/useSelectTime';
 import SubmitButton from 'components/@commons/SubmitButton';
 import TimeSelectSkeleton from 'components/Suspenses/PageSkeletons/TimeSelectSkeleton';
+import { useGetApplyForm } from 'hooks/alba/apply/fetch';
+import { useAtomValue } from 'jotai';
+import { weeklySelectAtom } from '..';
 
 const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: string }): JSX.Element => {
-  const { weeklySelect, findTimeData, selectTimeHandler, goPreviewHandler, putSaveHandler, isLoading } =
-    useApply(startWeekDate);
-
-  // 요일 바뀔 때마다 서버에 저장
-  useEffect(() => {
-    if (!weeklySelect.some((e) => e.length > 0)) return;
-    putSaveHandler(day);
-  }, [day]);
+  const { isLoading } = useGetApplyForm(startWeekDate);
+  const weeklySelect = useAtomValue(weeklySelectAtom);
+  const { goPreviewHandler, selectTimeHandler } = useSelectTime();
 
   if (isLoading) {
     return <TimeSelectSkeleton />;
@@ -25,7 +23,7 @@ const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: strin
     <>
       <FlexContainer $wFull>
         {weeklySelect[day].map((timeObject, timeIndex) => (
-          <label key={timeObject.workTimeId}>
+          <label key={timeObject.title}>
             <BorderBox width="100%" gradation={true}>
               <FlexContainer $wFull $padding="28px" $direction="row" $align="center">
                 <CheckBox
@@ -35,16 +33,17 @@ const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: strin
                   readOnly
                 />
                 <Text size="xl" margin="0">
-                  {findTimeData(timeObject.workTimeId)?.title}
+                  {timeObject.title}
                 </Text>
                 <Text size="xl" margin="0 0 0 auto">
-                  {findTimeData(timeObject.workTimeId)?.startTime} ~ {findTimeData(timeObject.workTimeId)?.endTime}
+                  {timeObject.startTime} ~ {timeObject.endTime}
                 </Text>
               </FlexContainer>
             </BorderBox>
           </label>
         ))}
       </FlexContainer>
+
       <SubmitButton onClick={goPreviewHandler}>미리보기</SubmitButton>
     </>
   );

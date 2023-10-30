@@ -12,6 +12,10 @@ export interface TimeWorkerListData extends TimeData {
   workerList: UserData[];
 }
 
+export interface SelectedTimeData extends TimeData {
+  isChecked: boolean;
+}
+
 export interface UserData {
   userId: number;
   name: string;
@@ -27,14 +31,16 @@ export interface TotalWorkedTimeData {
   monthly: number;
 }
 
-export interface SelectedTimeData {
-  workTimeId: number;
-  isChecked: boolean;
-}
-
 export interface WeekStatusData {
   weekStatus: WeekStatusTypes;
   dates: string[];
+}
+
+export interface AddNeweGroupForm {
+  marketName: string;
+  marketNumber: string;
+  mainAddress: string;
+  detailAddress: string;
 }
 
 export type WeekStatusTypes = 'allocatable' | 'inProgress' | 'closed' | '';

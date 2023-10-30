@@ -3,9 +3,15 @@ import { DailyWorkTimeData } from 'apis/types';
 import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
 import CalendarDayBox from './CalendarDayBox';
 import useSchedule from 'hooks/SchedulePage/useSchedule';
+import { useGetMonthly } from 'hooks/SchedulePage/fetch';
+import { useAtomValue } from 'jotai';
+import { dateAtom } from '../states';
 
 const CalenderConents = (): JSX.Element => {
-  const { scheduleData, selectedDate, dateOnClick } = useSchedule();
+  const { scheduleData } = useGetMonthly();
+  const { dateOnClick } = useSchedule();
+  const selectedDate = useAtomValue(dateAtom);
+
   return (
     <MonthBox $wFull>
       {scheduleData?.table.map((weekArray: DailyWorkTimeData[], i) => (

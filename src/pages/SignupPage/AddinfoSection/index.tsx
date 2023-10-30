@@ -12,7 +12,7 @@ interface Props {
 
 const AddinfoSection = ({ formHandler, toggleHandler, isNameError }: Props): JSX.Element => {
   return (
-    <FlexContainer $gap="8px">
+    <FlexContainer $wFull $gap="8px">
       <Input id="userName" onChange={formHandler} placeholder="이름" />
       {isNameError && <Text margin="0 0 0 auto">이름을 올바르게 입력해주세요</Text>}
       <FlexContainer $direction="row" $justify="start" $padding="16px" $align="center">

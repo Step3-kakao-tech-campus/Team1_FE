@@ -1,49 +1,17 @@
-import { useAtom } from 'jotai';
 import React from 'react';
-import { selectedWeekAtom, weekStatusMonthAtom } from '..';
-import { useQuery } from '@tanstack/react-query';
-import { getWeekProgress } from 'apis/weekProgress';
+import { useAtomValue } from 'jotai';
 import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
 import { BorderWeekBox, WeekStatusBar, WeekContainer } from 'components/PageStyledComponents/admin/SelectWeekPage';
-import Text from 'components/@commons/Text';
 import StatusDailyBox from './StatusDailyBox';
-import { WeekStatusData, WeekStatusTypes } from 'apis/types';
-import { getLoginData } from 'utils/loginDatahandlers';
+import { WeekStatusData } from 'apis/types';
+import { useGetWeekProgress } from 'hooks/SelectWeekPage/fetch';
+import useSelectWeek from 'hooks/SelectWeekPage/useSelectWeek';
+import { selectedWeekAtom } from '../states';
 
 const StatusCalendar = (): JSX.Element => {
-  const isAdmin = getLoginData().isAdmin;
-  const [selectedWeek, setSelectedWeek] = useAtom(selectedWeekAtom);
-  const [nowMonth] = useAtom(weekStatusMonthAtom);
-  const { year, month } = nowMonth;
-
-  const { data: weekStatusData } = useQuery(
-    ['getWeekProgress', year, month, 1],
-    () => getWeekProgress({ year: year, month: month }),
-    {
-      suspense: true,
-    },
-  );
-
-  const weekOnClickHandler = (weekObj: WeekStatusData) => {
-    if (!isAdmin && weekObj.weekStatus !== 'inProgress') return;
-    const newObj = { startWeekDate: weekObj.dates[0], weekStatus: weekObj.weekStatus };
-    setSelectedWeek(newObj);
-  };
-
-  const statusConverter = (weekStatus: WeekStatusTypes) => {
-    switch (weekStatus) {
-      case 'allocatable':
-        return '모집 전';
-      case 'inProgress':
-        return '모집 중';
-      case 'closed':
-        return '모집 마감';
-    }
-  };
-
-  React.useEffect(() => {
-    setSelectedWeek({ startWeekDate: '', weekStatus: '' });
-  }, [year, month]);
+  const { weekStatusData } = useGetWeekProgress();
+  const { weekOnClickHandler, statusConverter } = useSelectWeek();
+  const selectedWeek = useAtomValue(selectedWeekAtom);
 
   return (
     <MonthBox $wFull>

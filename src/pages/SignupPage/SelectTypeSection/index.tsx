@@ -10,7 +10,7 @@ interface Props {
 
 const SelectTypeSection = ({ selectOneHandler, isAdmin }: Props): JSX.Element => {
   return (
-    <FlexContainer $direction="row" $wFull={true} $padding="20px 40px">
+    <FlexContainer $direction="row" $wFull={true} $padding="20px 0">
       <Button id="isAdmin" onClick={(e) => selectOneHandler(e, true)} $isSelected={isAdmin === true}>
         <Text size="lg" block>
           매니저로

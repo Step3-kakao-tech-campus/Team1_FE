@@ -10,9 +10,11 @@ import { ScrollContainer } from 'components/PageStyledComponents/admin/Applicati
 import useClose from 'hooks/admin/ApplicationClosePage/useClose';
 import useWeekSelector from 'hooks/useWeekSelector';
 import BorderBox from 'components/@commons/BorderBox';
+import { useGetRecommends } from 'hooks/admin/ApplicationClosePage/fetch';
 
 const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
-  const { recommendsRes, setCandidate, candidate, submitHandler } = useClose(startWeekDate);
+  const { recommendsRes } = useGetRecommends(startWeekDate);
+  const { setCandidate, candidate, submitHandler } = useClose();
   const { day, WeekBarComponent } = useWeekSelector(0);
 
   return (

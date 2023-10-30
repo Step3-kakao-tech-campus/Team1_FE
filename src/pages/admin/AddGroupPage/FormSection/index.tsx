@@ -1,36 +1,13 @@
-import { postAddNewGroup } from 'apis/admin/manageGroup';
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
-import useForm from 'hooks/useForm';
 import React from 'react';
 import { marketNoValidator, nameValidator } from 'utils/validators';
-import useModal from 'hooks/useModal';
 import InputBar from './InputBar';
-import useErrorHandler from 'error/useErrorHandler';
-import KakaoAddress from 'components/modals/KakaoAddress';
+import useAddGroupForm from 'hooks/admin/AddGroupPage/useAddGroupForm';
 
-const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JSX.Element => {
-  const initialInfo = {
-    marketName: '',
-    marketNumber: '',
-    mainAddress: '',
-    detailAddress: '',
-  };
-
-  const { obj: marketInfo, formHandler, etcUpdateHandler } = useForm(initialInfo);
-  const { apiErrorHandler } = useErrorHandler();
-  const submitHandler = (): void => {
-    postAddNewGroup(marketInfo)
-      .then((res) => {
-        doneStateHandler();
-      })
-      .catch((err) => {
-        apiErrorHandler(err);
-      });
-  };
-
-  const { modalOnHandler, modalOffHandler } = useModal();
+const FormSection = (): JSX.Element => {
+  const { marketInfo, formHandler, selectAddress, addGroupValidator, addGroupSubmit } = useAddGroupForm();
 
   return (
     <>
@@ -54,33 +31,17 @@ const FormSection = ({ doneStateHandler }: { doneStateHandler: () => void }): JS
         />
         <InputBar
           id="mainAddress"
-          onChange={formHandler}
-          labelName="주소1"
+          labelName="주소"
           validation={marketInfo.mainAddress.length > 0}
-          onClick={() =>
-            modalOnHandler(
-              <KakaoAddress
-                onComplete={(data) => {
-                  etcUpdateHandler(data.address, 'mainAddress');
-                  modalOffHandler();
-                }}
-              />,
-            )
-          }
+          onClick={selectAddress}
           value={marketInfo.mainAddress}
+          readOnly
         />
 
         <InputBar id="detailAddress" onChange={formHandler} labelName="상세 주소" validation={false} />
       </FlexContainer>
 
-      <SubmitButton
-        onClick={submitHandler}
-        disabled={
-          !nameValidator(marketInfo.marketName) ||
-          !marketNoValidator(marketInfo.marketNumber) ||
-          marketInfo.mainAddress.length === 0
-        }
-      >
+      <SubmitButton onClick={addGroupSubmit} disabled={!addGroupValidator()}>
         그룹 생성하기
       </SubmitButton>
     </>
