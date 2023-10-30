@@ -1,12 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export const HorizontalLine = styled.div`
-  border-top: 0.05rem solid;
-  border-color: gray;
+  border-top: 0.8px solid;
+  border-color: ${({ theme }) => theme.color.gray};
   width: 100%;
-  height: 0.5rem;
-  margin: 0.5rem 0;
 `;
 
 export const SidebarBackground = styled.div`
@@ -20,17 +17,12 @@ export const SidebarBackground = styled.div`
 `;
 
 export const SidebarBox = styled.div`
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.color.backgroundColor};
   height: 100%;
   width: 75%;
-  padding: 2rem;
-  max-width: 25rem;
+  max-width: 400px;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  align-items: start;
+  padding: 32px;
 
-  gap: 2rem;
   z-index: 981;
 `;
