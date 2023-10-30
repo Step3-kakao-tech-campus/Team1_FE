@@ -20,8 +20,8 @@ const SchedulePage = ({ members }: { members: UserData[] }): JSX.Element => {
   const nowMember = useAtomValue(memberAtom);
 
   return (
-    <PageContainer justify="start">
-      <FlexContainer $direction="row" $wFull $justify="start">
+    <PageContainer justify="start" padding="12px 20px">
+      <FlexContainer $direction="row" $wFull $justify="start" $height="48px">
         <FlexContainer $wFull $align="flex-start">
           {nowMember.isSelected && <TotalWorkTime />}
         </FlexContainer>
