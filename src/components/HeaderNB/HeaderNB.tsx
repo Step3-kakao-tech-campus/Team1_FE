@@ -7,7 +7,7 @@ import {
   HeaderRightMenuGroup,
 } from 'components/HeaderNB/HeaderNBStyels';
 import { Alarm, Hamburger } from './icons';
-import Sidebar from 'components/Sidebar/Sidebar';
+import Sidebar from 'components/Sidebar';
 import Text from 'components/@commons/Text';
 import { useLocation } from 'react-router-dom';
 
