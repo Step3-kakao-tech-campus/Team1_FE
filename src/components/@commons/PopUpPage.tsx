@@ -17,18 +17,23 @@ const AlarmContainer = styled.main<{
   $justify?: string;
   $bottom?: boolean;
 }>`
+  width: 100%;
+  height: 100%;
   flex-grow: 1;
   position: relative;
 
-  gap: ${(props) => (props.$gap ? props.$gap : '20px')};
-  padding: ${(props) => (props.$padding ? props.$padding : '28px')};
+  max-width: ${({ theme }) => theme.window.tabletMax};
+  min-width: ${({ theme }) => theme.window.minWidth};
+  @media screen and (min-width: ${({ theme }) => theme.window.desktopMin}) {
+    max-width: 480px;
+  }
+  padding: 24px 12px;
 
   display: flex;
   flex-direction: column;
-  justify-content: ${(props) => (props.$justify ? props.$justify : 'center')};
+  justify-content: start;
   align-items: center;
 
-  padding-bottom: ${(props) => (props.$bottom ? '80px' : '')};
   z-index: 993;
 `;
 
@@ -40,7 +45,7 @@ const AlarmBackground = styled.div`
   left: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
+
   background: ${({ theme }) => theme.color.backgroundColor};
   z-index: 991;
 `;
