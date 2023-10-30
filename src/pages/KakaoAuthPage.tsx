@@ -1,3 +1,5 @@
+import PageContainer from 'components/@commons/PageContainer';
+import Loader from 'components/Suspenses/Loader';
 import useLogin from 'hooks/useLogin';
 import React, { useEffect } from 'react';
 
@@ -10,7 +12,11 @@ const KakaoAuthPage = (): JSX.Element => {
     login(code);
   }, [code]);
 
-  return <p> 로그인 처리중 ... </p>;
+  return (
+    <PageContainer withoutHeader withoutBottonBar>
+      <Loader />
+    </PageContainer>
+  );
 };
 
 export default KakaoAuthPage;
