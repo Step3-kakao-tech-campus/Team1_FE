@@ -4,7 +4,16 @@ import Text from 'components/@commons/Text';
 import { CheckIcon, InputBox, InputLabel } from 'components/PageStyledComponents/admin/AddGroup';
 import React from 'react';
 
-const InputBar = ({ onChange, id, labelName, validation, inputType, onClick, value }: InputProps): JSX.Element => {
+const InputBar = ({
+  onChange,
+  id,
+  labelName,
+  validation,
+  inputType,
+  onClick,
+  value,
+  readOnly,
+}: InputProps): JSX.Element => {
   return (
     <FlexContainer $gap="8px" onClick={onClick}>
       <InputLabel htmlFor={id}>
@@ -12,7 +21,7 @@ const InputBar = ({ onChange, id, labelName, validation, inputType, onClick, val
       </InputLabel>
       <BorderBox border width="100%">
         <FlexContainer $direction="row" $gap="0" $align="center">
-          <InputBox id={id} value={value} type={inputType || 'text'} onChange={onChange} />
+          <InputBox id={id} value={value} type={inputType || 'text'} onChange={onChange} readOnly={readOnly} />
           {validation && <CheckIcon />}
         </FlexContainer>
       </BorderBox>
@@ -21,13 +30,14 @@ const InputBar = ({ onChange, id, labelName, validation, inputType, onClick, val
 };
 
 interface InputProps {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   id: string;
-  labelName?: string;
+  labelName: string;
   validation: boolean;
   inputType?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   value?: string;
+  readOnly?: boolean;
 }
 
 export default InputBar;
