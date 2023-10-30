@@ -34,3 +34,9 @@ export const HeaderButton = styled.button`
   align-items: center;
   text-decoration: none;
 `;
+
+export const HeaderTitleCont = styled.div`
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+`;

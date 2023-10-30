@@ -5,15 +5,19 @@ import {
   HeaderButton,
   HeaderLeftMenuGroup,
   HeaderRightMenuGroup,
+  HeaderTitleCont,
 } from 'components/HeaderNB/HeaderNBStyels';
-import { Alarm, Hamburger } from './icons';
 import Sidebar from 'components/Sidebar';
 import Text from 'components/@commons/Text';
 import { useLocation } from 'react-router-dom';
+import { Hamburger } from 'components/@commons/icons';
+import { getLoginData } from 'utils/loginDatahandlers';
 
 const HeaderNB = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
+
   const nowPath = useLocation().pathname;
+  const isAdmin = getLoginData().isAdmin;
 
   const albaTitle: { [index: string]: string } = {
     '/': '내 스케줄',
@@ -37,12 +41,14 @@ const HeaderNB = (): JSX.Element => {
               <Hamburger />
             </HeaderButton>
           </HeaderLeftMenuGroup>
-          <Text size="lg">{adminTitle[nowPath]}</Text>
-          <HeaderRightMenuGroup>
+          <HeaderTitleCont>
+            <Text size="lg">{isAdmin ? adminTitle[nowPath] : albaTitle[nowPath]}</Text>
+          </HeaderTitleCont>
+          {/* <HeaderRightMenuGroup>
             <HeaderButton>
               <Alarm />
             </HeaderButton>
-          </HeaderRightMenuGroup>
+          </HeaderRightMenuGroup> */}
         </HeaderInnerBox>
       </HeaderContainer>
 
