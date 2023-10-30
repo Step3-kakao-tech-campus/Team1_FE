@@ -1,6 +1,6 @@
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
-import { NextButton, PrevButton } from 'components/@commons/iconButtons';
+import { NextButton, PrevButton } from 'components/@commons/icons/buttons';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import React from 'react';
 import { WeekGrid } from './CalendarStyle';
@@ -27,6 +27,7 @@ const CalenderOutter = ({ monthDataAtom }: Props): JSX.Element => {
     <>
       <FlexContainer $direction="row" $justify="space-between" $wFull>
         <PrevButton onClick={() => monthMoveHandler(-1)} />
+
         <FlexContainer $direction="row" $gap="12px">
           <Text size="lg" weight="bold">{`${year} 년`}</Text>
           <Text size="lg" weight="bold">{`${month + 1} 월`}</Text>
