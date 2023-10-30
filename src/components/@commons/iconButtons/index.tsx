@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IoMdArrowRoundBack } from 'react-icons/io';
+import { IoIosClose, IoMdArrowRoundBack } from 'react-icons/io';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoIosArrowBack } from 'react-icons/io';
@@ -25,18 +25,10 @@ export const AddButton = ({ onClick, size, color }: Props) => {
   );
 };
 
-export const BackButton = ({ onClick, size, color }: Props) => {
-  return (
-    <button onClick={onClick}>
-      <IoMdArrowRoundBack size={size ? size : defaultSize} color={color ? color : defaultColor} />
-    </button>
-  );
-};
-
 export const CloseButton = ({ onClick, size, color }: Props) => {
   return (
     <button onClick={onClick}>
-      <IoIosCloseCircleOutline size={size ? size : defaultSize} color={color ? color : defaultColor} />
+      <IoIosClose size={size ? size : defaultSize} color={color ? color : defaultColor} />
     </button>
   );
 };
