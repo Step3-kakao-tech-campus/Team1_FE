@@ -21,6 +21,9 @@ const Text = ({ size, color, weight, block, align, margin, children }: Props): J
     case 'xs':
       fontSize = myTheme.fonts.fontSize.xs;
       break;
+    case 'xxs':
+      fontSize = myTheme.fonts.fontSize.xxs;
+      break;
     case 'base':
       fontSize = myTheme.fonts.fontSize.base;
       break;
