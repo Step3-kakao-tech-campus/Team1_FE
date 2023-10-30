@@ -1,25 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
-
 import DailyWorkersTemplate from 'components/DailyWorkers/DailyWorkersTemplate';
-import React, { useMemo } from 'react';
-import { getDailyWorkers } from 'apis/schedule/getDailyWorkers';
+import React from 'react';
 import { useAtomValue } from 'jotai';
 import { dateAtom } from '../states';
 import NotFixedDateBox from 'components/DailyWorkers/NotFixedDateBox';
 import SubmitButton from 'components/@commons/SubmitButton';
 import { getLoginData } from 'utils/loginDatahandlers';
+import { useGetDailyWorkers } from 'hooks/SchedulePage/fetch';
 
 const DailyWorkers = (): JSX.Element => {
   const isAdmin = getLoginData().isAdmin;
-
   const selectedDate = useAtomValue(dateAtom);
-  const { data: scheduleResponse } = useQuery(
-    [selectedDate],
-    () => getDailyWorkers({ selectedDate: selectedDate.date }),
-    {
-      suspense: true,
-    },
-  );
+  const { scheduleResponse } = useGetDailyWorkers();
 
   if (selectedDate.date === '') {
     return <></>;
