@@ -1,5 +1,4 @@
 import { styled } from 'styled-components';
-import React from 'react';
 
 export const HeaderContainer = styled.header`
   position: fixed;
@@ -34,4 +33,10 @@ export const HeaderButton = styled.button`
   display: flex;
   align-items: center;
   text-decoration: none;
+`;
+
+export const HeaderTitleCont = styled.div`
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
 `;

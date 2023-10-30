@@ -1,7 +1,7 @@
 import BorderBox from 'components/@commons/BorderBox';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
-import { CheckIcon, InputBox, InputLabel } from 'components/PageStyledComponents/admin/AddGroup';
+import { Check, InputBox, InputLabel } from 'components/PageStyledComponents/admin/AddGroup';
 import React from 'react';
 
 const InputBar = ({
@@ -22,7 +22,7 @@ const InputBar = ({
       <BorderBox border width="100%">
         <FlexContainer $direction="row" $gap="0" $align="center">
           <InputBox id={id} value={value} type={inputType || 'text'} onChange={onChange} readOnly={readOnly} />
-          {validation && <CheckIcon />}
+          {validation && <Check />}
         </FlexContainer>
       </BorderBox>
     </FlexContainer>

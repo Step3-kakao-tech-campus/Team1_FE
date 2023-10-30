@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
 import { useAtom } from 'jotai';
 import { DropDownCont } from 'components/PageStyledComponents/admin/MainPage';
 import { memberAtom } from 'pages/SchedulePage/states';
 import { UserData } from 'apis/types';
+import { DropDown, DropUp } from 'components/@commons/icons';
 
 const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
   const [member, setMember] = useAtom(memberAtom);
@@ -23,9 +23,16 @@ const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
 
   return (
     <DropDownCont>
-      <FlexContainer onClick={dropdownOnClick} $wFull $direction="row" $justify="space-between" $padding="4px 0">
+      <FlexContainer
+        onClick={dropdownOnClick}
+        $wFull
+        $direction="row"
+        $justify="space-between"
+        $align="center"
+        $padding="4px 0"
+      >
         <Text margin="0">{member.name || '선택'}</Text>
-        <Text margin="0">{isOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}</Text>
+        {isOpen ? <DropUp /> : <DropDown />}
       </FlexContainer>
       {isOpen && (
         <FlexContainer $wFull $gap="10px" $padding="16px 0">

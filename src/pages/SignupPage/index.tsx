@@ -10,7 +10,6 @@ import useForm from 'hooks/useForm';
 import { nameValidator } from 'utils/validators';
 import useSignUpForm from 'hooks/SignUpPage/useSignUpForm';
 import LogoPicture from 'components/@commons/LogoPicture';
-import styled from 'styled-components';
 
 const signupPage = (): JSX.Element => {
   const {

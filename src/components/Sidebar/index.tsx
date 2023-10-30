@@ -1,36 +1,104 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { Suspense } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { getMyInfo } from 'apis/userInfo';
+import useLogin from 'hooks/useLogin';
+import useModal from 'hooks/useModal';
+import GetInviteKey from 'components/modals/GetInviteKey';
+import { HorizontalLine, SidebarBackground, SidebarBox } from './styles';
+import Text from '../@commons/Text';
+import FlexContainer from '../@commons/FlexContainer';
+import { UserData } from 'apis/types';
+import { getLoginData } from 'utils/loginDatahandlers';
+import Loader from 'components/Suspenses/Loader';
 
-export const HorizontalLine = styled.div`
-  border-top: 0.05rem solid;
-  border-color: gray;
-  width: 100%;
-  height: 0.5rem;
-  margin: 0.5rem 0;
-`;
+const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element => {
+  return (
+    <SidebarBackground onClick={closeHandler}>
+      <SidebarBox onClick={(e) => e.stopPropagation()}>
+        <FlexContainer $wFull $height="100vw" $justify="start" $gap="32px">
+          <Suspense fallback={<Loader />}>
+            <SideBarContent />
+          </Suspense>
+        </FlexContainer>
+      </SidebarBox>
+    </SidebarBackground>
+  );
+};
 
-export const SidebarBackground = styled.div`
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 980;
-`;
+export default Sidebar;
 
-export const SidebarBox = styled.div`
-  background-color: #ffffff;
-  height: 100%;
-  width: 75%;
-  padding: 2rem;
-  max-width: 25rem;
+const SideBarContent = () => {
+  const { data: myInfo } = useQuery(['myInfo'], getMyInfo, { suspense: true });
+  const isAdmin = getLoginData().isAdmin;
+  return (
+    <>
+      <SideBarProfile userName={myInfo?.data.userName} isAdmin={isAdmin} groupName={myInfo?.data.groupName} />
+      <SideBarButtons isAdmin={isAdmin} />
+      <SideBarMemberList memberList={myInfo?.data.members} />
+    </>
+  );
+};
 
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  align-items: start;
+const SideBarProfile = ({
+  userName,
+  isAdmin,
+  groupName,
+}: {
+  userName?: string;
+  isAdmin: boolean;
+  groupName?: string;
+}) => {
+  return (
+    <FlexContainer $gap="12px" $padding="0">
+      <FlexContainer $direction="row" $justify="start" $align="center">
+        <Text size="lg" weight="bold" margin="0">
+          {userName}
+        </Text>
+        <Text margin="0">{isAdmin && 'Admin'}</Text>
+      </FlexContainer>
+      <FlexContainer $direction="row" $justify="start" $align="center">
+        <Text margin="0 0 4px 0" size="sm">
+          {groupName}
+        </Text>
+      </FlexContainer>
 
-  gap: 2rem;
-  z-index: 981;
-`;
+      <HorizontalLine />
+    </FlexContainer>
+  );
+};
+
+const SideBarButtons = ({ isAdmin }: { isAdmin: boolean }) => {
+  const { logout } = useLogin('/');
+  const { modalOnHandler } = useModal();
+  return (
+    <FlexContainer $align="flex-start" $gap="20px">
+      {isAdmin && (
+        <FlexContainer onClick={() => modalOnHandler(<GetInviteKey />)}>
+          <Text>직원 초대하기</Text>
+        </FlexContainer>
+      )}
+      <FlexContainer onClick={logout}>
+        <Text>로그아웃</Text>
+      </FlexContainer>
+    </FlexContainer>
+  );
+};
+
+const SideBarMemberList = ({ memberList }: { memberList?: UserData[] }) => {
+  return (
+    <FlexContainer $wFull $align="flex-start" $gap="16px">
+      <Text weight="bold" margin="0">
+        우리 매장 직원 목록
+      </Text>
+      <HorizontalLine />
+
+      <FlexContainer $wFull $align="flex-start" $gap="16px">
+        {memberList?.map((member: UserData) => (
+          <ol key={member.name}>
+            <Text>{member.name}</Text>
+          </ol>
+        ))}
+      </FlexContainer>
+    </FlexContainer>
+  );
+};

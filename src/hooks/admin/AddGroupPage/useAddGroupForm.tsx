@@ -9,12 +9,6 @@ import React from 'react';
 import { marketNoValidator, nameValidator } from 'utils/validators';
 
 const useAddGroupForm = () => {
-  const initialInfo = {
-    marketName: '',
-    marketNumber: '',
-    mainAddress: '',
-    detailAddress: '',
-  };
   const { obj: marketInfo, formHandler, etcUpdateHandler } = useForm(initialInfo);
 
   const { modalOnHandler, modalOffHandler } = useModal();
@@ -53,3 +47,10 @@ const useAddGroupForm = () => {
 };
 
 export default useAddGroupForm;
+
+const initialInfo = {
+  marketName: '',
+  marketNumber: '',
+  mainAddress: '',
+  detailAddress: '',
+};

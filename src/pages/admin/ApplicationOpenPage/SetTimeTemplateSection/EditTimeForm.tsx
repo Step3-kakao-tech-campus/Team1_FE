@@ -3,7 +3,7 @@ import ColorBox from 'components/@commons/ColorBox';
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
-import { AddButton, CloseButton } from 'components/@commons/iconButtons';
+import { AddButton, CloseCircleButton } from 'components/@commons/icons/buttons';
 import { ButtonContainer, InputTime, InputTitle } from 'components/PageStyledComponents/admin/ApplicationOpenPage';
 import useTimeTemplate from 'hooks/admin/ApplicationOpenPage/useTimeTemplate';
 
@@ -26,7 +26,7 @@ const EditTimeForm = ({ startWeekDate }: { startWeekDate: string }) => {
                 placeholder="시간대 이름을 입력하세요"
               />
               <ButtonContainer>
-                <CloseButton onClick={() => deleteHandler(i)} />
+                <CloseCircleButton onClick={() => deleteHandler(i)} />
               </ButtonContainer>
             </FlexContainer>
 
