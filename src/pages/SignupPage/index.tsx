@@ -6,20 +6,13 @@ import AddinfoSection from 'pages/SignupPage/AddinfoSection';
 import SelectTypeSection from 'pages/SignupPage/SelectTypeSection';
 
 import useForm from 'hooks/useForm';
-import useLogin from 'hooks/useLogin';
-import Logo from 'assets/schedule_albbaim.png';
-import { useLocation } from 'react-router-dom';
-import { nameValidator } from 'utils/validators';
 
-interface SignUpFormData {
-  [index: string]: string | boolean | null;
-  isAdmin: boolean | null;
-  userName: string;
-  agreement: boolean;
-}
+import { nameValidator } from 'utils/validators';
+import useSignUpForm from 'hooks/SignUpPage/useSignUpForm';
+import LogoPicture from 'components/@commons/LogoPicture';
+import styled from 'styled-components';
 
 const signupPage = (): JSX.Element => {
-  // 1. 입력폼 상태 관리
   const {
     obj: userInfo,
     formHandler,
@@ -31,54 +24,44 @@ const signupPage = (): JSX.Element => {
     agreement: false,
   });
 
-  // 2. 로그인 요청 보내기
-  const { signup } = useLogin();
-
-  const state = useLocation().state;
-  if (state === null) {
-    throw { name: 'clientError' };
-  }
-  const code = state.code;
-
-  const signupBtnHandler = () => {
-    if (userInfo.isAdmin === null) {
-      throw { name: 'clientError' };
-    }
-    signup({
-      isAdmin: userInfo.isAdmin,
-      userName: userInfo.userName,
-      code: code,
-    });
-  };
+  const { signupBtnHandler } = useSignUpForm(userInfo);
 
   return (
-    <PageContainer withoutHeader withoutBottonBar>
+    <PageContainer withoutHeader withoutBottonBar gap="36px">
       {userInfo.isAdmin === null && (
-        <FlexContainer $align="center" $padding="0 18%">
-          <img src={Logo} width="100%" />
+        <FlexContainer $align="center">
+          <LogoPicture width="85%" />
         </FlexContainer>
       )}
+      <FlexContainer $wFull $maxWidth="480px">
+        <SelectTypeSection selectOneHandler={selectOneHandler<boolean>} isAdmin={userInfo.isAdmin} />
 
-      <SelectTypeSection selectOneHandler={selectOneHandler<boolean>} isAdmin={userInfo.isAdmin} />
+        {userInfo.isAdmin !== null && (
+          <>
+            <AddinfoSection
+              formHandler={formHandler}
+              toggleHandler={toggleHandler}
+              isNameError={userInfo.userName.length > 0 && !nameValidator(userInfo.userName)}
+            />
 
-      {userInfo.isAdmin !== null && (
-        <FlexContainer $wFull $gap="36px" $padding="0 40px">
-          <AddinfoSection
-            formHandler={formHandler}
-            toggleHandler={toggleHandler}
-            isNameError={userInfo.userName.length > 0 && !nameValidator(userInfo.userName)}
-          />
-
-          <SubmitButton
-            onClick={signupBtnHandler}
-            disabled={userInfo.isAdmin === null || !nameValidator(userInfo.userName) || !userInfo.agreement}
-          >
-            가입 완료
-          </SubmitButton>
-        </FlexContainer>
-      )}
+            <SubmitButton
+              onClick={signupBtnHandler}
+              disabled={userInfo.isAdmin === null || !nameValidator(userInfo.userName) || !userInfo.agreement}
+            >
+              가입 완료
+            </SubmitButton>
+          </>
+        )}
+      </FlexContainer>
     </PageContainer>
   );
 };
 
 export default signupPage;
+
+interface SignUpFormData {
+  [index: string]: string | boolean | null;
+  isAdmin: boolean | null;
+  userName: string;
+  agreement: boolean;
+}
