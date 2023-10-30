@@ -17,14 +17,14 @@ const defaultSize: string = '24px';
 const defaultColor: string = myTheme.color.textColor;
 
 export const BackArrowButton = ({ onClick, size, color }: Props) => {
-  <button onClick={onClick}>
+  <button onClick={onClick} aria-label="뒤로가기">
     <IoIosArrowBack size={size ? size : defaultSize} color={color ? color : defaultColor} />
   </button>;
 };
 
 export const AddButton = ({ onClick, size, color }: Props) => {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} aria-label="추가">
       <IoIosAddCircleOutline size={size ? size : defaultSize} color={color ? color : defaultColor} />
     </button>
   );
@@ -32,7 +32,7 @@ export const AddButton = ({ onClick, size, color }: Props) => {
 
 export const CloseCircleButton = ({ onClick, size, color }: Props) => {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} aria-label="제거">
       <IoIosCloseCircleOutline size={size ? size : defaultSize} color={color ? color : defaultColor} />
     </button>
   );
@@ -40,7 +40,7 @@ export const CloseCircleButton = ({ onClick, size, color }: Props) => {
 
 export const CloseButton = ({ onClick, size, color }: Props) => {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} aria-label="닫기">
       <IoIosClose size={size ? size : defaultSize} color={color ? color : defaultColor} />
     </button>
   );
@@ -48,7 +48,7 @@ export const CloseButton = ({ onClick, size, color }: Props) => {
 
 export const NextButton = ({ onClick, size, color }: Props) => {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} aria-label="다음">
       <IoIosArrowForward size={size ? size : defaultSize} color={color ? color : defaultColor} />
     </button>
   );
@@ -56,7 +56,7 @@ export const NextButton = ({ onClick, size, color }: Props) => {
 
 export const PrevButton = ({ onClick, size, color }: Props) => {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} aria-label="이전">
       <IoIosArrowBack size={size ? size : defaultSize} color={color ? color : defaultColor} />
     </button>
   );
