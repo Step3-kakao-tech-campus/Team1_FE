@@ -9,8 +9,6 @@ import DailyWorkersTemplate from 'components/DailyWorkers/DailyWorkersTemplate';
 import useWeekSelector from 'hooks/useWeekSelector';
 import { useGetApplyStatus } from 'hooks/SelectWeekPage/fetch';
 import { useGetDailyWorkers } from 'hooks/SelectWeekPage/fetch';
-import { ErrorBoundary } from 'react-error-boundary';
-import { ErrorFallbackProps } from 'apis/types';
 
 const AdminDetailSection = (): JSX.Element => {
   const selectedWeek = useAtomValue(selectedWeekAtom);
@@ -26,11 +24,9 @@ const AdminDetailSection = (): JSX.Element => {
       );
     case 'closed':
       return (
-        <ErrorBoundary FallbackComponent={NoFixedScheduleError}>
-          <Suspense fallback={<Loader />}>
-            <ClosedDetail />
-          </Suspense>
-        </ErrorBoundary>
+        <Suspense fallback={<Loader />}>
+          <ClosedDetail />
+        </Suspense>
       );
   }
   return <Text>주차를 선택해 주세요</Text>;
@@ -61,18 +57,13 @@ const ClosedDetail = (): JSX.Element => {
   const { day, WeekBarComponent } = useWeekSelector(0);
   const { scheduleRes } = useGetDailyWorkers(day);
 
+  if (scheduleRes === null) {
+    return <Text>스케줄 정보 없음</Text>;
+  }
   return (
     <>
       <WeekBarComponent />
       <DailyWorkersTemplate dailyData={scheduleRes?.schedule} />
     </>
   );
-};
-
-const NoFixedScheduleError = ({ error, resetErrorBoundary }: ErrorFallbackProps) => {
-  if (error.response?.data?.code === -11001) {
-    resetErrorBoundary();
-    return <Text>스케줄 정보 없음</Text>;
-  }
-  throw error;
 };
