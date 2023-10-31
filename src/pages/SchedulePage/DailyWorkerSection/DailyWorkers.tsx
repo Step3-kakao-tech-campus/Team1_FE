@@ -16,7 +16,7 @@ const DailyWorkers = (): JSX.Element => {
     return <></>;
   }
 
-  if (!selectedDate.isFixed) {
+  if (!selectedDate.isFixed || scheduleResponse === null) {
     return <NotFixedDateBox />;
   }
 
