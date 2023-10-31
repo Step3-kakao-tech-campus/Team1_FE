@@ -24,7 +24,7 @@ const CalenderOutter = ({ monthDataAtom }: Props): JSX.Element => {
   };
 
   return (
-    <>
+    <FlexContainer $wFull $gap="24px">
       <FlexContainer $direction="row" $justify="space-between" $wFull>
         <PrevButton onClick={() => monthMoveHandler(-1)} />
 
@@ -38,7 +38,7 @@ const CalenderOutter = ({ monthDataAtom }: Props): JSX.Element => {
       <FlexContainer $direction="row" $wFull>
         <DayTitle />
       </FlexContainer>
-    </>
+    </FlexContainer>
   );
 };
 
@@ -49,7 +49,7 @@ const DayTitle = () => {
     <WeekGrid>
       {weekdayArray.map((e) => (
         <FlexContainer $wFull key={e.eng}>
-          <Text size="xs" weight="bold">
+          <Text size="xxs" weight="semiBold">
             {e.eng}
           </Text>
         </FlexContainer>
