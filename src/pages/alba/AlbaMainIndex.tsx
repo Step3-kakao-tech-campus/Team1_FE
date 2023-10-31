@@ -1,21 +1,18 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { getMyInfo } from 'apis/userInfo';
 import SchedulePage from 'pages/SchedulePage';
 import PageContainer from 'components/@commons/PageContainer';
 import GrayBox from 'components/@commons/GrayBox';
-import { UserData } from 'apis/types';
 import Text from 'components/@commons/Text';
 import FlexContainer from 'components/@commons/FlexContainer';
+import useGetMyInfo from 'hooks/useGetMyInfo';
 
 const AlbaMainIndex = (): JSX.Element => {
-  const { data: membersData } = useQuery(['getMyInfo'], getMyInfo, { suspense: true });
-  const hasGroup = membersData?.data.groupName !== null;
+  const { hasGroup, members } = useGetMyInfo();
 
   return (
     <>
       {!hasGroup && <AlbaNoGroupPage />}
-      {hasGroup && <SchedulePage members={membersData?.data.members || []} />}
+      {hasGroup && <SchedulePage members={members} />}
     </>
   );
 };

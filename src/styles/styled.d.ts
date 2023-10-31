@@ -16,6 +16,7 @@ declare module 'styled-components' {
     };
     fonts: {
       fontSize: {
+        xxxs: string;
         xxs: string;
         xs: string;
         sm: string;

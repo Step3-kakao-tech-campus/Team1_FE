@@ -1,15 +1,10 @@
 import FlexContainer from 'components/@commons/FlexContainer';
 import styled from 'styled-components';
+import { timeColors } from 'utils/colors';
 
-export const TitleBox = styled(FlexContainer)<{ $time?: string }>`
+export const TitleBox = styled(FlexContainer)<{ $timeIndex: number }>`
   width: 100%;
-  background-color: ${(props) =>
-    props.$time &&
-    (props.$time === '오픈'
-      ? props.theme.color.open
-      : props.$time === '미들'
-      ? props.theme.color.middle
-      : props.theme.color.close)};
+  background-color: ${(props) => props.$timeIndex && timeColors(props.$timeIndex)};
   align-items: center;
   gap: 0;
   padding: 4px;

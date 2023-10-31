@@ -40,6 +40,7 @@ export const useGetDailyWorkers = () => {
     () => getDailyWorkers({ selectedDate: selectedDate.date }),
     {
       suspense: true,
+      enabled: selectedDate.date !== '' && selectedDate.isFixed,
     },
   );
   return { scheduleResponse };

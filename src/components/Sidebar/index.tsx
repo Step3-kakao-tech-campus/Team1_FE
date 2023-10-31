@@ -1,6 +1,4 @@
 import React, { Suspense } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { getMyInfo } from 'apis/userInfo';
 import useLogin from 'hooks/useLogin';
 import useModal from 'hooks/useModal';
 import GetInviteKey from 'components/modals/GetInviteKey';
@@ -10,6 +8,7 @@ import FlexContainer from '../@commons/FlexContainer';
 import { UserData } from 'apis/types';
 import { getLoginData } from 'utils/loginDatahandlers';
 import Loader from 'components/Suspenses/Loader';
+import useGetMyInfo from 'hooks/useGetMyInfo';
 
 const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element => {
   return (
@@ -28,13 +27,14 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
 export default Sidebar;
 
 const SideBarContent = () => {
-  const { data: myInfo } = useQuery(['myInfo'], getMyInfo, { suspense: true });
   const isAdmin = getLoginData().isAdmin;
+  const { userName, groupName, members } = useGetMyInfo();
+
   return (
     <>
-      <SideBarProfile userName={myInfo?.data.userName} isAdmin={isAdmin} groupName={myInfo?.data.groupName} />
+      <SideBarProfile userName={userName} isAdmin={isAdmin} groupName={groupName} />
       <SideBarButtons isAdmin={isAdmin} />
-      <SideBarMemberList memberList={myInfo?.data.members} />
+      <SideBarMemberList memberList={members} />
     </>
   );
 };

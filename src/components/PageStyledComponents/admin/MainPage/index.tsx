@@ -8,7 +8,7 @@ export const DropDownCont = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2px 24px;
+  padding: 2px 16px;
   background-color: ${({ theme }) => theme.color.lightGray};
   z-index: 20;
 `;

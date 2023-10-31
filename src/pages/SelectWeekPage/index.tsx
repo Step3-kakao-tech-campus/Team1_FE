@@ -11,12 +11,14 @@ import { weekStatusMonthAtom } from './states';
 const SelectWeekPage = ({ isAdmin }: { isAdmin: boolean }): JSX.Element => {
   return (
     <PageContainer justify="start">
-      <FlexContainer $wFull $justify="start">
+      <FlexContainer $wFull $justify="start" $gap="8px">
         <CalenderOutter monthDataAtom={weekStatusMonthAtom} />
         <Suspense fallback={<Skeleton aspectRatio="1.54" isDeffered />}>
           <StatusCalendar />
 
-          <FlexContainer $wFull>{isAdmin ? <AdminDetailSect /> : <AlbaSubmitButton />}</FlexContainer>
+          <FlexContainer $wFull $padding="16px 0">
+            {isAdmin ? <AdminDetailSect /> : <AlbaSubmitButton />}
+          </FlexContainer>
         </Suspense>
       </FlexContainer>
     </PageContainer>

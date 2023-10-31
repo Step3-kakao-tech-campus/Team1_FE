@@ -11,15 +11,24 @@ interface Props {
   justify?: string;
   withoutHeader?: boolean;
   withoutBottonBar?: boolean;
+  maxWidth?: string;
 }
 
-const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar, justify }: Props): JSX.Element => {
+const PageContainer = ({
+  children,
+  gap,
+  padding,
+  withoutHeader,
+  withoutBottonBar,
+  justify,
+  maxWidth,
+}: Props): JSX.Element => {
   const isAdmin = getLoginData().isAdmin;
 
   return (
     <>
       {!withoutHeader && <HeaderNB />}
-      <MainContainer $gap={gap} $padding={padding} $justify={justify} $bottom={!withoutBottonBar}>
+      <MainContainer $gap={gap} $padding={padding} $justify={justify} $bottom={!withoutBottonBar} $maxWidth={maxWidth}>
         {children}
       </MainContainer>
       {!withoutBottonBar && isAdmin && <AdminBottomNB />}
@@ -35,7 +44,10 @@ const MainContainer = styled.main<{
   $padding?: string;
   $justify?: string;
   $bottom?: boolean;
+  $maxWidth?: string;
 }>`
+  width: 100%;
+  box-sizing: border-box;
   flex-grow: 1;
   position: relative;
 
@@ -46,4 +58,6 @@ const MainContainer = styled.main<{
   flex-direction: column;
   justify-content: ${(props) => (props.$justify ? props.$justify : 'center')};
   align-items: center;
+
+  max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : 'none')};
 `;

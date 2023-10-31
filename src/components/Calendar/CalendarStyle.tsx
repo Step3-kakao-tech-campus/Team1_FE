@@ -14,24 +14,20 @@ export const DateCircle = styled.div<{ $isToday: boolean }>`
 `;
 
 export const BadgeText = styled.span`
-  font-size: 2vw;
-  @media screen and (min-width: ${({ theme }) => theme.window.tabletMin}) {
-    font-size: ${({ theme }) => theme.fonts.fontSize.xs};
+  font-size: ${(props) => props.theme.fonts.fontSize.xs};
+  @media screen and (max-width: 340px) {
+    font-size: ${({ theme }) => theme.fonts.fontSize.xxs};
   }
 `;
 
-export const Badge = styled.div<{ $time?: string }>`
-  background-color: ${(props) =>
-    props.$time &&
-    (props.$time === '오픈'
-      ? props.theme.color.open
-      : props.$time === '미들'
-      ? props.theme.color.middle
-      : props.theme.color.close)};
+export const Badge = styled.div<{ $color?: string }>`
+  background-color: ${(props) => props.$color};
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  border-radius: 8px;
 `;
 
 export const BadgeCont = styled.div`
@@ -40,6 +36,7 @@ export const BadgeCont = styled.div`
   flex-direction: column;
   align-items: stretch;
   z-index: 11;
+  gap: 2px;
 `;
 
 export const BorderDayBox = styled.div`
@@ -52,17 +49,11 @@ export const BorderDayBox = styled.div`
 
 export const OutterDayBox = styled.div<{
   $disabled?: boolean;
-  $aspectRatio: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }>`
   position: relative;
 
   width: 100%;
-  aspect-ratio: ${(props) => (props.$aspectRatio ? props.$aspectRatio : 'none')};
-
-  @media screen and (max-width: 340px) {
-    aspect-ratio: ${(props) => (props.$aspectRatio ? Number.parseInt(props.$aspectRatio) * 0.9 : 'none')};
-  }
 
   border: 0.35px solid;
   border-color: ${({ theme }) => theme.color.lightGray};
@@ -75,10 +66,13 @@ export const OutterDayBox = styled.div<{
   gap: 4px;
 `;
 
-export const WeekGrid = styled.div`
+export const WeekGrid = styled.div<{
+  $aspectRatio?: string;
+}>`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   width: 100%;
+  aspect-ratio: ${(props) => (props.$aspectRatio ? props.$aspectRatio : 'none')};
 `;
 
 export const MonthBox = styled(FlexContainer)`

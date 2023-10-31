@@ -15,6 +15,7 @@ export const useGetApplyForm = (startWeekDate: string) => {
         startWeekDate: startWeekDate,
       }),
     {
+      enabled: startWeekDate !== '',
       onSuccess: (data) => {
         if (data === undefined) return;
         setWeeklySelect(data.selected);

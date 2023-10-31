@@ -29,16 +29,20 @@ const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
         $direction="row"
         $justify="space-between"
         $align="center"
-        $padding="4px 0"
+        $padding="2px 0"
       >
-        <Text margin="0">{member.name || '선택'}</Text>
+        <Text margin="0" size="sm">
+          {member.name || '선택'}
+        </Text>
         {isOpen ? <DropUp /> : <DropDown />}
       </FlexContainer>
       {isOpen && (
-        <FlexContainer $wFull $gap="10px" $padding="16px 0">
+        <FlexContainer $wFull $gap="10px" $padding="12px 0">
           {members.map((member: UserData) => (
             <FlexContainer $wFull $align="flex-start" onClick={() => contentOnClick(member)} key={member.name}>
-              <Text margin="0">{member.name}</Text>
+              <Text margin="0" size="sm">
+                {member.name}
+              </Text>
             </FlexContainer>
           ))}
         </FlexContainer>

@@ -9,9 +9,9 @@ import { strTimeProcessor } from 'utils/strTimeProcessor';
 const DailyWorkersTemplate = ({ dailyData }: { dailyData: TimeWorkerListData[] | undefined }): JSX.Element => {
   return (
     <FlexContainer $direction="row" $wFull $gap="3%">
-      {dailyData?.map((timeData: TimeWorkerListData) => (
+      {dailyData?.map((timeData: TimeWorkerListData, timeindex) => (
         <FlexContainer key={timeData.title} $wFull $gap="10px">
-          <TitleBox $time={timeData.title}>
+          <TitleBox $timeIndex={timeindex}>
             <Text block size="lg" weight="semiBold">
               {timeData.title + ' (' + timeData.workerList.length + ')'}
             </Text>

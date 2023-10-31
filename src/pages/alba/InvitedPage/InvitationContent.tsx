@@ -17,6 +17,7 @@ const InvitationContent = ({ invitationKey }: Props): JSX.Element => {
       suspense: true,
     },
   );
+
   return (
     <>
       <FlexContainer>

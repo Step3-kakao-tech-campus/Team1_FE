@@ -1,12 +1,12 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
-import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
+import { MonthBox } from 'components/Calendar/CalendarStyle';
 import { BorderWeekBox, WeekStatusBar, WeekContainer } from 'components/PageStyledComponents/admin/SelectWeekPage';
-import StatusDailyBox from './StatusDailyBox';
 import { WeekStatusData } from 'apis/types';
 import { useGetWeekProgress } from 'hooks/SelectWeekPage/fetch';
 import useSelectWeek from 'hooks/SelectWeekPage/useSelectWeek';
 import { selectedWeekAtom } from '../states';
+import StatusCalendarWeekly from './StatusCalendarWeekly';
 
 const StatusCalendar = (): JSX.Element => {
   const { weekStatusData } = useGetWeekProgress();
@@ -20,11 +20,7 @@ const StatusCalendar = (): JSX.Element => {
           <WeekStatusBar $status={weekObj.weekStatus}>{statusConverter(weekObj.weekStatus)}</WeekStatusBar>
           {weekObj.dates[0] === selectedWeek.startWeekDate && <BorderWeekBox />}
 
-          <WeekGrid>
-            {weekObj.dates.map((date: string) => (
-              <StatusDailyBox date={date} key={date} />
-            ))}
-          </WeekGrid>
+          <StatusCalendarWeekly dates={weekObj.dates} />
         </WeekContainer>
       ))}
     </MonthBox>
