@@ -1,6 +1,7 @@
 import instance from 'apis/instance';
 import { DailyWorkTimeData, TotalWorkedTimeData } from 'apis/types';
 import { AxiosResponse } from 'axios';
+import { timeColors } from 'utils/colors';
 import { dateToString } from 'utils/dateToString';
 
 export const getMonthly = async (info: Info): Promise<Return> => {
@@ -27,6 +28,7 @@ export const getMonthly = async (info: Info): Promise<Return> => {
 interface Return {
   table: DailyWorkTimeData[][];
   totalTime: TotalWorkedTimeData;
+  badgeColor: { [index: string]: string };
 }
 
 interface Response {
@@ -59,6 +61,7 @@ const to2Dimension = (info: Info, response: AxiosResponse<Response>): Return => 
 
   // 2. 2차원 빈 달력
   const table = [];
+  const allWorkTimes: Set<string> = new Set();
   for (let i = 0; i < 6; i++) {
     const weekly = [];
     const startWeekDate = i * 7 + firstMonday;
@@ -77,9 +80,19 @@ const to2Dimension = (info: Info, response: AxiosResponse<Response>): Return => 
       };
 
       weekly.push(!!objectDaily ? objectDaily : emptyDaily);
+
+      if (objectDaily === undefined || objectDaily.workTime === null) continue;
+      for (let title of objectDaily.workTime) {
+        allWorkTimes.add(title);
+      }
     }
     table.push(weekly);
   }
 
-  return { table, totalTime };
+  const badgeColor: { [index: string]: string } = {};
+  const allWorkTimesArr = Array.from(allWorkTimes).sort();
+  allWorkTimesArr.map((e, i) => {
+    badgeColor[e] = timeColors(i);
+  });
+  return { table, totalTime, badgeColor };
 };
