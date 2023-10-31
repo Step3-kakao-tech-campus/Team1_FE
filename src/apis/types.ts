@@ -54,3 +54,8 @@ export interface ErrorData {
     };
   };
 }
+
+export interface ErrorFallbackProps {
+  error: ErrorData;
+  resetErrorBoundary: () => void;
+}
