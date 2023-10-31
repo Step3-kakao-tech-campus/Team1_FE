@@ -20,8 +20,8 @@ const SchedulePage = ({ members }: { members: UserData[] }): JSX.Element => {
   const nowMember = useAtomValue(memberAtom);
 
   return (
-    <PageContainer justify="start" padding="12px 20px">
-      <FlexContainer $direction="row" $wFull $justify="start" $height="48px">
+    <PageContainer justify="start" padding="0 20px" maxWidth="600px">
+      <FlexContainer $direction="row" $wFull $justify="start" $height="48px" $gap="0">
         <FlexContainer $wFull $align="flex-start">
           {nowMember.isSelected && <TotalWorkTime />}
         </FlexContainer>
@@ -31,7 +31,7 @@ const SchedulePage = ({ members }: { members: UserData[] }): JSX.Element => {
       </FlexContainer>
 
       {nowMember.isSelected && (
-        <FlexContainer $wFull>
+        <FlexContainer $wFull $gap="8px">
           <CalenderOutter monthDataAtom={monthAtom} />
           <Suspense fallback={<Skeleton aspectRatio="1.12" isDeffered />}>
             <CalenderConents />
