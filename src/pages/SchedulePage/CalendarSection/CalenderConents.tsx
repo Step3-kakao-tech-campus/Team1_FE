@@ -15,7 +15,7 @@ const CalenderConents = (): JSX.Element => {
   return (
     <MonthBox $wFull>
       {scheduleData?.table.map((weekArray: DailyWorkTimeData[], i) => (
-        <WeekGrid key={`${i}주`}>
+        <WeekGrid key={`${i}주`} $aspectRatio="5.6">
           {weekArray.map((e: DailyWorkTimeData) => (
             <CalendarDayBox
               key={e.date}
@@ -23,6 +23,7 @@ const CalenderConents = (): JSX.Element => {
               timeList={e.workTime}
               onClick={() => dateOnClick(e.workTime !== null, e.date)}
               isSelected={selectedDate.date === e.date}
+              colors={scheduleData.badgeColor}
             />
           ))}
         </WeekGrid>

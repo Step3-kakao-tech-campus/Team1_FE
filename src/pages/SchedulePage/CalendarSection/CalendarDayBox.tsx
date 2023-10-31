@@ -8,11 +8,12 @@ interface Props {
   timeList: string[] | null;
   onClick: React.MouseEventHandler<HTMLDivElement>;
   isSelected: boolean;
+  colors: { [index: string]: string };
 }
 
-const CalendarDayBox = ({ dateString, timeList, onClick, isSelected }: Props): JSX.Element => {
+const CalendarDayBox = ({ dateString, timeList, onClick, isSelected, colors }: Props): JSX.Element => {
   return (
-    <OutterDayBox onClick={onClick} $aspectRatio="0.8" $disabled={timeList === null}>
+    <OutterDayBox onClick={onClick} $disabled={timeList === null}>
       {isSelected && <BorderDayBox />}
       <DateCircle $isToday={stringDateIsToday(dateString)}>
         <Text size="xs" weight="regular">
@@ -21,7 +22,7 @@ const CalendarDayBox = ({ dateString, timeList, onClick, isSelected }: Props): J
       </DateCircle>
       <BadgeCont>
         {timeList?.map((title) => (
-          <Badge key={title} $time={title}>
+          <Badge key={title} $color={colors[title]}>
             <BadgeText>{title}</BadgeText>
           </Badge>
         ))}
