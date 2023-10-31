@@ -3,14 +3,14 @@ import React from 'react';
 import { useAtomValue } from 'jotai';
 import { dateAtom } from '../states';
 import NotFixedDateBox from 'components/DailyWorkers/NotFixedDateBox';
-import SubmitButton from 'components/@commons/SubmitButton';
-import { getLoginData } from 'utils/loginDatahandlers';
 import { useGetDailyWorkers } from 'hooks/SchedulePage/fetch';
+// import SubmitButton from 'components/@commons/SubmitButton';
+// import { getLoginData } from 'utils/loginDatahandlers';
 
 const DailyWorkers = (): JSX.Element => {
-  const isAdmin = getLoginData().isAdmin;
   const selectedDate = useAtomValue(dateAtom);
   const { scheduleResponse } = useGetDailyWorkers();
+  //  const isAdmin = getLoginData().isAdmin;
 
   if (selectedDate.date === '') {
     return <></>;
@@ -23,7 +23,7 @@ const DailyWorkers = (): JSX.Element => {
   return (
     <>
       <DailyWorkersTemplate dailyData={scheduleResponse?.schedule} />
-      {!isAdmin && <SubmitButton>대타를 구하고 싶어요</SubmitButton>}
+      {/* {!isAdmin && <SubmitButton>대타를 구하고 싶어요</SubmitButton>} */}
     </>
   );
 };
