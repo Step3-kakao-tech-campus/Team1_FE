@@ -34,11 +34,19 @@ export const useGetDailyWorkers = (day: number) => {
   const startWeekDate = useAtomValue(selectedWeekAtom).startWeekDate;
   const selectedDate = stringDateMove(startWeekDate, day);
   const { data: scheduleRes } = useQuery(
-    ['getDailyWorkers', selectedDate],
-    () => getDailyWorkers({ selectedDate: selectedDate }),
+    ['getDailyWorkers', 'newSchedule', selectedDate],
+    () =>
+      getDailyWorkers({ selectedDate: selectedDate }).catch((err) => {
+        if (err.response?.data?.code === -11001) {
+          return null;
+        } else {
+          throw err;
+        }
+      }),
     {
       suspense: true,
     },
   );
+
   return { scheduleRes };
 };
