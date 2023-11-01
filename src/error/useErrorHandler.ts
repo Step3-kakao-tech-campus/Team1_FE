@@ -7,8 +7,13 @@ import { removeLoginData } from 'utils/loginDatahandlers';
 const useErrorHandler = () => {
   const navigate = useNavigate();
 
+  // useLocation state 깨짐
+  const wrongPathHandler = (redirect?: string) => {
+    navigate(convertPath(redirect || '/'));
+  };
+
   const apiErrorHandler = (error: ErrorData) => {
-    console.log(error);
+    console.log('apiErrorHandler', error);
 
     if (error.response === undefined) {
       alert('서버 오류');
@@ -16,7 +21,7 @@ const useErrorHandler = () => {
     }
 
     // 서버 에러 응답
-    const code = error.response.status;
+    const code = error.response.data?.code;
     switch (code) {
       case -10000:
         // 타임 아웃
@@ -45,7 +50,7 @@ const useErrorHandler = () => {
         return;
 
       case -20001:
-        // 이미 그룹이 있는데 초대 승인 요청
+        // 이미 그룹이 있음
         alert('이미 소속된 그룹이 있습니다');
         navigate(convertPath('/'));
         return;
@@ -76,7 +81,7 @@ const useErrorHandler = () => {
     }
   };
 
-  return { apiErrorHandler };
+  return { apiErrorHandler, wrongPathHandler };
 };
 
 export default useErrorHandler;
