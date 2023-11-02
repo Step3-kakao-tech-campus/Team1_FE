@@ -9,7 +9,7 @@ export const getApplyStatus = async (params: Params): Promise<Return> => {
 
   const templates: { [index: number]: TimeData } = {};
   for (let timeObj of response.data.template) {
-    templates[timeObj.worktimeId] = {
+    templates[timeObj.workTimeId] = {
       title: timeObj.title,
       startTime: strTimeProcessor(timeObj.startTime),
       endTime: strTimeProcessor(timeObj.endTime),
@@ -18,7 +18,7 @@ export const getApplyStatus = async (params: Params): Promise<Return> => {
 
   const applyStatus = weeklyArray.map((dailyArray) => {
     return dailyArray.map((workersObj) => {
-      return { ...templates[workersObj.worktimeId], workerList: workersObj.workerList };
+      return { ...templates[workersObj.workTimeId], workerList: workersObj.workerList };
     });
   });
 
@@ -36,7 +36,7 @@ interface Return {
 interface Response {
   template: TimeWithIdData[];
   applyStatus: {
-    worktimeId: number;
+    workTimeId: number;
     workerList: UserData[];
   }[][];
 }

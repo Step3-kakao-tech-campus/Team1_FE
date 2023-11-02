@@ -5,7 +5,7 @@ export interface TimeData {
 }
 
 export interface TimeWithIdData extends TimeData {
-  worktimeId: number;
+  workTimeId: number;
 }
 
 export interface TimeWorkerListData extends TimeData {
@@ -53,4 +53,9 @@ export interface ErrorData {
       code: number;
     };
   };
+}
+
+export interface ErrorFallbackProps {
+  error: ErrorData;
+  resetErrorBoundary: () => void;
 }

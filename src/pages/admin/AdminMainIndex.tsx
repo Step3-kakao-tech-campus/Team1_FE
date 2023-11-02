@@ -4,15 +4,18 @@ import SchedulePage from 'pages/SchedulePage';
 import useGetMyInfo from 'hooks/useGetMyInfo';
 
 const AdminMainIndex = (): JSX.Element => {
-  const { hasGroup, hasMember, members } = useGetMyInfo();
+  const { userType, members } = useGetMyInfo();
 
-  return (
-    <>
-      {!hasGroup && <AdminNoGroupPage />}
-      {hasGroup && !hasMember && <AdminNoMemberPage />}
-      {hasGroup && hasMember && <SchedulePage members={members} />}
-    </>
-  );
+  switch (userType) {
+    case 'ADMIN_NO_GROUP':
+      return <AdminNoGroupPage />;
+    case 'ADMIN_NO_MEMBER':
+      return <AdminNoMemberPage />;
+    case 'ADMIN':
+      return <SchedulePage members={members} />;
+    default:
+      return <></>;
+  }
 };
 
 export default AdminMainIndex;

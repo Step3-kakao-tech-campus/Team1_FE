@@ -3,11 +3,13 @@ import { useLocation } from 'react-router-dom';
 import PageContainer from 'components/@commons/PageContainer';
 import SelectRecommendsSection from './SelectRecommendsSection';
 import Loader from 'components/Suspenses/Loader';
+import useErrorHandler from 'error/useErrorHandler';
 
 const ApplicationClosePage = (): JSX.Element => {
+  const { wrongPathHandler } = useErrorHandler();
   const state = useLocation().state;
   if (state === null) {
-    throw { name: 'clientError' };
+    wrongPathHandler('/newSchedule');
   }
   const startWeekDate = state.startWeekDate;
 

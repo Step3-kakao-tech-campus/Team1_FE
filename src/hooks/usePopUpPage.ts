@@ -6,7 +6,7 @@ export const popUpAtom = atom<{
   content: React.ReactNode;
 }>({
   isOn: false,
-  content: <></>,
+  content: null,
 });
 
 const usePopUpPage = () => {
@@ -19,7 +19,7 @@ const usePopUpPage = () => {
   const popUpOffHandler = () => {
     setPopup({
       isOn: false,
-      content: <></>,
+      content: null,
     });
   };
 

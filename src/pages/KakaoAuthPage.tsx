@@ -1,14 +1,24 @@
+import { convertPath } from 'apis/convertURI';
 import PageContainer from 'components/@commons/PageContainer';
 import Loader from 'components/Suspenses/Loader';
-import useLogin from 'hooks/useLogin';
-import React, { useEffect } from 'react';
+import useLogin from 'hooks/auth/useLogin';
+import React from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const KakaoAuthPage = (): JSX.Element => {
   const { login } = useLogin();
-  const code: string | null = new URL(window.location.href).searchParams.get('code');
+  const [searchParams] = useSearchParams();
+  const code: string | null = searchParams.get('code');
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (code === null) return;
+  React.useEffect(() => {
+    navigate(convertPath('/'));
+
+    if (code === null) {
+      alert('다시 시도하세요');
+      return;
+    }
+
     login(code);
   }, [code]);
 

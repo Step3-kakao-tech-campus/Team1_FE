@@ -4,7 +4,7 @@ import { timeColors } from 'utils/colors';
 
 export const TitleBox = styled(FlexContainer)<{ $timeIndex: number }>`
   width: 100%;
-  background-color: ${(props) => props.$timeIndex && timeColors(props.$timeIndex)};
+  background-color: ${(props) => timeColors(props.$timeIndex)};
   align-items: center;
   gap: 0;
   padding: 4px;

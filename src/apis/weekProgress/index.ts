@@ -3,8 +3,8 @@ import { WeekStatusData, WeekStatusTypes } from 'apis/types';
 import { AxiosResponse } from 'axios';
 import { dateToString } from 'utils/dateToString';
 
-export const getWeekProgress = async (info: Info): Promise<Return> => {
-  const { year, month } = { ...info };
+export const getWeekProgress = async ({ year, month }: { year: number; month: number }): Promise<Return> => {
+  const today = new Date().getTime();
 
   let firstMonday = 1;
 
@@ -19,9 +19,11 @@ export const getWeekProgress = async (info: Info): Promise<Return> => {
   // 2. 2차원 빈 달력
   const table: WeekStatusData[] = [];
   for (let i = 0; i < 6; i++) {
+    // 해당 주 날짜 리스트 생성
     const weekly = [];
     const startWeekDate = i * 7 + firstMonday;
 
+    // 6주차가 다음달일 때
     if (i === 5 && new Date(year, month, startWeekDate).getDate() !== startWeekDate) {
       break;
     }
@@ -30,27 +32,27 @@ export const getWeekProgress = async (info: Info): Promise<Return> => {
       weekly.push(dateToString(new Date(year, month, j)));
     }
 
-    const params: Params = {
-      startWeekDate: dateToString(new Date(year, month, startWeekDate)),
-    };
-    const response: AxiosResponse<Response> = await instance.get(`/schedule/status`, { params });
-    const weekStatus = response.data.weekStatus;
-
-    const weekObject = {
-      weekStatus: weekStatus,
+    // 주 상태 객체 생성 (기본값 : 모집마감)
+    const weekObject: WeekStatusData = {
+      weekStatus: 'closed',
       dates: weekly,
     };
+
+    // 해당 주가 오늘 이후일 때 : 요청 보내기
+    if (today < new Date(year, month, startWeekDate).getTime()) {
+      const params: Params = {
+        startWeekDate: dateToString(new Date(year, month, startWeekDate)),
+      };
+
+      const response: AxiosResponse<Response> = await instance.get(`/schedule/status`, { params });
+      weekObject.weekStatus = response.data.weekStatus;
+    }
 
     table.push(weekObject);
   }
 
   return { table };
 };
-
-interface Info {
-  year: number;
-  month: number;
-}
 
 interface Params {
   startWeekDate: string;

@@ -35,9 +35,17 @@ export const useGetMonthly = () => {
 
 export const useGetDailyWorkers = () => {
   const selectedDate = useAtomValue(dateAtom);
+
   const { data: scheduleResponse } = useQuery(
-    [selectedDate],
-    () => getDailyWorkers({ selectedDate: selectedDate.date }),
+    ['getDailyWorkers', 'newSchedule', selectedDate.date],
+    () =>
+      getDailyWorkers({ selectedDate: selectedDate.date }).catch((err) => {
+        if (err.response?.data?.code === -11001) {
+          return null;
+        } else {
+          throw err;
+        }
+      }),
     {
       suspense: true,
       enabled: selectedDate.date !== '' && selectedDate.isFixed,

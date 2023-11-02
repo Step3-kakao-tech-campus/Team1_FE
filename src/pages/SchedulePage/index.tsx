@@ -15,7 +15,7 @@ import Loader from 'components/Suspenses/Loader';
 import Skeleton from 'components/Suspenses/Skeleton';
 import { getLoginData } from 'utils/loginDatahandlers';
 
-const SchedulePage = ({ members }: { members: UserData[] }): JSX.Element => {
+const SchedulePage = ({ members }: { members?: UserData[] }): JSX.Element => {
   const isAdmin = getLoginData().isAdmin;
   const nowMember = useAtomValue(memberAtom);
 
@@ -26,7 +26,7 @@ const SchedulePage = ({ members }: { members: UserData[] }): JSX.Element => {
           {nowMember.isSelected && <TotalWorkTime />}
         </FlexContainer>
         <FlexContainer $hFull $wFull $position="relative">
-          {isAdmin && <Dropdown members={members} />}
+          {isAdmin && !!members && <Dropdown members={members} />}
         </FlexContainer>
       </FlexContainer>
 

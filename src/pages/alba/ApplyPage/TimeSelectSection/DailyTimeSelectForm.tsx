@@ -4,16 +4,18 @@ import BorderBox from 'components/@commons/BorderBox';
 import Text from 'components/@commons/Text';
 import CheckBox from 'components/@commons/CheckBox';
 import useSelectTime from 'hooks/alba/apply/useSelectTime';
-import SubmitButton from 'components/@commons/SubmitButton';
 import TimeSelectSkeleton from 'components/Suspenses/PageSkeletons/TimeSelectSkeleton';
 import { useGetApplyForm } from 'hooks/alba/apply/fetch';
 import { useAtomValue } from 'jotai';
-import { weeklySelectAtom } from '..';
+import { weeklySelectAtom } from '../states';
 
-const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: string }): JSX.Element => {
+const DailyTimeSelectForm = ({ day, startWeekDate }: { day: number; startWeekDate: string }): JSX.Element => {
+  // get요청 -> 전역상태 업데이트
   const { isLoading } = useGetApplyForm(startWeekDate);
+  // 전역상태 불러오기
   const weeklySelect = useAtomValue(weeklySelectAtom);
-  const { goPreviewHandler, selectTimeHandler } = useSelectTime();
+  // 폼 입력 -> 전역상태 업데이트
+  const { selectTimeHandler } = useSelectTime();
 
   if (isLoading) {
     return <TimeSelectSkeleton />;
@@ -28,7 +30,7 @@ const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: strin
               <FlexContainer $wFull $padding="28px" $direction="row" $align="center">
                 <CheckBox
                   type="checkbox"
-                  onClick={() => selectTimeHandler(timeObject, timeIndex, day)}
+                  onClick={() => selectTimeHandler(timeIndex, day)}
                   checked={timeObject.isChecked}
                   readOnly
                 />
@@ -43,9 +45,7 @@ const DailySelect = ({ day, startWeekDate }: { day: number; startWeekDate: strin
           </label>
         ))}
       </FlexContainer>
-
-      <SubmitButton onClick={goPreviewHandler}>미리보기</SubmitButton>
     </>
   );
 };
-export default DailySelect;
+export default DailyTimeSelectForm;

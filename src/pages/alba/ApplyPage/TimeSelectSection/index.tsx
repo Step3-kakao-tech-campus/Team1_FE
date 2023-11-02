@@ -1,12 +1,12 @@
-import React, { Suspense } from 'react';
-import DailySelect from './DailySelect';
+import React from 'react';
+import DailyTimeSelectForm from './DailyTimeSelectForm';
 import FlexContainer from 'components/@commons/FlexContainer';
 import useWeekSelector from 'hooks/useWeekSelector';
 import Text from 'components/@commons/Text';
 import { stringDateMoveKor } from 'utils/dateToString';
 import BorderBox from 'components/@commons/BorderBox';
 
-const TimeSelectSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
+const TimeSelectSection = ({ startWeekDate }: { startWeekDate: string; previewPage: React.ReactNode }): JSX.Element => {
   const { day, WeekBarComponent } = useWeekSelector(0);
 
   return (
@@ -20,7 +20,7 @@ const TimeSelectSection = ({ startWeekDate }: { startWeekDate: string }): JSX.El
         </FlexContainer>
       </BorderBox>
 
-      <DailySelect day={day} startWeekDate={startWeekDate} />
+      <DailyTimeSelectForm day={day} startWeekDate={startWeekDate} />
     </FlexContainer>
   );
 };

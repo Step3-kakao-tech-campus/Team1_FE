@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { getApplyForm, putApply } from 'apis/alba/apply';
-import { weeklySelectAtom } from 'pages/alba/ApplyPage';
+import { weeklySelectAtom } from 'pages/alba/ApplyPage/states';
 
 export const useGetApplyForm = (startWeekDate: string) => {
   const setWeeklySelect = useSetAtom(weeklySelectAtom);

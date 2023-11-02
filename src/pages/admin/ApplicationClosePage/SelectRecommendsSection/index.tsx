@@ -1,5 +1,5 @@
 import React from 'react';
-import DailyWorkersTemplate from 'components/DailyWorkers/DailyWorkersTemplate';
+import { DailyWorkersTable } from 'components/DailyWorkersTable';
 import ColorBox from 'components/@commons/ColorBox';
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
@@ -14,7 +14,7 @@ import { useGetRecommends } from 'hooks/admin/ApplicationClosePage/fetch';
 
 const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { recommendsRes } = useGetRecommends(startWeekDate);
-  const { setCandidate, candidate, submitHandler } = useClose();
+  const { setCandidate, candidate, submitHandler } = useClose(startWeekDate);
   const { day, WeekBarComponent } = useWeekSelector(0);
 
   return (
@@ -45,7 +45,7 @@ const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): 
         </FlexContainer>
       </BorderBox>
 
-      <DailyWorkersTemplate dailyData={recommendsRes?.data.recommends[candidate][day]} />
+      <DailyWorkersTable dailyData={recommendsRes?.data.recommends[candidate][day]} />
       <SubmitButton onClick={submitHandler}>스케줄 확정하기 (그룹원에게 알림이 가요!)</SubmitButton>
     </>
   );

@@ -9,7 +9,7 @@ import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import styled from 'styled-components';
 
-const GetInviteKey = (): JSX.Element => {
+const GetInviteKeyModal = (): JSX.Element => {
   const { data: inviteKeyData } = useQuery(['inviteKey'], getInviteKey);
   const { modalOffHandler } = useModal();
   return (
@@ -33,7 +33,7 @@ const GetInviteKey = (): JSX.Element => {
   );
 };
 
-export default GetInviteKey;
+export default GetInviteKeyModal;
 
 const Box = styled.div`
   display: flex;

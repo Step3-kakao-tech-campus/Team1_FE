@@ -1,6 +1,6 @@
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
 import { myTheme } from 'styles/myTheme';
@@ -12,7 +12,6 @@ import LogoutOnlyPrivate from 'privateRoutes/LogoutOnlyPrivate';
 import UserTypePrivate from 'privateRoutes/UserTypePrivate';
 
 import HomeIndex from 'pages/HomeIndex';
-import KakaoAuthPage from 'pages/KakaoAuthPage';
 import SignupPage from 'pages/SignupPage';
 import InvitedPage from 'pages/alba/InvitedPage';
 import AddGroupPage from 'pages/admin/AddGroupPage';
@@ -22,14 +21,38 @@ import ApplyPage from 'pages/alba/ApplyPage';
 import SelectWeekPage from 'pages/SelectWeekPage';
 import ErrorFallback from 'error/ErrorFallback';
 import ViewPortContainer from 'components/@commons/ViewPortContainer';
-import { useQueryErrorResetBoundary } from '@tanstack/react-query';
+import { QueryCache, QueryClient, QueryClientProvider, useQueryErrorResetBoundary } from '@tanstack/react-query';
+import useErrorHandler from 'error/useErrorHandler';
+import KakaoAuthPage from 'pages/KakaoAuthPage';
 
 function App(): JSX.Element {
   const { reset } = useQueryErrorResetBoundary();
+  const { apiErrorHandler } = useErrorHandler();
+  const queryClient = new QueryClient({
+    queryCache: new QueryCache({
+      onError(error, query) {
+        setTimeout(() => {
+          queryClient.removeQueries(query.queryKey);
+        }, 1000);
+      },
+    }),
+    defaultOptions: {
+      queries: {
+        useErrorBoundary: true,
+        retryOnMount: true,
+        retry: 0,
+        onError: (err) => apiErrorHandler(err || { name: 'unknownError' }),
+      },
+      mutations: {
+        onError: (err) => apiErrorHandler(err || { name: 'unknownError' }),
+      },
+    },
+  });
+
   return (
-    <ThemeProvider theme={myTheme}>
-      <Provider>
-        <BrowserRouter>
+    <Provider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={myTheme}>
           <ViewPortContainer>
             <ErrorBoundary FallbackComponent={ErrorFallback} onReset={reset}>
               <Routes>
@@ -55,9 +78,9 @@ function App(): JSX.Element {
               </Routes>
             </ErrorBoundary>
           </ViewPortContainer>
-        </BrowserRouter>
-      </Provider>
-    </ThemeProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </Provider>
   );
 }
 
