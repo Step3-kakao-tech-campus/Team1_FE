@@ -3,7 +3,7 @@ import { convertPath } from 'apis/convertURI';
 import { SignupRequest } from 'apis/auth';
 import React from 'react';
 import { removeLoginData } from 'utils/loginDatahandlers';
-import { useLoginFetch } from './useLoginFetch';
+import { useLoginFetch } from './fetch';
 
 const useLogin = (redirectPage?: string) => {
   const navigate = useNavigate();
