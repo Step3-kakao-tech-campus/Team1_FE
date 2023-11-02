@@ -18,7 +18,6 @@ const AlarmContainer = styled.main<{
   $bottom?: boolean;
 }>`
   width: 100%;
-  height: 100%;
   flex-grow: 1;
   position: relative;
 
@@ -27,7 +26,7 @@ const AlarmContainer = styled.main<{
   @media screen and (min-width: ${({ theme }) => theme.window.desktopMin}) {
     max-width: 480px;
   }
-  padding: 24px 12px;
+  padding: 24px 20px;
 
   display: flex;
   flex-direction: column;
