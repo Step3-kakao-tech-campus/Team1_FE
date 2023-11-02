@@ -2,18 +2,22 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import BorderBox from 'components/@commons/BorderBox';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
-import usePeopleAmount from 'hooks/admin/ApplicationOpenPage/usePeopleAmount';
 import React from 'react';
 import useWeekSelector from 'hooks/useWeekSelector';
 import EditAmountForm from './EditAmountForm';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { openStepAtom, timeTemplateAtom } from '..';
+import { usePostOpenApplication } from 'hooks/admin/ApplicationOpenPage/fetch';
 
 const SetPeopleSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
-  const { timeTemplate, submitStartHandler, goPrevHandler } = usePeopleAmount(startWeekDate);
   const { day, WeekBarComponent } = useWeekSelector(0);
+  const { submitOpenhandler } = usePostOpenApplication(startWeekDate);
+  const timeTemplate = useAtomValue(timeTemplateAtom);
+  const setStep = useSetAtom(openStepAtom);
 
   return (
     <FlexContainer $wFull $gap="48px">
-      <button onClick={goPrevHandler}>시간대 수정하기</button>
+      <button onClick={() => setStep('setTime')}>시간대 수정하기</button>
       <WeekBarComponent />
       <FlexContainer $wFull>
         {timeTemplate.map((timeData, timeIndex) => (
@@ -33,7 +37,7 @@ const SetPeopleSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Ele
           </BorderBox>
         ))}
       </FlexContainer>
-      <SubmitButton onClick={submitStartHandler}>스케줄 모집 시작하기 (그룹원에게 알림이 가요!)</SubmitButton>
+      <SubmitButton onClick={submitOpenhandler}>스케줄 모집 시작하기 (그룹원에게 알림이 가요!)</SubmitButton>
     </FlexContainer>
   );
 };
