@@ -5,7 +5,7 @@ export interface TimeData {
 }
 
 export interface TimeWithIdData extends TimeData {
-  worktimeId: number;
+  workTimeId: number;
 }
 
 export interface TimeWorkerListData extends TimeData {
