@@ -32,7 +32,7 @@ export const useLoginFetch = () => {
 
   // 회원가입 요청
   const { mutate: signupMutate } = useMutation(
-    ['postRecommends'],
+    ['postsignup'],
     (requestBody: SignupRequest) => postsignup(requestBody),
     {
       onSuccess: (response) => {
