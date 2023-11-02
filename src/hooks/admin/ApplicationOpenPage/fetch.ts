@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { postOpenApplication } from 'apis/admin/application/open';
 import { convertPath } from 'apis/convertURI';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage';
+import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage/states';
 import { useNavigate } from 'react-router-dom';
 
 export const usePostOpenApplication = (startWeekDate: string) => {

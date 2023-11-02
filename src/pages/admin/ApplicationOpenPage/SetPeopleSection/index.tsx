@@ -6,8 +6,8 @@ import React from 'react';
 import useWeekSelector from 'hooks/useWeekSelector';
 import EditAmountForm from './EditAmountForm';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { openStepAtom, timeTemplateAtom } from '..';
 import { usePostOpenApplication } from 'hooks/admin/ApplicationOpenPage/fetch';
+import { openStepAtom, timeTemplateAtom } from '../states';
 
 const SetPeopleSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { day, WeekBarComponent } = useWeekSelector(0);

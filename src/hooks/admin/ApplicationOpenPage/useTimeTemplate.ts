@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getTimeTemplate } from 'apis/admin/application/open';
 import { useAtom, useSetAtom } from 'jotai';
-import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage';
+import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage/states';
 import React from 'react';
 import weekdayArray from 'utils/weekdayArray';
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useAtom } from 'jotai';
 import { isOnlyNumber } from 'utils/validators';
-import { weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage';
+import { weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage/states';
 
 export const usePeopleValidation = (timeIndex: number, day: number) => {
   const [weeklyAmount, setWeeklyAmount] = useAtom(weeklyPeopleAtom);
