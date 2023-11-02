@@ -1,6 +1,6 @@
+import { useMutation } from '@tanstack/react-query';
 import { postAddNewGroup } from 'apis/admin/manageGroup';
 import KakaoAddress from 'components/modals/KakaoAddress';
-import useErrorHandler from 'error/useErrorHandler';
 import useForm from 'hooks/useForm';
 import useModal from 'hooks/useModal';
 import usePopUpPage from 'hooks/usePopUpPage';
@@ -31,16 +31,12 @@ const useAddGroupForm = () => {
     );
   };
 
-  const { apiErrorHandler } = useErrorHandler();
   const { popUpOnHandler } = usePopUpPage();
+  const { mutate } = useMutation(['postAddNewGroup'], () => postAddNewGroup(marketInfo), {
+    onSuccess: () => popUpOnHandler(<AddGroupDonePopUp />),
+  });
   const addGroupSubmit = (): void => {
-    postAddNewGroup(marketInfo)
-      .then((res) => {
-        popUpOnHandler(<AddGroupDonePopUp />);
-      })
-      .catch((err) => {
-        apiErrorHandler(err);
-      });
+    mutate();
   };
 
   return { marketInfo, formHandler, selectAddress, addGroupValidator, addGroupSubmit };
