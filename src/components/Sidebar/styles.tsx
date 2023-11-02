@@ -25,4 +25,5 @@ export const SidebarBox = styled.div`
   padding: 32px;
 
   z-index: 981;
+  height: 100vh;
 `;
