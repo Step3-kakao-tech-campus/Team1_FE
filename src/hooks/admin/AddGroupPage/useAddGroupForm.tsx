@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { postAddNewGroup } from 'apis/admin/manageGroup';
-import KakaoAddress from 'components/modals/KakaoAddress';
+import KakaoAddressModal from 'components/modals/KakaoAddressModal';
 import useForm from 'hooks/useForm';
 import useModal from 'hooks/useModal';
 import usePopUpPage from 'hooks/usePopUpPage';
@@ -14,7 +14,7 @@ const useAddGroupForm = () => {
   const { modalOnHandler, modalOffHandler } = useModal();
   const selectAddress = () => {
     modalOnHandler(
-      <KakaoAddress
+      <KakaoAddressModal
         onComplete={(data) => {
           etcUpdateHandler(data.address, 'mainAddress');
           modalOffHandler();

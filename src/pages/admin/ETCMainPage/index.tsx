@@ -4,7 +4,7 @@ import GrayBox from 'components/@commons/GrayBox';
 import PageContainer from 'components/@commons/PageContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
-import GetInviteKey from 'components/modals/GetInviteKey';
+import GetInviteKeyModal from 'components/modals/GetInviteKeyModal';
 import useModal from 'hooks/useModal';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -46,7 +46,7 @@ export const AdminNoMemberPage = (): JSX.Element => {
                 </Text>
                 <Text size="xl">그룹에 직원이 없습니다</Text>
               </FlexContainer>
-              <SubmitButton onClick={() => modalOnHandler(<GetInviteKey />)}>초대링크 발급받기</SubmitButton>
+              <SubmitButton onClick={() => modalOnHandler(<GetInviteKeyModal />)}>초대링크 발급받기</SubmitButton>
             </FlexContainer>
           </GrayBox>
         </FlexContainer>

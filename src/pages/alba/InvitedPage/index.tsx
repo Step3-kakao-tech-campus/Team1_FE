@@ -6,13 +6,13 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import InvitationSkeleton from 'components/Suspenses/PageSkeletons/InvitationSkeleton';
 import InvitationContent from './InvitationContent';
 import SubmitButton from 'components/@commons/SubmitButton';
-import LoginSignup from 'components/modals/LoginSignup';
+import LoginSignupModal from 'components/modals/LoginSignupModal';
 import useInvitation from 'hooks/alba/invitation/useInvitation';
 
 const InvitedPage = (): JSX.Element => {
   const invitationKey: string = useParams()?.invitationKey || '';
   const donePage = <JoinDone />;
-  const loginModal = <LoginSignup invitationKey={invitationKey} />;
+  const loginModal = <LoginSignupModal invitationKey={invitationKey} />;
   const { acceptBtnHandler } = useInvitation(invitationKey, donePage, loginModal);
 
   return (
