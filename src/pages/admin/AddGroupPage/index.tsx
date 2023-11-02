@@ -1,7 +1,7 @@
 import PageContainer from 'components/@commons/PageContainer';
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import FormSection from './FormSection';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
 import Loader from 'components/Suspenses/Loader';
 import useGetMyInfo from 'hooks/useGetMyInfo';
@@ -21,10 +21,16 @@ const AddGroupPage = (): JSX.Element => {
 export default AddGroupPage;
 
 const CheckAuth = ({ children }: { children: React.ReactNode }) => {
-  const { hasGroup } = useGetMyInfo();
-  if (hasGroup) {
-    alert('이미 그룹이 있습니다');
-    return <Navigate to={convertPath('/')} />;
-  }
+  const { userType } = useGetMyInfo();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userType !== 'ADMIN_NO_GROUP') {
+      alert('이미 그룹이 있습니다');
+      navigate(convertPath('/'));
+      return;
+    }
+  }, [userType]);
+
   return <>{children}</>;
 };
