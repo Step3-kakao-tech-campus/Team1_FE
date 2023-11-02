@@ -7,6 +7,7 @@ export const postRecommends = (body: PostRequest) => {
 };
 
 interface PostRequest {
+  weekStartDate: string;
   selection: number;
 }
 

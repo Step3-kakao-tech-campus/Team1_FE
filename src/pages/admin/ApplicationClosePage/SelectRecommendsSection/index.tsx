@@ -14,7 +14,7 @@ import { useGetRecommends } from 'hooks/admin/ApplicationClosePage/fetch';
 
 const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { recommendsRes } = useGetRecommends(startWeekDate);
-  const { setCandidate, candidate, submitHandler } = useClose();
+  const { setCandidate, candidate, submitHandler } = useClose(startWeekDate);
   const { day, WeekBarComponent } = useWeekSelector(0);
 
   return (
