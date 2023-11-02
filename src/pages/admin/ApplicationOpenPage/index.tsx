@@ -5,15 +5,17 @@ import PageContainer from 'components/@commons/PageContainer';
 import SetPeopleSection from './SetPeopleSection';
 import SetTimeSection from './SetTimeTemplateSection';
 import { TimeData } from 'apis/types';
+import useErrorHandler from 'error/useErrorHandler';
 
 export const timeTemplateAtom = atom<TimeData[]>([]);
 export const weeklyPeopleAtom = atom<number[][]>([new Array(7).fill([])]);
 export const openStepAtom = atom<'setTime' | 'setAmount'>('setTime');
 
 const ApplicationOpenPage = (): JSX.Element => {
+  const { wrongPathHandler } = useErrorHandler();
   const state = useLocation().state;
   if (state === null) {
-    throw { name: 'clientError' };
+    wrongPathHandler('/newSchedule');
   }
   const startWeekDate = state.startWeekDate;
   const step = useAtomValue(openStepAtom);

@@ -1,19 +1,17 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import PageContainer from 'components/@commons/PageContainer';
-import { atom, useAtomValue } from 'jotai';
-import weekdayArray from 'utils/weekdayArray';
+import { useAtomValue } from 'jotai';
 import TimeSelectSection from './TimeSelectSection';
 import PreviewSection from './PreviewSection';
-import { SelectedTimeData } from 'apis/types';
-
-export const weeklySelectAtom = atom<SelectedTimeData[][]>(weekdayArray.map(() => []));
-export const applyStepAtom = atom<'checkTime' | 'preview'>('checkTime');
+import useErrorHandler from 'error/useErrorHandler';
+import { applyStepAtom } from './states';
 
 const ApplyPage = (): JSX.Element => {
+  const { wrongPathHandler } = useErrorHandler();
   const state = useLocation().state;
   if (state === null) {
-    throw { name: 'clientError' };
+    wrongPathHandler('/apply');
   }
   const startWeekDate = state.startWeekDate;
   const step = useAtomValue(applyStepAtom);
