@@ -1,47 +1,60 @@
 import React from 'react';
-import ColorBox from 'components/@commons/ColorBox';
 import FlexContainer from 'components/@commons/FlexContainer';
-import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
-import { AddButton, CloseCircleButton } from 'components/@commons/icons/buttons';
+import { CloseCircleButton } from 'components/@commons/icons/buttons';
 import { ButtonContainer, InputTime, InputTitle } from 'components/PageStyledComponents/admin/ApplicationOpenPage';
-import useTimeTemplate from 'hooks/admin/ApplicationOpenPage/useTimeTemplate';
-
-import { myTheme } from 'styles/myTheme';
 import { TimeData } from 'apis/types';
+import useFormOnBlurUpdate from 'hooks/useFormOnBlurUpdate';
+import { useGetOpenTemplate } from 'hooks/admin/ApplicationOpenPage/fetch';
 
-const EditTimeForm = ({ startWeekDate }: { startWeekDate: string }) => {
-  const { timeTemplate, updateTimeHandler, deleteHandler, addHandler, goNextHandler } = useTimeTemplate(startWeekDate);
+interface Props {
+  timeData: TimeData;
+  timeIndex: number;
+  updater: (id: string, value: string, index: number) => void;
+  deleteHandler: (i: number) => void;
+}
+
+export const OpenTimeInputs = ({ timeData, timeIndex, updater, deleteHandler }: Props) => {
+  const { val, onBlurHandler, onChangeHandler } = useFormOnBlurUpdate<TimeDataIndex>(
+    timeData as TimeDataIndex,
+    (value: string, id: string) => updater(value, id, timeIndex),
+  );
 
   return (
     <>
-      {timeTemplate.map((time: TimeData, i: number) => (
-        <ColorBox $wFull key={`key${i}`} $background={myTheme.color.lightYellow}>
-          <FlexContainer $wFull $padding="20px">
-            <FlexContainer $position="relative" $direction="row" $wFull>
-              <InputTitle
-                id="title"
-                value={time.title}
-                onChange={(e) => updateTimeHandler(e, i)}
-                placeholder="시간대 이름을 입력하세요"
-              />
-              <ButtonContainer>
-                <CloseCircleButton onClick={() => deleteHandler(i)} />
-              </ButtonContainer>
-            </FlexContainer>
+      <FlexContainer $position="relative" $direction="row" $wFull>
+        <InputTitle
+          id="title"
+          value={val['title']}
+          onChange={onChangeHandler}
+          onBlur={onBlurHandler}
+          placeholder="시간대 이름을 입력하세요"
+        />
+        <ButtonContainer>
+          <CloseCircleButton onClick={() => deleteHandler(timeIndex)} />
+        </ButtonContainer>
+      </FlexContainer>
 
-            <FlexContainer $direction="row">
-              <InputTime id="startTime" type="time" value={time.startTime} onChange={(e) => updateTimeHandler(e, i)} />
-              <Text margin="0">~</Text>
-              <InputTime id="endTime" type="time" value={time.endTime} onChange={(e) => updateTimeHandler(e, i)} />
-            </FlexContainer>
-          </FlexContainer>
-        </ColorBox>
-      ))}
-      <AddButton onClick={addHandler} />
-      <SubmitButton onClick={goNextHandler}>요일별 모집 인원 설정하기</SubmitButton>
+      <FlexContainer $direction="row">
+        <InputTime
+          id="startTime"
+          value={val['startTime']}
+          onChange={onChangeHandler}
+          onBlur={onBlurHandler}
+          type="time"
+        />
+        <Text margin="0">~</Text>
+        <InputTime id="endTime" value={val['endTime']} onChange={onChangeHandler} onBlur={onBlurHandler} type="time" />
+      </FlexContainer>
     </>
   );
 };
 
-export default EditTimeForm;
+interface TimeDataIndex extends TimeData {
+  [index: string]: string;
+}
+
+export const FetchGetOpen = ({ children }: { children: React.ReactNode }) => {
+  const data = useGetOpenTemplate();
+  return <>{children}</>;
+};

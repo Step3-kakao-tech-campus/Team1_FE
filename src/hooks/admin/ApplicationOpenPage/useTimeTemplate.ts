@@ -1,40 +1,18 @@
-import { useQuery } from '@tanstack/react-query';
-import { getTimeTemplate } from 'apis/admin/application/open';
 import { useAtom, useSetAtom } from 'jotai';
 import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage/states';
 import React from 'react';
-import weekdayArray from 'utils/weekdayArray';
 
-const useTimeTemplate = (startWeekDate: string) => {
-  /* 1. 초기 설정 */
+const useTimeTemplate = () => {
+  /* 1. 초기 선언 */
 
-  // 전역 상태 선언
   const [timeTemplate, setTimeTemplate] = useAtom(timeTemplateAtom);
   const setWeeklyData = useSetAtom(weeklyPeopleAtom);
-
-  // 이미 불러온 템플릿이 없을 때 : 서버에서 기본템플릿 불러오기
-  const { data } = useQuery(
-    ['getTimeTemplate', startWeekDate],
-    () => getTimeTemplate({ startWeekDate: startWeekDate }),
-    {
-      suspense: true,
-      enabled: timeTemplate.length === 0,
-      onSuccess: (data) => {
-        if (timeTemplate.length === 0) {
-          setTimeTemplate(data.template);
-          setWeeklyData(weekdayArray.map(() => data.template.map(() => 0)));
-        }
-      },
-    },
-  );
 
   /* 2. 업데이트 */
 
   // 시간대 이름/시간 변경 (입력 값 반영)
-  const updateTimeHandler = (e: React.ChangeEvent<HTMLInputElement>, timeIndex: number): void => {
-    setTimeTemplate((prev) =>
-      prev.map((object, index) => (timeIndex !== index ? object : { ...object, [e.target.id]: e.target.value })),
-    );
+  const updateTimeHandler = (value: string, id: string, timeIndex: number): void => {
+    setTimeTemplate((prev) => prev.map((object, index) => (timeIndex !== index ? object : { ...object, [id]: value })));
   };
 
   // 시간대 삭제

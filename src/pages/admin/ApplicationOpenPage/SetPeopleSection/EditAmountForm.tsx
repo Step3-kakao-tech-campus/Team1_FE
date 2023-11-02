@@ -3,16 +3,16 @@ import { InputPeople } from 'components/PageStyledComponents/admin/ApplicationOp
 import { usePeopleValidation } from 'hooks/admin/ApplicationOpenPage/usePeopleValidation';
 
 const EditAmountForm = ({ timeIndex, day }: { timeIndex: number; day: number }): JSX.Element => {
-  const { val, peopleOnChange, peopleOnBlur } = usePeopleValidation(timeIndex, day);
+  const { val, onBlurHandler, onChangeHandler } = usePeopleValidation(timeIndex, day);
 
   return (
     <InputPeople
       type="number"
       min="0"
       id={`${timeIndex}`}
-      value={val}
-      onChange={peopleOnChange}
-      onBlur={peopleOnBlur}
+      value={val[`${timeIndex}`]}
+      onChange={onChangeHandler}
+      onBlur={onBlurHandler}
     />
   );
 };

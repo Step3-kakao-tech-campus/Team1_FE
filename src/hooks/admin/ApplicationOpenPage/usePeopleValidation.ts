@@ -1,38 +1,43 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 import { useAtom } from 'jotai';
 import { isOnlyNumber } from 'utils/validators';
 import { weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage/states';
+import useFormOnBlurUpdate from 'hooks/useFormOnBlurUpdate';
 
 export const usePeopleValidation = (timeIndex: number, day: number) => {
   const [weeklyAmount, setWeeklyAmount] = useAtom(weeklyPeopleAtom);
-  const [val, setVal] = useState(weeklyAmount[day][timeIndex].toString());
 
-  const peopleOnBlur = () => {
+  const validator = (prev: string) => {
     // validation : 숫자가 아닌 값
-    if (!isOnlyNumber(val)) {
-      setVal(weeklyAmount[day][timeIndex].toString());
-      return;
+    if (!isOnlyNumber(prev)) {
+      return weeklyAmount[day][timeIndex].toString();
     }
 
+    let newValue = prev;
     // validation : 0으로 시작
-    let newValue = val;
     while (newValue.length > 1 && newValue.startsWith('0')) {
       newValue = newValue.slice(1);
     }
-    setVal(newValue);
+    return newValue;
+  };
 
+  const afterBlurUpdater = (eventValue: string) => {
     // 데일리 배열 새로 생성
     const dailyNew = weeklyAmount[day].map((amount, index) =>
-      index === timeIndex ? Number.parseInt(newValue) : amount,
+      index === timeIndex ? Number.parseInt(validator(eventValue)) : amount,
     );
     // 위클리 시간표 업데이트
     setWeeklyAmount((prev) => prev.map((dailyOrigin, dayIndex) => (dayIndex === day ? dailyNew : dailyOrigin)));
   };
 
-  const peopleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setVal(event.target.value);
+  const { val, onBlurHandler, onChangeHandler } = useFormOnBlurUpdate(
+    { [timeIndex]: weeklyAmount[day][timeIndex].toString() },
+    afterBlurUpdater,
+    validator,
+  );
+  return {
+    val,
+    onBlurHandler,
+    onChangeHandler,
   };
-
-  return { val, peopleOnBlur, peopleOnChange };
 };
