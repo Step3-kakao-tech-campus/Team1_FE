@@ -10,7 +10,7 @@ export const DailyWorkersTable = ({ dailyData }: { dailyData: TimeWorkerListData
   return (
     <FlexContainer $direction="row" $wFull $gap="3%">
       {dailyData?.map((timeData: TimeWorkerListData, timeindex) => (
-        <FlexContainer key={timeData.title} $wFull $gap="10px">
+        <FlexContainer key={`${timeData.title}${timeindex}`} $wFull $gap="10px">
           <TitleBox $timeIndex={timeindex}>
             <Text block size="lg" weight="semiBold">
               {timeData.title + ' (' + timeData.workerList.length + ')'}
@@ -21,7 +21,7 @@ export const DailyWorkersTable = ({ dailyData }: { dailyData: TimeWorkerListData
           </TitleBox>
           <FlexContainer $gap="8px">
             {timeData.workerList.map((w: UserData, i) => (
-              <NameBox key={w.name + i}>
+              <NameBox key={`${w.name}${i}`}>
                 <Text>{w.name}</Text>
               </NameBox>
             ))}
