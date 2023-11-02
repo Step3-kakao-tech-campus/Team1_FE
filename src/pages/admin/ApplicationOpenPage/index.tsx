@@ -1,15 +1,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { atom, useAtomValue } from 'jotai';
+import { useAtomValue } from 'jotai';
 import PageContainer from 'components/@commons/PageContainer';
 import SetPeopleSection from './SetPeopleSection';
 import SetTimeSection from './SetTimeTemplateSection';
-import { TimeData } from 'apis/types';
 import useErrorHandler from 'error/useErrorHandler';
-
-export const timeTemplateAtom = atom<TimeData[]>([]);
-export const weeklyPeopleAtom = atom<number[][]>([new Array(7).fill([])]);
-export const openStepAtom = atom<'setTime' | 'setAmount'>('setTime');
+import { openStepAtom } from './states';
 
 const ApplicationOpenPage = (): JSX.Element => {
   const { wrongPathHandler } = useErrorHandler();
