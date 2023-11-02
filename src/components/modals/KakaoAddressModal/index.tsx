@@ -7,7 +7,7 @@ interface Props {
   onComplete: (address: Address) => void;
 }
 
-const KakaoAddress = ({ onComplete }: Props): JSX.Element => {
+const KakaoAddressModal = ({ onComplete }: Props): JSX.Element => {
   const { modalOffHandler } = useModal();
   return (
     <>
@@ -17,4 +17,4 @@ const KakaoAddress = ({ onComplete }: Props): JSX.Element => {
   );
 };
 
-export default KakaoAddress;
+export default KakaoAddressModal;
