@@ -5,7 +5,7 @@ import Loader from 'components/Suspenses/Loader';
 import { selectedWeekAtom } from '../states';
 import SubmitButton from 'components/@commons/SubmitButton';
 import useWeeklyDetail from 'hooks/SelectWeekPage/useWeeklyDetail';
-import DailyWorkersTemplate from 'components/DailyWorkers/DailyWorkersTemplate';
+import { DailyWorkersTable } from 'components/DailyWorkersTable';
 import useWeekSelector from 'hooks/useWeekSelector';
 import { useGetApplyStatus } from 'hooks/SelectWeekPage/fetch';
 import { useGetDailyWorkers } from 'hooks/SelectWeekPage/fetch';
@@ -48,7 +48,7 @@ const InProgressDetail = (): JSX.Element => {
     <>
       <SubmitButton onClick={closeHandler}>모집 마감하고 배정하기</SubmitButton>
       <WeekBarComponent />
-      <DailyWorkersTemplate dailyData={applicantsStatusRes?.applyStatus[day]} />
+      <DailyWorkersTable dailyData={applicantsStatusRes?.applyStatus[day]} />
     </>
   );
 };
@@ -63,7 +63,7 @@ const ClosedDetail = (): JSX.Element => {
   return (
     <>
       <WeekBarComponent />
-      <DailyWorkersTemplate dailyData={scheduleRes?.schedule} />
+      <DailyWorkersTable dailyData={scheduleRes?.schedule} />
     </>
   );
 };

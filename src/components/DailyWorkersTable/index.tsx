@@ -1,12 +1,12 @@
 import React from 'react';
 import FlexContainer from 'components/@commons/FlexContainer';
-
 import Text from 'components/@commons/Text';
-import { NameBox, TitleBox } from './DailyWorkersStyle';
+import { NameBox, TitleBox } from './styles';
 import { TimeWorkerListData, UserData } from 'apis/types';
 import { strTimeProcessor } from 'utils/strTimeProcessor';
+import GrayBox from 'components/@commons/GrayBox';
 
-const DailyWorkersTemplate = ({ dailyData }: { dailyData: TimeWorkerListData[] | undefined }): JSX.Element => {
+export const DailyWorkersTable = ({ dailyData }: { dailyData: TimeWorkerListData[] | undefined }): JSX.Element => {
   return (
     <FlexContainer $direction="row" $wFull $gap="3%">
       {dailyData?.map((timeData: TimeWorkerListData, timeindex) => (
@@ -32,4 +32,12 @@ const DailyWorkersTemplate = ({ dailyData }: { dailyData: TimeWorkerListData[] |
   );
 };
 
-export default DailyWorkersTemplate;
+export const NotFixedDateBox = (): JSX.Element => {
+  return (
+    <GrayBox>
+      <Text size="lg" weight="medium">
+        아직 확정된 스케줄이 없습니다
+      </Text>
+    </GrayBox>
+  );
+};
