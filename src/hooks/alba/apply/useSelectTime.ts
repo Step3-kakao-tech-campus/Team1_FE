@@ -1,29 +1,25 @@
 import React from 'react';
-import { useAtom, useSetAtom } from 'jotai';
-import { applyStepAtom, weeklySelectAtom } from 'pages/alba/ApplyPage';
-import { SelectedTimeData } from 'apis/types';
+import { useSetAtom } from 'jotai';
+import { weeklySelectAtom } from 'pages/alba/ApplyPage/states';
 
 const useSelectTime = () => {
   // 시간 체크 입력값 반영
-  const [weeklySelect, setWeeklySelect] = useAtom(weeklySelectAtom);
-  const selectTimeHandler = (timeObject: SelectedTimeData, timeIndex: number, nowDay: number) => {
-    const newDaily = weeklySelect[nowDay].map((selected: SelectedTimeData, i) =>
-      i === timeIndex ? { ...timeObject, isChecked: !timeObject.isChecked } : selected,
-    );
-    setWeeklySelect((prevWeekly) =>
-      prevWeekly.map((prevDaily, dayIndex) => (dayIndex === nowDay ? newDaily : prevDaily)),
-    );
-  };
+  const setWeeklySelect = useSetAtom(weeklySelectAtom);
+  const selectTimeHandler = (timeIndex: number, nowDay: number) => {
+    setWeeklySelect((prevWeekly) => {
+      // 해당 요일의 타임 배열 업데이트
+      const newDaily = [...prevWeekly[nowDay]];
+      newDaily[timeIndex] = { ...newDaily[timeIndex], isChecked: !newDaily[timeIndex].isChecked };
 
-  // 미리보기 버튼 클릭
-  const setStep = useSetAtom(applyStepAtom);
-  const goPreviewHandler = () => {
-    setStep('preview');
+      // 해당 주차의 요일 배열 업데이트
+      const newWeekly = [...prevWeekly];
+      newWeekly[nowDay] = newDaily;
+      return newWeekly;
+    });
   };
 
   return {
     selectTimeHandler,
-    goPreviewHandler,
   };
 };
 

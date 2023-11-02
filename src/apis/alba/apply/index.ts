@@ -8,7 +8,7 @@ export const getApplyForm = async (params: GetParams): Promise<GetReturn> => {
 
   const templates: { [index: number]: TimeData } = {};
   for (let timeObj of response.data.template) {
-    templates[timeObj.worktimeId] = {
+    templates[timeObj.workTimeId] = {
       title: timeObj.title,
       startTime: strTimeProcessor(timeObj.startTime),
       endTime: strTimeProcessor(timeObj.endTime),
@@ -17,7 +17,7 @@ export const getApplyForm = async (params: GetParams): Promise<GetReturn> => {
 
   const selected = response.data.selected.map((dailyArray) => {
     return dailyArray.map((workersObj) => {
-      return { ...templates[workersObj.worktimeId], isChecked: workersObj.isChecked };
+      return { ...templates[workersObj.workTimeId], isChecked: workersObj.isChecked };
     });
   });
 
@@ -31,7 +31,7 @@ interface GetParams {
 interface GetResponse {
   template: TimeWithIdData[];
   selected: {
-    worktimeId: number;
+    workTimeId: number;
     isChecked: boolean;
   }[][];
 }
