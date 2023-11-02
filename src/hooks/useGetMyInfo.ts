@@ -11,7 +11,7 @@ const useGetMyInfo = () => {
     refetchOnWindowFocus: false,
   });
 
-  const userName = myInfo?.data.userName;
+  const userName = myInfo?.data.userName || '';
   const groupName = myInfo?.data.groupName || null;
   const members = myInfo?.data.members || [];
 
