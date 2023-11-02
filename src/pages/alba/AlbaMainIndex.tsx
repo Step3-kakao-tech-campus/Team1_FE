@@ -7,14 +7,16 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import useGetMyInfo from 'hooks/useGetMyInfo';
 
 const AlbaMainIndex = (): JSX.Element => {
-  const { hasGroup, members } = useGetMyInfo();
+  const { userType } = useGetMyInfo();
 
-  return (
-    <>
-      {!hasGroup && <AlbaNoGroupPage />}
-      {hasGroup && <SchedulePage members={members} />}
-    </>
-  );
+  switch (userType) {
+    case 'ALBA_NO_GROUP':
+      return <AlbaNoGroupPage />;
+    case 'ALBA':
+      return <SchedulePage />;
+    default:
+      return <></>;
+  }
 };
 
 export default AlbaMainIndex;

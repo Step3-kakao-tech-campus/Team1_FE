@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import useLogin from 'hooks/auth/useLogin';
 import useModal from 'hooks/useModal';
-import GetInviteKey from 'components/modals/GetInviteKey';
+import GetInviteKeyModal from 'components/modals/GetInviteKeyModal';
 import { HorizontalLine, SidebarBackground, SidebarBox } from './styles';
 import Text from '../@commons/Text';
 import FlexContainer from '../@commons/FlexContainer';
@@ -14,11 +14,9 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
   return (
     <SidebarBackground onClick={closeHandler}>
       <SidebarBox onClick={(e) => e.stopPropagation()}>
-        <FlexContainer $wFull $height="100vw" $justify="start" $gap="32px">
-          <Suspense fallback={<Loader />}>
-            <SideBarContent />
-          </Suspense>
-        </FlexContainer>
+        <Suspense fallback={<Loader />}>
+          <SideBarContent />
+        </Suspense>
       </SidebarBox>
     </SidebarBackground>
   );
@@ -28,14 +26,14 @@ export default Sidebar;
 
 const SideBarContent = () => {
   const isAdmin = getLoginData().isAdmin;
-  const { userName, groupName, members } = useGetMyInfo();
+  const { userName, userType, groupName, members } = useGetMyInfo();
 
   return (
-    <>
-      <SideBarProfile userName={userName} isAdmin={isAdmin} groupName={groupName} />
+    <FlexContainer $wFull $justify="start" $gap="32px" $wrap="wrap">
+      <SideBarProfile userName={userName} isAdmin={isAdmin} userType={userType} groupName={groupName} />
       <SideBarButtons isAdmin={isAdmin} />
-      <SideBarMemberList memberList={members} />
-    </>
+      {(userType === 'ALBA' || userType === 'ADMIN') && <SideBarMemberList memberList={members} />}
+    </FlexContainer>
   );
 };
 
@@ -43,10 +41,12 @@ const SideBarProfile = ({
   userName,
   isAdmin,
   groupName,
+  userType,
 }: {
-  userName?: string;
+  userName: string;
   isAdmin: boolean;
-  groupName?: string;
+  userType: string;
+  groupName: string | null;
 }) => {
   return (
     <FlexContainer $gap="12px" $padding="0">
@@ -58,7 +58,7 @@ const SideBarProfile = ({
       </FlexContainer>
       <FlexContainer $direction="row" $justify="start" $align="center">
         <Text margin="0 0 4px 0" size="sm">
-          {groupName}
+          {userType === 'ALBA' || userType === 'ADMIN' ? groupName : '무소속'}
         </Text>
       </FlexContainer>
 
@@ -73,7 +73,7 @@ const SideBarButtons = ({ isAdmin }: { isAdmin: boolean }) => {
   return (
     <FlexContainer $align="flex-start" $gap="20px">
       {isAdmin && (
-        <FlexContainer onClick={() => modalOnHandler(<GetInviteKey />)}>
+        <FlexContainer onClick={() => modalOnHandler(<GetInviteKeyModal />)}>
           <Text>직원 초대하기</Text>
         </FlexContainer>
       )}
@@ -94,7 +94,7 @@ const SideBarMemberList = ({ memberList }: { memberList?: UserData[] }) => {
 
       <FlexContainer $wFull $align="flex-start" $gap="16px">
         {memberList?.map((member: UserData) => (
-          <ol key={member.name}>
+          <ol key={`${member.name}${member.userId}`}>
             <Text>{member.name}</Text>
           </ol>
         ))}
