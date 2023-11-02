@@ -14,6 +14,7 @@ interface Props {
   $align?: string;
   $position?: string;
   $shrink?: string;
+  $wrap?: string;
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
@@ -32,6 +33,7 @@ const FlexContainer = styled.div<Props>`
   justify-content: ${(props) => (props.$justify ? props.$justify : 'center')};
   align-items: ${(props) => (props.$align ? props.$align : 'stretch')};
   flex-shrink: ${(props) => (props.$shrink ? props.$shrink : '')};
+  flex-wrap: ${(props) => (props.$wrap ? props.$wrap : 'nowrap')};
 `;
 
 export default FlexContainer;
