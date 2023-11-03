@@ -1,12 +1,12 @@
-import React, { Suspense } from 'react';
-import CalenderOutter from 'components/Calendar/CalenderOutter';
-import StatusCalendar from './Calendar/StatusCalendar';
 import FlexContainer from 'components/@commons/FlexContainer';
 import PageContainer from 'components/@commons/PageContainer';
+import CalenderOutter from 'components/Calendar/CalenderOutter';
+import Skeleton from 'components/Suspenses/Skeleton';
 import AdminDetailSect from 'pages/SelectWeekPage/AdminDetailSection';
 import AlbaSubmitButton from 'pages/SelectWeekPage/AlbaSubmitButton';
-import Skeleton from 'components/Suspenses/Skeleton';
-import { weekStatusMonthAtom } from './states';
+import StatusCalendar from 'pages/SelectWeekPage/Calendar/StatusCalendar';
+import { weekStatusMonthAtom } from 'pages/SelectWeekPage/states';
+import { Suspense } from 'react';
 
 const SelectWeekPage = ({ isAdmin }: { isAdmin: boolean }): JSX.Element => {
   return (
