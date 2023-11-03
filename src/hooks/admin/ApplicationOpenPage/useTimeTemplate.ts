@@ -1,12 +1,10 @@
 import { useAtom, useSetAtom } from 'jotai';
 import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage/states';
-import React from 'react';
-
 const useTimeTemplate = () => {
   /* 1. 초기 선언 */
 
   const [timeTemplate, setTimeTemplate] = useAtom(timeTemplateAtom);
-  const setWeeklyData = useSetAtom(weeklyPeopleAtom);
+  const setWeeklyAmount = useSetAtom(weeklyPeopleAtom);
 
   /* 2. 업데이트 */
 
@@ -18,7 +16,7 @@ const useTimeTemplate = () => {
   // 시간대 삭제
   const deleteHandler = (i: number) => {
     setTimeTemplate((prev) => prev.filter((e, index) => i !== index));
-    setWeeklyData((prev) => {
+    setWeeklyAmount((prev) => {
       return prev.map((daily) => daily.filter((amount, index) => i !== index));
     });
   };
@@ -26,7 +24,7 @@ const useTimeTemplate = () => {
   // 시간대 추가
   const addHandler = () => {
     setTimeTemplate((prev) => [...prev, { title: '', startTime: '00:00', endTime: '00:00' }]);
-    setWeeklyData((prev) => prev.map((dailyArr) => [...dailyArr, 0]));
+    setWeeklyAmount((prev) => prev.map((dailyArr) => [...dailyArr, 0]));
   };
 
   /* 3. 다음 단계로 넘어가기 : 데이터 저장 */
@@ -44,7 +42,14 @@ const useTimeTemplate = () => {
     setStep('setAmount');
   };
 
-  return { timeTemplate, updateTimeHandler, deleteHandler, addHandler, goNextHandler };
+  /* 4. 데이터 초기화 */
+  const initializeOpenData = () => {
+    setWeeklyAmount([new Array(7).fill([])]);
+    setTimeTemplate([]);
+    setStep('setTime');
+  };
+
+  return { timeTemplate, updateTimeHandler, deleteHandler, addHandler, goNextHandler, initializeOpenData };
 };
 
 export default useTimeTemplate;
