@@ -1,11 +1,9 @@
-import React from 'react';
+import { TimeData } from 'apis/types';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
 import { CloseCircleButton } from 'components/@commons/icons/buttons';
 import { ButtonContainer, InputTime, InputTitle } from 'components/PageStyledComponents/admin/ApplicationOpenPage';
-import { TimeData } from 'apis/types';
 import useFormOnBlurUpdate from 'hooks/useFormOnBlurUpdate';
-import { useGetOpenTemplate } from 'hooks/admin/ApplicationOpenPage/fetch';
 
 interface Props {
   timeData: TimeData;
@@ -53,8 +51,3 @@ export const OpenTimeInputs = ({ timeData, timeIndex, updater, deleteHandler }: 
 interface TimeDataIndex extends TimeData {
   [index: string]: string;
 }
-
-export const FetchGetOpen = ({ children }: { children: React.ReactNode }) => {
-  const data = useGetOpenTemplate();
-  return <>{children}</>;
-};

@@ -1,15 +1,16 @@
-import Text from 'components/@commons/Text';
-import React, { Suspense } from 'react';
-import { FetchGetOpen, OpenTimeInputs } from './EditTimeForm';
-import { stringDateMoveKor } from 'utils/dateToString';
-import FlexContainer from 'components/@commons/FlexContainer';
-import SetTimeTemplateSkeleton from 'components/Suspenses/PageSkeletons/SetTimeTemplateSkeleton';
-import useTimeTemplate from 'hooks/admin/ApplicationOpenPage/useTimeTemplate';
 import { TimeData } from 'apis/types';
 import ColorBox from 'components/@commons/ColorBox';
-import { AddButton } from 'components/@commons/icons/buttons';
+import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
+import Text from 'components/@commons/Text';
+import { AddButton } from 'components/@commons/icons/buttons';
+import SetTimeTemplateSkeleton from 'components/Suspenses/PageSkeletons/SetTimeTemplateSkeleton';
+import { useGetOpenTemplate } from 'hooks/admin/ApplicationOpenPage/fetch';
+import useTimeTemplate from 'hooks/admin/ApplicationOpenPage/useTimeTemplate';
+import { Suspense } from 'react';
 import { myTheme } from 'styles/myTheme';
+import { stringDateMoveKor } from 'utils/dateToString';
+import { OpenTimeInputs } from './EditTimeForm';
 
 const SetTimeTemplateSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { timeTemplate, updateTimeHandler, deleteHandler, addHandler, goNextHandler } = useTimeTemplate();
@@ -22,7 +23,7 @@ const SetTimeTemplateSection = ({ startWeekDate }: { startWeekDate: string }): J
       <Text>근무 시간대를 설정하세요</Text>
       <FlexContainer $wFull $align="center" $gap="30px">
         <Suspense fallback={<SetTimeTemplateSkeleton />}>
-          <FetchGetOpen>
+          <FetchGetOpen startWeekDate={startWeekDate}>
             {timeTemplate.map((time: TimeData, timeIndex: number) => (
               <ColorBox $wFull key={`${time.title}${timeIndex}`} $background={myTheme.color.lightYellow}>
                 <FlexContainer $wFull $padding="20px">
@@ -46,3 +47,8 @@ const SetTimeTemplateSection = ({ startWeekDate }: { startWeekDate: string }): J
 };
 
 export default SetTimeTemplateSection;
+
+const FetchGetOpen = ({ startWeekDate, children }: { startWeekDate: string; children: React.ReactNode }) => {
+  const data = useGetOpenTemplate(startWeekDate);
+  return <>{children}</>;
+};
