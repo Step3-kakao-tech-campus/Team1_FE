@@ -1,9 +1,9 @@
-import { selectedWeekAtom } from 'pages/SelectWeekPage/states';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { getTimeTemplate, postOpenApplication } from 'apis/admin/application/open';
 import { convertPath } from 'apis/convertURI';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { openStepAtom, timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage/states';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import weekdayArray from 'utils/weekdayArray';
 
@@ -35,27 +35,26 @@ export const usePostOpenApplication = (startWeekDate: string) => {
   return { submitOpenhandler: () => openApplicationMutate() };
 };
 
-export const useGetOpenTemplate = () => {
-  const [timeTemplate, setTimeTemplate] = useAtom(timeTemplateAtom);
+export const useGetOpenTemplate = (startWeekDate: string) => {
+  const setTimeTemplate = useSetAtom(timeTemplateAtom);
   const setWeeklyData = useSetAtom(weeklyPeopleAtom);
-  const selectedWeek = useAtomValue(selectedWeekAtom);
 
   const { data: timeTemplateRes } = useQuery(
-    ['getTimeTemplate', selectedWeek],
-    () => getTimeTemplate({ startWeekDate: selectedWeek.startWeekDate }),
+    ['getTimeTemplate', startWeekDate],
+    () => getTimeTemplate({ startWeekDate: startWeekDate }),
     {
       suspense: true,
       staleTime: 3600 * 1000,
       cacheTime: 3600 * 1000,
-      enabled: timeTemplate.length === 0,
-      onSuccess: (data) => {
-        if (timeTemplate.length === 0) {
-          setTimeTemplate(data.template);
-          setWeeklyData(weekdayArray.map(() => data.template.map(() => 0)));
-        }
-      },
+      refetchOnMount: false,
     },
   );
+
+  useEffect(() => {
+    if (timeTemplateRes === undefined) return;
+    setTimeTemplate(timeTemplateRes.template);
+    setWeeklyData(weekdayArray.map(() => timeTemplateRes.template.map(() => 0)));
+  }, [timeTemplateRes]);
 
   return { timeTemplateRes };
 };
