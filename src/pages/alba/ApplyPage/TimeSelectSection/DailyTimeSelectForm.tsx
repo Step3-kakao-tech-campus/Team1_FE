@@ -1,25 +1,19 @@
-import React from 'react';
-import FlexContainer from 'components/@commons/FlexContainer';
 import BorderBox from 'components/@commons/BorderBox';
-import Text from 'components/@commons/Text';
 import CheckBox from 'components/@commons/CheckBox';
-import useSelectTime from 'hooks/alba/apply/useSelectTime';
-import TimeSelectSkeleton from 'components/Suspenses/PageSkeletons/TimeSelectSkeleton';
+import FlexContainer from 'components/@commons/FlexContainer';
+import Text from 'components/@commons/Text';
 import { useGetApplyForm } from 'hooks/alba/apply/fetch';
+import useSelectTime from 'hooks/alba/apply/useSelectTime';
 import { useAtomValue } from 'jotai';
 import { weeklySelectAtom } from '../states';
 
 const DailyTimeSelectForm = ({ day, startWeekDate }: { day: number; startWeekDate: string }): JSX.Element => {
   // get요청 -> 전역상태 업데이트
-  const { isLoading } = useGetApplyForm(startWeekDate);
+  const fetch = useGetApplyForm(startWeekDate);
   // 전역상태 불러오기
   const weeklySelect = useAtomValue(weeklySelectAtom);
   // 폼 입력 -> 전역상태 업데이트
   const { selectTimeHandler } = useSelectTime();
-
-  if (isLoading) {
-    return <TimeSelectSkeleton />;
-  }
 
   return (
     <>

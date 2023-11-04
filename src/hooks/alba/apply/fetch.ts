@@ -1,12 +1,11 @@
-import React from 'react';
-import { useAtomValue, useSetAtom } from 'jotai';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { getApplyForm, putApply } from 'apis/alba/apply';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { weeklySelectAtom } from 'pages/alba/ApplyPage/states';
+import React from 'react';
 
 export const useGetApplyForm = (startWeekDate: string) => {
   const setWeeklySelect = useSetAtom(weeklySelectAtom);
-  const [isLoading, setIsLoading] = React.useState(true);
 
   const { data } = useQuery(
     ['getApplyForm', startWeekDate],
@@ -15,16 +14,20 @@ export const useGetApplyForm = (startWeekDate: string) => {
         startWeekDate: startWeekDate,
       }),
     {
-      enabled: startWeekDate !== '',
-      onSuccess: (data) => {
-        if (data === undefined) return;
-        setWeeklySelect(data.selected);
-        setIsLoading(false);
-      },
+      suspense: true,
+      staleTime: 3600 * 1000,
+      cacheTime: 3600 * 1000,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
     },
   );
 
-  return { data, isLoading };
+  React.useEffect(() => {
+    if (data === undefined) return;
+    setWeeklySelect(data.selected);
+  }, [data]);
+
+  return { data };
 };
 
 export const usePutApplyForm = (startWeekDate: string, onSuccess: () => void) => {
