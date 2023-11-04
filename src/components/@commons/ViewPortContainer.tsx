@@ -1,11 +1,10 @@
 import { modalAtom } from 'hooks/useModal';
+import { popUpAtom } from 'hooks/usePopUpPage';
 import { useAtomValue } from 'jotai';
 import React from 'react';
 import styled from 'styled-components';
 import { Modal } from '../modals';
-import { popUpAtom } from 'hooks/usePopUpPage';
 import PopUpPage from './PopUpPage';
-
 const ViewPortContainer = ({ children }: { children: React.ReactNode }): JSX.Element => {
   const modal = useAtomValue(modalAtom);
   const popUp = useAtomValue(popUpAtom);
