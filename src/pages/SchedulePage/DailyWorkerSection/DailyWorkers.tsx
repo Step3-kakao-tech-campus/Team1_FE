@@ -1,24 +1,23 @@
-import React from 'react';
-import { useAtomValue } from 'jotai';
-import { dateAtom } from '../states';
 import { DailyWorkersTable, NotFixedDateBox } from 'components/DailyWorkersTable';
 import { useGetDailyWorkers } from 'hooks/SchedulePage/fetch';
+import { useAtomValue } from 'jotai';
+import { dateAtom } from '../states';
 
 const DailyWorkers = (): JSX.Element => {
   const selectedDate = useAtomValue(dateAtom);
-  const { scheduleResponse } = useGetDailyWorkers();
+  const { scheduleRes, isNotFixed } = useGetDailyWorkers(selectedDate.date, selectedDate.isFixed);
 
   if (selectedDate.date === '') {
     return <></>;
   }
 
-  if (!selectedDate.isFixed || scheduleResponse === null) {
+  if (!selectedDate.isFixed || isNotFixed) {
     return <NotFixedDateBox />;
   }
 
   return (
     <>
-      <DailyWorkersTable dailyData={scheduleResponse?.schedule} />
+      <DailyWorkersTable dailyData={scheduleRes?.schedule} />
     </>
   );
 };
