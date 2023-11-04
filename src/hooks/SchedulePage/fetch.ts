@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
+import { getDailyWorkers } from 'apis/schedule/getDailyWorkers';
 import { getMonthly } from 'apis/schedule/getMonthly';
 import { useAtomValue, useSetAtom } from 'jotai';
-import React from 'react';
-import { dateAtom, memberAtom, monthAtom, workTimeAtom } from 'pages/SchedulePage/states';
+import { memberAtom, monthAtom, workTimeAtom } from 'pages/SchedulePage/states';
+import { useEffect } from 'react';
 import { getLoginData } from 'utils/loginDatahandlers';
-import { getDailyWorkers } from 'apis/schedule/getDailyWorkers';
 
 export const useGetMonthly = () => {
   const nowMember = useAtomValue(memberAtom);
@@ -24,22 +24,22 @@ export const useGetMonthly = () => {
     {
       suspense: true,
       enabled: nowMember.isSelected === true,
-      onSuccess: (scheduleData) => {
-        setWorkTime({ ...scheduleData?.totalTime });
-      },
     },
   );
+
+  useEffect(() => {
+    if (scheduleData === undefined) return;
+    setWorkTime({ ...scheduleData?.totalTime });
+  }, [scheduleData]);
 
   return { scheduleData };
 };
 
-export const useGetDailyWorkers = () => {
-  const selectedDate = useAtomValue(dateAtom);
-
-  const { data: scheduleResponse } = useQuery(
-    ['getDailyWorkers', 'newSchedule', selectedDate.date],
+export const useGetDailyWorkers = (selectedDate: string, enabled?: boolean) => {
+  const { data: scheduleRes } = useQuery(
+    ['getDailyWorkers', 'newSchedule', selectedDate],
     () =>
-      getDailyWorkers({ selectedDate: selectedDate.date }).catch((err) => {
+      getDailyWorkers({ selectedDate: selectedDate }).catch((err) => {
         if (err.response?.data?.code === -11001) {
           return null;
         } else {
@@ -48,8 +48,9 @@ export const useGetDailyWorkers = () => {
       }),
     {
       suspense: true,
-      enabled: selectedDate.date !== '' && selectedDate.isFixed,
+      enabled: enabled,
     },
   );
-  return { scheduleResponse };
+  const isNotFixed = scheduleRes === null;
+  return { scheduleRes, isNotFixed };
 };
