@@ -1,53 +1,48 @@
-import React from 'react';
+import { QueryCache, QueryClient, QueryClientProvider, useQueryErrorResetBoundary } from '@tanstack/react-query';
+import { convertPath } from 'apis/convertURI';
+import ViewPortContainer from 'components/@commons/ViewPortContainer';
+import ErrorFallback from 'error/ErrorFallback';
+import { defaultErrorHandler } from 'error/defaultErrorHandler';
+import { Provider } from 'jotai';
+import HomeIndex from 'pages/HomeIndex';
+import KakaoAuthPage from 'pages/KakaoAuthPage';
+import SelectWeekPage from 'pages/SelectWeekPage';
+import SignupPage from 'pages/SignupPage';
+import AddGroupPage from 'pages/admin/AddGroupPage';
+import ApplicationClosePage from 'pages/admin/ApplicationClosePage';
+import ApplicationOpenPage from 'pages/admin/ApplicationOpenPage';
+import ApplyPage from 'pages/alba/ApplyPage';
+import InvitedPage from 'pages/alba/InvitedPage';
+import LogoutOnlyPrivate from 'privateRoutes/LogoutOnlyPrivate';
+import UserTypePrivate from 'privateRoutes/UserTypePrivate';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Routes, Route } from 'react-router-dom';
-
+import { Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { myTheme } from 'styles/myTheme';
 
-import { convertPath } from 'apis/convertURI';
-import { Provider } from 'jotai';
-
-import LogoutOnlyPrivate from 'privateRoutes/LogoutOnlyPrivate';
-import UserTypePrivate from 'privateRoutes/UserTypePrivate';
-
-import HomeIndex from 'pages/HomeIndex';
-import SignupPage from 'pages/SignupPage';
-import InvitedPage from 'pages/alba/InvitedPage';
-import AddGroupPage from 'pages/admin/AddGroupPage';
-import ApplicationOpenPage from 'pages/admin/ApplicationOpenPage';
-import ApplicationClosePage from 'pages/admin/ApplicationClosePage';
-import ApplyPage from 'pages/alba/ApplyPage';
-import SelectWeekPage from 'pages/SelectWeekPage';
-import ErrorFallback from 'error/ErrorFallback';
-import ViewPortContainer from 'components/@commons/ViewPortContainer';
-import { QueryCache, QueryClient, QueryClientProvider, useQueryErrorResetBoundary } from '@tanstack/react-query';
-import useErrorHandler from 'error/useErrorHandler';
-import KakaoAuthPage from 'pages/KakaoAuthPage';
+const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError(error, query) {
+      defaultErrorHandler(error || { name: 'unknownError' });
+      setTimeout(() => {
+        queryClient.removeQueries(query.queryKey);
+      }, 1000);
+    },
+  }),
+  defaultOptions: {
+    queries: {
+      useErrorBoundary: true,
+      retry: 0,
+      refetchOnWindowFocus: false,
+    },
+    mutations: {
+      onError: (err) => defaultErrorHandler(err || { name: 'unknownError' }),
+    },
+  },
+});
 
 function App(): JSX.Element {
   const { reset } = useQueryErrorResetBoundary();
-  const { apiErrorHandler } = useErrorHandler();
-  const queryClient = new QueryClient({
-    queryCache: new QueryCache({
-      onError(error, query) {
-        setTimeout(() => {
-          queryClient.removeQueries(query.queryKey);
-        }, 1000);
-      },
-    }),
-    defaultOptions: {
-      queries: {
-        useErrorBoundary: true,
-        retryOnMount: true,
-        retry: 0,
-        onError: (err) => apiErrorHandler(err || { name: 'unknownError' }),
-      },
-      mutations: {
-        onError: (err) => apiErrorHandler(err || { name: 'unknownError' }),
-      },
-    },
-  });
 
   return (
     <Provider>
