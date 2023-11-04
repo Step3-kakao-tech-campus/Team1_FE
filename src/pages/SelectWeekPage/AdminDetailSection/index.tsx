@@ -1,14 +1,15 @@
-import { useAtomValue } from 'jotai';
-import React, { Suspense } from 'react';
-import Text from 'components/@commons/Text';
-import Loader from 'components/Suspenses/Loader';
-import { selectedWeekAtom } from '../states';
 import SubmitButton from 'components/@commons/SubmitButton';
-import useWeeklyDetail from 'hooks/SelectWeekPage/useWeeklyDetail';
+import Text from 'components/@commons/Text';
 import { DailyWorkersTable } from 'components/DailyWorkersTable';
-import useWeekSelector from 'hooks/useWeekSelector';
+import Loader from 'components/Suspenses/Loader';
+import { useGetDailyWorkers } from 'hooks/SchedulePage/fetch';
 import { useGetApplyStatus } from 'hooks/SelectWeekPage/fetch';
-import { useGetDailyWorkers } from 'hooks/SelectWeekPage/fetch';
+import useWeeklyDetail from 'hooks/SelectWeekPage/useWeeklyDetail';
+import useWeekSelector from 'hooks/useWeekSelector';
+import { useAtomValue } from 'jotai';
+import { Suspense } from 'react';
+import { stringDateMove } from 'utils/dateToString';
+import { selectedWeekAtom } from '../states';
 
 const AdminDetailSection = (): JSX.Element => {
   const selectedWeek = useAtomValue(selectedWeekAtom);
@@ -55,9 +56,10 @@ const InProgressDetail = (): JSX.Element => {
 
 const ClosedDetail = (): JSX.Element => {
   const { day, WeekBarComponent } = useWeekSelector(0);
-  const { scheduleRes } = useGetDailyWorkers(day);
+  const startWeekDate = useAtomValue(selectedWeekAtom).startWeekDate;
+  const { scheduleRes, isNotFixed } = useGetDailyWorkers(stringDateMove(startWeekDate, day));
 
-  if (scheduleRes === null) {
+  if (isNotFixed) {
     return <Text>스케줄 정보 없음</Text>;
   }
   return (

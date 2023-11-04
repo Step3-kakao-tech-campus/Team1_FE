@@ -1,5 +1,4 @@
 import { WeekStatusData, WeekStatusTypes } from 'apis/types';
-import useTimeTemplate from 'hooks/admin/ApplicationOpenPage/useTimeTemplate';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { selectedWeekAtom, weekStatusMonthAtom } from 'pages/SelectWeekPage/states';
 import React from 'react';
@@ -33,12 +32,6 @@ const useSelectWeek = () => {
   React.useEffect(() => {
     setSelectedWeek({ startWeekDate: '', weekStatus: '' });
   }, [year, month]);
-
-  // 모집 상태 초기화
-  const { initializeOpenData } = useTimeTemplate();
-  React.useEffect(() => {
-    initializeOpenData();
-  }, []);
 
   return { weekOnClickHandler, statusConverter };
 };
