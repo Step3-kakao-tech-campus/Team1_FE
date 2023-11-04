@@ -3,7 +3,6 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import usePopUpPage from 'hooks/usePopUpPage';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AddGroupDonePopUp = (): JSX.Element => {
@@ -17,7 +16,7 @@ const AddGroupDonePopUp = (): JSX.Element => {
     <FlexContainer $wFull $hFull $gap="60px" $padding="24px">
       <FlexContainer>
         <Text size="xxl" weight="bold">
-          그룹 생성에 성공했습니다
+          매장 등록에 성공했습니다
         </Text>
         <Text size="xl">이제 근무일정을 관리하세요</Text>
       </FlexContainer>

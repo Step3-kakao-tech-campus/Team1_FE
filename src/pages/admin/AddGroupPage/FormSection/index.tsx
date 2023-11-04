@@ -1,10 +1,9 @@
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
-import React from 'react';
+import useAddGroupForm from 'hooks/admin/AddGroupPage/useAddGroupForm';
 import { marketNoValidator, nameValidator } from 'utils/validators';
 import InputBar from './InputBar';
-import useAddGroupForm from 'hooks/admin/AddGroupPage/useAddGroupForm';
 
 const FormSection = (): JSX.Element => {
   const { marketInfo, formHandler, selectAddress, addGroupValidator, addGroupSubmit } = useAddGroupForm();
@@ -12,7 +11,7 @@ const FormSection = (): JSX.Element => {
   return (
     <>
       <Text size="xxl" weight="semiBold">
-        그룹 생성하기
+        매장 등록하기
       </Text>
 
       <FlexContainer $gap="20px" $wFull>
