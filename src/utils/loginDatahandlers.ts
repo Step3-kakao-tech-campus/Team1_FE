@@ -1,3 +1,5 @@
+const storage: Storage = localStorage;
+
 export const saveLoginData = (token: string, userData: UserDataType) => {
   sessionStorage.removeItem('beforeLoginURL');
 
@@ -7,11 +9,11 @@ export const saveLoginData = (token: string, userData: UserDataType) => {
     isAdmin: userData.isAdmin,
   };
 
-  sessionStorage.setItem('login', JSON.stringify(loginData));
+  storage.setItem('login', JSON.stringify(loginData));
 };
 
 export const removeLoginData = () => {
-  sessionStorage.removeItem('login');
+  storage.removeItem('login');
   location.reload();
 };
 
@@ -22,7 +24,7 @@ const defaultLoginState = {
 };
 
 export const getLoginData = () => {
-  const stringData = sessionStorage.getItem('login');
+  const stringData = storage.getItem('login');
   if (stringData === null) return defaultLoginState;
 
   return JSON.parse(stringData);
