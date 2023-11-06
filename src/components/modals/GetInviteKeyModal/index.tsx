@@ -1,17 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 import { getInviteKey } from 'apis/admin/manageGroup';
-
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
+import { CheckIcon } from 'components/@commons/icons';
+import Loader from 'components/Suspenses/Loader';
+import { LinkBox } from 'components/modals/GetInviteKeyModal/styles';
 import useModal from 'hooks/useModal';
-import React from 'react';
+import { useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import styled from 'styled-components';
+import { myTheme } from 'styles/myTheme';
 
 const GetInviteKeyModal = (): JSX.Element => {
-  const { data: inviteKeyData } = useQuery(['inviteKey'], getInviteKey);
+  const { data: inviteKeyData, isFetching } = useQuery(['inviteKey'], getInviteKey);
   const { modalOffHandler } = useModal();
+  const [isCopied, setIsCopied] = useState(false);
+  const link = `${process.env.REACT_APP_BASE_URL}/invited/${inviteKeyData?.data.invitationKey}`;
+
   return (
     <FlexContainer $wFull $padding="20px" $gap="30px">
       <FlexContainer $gap="10px">
@@ -20,31 +25,33 @@ const GetInviteKeyModal = (): JSX.Element => {
         </Text>
         <Text>아래 링크에 접속하면 그룹에 가입됩니다.</Text>
       </FlexContainer>
-      <Box>
-        <Text>{inviteKeyData?.data.invitationKey}</Text>
-      </Box>
+      <FlexContainer $wFull $height="44px">
+        {isFetching ? <Loader size="1.5rem" isDeffered={false} /> : <LinkBox value={link} readOnly />}
+      </FlexContainer>
       <FlexContainer $gap="10px">
-        <CopyToClipboard text={inviteKeyData?.data.invitationKey || ''}>
-          <SubmitButton>복사하기</SubmitButton>
-        </CopyToClipboard>
-        <Button onClick={() => modalOffHandler()}>닫기</Button>
+        {isFetching && (
+          <SubmitButton>
+            <Loader size="1.3rem" isDeffered={false} />
+          </SubmitButton>
+        )}
+        {!isFetching && (
+          <CopyToClipboard text={inviteKeyData?.data.invitationKey || ''}>
+            {!isCopied ? (
+              <SubmitButton onClick={() => setIsCopied(true)}>복사하기</SubmitButton>
+            ) : (
+              <SubmitButton>
+                <Text margin="0 0.3rem 0 0">복사됨</Text>
+                <CheckIcon size="1rem" />
+              </SubmitButton>
+            )}
+          </CopyToClipboard>
+        )}
+        <SubmitButton $hasBorder $activeColor={myTheme.color.backgroundColor} onClick={() => modalOffHandler()}>
+          닫기
+        </SubmitButton>
       </FlexContainer>
     </FlexContainer>
   );
 };
 
 export default GetInviteKeyModal;
-
-const Box = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  border: 1px solid;
-  border-color: ${({ theme }) => theme.color.gray};
-`;
-
-const Button = styled(SubmitButton)`
-  background-color: ${({ theme }) => theme.color.backgroundColor};
-  border: 2px solid;
-  border-color: ${({ theme }) => theme.color.yellow};
-`;

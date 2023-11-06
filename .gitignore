@@ -26,6 +26,6 @@ yarn-error.log*
 /k8s/secret.yaml
 /test-results/
 /playwright-report/
-/playwright/.cache/
+/playwright/
 /tests/tests-examples/
 /tests/logintest.ts

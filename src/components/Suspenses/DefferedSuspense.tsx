@@ -1,12 +1,13 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const DefferedSuspense = ({ children }: PropsWithChildren<{}>) => {
+const DefferedSuspense = ({ children, deffered = true }: { children: React.ReactNode; deffered?: boolean }) => {
   const [isDeferred, setIsDeferred] = useState(false);
+  const time = deffered ? 200 : 0;
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsDeferred(true);
-    }, 200);
+    }, time);
     return () => clearTimeout(timeout);
   }, []);
 
