@@ -2,8 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 import path from 'path';
 require('dotenv').config();
 
-export const STORAGE_STATE = path.join('/Users/localgaji/Documents/pyc/albbaim', './playwright/.auth/user.json');
-
+export const ADMINSTATE = path.join(__dirname, './playwright/.auth/admin.json');
+export const ALBASTATE = path.join(__dirname, './playwright/.auth/alba.json');
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -29,33 +29,35 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
-
+  timeout: 10000,
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'setup',
-      testMatch: /globalAdmin.setup\.ts/,
-    },
-    {
-      name: 'setupAlba',
-      testMatch: /globalAlba.setup\.ts/,
-    },
+    // {
+    //   name: 'setup',
+    //   testMatch: /globalAdmin.setup\.ts/,
+    //   use: { storageState: ADMINSTATE },
+    // },
+    // {
+    //   name: 'setupAlba',
+    //   testMatch: /globalAlba.setup\.ts/,
+    //   use: { storageState: ALBASTATE },
+    // },
     {
       name: 'admin',
-      dependencies: ['setup'],
+      // dependencies: ['setup'],
       use: {
         ...devices['Desktop Chrome'],
-        storageState: STORAGE_STATE,
+        storageState: ADMINSTATE,
       },
       testMatch: '**/tests/admin/**',
       testIgnore: '**/tests/alba/**',
     },
     {
       name: 'alba',
-      dependencies: ['setupAlba'],
+      // dependencies: ['setupAlba'],
       use: {
         ...devices['Desktop Chrome'],
-        storageState: STORAGE_STATE,
+        storageState: ALBASTATE,
       },
       testMatch: '**/tests/alba/**',
       testIgnore: '**/tests/admin/**',
