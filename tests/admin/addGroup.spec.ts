@@ -1,19 +1,15 @@
 import { expect, test } from '@playwright/test';
-import { getMyinfoNoGroup } from '../mock/getMyInfo';
-import { mockResponse } from '../mock/mockResponse';
+import { mockMapper, mockResponse } from '../mock/mockResponse';
+import { getMyinfoNoGroup } from '../mock/responseBody/getMyInfo';
 
 test.beforeEach(async ({ page }) => {
-  await page.route('*/**/group', async (route) => {
-    if (route.request().method() === 'GET') {
-      await route.fulfill(mockResponse(getMyinfoNoGroup));
-    } else {
-      await route.fulfill(mockResponse(null));
-    }
-  });
+  mockMapper({ page, url: 'group', method: 'GET', response: mockResponse(getMyinfoNoGroup) });
+  mockMapper({ page, url: 'group', method: 'POST', response: mockResponse(null) });
 });
 
 test.describe('그룹 생성 페이지', () => {
   test('그룹 생성', async ({ page, baseURL }) => {
+    // 1. 접속
     await page.goto(`${baseURL}/addGroup`);
     expect(page.getByText('매장 등록하기')).toBeVisible();
 
@@ -22,43 +18,33 @@ test.describe('그룹 생성 페이지', () => {
     const address = page.getByLabel('상세 주소');
     const mainAddress = page.getByLabel('주소', { exact: true });
 
+    // 2. 매장명 입력
     await marketName.focus();
     await marketName.fill('카카오 프렌즈샵');
 
+    // 3. 사업자번호 입력
     await marketNumber.focus();
-    await marketNumber.fill('1111111111');
+    await marketNumber.fill('0123456789');
 
+    // 4. 상세주소 입력
     await address.focus();
-    await address.fill('11');
+    await address.fill('상세 주소');
 
+    // 5. 다음 주소
     await mainAddress.click();
-    await page
-      .frameLocator('iframe[title="우편번호서비스 레이어 프레임"]')
-      .frameLocator('iframe[title="우편번호 검색 프레임"]')
-      .getByText('예) 판교역로 166, 분당 주공, 백현동 532')
-      .click();
-    await page
-      .frameLocator('iframe[title="우편번호서비스 레이어 프레임"]')
-      .frameLocator('iframe[title="우편번호 검색 프레임"]')
-      .getByLabel('검색할 도로명/지번주소를 입력, 예시) 판교역로 166, 분당 주공, 백현동 532')
-      .fill('성동구 서울숲길');
-    await page
-      .frameLocator('iframe[title="우편번호서비스 레이어 프레임"]')
-      .frameLocator('iframe[title="우편번호 검색 프레임"]')
-      .getByRole('link', { name: '서울특별시 성동구 서울숲길' })
-      .click();
-    await page
-      .frameLocator('iframe[title="우편번호서비스 레이어 프레임"]')
-      .frameLocator('iframe[title="우편번호 검색 프레임"]')
-      .getByRole('button', { name: '서울 성동구 서울숲길 17 (성수파크빌)' })
-      .click();
 
-    await page.waitForTimeout(2000);
+    // 5. 다음 주소 - 검색
+    const searchBox = page.locator('//fieldset/div/span');
+    await searchBox.click();
+    await searchBox.fill('강남구');
 
+    // 5. 다음 주소 - 첫번째 결과 클릭
+    await page.locator('//div[@id="postCodeSuggestLayer"]//li[1]').click();
+    await page.locator('//ul/li[1]/dl/dd[1]/span/button').click();
+
+    // 6. 제출
     await page.getByRole('button', { name: '그룹 생성하기' }).click();
 
-    await page.getByText('매장 등록에 성공했습니다').isVisible({ timeout: 10000 });
-
-    expect(page.getByText('매장 등록에 성공했습니다')).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText('매장 등록에 성공했습니다')).toBeVisible();
   });
 });
