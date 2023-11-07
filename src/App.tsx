@@ -1,8 +1,7 @@
-import { QueryCache, QueryClient, QueryClientProvider, useQueryErrorResetBoundary } from '@tanstack/react-query';
+import { QueryClientProvider, useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { convertPath } from 'apis/convertURI';
 import ViewPortContainer from 'components/@commons/ViewPortContainer';
 import ErrorFallback from 'error/ErrorFallback';
-import { defaultErrorHandler } from 'error/defaultErrorHandler';
 import { Provider } from 'jotai';
 import HomeIndex from 'pages/HomeIndex';
 import KakaoAuthPage from 'pages/KakaoAuthPage';
@@ -19,27 +18,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { myTheme } from 'styles/myTheme';
-
-const queryClient = new QueryClient({
-  queryCache: new QueryCache({
-    onError(error, query) {
-      defaultErrorHandler(error || { name: 'unknownError' });
-      setTimeout(() => {
-        queryClient.removeQueries(query.queryKey);
-      }, 1000);
-    },
-  }),
-  defaultOptions: {
-    queries: {
-      useErrorBoundary: true,
-      retry: 0,
-      refetchOnWindowFocus: false,
-    },
-    mutations: {
-      onError: (err) => defaultErrorHandler(err || { name: 'unknownError' }),
-    },
-  },
-});
+import { queryClient } from 'utils/queryClient';
 
 function App(): JSX.Element {
   const { reset } = useQueryErrorResetBoundary();

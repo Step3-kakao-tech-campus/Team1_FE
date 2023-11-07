@@ -1,6 +1,22 @@
-import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import DefferedSuspense from './DefferedSuspense';
+
+interface Props {
+  width?: string;
+  height?: string;
+  aspectRatio?: string;
+  isDeffered?: boolean;
+}
+
+const Skeleton = ({ width, height, aspectRatio, isDeffered = true }: Props) => {
+  return (
+    <DefferedSuspense deffered={isDeffered}>
+      <SkeletonBox $width={width} $height={height} $aspectRatio={aspectRatio} />
+    </DefferedSuspense>
+  );
+};
+
+export default Skeleton;
 
 const skeletonAnimation = keyframes`
   0% {
@@ -25,23 +41,3 @@ const SkeletonBox = styled.div<{
   border-radius: 4px;
   object-fit: cover;
 `;
-
-const Skeleton = ({ width, height, aspectRatio, isDeffered }: Props) => {
-  if (isDeffered) {
-    return (
-      <DefferedSuspense>
-        <SkeletonBox $width={width} $height={height} $aspectRatio={aspectRatio} />
-      </DefferedSuspense>
-    );
-  }
-  return <SkeletonBox $width={width} $height={height} $aspectRatio={aspectRatio} />;
-};
-
-export default Skeleton;
-
-interface Props {
-  width?: string;
-  height?: string;
-  aspectRatio?: string;
-  isDeffered?: boolean;
-}

@@ -1,19 +1,17 @@
-import React, { Suspense } from 'react';
-import { useAtomValue } from 'jotai';
-import { memberAtom, monthAtom } from './states';
-
-import PageContainer from 'components/@commons/PageContainer';
+import { UserData } from 'apis/types';
 import FlexContainer from 'components/@commons/FlexContainer';
-import CalenderOutter from 'components/Calendar/CalenderOutter';
-
+import PageContainer from 'components/@commons/PageContainer';
+import CalenderOutter, { MonthData } from 'components/Calendar/CalenderOutter';
+import Loader from 'components/Suspenses/Loader';
+import Skeleton from 'components/Suspenses/Skeleton';
+import { useAtom, useAtomValue } from 'jotai';
 import CalenderConents from 'pages/SchedulePage/CalendarSection/CalenderConents';
 import DailyWorkers from 'pages/SchedulePage/DailyWorkerSection/DailyWorkers';
 import Dropdown from 'pages/SchedulePage/HeaderSection/Dropdown';
 import TotalWorkTime from 'pages/SchedulePage/HeaderSection/TotalWorkTime';
-import { UserData } from 'apis/types';
-import Loader from 'components/Suspenses/Loader';
-import Skeleton from 'components/Suspenses/Skeleton';
+import { Suspense } from 'react';
 import { getLoginData } from 'utils/loginDatahandlers';
+import { memberAtom, monthAtom } from './states';
 
 const SchedulePage = ({ members }: { members?: UserData[] }): JSX.Element => {
   const isAdmin = getLoginData().isAdmin;
@@ -32,7 +30,7 @@ const SchedulePage = ({ members }: { members?: UserData[] }): JSX.Element => {
 
       {nowMember.isSelected && (
         <FlexContainer $wFull $gap="8px">
-          <CalenderOutter monthDataAtom={monthAtom} />
+          <MonthSelector />
           <Suspense fallback={<Skeleton aspectRatio="1.12" isDeffered />}>
             <CalenderConents />
           </Suspense>
@@ -49,3 +47,11 @@ const SchedulePage = ({ members }: { members?: UserData[] }): JSX.Element => {
 };
 
 export default SchedulePage;
+
+const MonthSelector = () => {
+  const [selectedMonth, setter] = useAtom(monthAtom);
+  const setMonth = (newMonth: MonthData) => {
+    setter(newMonth);
+  };
+  return <CalenderOutter selectedMonth={selectedMonth} setMonth={setMonth} />;
+};

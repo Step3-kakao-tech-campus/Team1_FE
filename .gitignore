@@ -24,7 +24,8 @@ yarn-debug.log*
 yarn-error.log*
 
 /k8s/secret.yaml
+/test-results/
+/playwright-report/
+/playwright/
 /tests/tests-examples/
-/tests/tests-results/
-/tests/playwright-report/
-/playwright/.cache/
+/tests/logintest.ts
