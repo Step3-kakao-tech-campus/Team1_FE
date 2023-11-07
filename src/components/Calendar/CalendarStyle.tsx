@@ -1,6 +1,6 @@
 import React from 'react';
-import FlexContainer from '../@commons/FlexContainer';
 import styled from 'styled-components';
+import FlexContainer from '../@commons/FlexContainer';
 
 export const DateCircle = styled.div<{ $isToday: boolean }>`
   background-color: ${(props) => (props.$isToday ? props.theme.color.yellow : null)};
@@ -20,7 +20,7 @@ export const BadgeText = styled.span`
   }
 `;
 
-export const Badge = styled.div<{ $color?: string }>`
+export const Badge = styled.ol<{ $color?: string }>`
   background-color: ${(props) => props.$color};
 
   display: flex;
