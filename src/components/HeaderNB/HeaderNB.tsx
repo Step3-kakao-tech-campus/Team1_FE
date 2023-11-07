@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import Text from 'components/@commons/Text';
+import { Hamburger } from 'components/@commons/icons';
 import {
+  HeaderButton,
   HeaderContainer,
   HeaderInnerBox,
-  HeaderButton,
   HeaderLeftMenuGroup,
   HeaderTitleCont,
 } from 'components/HeaderNB/HeaderNBStyels';
 import Sidebar from 'components/Sidebar';
-import Text from 'components/@commons/Text';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Hamburger } from 'components/@commons/icons';
 import { getLoginData } from 'utils/loginDatahandlers';
 
 const isAdmin = getLoginData().isAdmin;
@@ -29,7 +29,9 @@ const HeaderNB = (): JSX.Element => {
             </HeaderButton>
           </HeaderLeftMenuGroup>
           <HeaderTitleCont>
-            <Text size="lg">{isAdmin ? adminTitle[nowPath] : albaTitle[nowPath]}</Text>
+            <Text size="lg" key={isAdmin + nowPath} data-testId="페이지제목">
+              {isAdmin ? adminTitle[nowPath] : albaTitle[nowPath]}
+            </Text>
           </HeaderTitleCont>
         </HeaderInnerBox>
       </HeaderContainer>

@@ -4,6 +4,12 @@ export const getMyinfoNoGroup = {
   members: [],
 };
 
+export const getMyinfoNoMember = {
+  userName: '라이언',
+  groupName: '라이언 월드',
+  members: [{ name: '라이언', userId: 1 }],
+};
+
 export const getMyinfo = {
   userName: '라이언',
   groupName: '라이언 월드',

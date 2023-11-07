@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { UserData } from 'apis/types';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
-import { useAtom } from 'jotai';
-import { DropDownCont } from 'components/PageStyledComponents/admin/MainPage';
-import { memberAtom } from 'pages/SchedulePage/states';
-import { UserData } from 'apis/types';
 import { DropDown, DropUp } from 'components/@commons/icons';
+import { DropDownCont, DropdownBtn } from 'components/PageStyledComponents/admin/MainPage';
+import { useAtom } from 'jotai';
+import { memberAtom } from 'pages/SchedulePage/states';
+import { useState } from 'react';
 
 const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
   const [member, setMember] = useAtom(memberAtom);
@@ -23,27 +23,22 @@ const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
 
   return (
     <DropDownCont>
-      <FlexContainer
-        onClick={dropdownOnClick}
-        $wFull
-        $direction="row"
-        $justify="space-between"
-        $align="center"
-        $padding="2px 0"
-      >
+      <DropdownBtn onClick={dropdownOnClick} aria-label="멤버 선택">
         <Text margin="0" size="sm">
           {member.name || '선택'}
         </Text>
         {isOpen ? <DropUp /> : <DropDown />}
-      </FlexContainer>
+      </DropdownBtn>
       {isOpen && (
-        <FlexContainer $wFull $gap="10px" $padding="12px 0">
+        <FlexContainer $wFull $gap="10px" $padding="12px 0" data-testid="멤버리스트">
           {members.map((member: UserData, index) => (
-            <FlexContainer $wFull $align="flex-start" onClick={() => contentOnClick(member)} key={member.name + index}>
-              <Text margin="0" size="sm">
-                {member.name}
-              </Text>
-            </FlexContainer>
+            <ol key={member.name + index} onClick={() => contentOnClick(member)}>
+              <FlexContainer $wFull $align="flex-start">
+                <Text margin="0" size="sm">
+                  {member.name}
+                </Text>
+              </FlexContainer>
+            </ol>
           ))}
         </FlexContainer>
       )}

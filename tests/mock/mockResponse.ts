@@ -4,7 +4,7 @@ export const mockResponse = (responseBody) => {
   if (responseBody === null) {
     return { status: 200 };
   }
-  return { status: 200, body: JSON.stringify(responseBody) };
+  return { status: 200, contentType: 'application/json', body: JSON.stringify(responseBody) };
 };
 
 export const mockMapper = async ({
