@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getInviteKey } from 'apis/admin/manageGroup';
+import { baseURL } from 'apis/convertURI';
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
@@ -15,10 +16,10 @@ const GetInviteKeyModal = (): JSX.Element => {
   const { data: inviteKeyData, isFetching } = useQuery(['inviteKey'], getInviteKey);
   const { modalOffHandler } = useModal();
   const [isCopied, setIsCopied] = useState(false);
-  const link = `${process.env.REACT_APP_BASE_URL}/invited/${inviteKeyData?.data.invitationKey}`;
+  const link = `${baseURL}/invited/${inviteKeyData?.data.invitationKey}`;
 
   return (
-    <FlexContainer $wFull $padding="20px" $gap="30px">
+    <FlexContainer $wFull $padding="20px" $gap="30px" data-testId="초대링크모달">
       <FlexContainer $gap="10px">
         <Text size="xl" weight="bold">
           초대 링크

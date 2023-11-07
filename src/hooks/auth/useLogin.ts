@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-import { convertPath } from 'apis/convertURI';
 import { SignupRequest } from 'apis/auth';
-import React from 'react';
+import { baseURL, convertPath } from 'apis/convertURI';
+import { useNavigate } from 'react-router-dom';
 import { removeLoginData } from 'utils/loginDatahandlers';
 import { useLoginFetch } from './fetch';
 
@@ -12,7 +11,7 @@ const useLogin = (redirectPage?: string) => {
 
   const loginBtnHandler = (): void => {
     sessionStorage.setItem('beforeLoginURL', redirectPage || '/');
-    const redirectURI = new URL(window.location.href).origin + '/login/kakao';
+    const redirectURI = baseURL + '/login/kakao';
     location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_API_KEY}&redirect_uri=${redirectURI}&response_type=code`;
   };
 
