@@ -12,3 +12,11 @@ export const DropDownCont = styled.div`
   background-color: ${({ theme }) => theme.color.lightGray};
   z-index: 20;
 `;
+
+export const DropdownBtn = styled.button`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+`;
