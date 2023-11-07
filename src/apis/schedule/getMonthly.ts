@@ -6,17 +6,18 @@ import { dateToString } from 'utils/dateToString';
 
 export const getMonthly = async (info: Info): Promise<Return> => {
   const { year, month } = { ...info };
+  const strMonth = String(month + 1).padStart(2, '0');
 
   let params = {};
 
   if (info.isAdmin) {
     params = {
-      month: `${year}-${month + 1}`,
+      month: `${year}-${strMonth}`,
       userId: info.userId,
     };
   } else {
     params = {
-      month: `${year}-${month + 1}`,
+      month: `${year}-${strMonth}`,
     };
   }
 
