@@ -17,7 +17,7 @@ export const defaultErrorHandler = (error: ErrorData) => {
 
   // 서버 에러 응답
   console.log('defaultErrorHandler', error.response?.data);
-  const code = error.response.data?.code;
+  const code = error.response.data?.errorCode;
   switch (code) {
     case -10000:
       // 타임 아웃
