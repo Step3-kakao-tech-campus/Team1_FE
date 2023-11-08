@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { getMyInfo } from 'apis/userInfo';
-import { getLoginData } from 'utils/loginDatahandlers';
-import React from 'react';
 import { UserData } from 'apis/types';
+import { getMyInfo } from 'apis/userInfo';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 
 const useGetMyInfo = () => {
   const { data: myInfo } = useQuery(['myInfo'], getMyInfo, {
@@ -29,7 +28,7 @@ export default useGetMyInfo;
 type UserType = 'NON_USER' | 'ADMIN_NO_GROUP' | 'ADMIN_NO_MEMBER' | 'ADMIN' | 'ALBA_NO_GROUP' | 'ALBA';
 
 const userTypeCheck = (groupName: string | null, members: UserData[]): UserType => {
-  const loginState = getLoginData();
+  const loginState = loginDatahandlers.getLoginData();
 
   if (!loginState.isLogin) {
     return 'NON_USER';

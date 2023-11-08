@@ -1,17 +1,16 @@
-import React from 'react';
 import { convertPath } from 'apis/convertURI';
-import { useNavigate } from 'react-router-dom';
-import ErrorPage from './ErrorPage';
 import { ErrorFallbackProps } from 'apis/types';
 import { AdminNoGroupPage, AdminNoMemberPage } from 'pages/admin/ETCMainPage';
 import { AlbaNoGroupPage } from 'pages/alba/AlbaMainIndex';
-import { getLoginData } from 'utils/loginDatahandlers';
+import { useNavigate } from 'react-router-dom';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
+import ErrorPage from './ErrorPage';
 
 const ErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackProps) => {
   console.log(error);
 
   const navigate = useNavigate();
-  const isAdmin = getLoginData().isAdmin;
+  const isAdmin = loginDatahandlers.getLoginData().isAdmin;
   const code = error.response?.data?.code || 0;
 
   switch (code) {

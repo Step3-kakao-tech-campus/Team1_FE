@@ -2,10 +2,10 @@ import { WeekStatusData, WeekStatusTypes } from 'apis/types';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { selectedWeekAtom, weekStatusMonthAtom } from 'pages/SelectWeekPage/states';
 import React from 'react';
-import { getLoginData } from 'utils/loginDatahandlers';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 
 const useSelectWeek = () => {
-  const isAdmin = getLoginData().isAdmin;
+  const isAdmin = loginDatahandlers.getLoginData().isAdmin;
   const setSelectedWeek = useSetAtom(selectedWeekAtom);
 
   const weekOnClickHandler = (weekObj: WeekStatusData) => {

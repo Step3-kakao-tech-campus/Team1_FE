@@ -1,8 +1,8 @@
 import { TotalWorkedTimeData, UserData } from 'apis/types';
 import { atom } from 'jotai';
-import { getLoginData } from 'utils/loginDatahandlers';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 
-const isAdmin = getLoginData().isAdmin;
+const isAdmin = loginDatahandlers.getLoginData().isAdmin;
 
 export const workTimeAtom = atom<TotalWorkedTimeData>({ monthly: 0, weekly: 0 });
 export const memberAtom = atom<MemberType>(

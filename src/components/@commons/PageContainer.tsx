@@ -1,8 +1,8 @@
+import { AdminBottomNB, AlbaBottomNB } from 'components/BottomNB/BottomNB';
+import HeaderNB from 'components/HeaderNB/HeaderNB';
 import React from 'react';
 import styled from 'styled-components';
-import HeaderNB from 'components/HeaderNB/HeaderNB';
-import { AlbaBottomNB, AdminBottomNB } from 'components/BottomNB/BottomNB';
-import { getLoginData } from 'utils/loginDatahandlers';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 
 interface Props {
   children: React.ReactNode;
@@ -23,7 +23,7 @@ const PageContainer = ({
   justify,
   maxWidth,
 }: Props): JSX.Element => {
-  const isAdmin = getLoginData().isAdmin;
+  const isAdmin = loginDatahandlers.getLoginData().isAdmin;
 
   return (
     <>

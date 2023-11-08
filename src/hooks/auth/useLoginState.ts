@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
-import React from 'react';
-import { saveLoginData } from 'utils/loginDatahandlers';
+import { useNavigate } from 'react-router-dom';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 
 export const useLoginState = () => {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ export const useLoginState = () => {
       isAdmin: boolean;
     },
   ) => {
-    saveLoginData(token, userData);
+    loginDatahandlers.saveLoginData(token, userData);
     navigate(convertPath(sessionStorage.getItem('beforeLoginURL') || '/'));
   };
 

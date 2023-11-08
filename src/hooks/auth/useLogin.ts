@@ -1,7 +1,7 @@
 import { SignupRequest } from 'apis/auth';
 import { baseURL, convertPath } from 'apis/convertURI';
 import { useNavigate } from 'react-router-dom';
-import { removeLoginData } from 'utils/loginDatahandlers';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 import { useLoginFetch } from './fetch';
 
 const useLogin = (redirectPage?: string) => {
@@ -25,7 +25,7 @@ const useLogin = (redirectPage?: string) => {
   };
 
   const logout = () => {
-    removeLoginData();
+    loginDatahandlers.removeLoginData();
     navigate(convertPath('/'));
   };
 
