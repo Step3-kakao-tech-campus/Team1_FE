@@ -1,16 +1,9 @@
-import React from 'react';
 import { styled } from 'styled-components';
 import DefferedSuspense from './DefferedSuspense';
 
-const StyledLoader = styled.div<{ $size?: string }>`
-  margin: auto;
-  width: ${(props) => (props.$size ? props.$size : '40px')};
-  height: ${(props) => (props.$size ? props.$size : '40px')};
-`;
-
-const Loader = ({ size }: { size?: string }) => {
+const Loader = ({ size, isDeffered = true }: { size?: string; isDeffered?: boolean }) => {
   return (
-    <DefferedSuspense>
+    <DefferedSuspense deffered={isDeffered}>
       <StyledLoader $size={size}>
         <svg
           version="1.1"
@@ -54,3 +47,9 @@ const Loader = ({ size }: { size?: string }) => {
 };
 
 export default Loader;
+
+const StyledLoader = styled.div<{ $size?: string }>`
+  margin: auto;
+  width: ${(props) => (props.$size ? props.$size : '40px')};
+  height: ${(props) => (props.$size ? props.$size : '40px')};
+`;

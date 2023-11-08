@@ -1,14 +1,14 @@
-import React, { Suspense } from 'react';
-import useLogin from 'hooks/auth/useLogin';
-import useModal from 'hooks/useModal';
-import GetInviteKeyModal from 'components/modals/GetInviteKeyModal';
-import { HorizontalLine, SidebarBackground, SidebarBox } from './styles';
-import Text from '../@commons/Text';
-import FlexContainer from '../@commons/FlexContainer';
 import { UserData } from 'apis/types';
-import { getLoginData } from 'utils/loginDatahandlers';
 import Loader from 'components/Suspenses/Loader';
+import GetInviteKeyModal from 'components/modals/GetInviteKeyModal';
+import useLogin from 'hooks/auth/useLogin';
 import useGetMyInfo from 'hooks/useGetMyInfo';
+import useModal from 'hooks/useModal';
+import { Suspense } from 'react';
+import { getLoginData } from 'utils/loginDatahandlers';
+import FlexContainer from '../@commons/FlexContainer';
+import Text from '../@commons/Text';
+import { HorizontalLine, SidebarBackground, SidebarBox } from './styles';
 
 const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element => {
   return (
@@ -73,13 +73,13 @@ const SideBarButtons = ({ isAdmin }: { isAdmin: boolean }) => {
   return (
     <FlexContainer $align="flex-start" $gap="20px">
       {isAdmin && (
-        <FlexContainer onClick={() => modalOnHandler(<GetInviteKeyModal />)}>
+        <button onClick={() => modalOnHandler(<GetInviteKeyModal />)}>
           <Text>직원 초대하기</Text>
-        </FlexContainer>
+        </button>
       )}
-      <FlexContainer onClick={logout}>
+      <button onClick={logout}>
         <Text>로그아웃</Text>
-      </FlexContainer>
+      </button>
     </FlexContainer>
   );
 };

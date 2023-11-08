@@ -11,6 +11,7 @@ export const defaultErrorHandler = (error: ErrorData) => {
 
   if (error.response === undefined) {
     alert('서버 오류');
+    removeLoginData();
     return;
   }
 
@@ -71,6 +72,7 @@ export const defaultErrorHandler = (error: ErrorData) => {
 
     default:
       alert(`잘못된 접근입니다`);
+      removeLoginData();
       redirect(convertPath('/'));
       return;
   }

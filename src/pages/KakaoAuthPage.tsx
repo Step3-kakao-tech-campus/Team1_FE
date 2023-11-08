@@ -12,14 +12,18 @@ const KakaoAuthPage = (): JSX.Element => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    navigate(convertPath('/'));
-
     if (code === null) {
       alert('다시 시도하세요');
+      navigate(convertPath('/'));
+      return;
+    }
+    if (code === sessionStorage.getItem('code')) {
+      navigate(convertPath('/'));
       return;
     }
 
     login(code);
+    sessionStorage.setItem('code', code);
   }, [code]);
 
   return (
