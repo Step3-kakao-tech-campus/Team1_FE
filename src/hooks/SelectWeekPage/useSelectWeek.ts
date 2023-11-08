@@ -1,4 +1,4 @@
-import { WeekStatusData, WeekStatusTypes } from 'apis/types';
+import { WeekStatusData } from 'apis/types';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { selectedWeekAtom, weekStatusMonthAtom } from 'pages/SelectWeekPage/states';
 import React from 'react';
@@ -14,17 +14,6 @@ const useSelectWeek = () => {
     setSelectedWeek(newObj);
   };
 
-  const statusConverter = (weekStatus: WeekStatusTypes) => {
-    switch (weekStatus) {
-      case 'allocatable':
-        return '모집 전';
-      case 'inProgress':
-        return '모집 중';
-      case 'closed':
-        return '모집 마감';
-    }
-  };
-
   const nowMonth = useAtomValue(weekStatusMonthAtom);
   const { year, month } = nowMonth;
 
@@ -33,7 +22,7 @@ const useSelectWeek = () => {
     setSelectedWeek({ startWeekDate: '', weekStatus: '' });
   }, [year, month]);
 
-  return { weekOnClickHandler, statusConverter };
+  return { weekOnClickHandler };
 };
 
 export default useSelectWeek;
