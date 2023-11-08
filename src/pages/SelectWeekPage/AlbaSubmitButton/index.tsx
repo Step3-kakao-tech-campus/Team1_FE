@@ -1,9 +1,8 @@
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
-import React from 'react';
 import { useAtomValue } from 'jotai';
+import useWeeklyDetail from 'pages/SelectWeekPage/hooks/useWeeklyDetail';
 import { selectedWeekAtom } from 'pages/SelectWeekPage/states';
-import useWeeklyDetail from 'hooks/SelectWeekPage/useWeeklyDetail';
 
 const AlbaSubmitButton = (): JSX.Element => {
   const selectedWeek = useAtomValue(selectedWeekAtom);

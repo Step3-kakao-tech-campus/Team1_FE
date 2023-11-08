@@ -1,6 +1,6 @@
-import { usePostGroupJoin } from 'hooks/alba/invitation/fetch';
 import useModal from 'hooks/useModal';
 import usePopUpPage from 'hooks/usePopUpPage';
+import { usePostGroupJoin } from 'pages/alba/InvitedPage/hooks/fetch';
 import React from 'react';
 import { loginDatahandlers } from 'utils/loginDatahandlers';
 

@@ -1,7 +1,6 @@
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
-import { useGetInvitation } from 'hooks/alba/invitation/fetch';
-import React from 'react';
+import { useGetInvitation } from 'pages/alba/InvitedPage/hooks/fetch';
 
 interface Props {
   invitationKey: string;

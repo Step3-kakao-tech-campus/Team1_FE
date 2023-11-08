@@ -2,9 +2,9 @@ import BorderBox from 'components/@commons/BorderBox';
 import CheckBox from 'components/@commons/CheckBox';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
-import { useGetApplyForm } from 'hooks/alba/apply/fetch';
-import useSelectTime from 'hooks/alba/apply/useSelectTime';
 import { useAtomValue } from 'jotai';
+import { useGetApplyForm } from 'pages/alba/ApplyPage/hooks/fetch';
+import useSelectTime from 'pages/alba/ApplyPage/hooks/useSelectTime';
 import { weeklySelectAtom } from '../states';
 
 const DailyTimeSelectForm = ({ day, startWeekDate }: { day: number; startWeekDate: string }): JSX.Element => {

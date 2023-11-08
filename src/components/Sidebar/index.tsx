@@ -1,9 +1,9 @@
 import { UserData } from 'apis/types';
 import Loader from 'components/Suspenses/Loader';
 import GetInviteKeyModal from 'components/modals/GetInviteKeyModal';
-import useLogin from 'hooks/auth/useLogin';
 import useGetMyInfo from 'hooks/useGetMyInfo';
 import useModal from 'hooks/useModal';
+import useLogin from 'pages/auth/hooks/useLogin';
 import { Suspense } from 'react';
 import { loginDatahandlers } from 'utils/loginDatahandlers';
 import FlexContainer from '../@commons/FlexContainer';

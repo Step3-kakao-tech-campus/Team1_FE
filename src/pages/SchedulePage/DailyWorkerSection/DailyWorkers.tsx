@@ -1,6 +1,6 @@
 import { DailyWorkersTable, NotFixedDateBox } from 'components/DailyWorkersTable';
-import { useGetDailyWorkers } from 'hooks/SchedulePage/fetch';
 import { useAtomValue } from 'jotai';
+import { useGetDailyWorkers } from 'pages/SchedulePage/hooks/fetch';
 import { dateAtom } from '../states';
 
 const DailyWorkers = (): JSX.Element => {

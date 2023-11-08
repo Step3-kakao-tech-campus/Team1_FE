@@ -1,10 +1,10 @@
 import { WeekStatusData } from 'apis/types';
 import { MonthBox } from 'components/Calendar/CalendarStyle';
 import { BorderWeekBox, WeekContainer, WeekStatusBar } from 'components/PageStyledComponents/admin/SelectWeekPage';
-import { useGetWeekProgress } from 'hooks/SelectWeekPage/fetch';
-import useSelectWeek from 'hooks/SelectWeekPage/useSelectWeek';
 import { useAtomValue } from 'jotai';
 import StatusCalendarWeekly from 'pages/SelectWeekPage/Calendar/StatusCalendarWeekly';
+import { useGetWeekProgress } from 'pages/SelectWeekPage/hooks/fetch';
+import useSelectWeek from 'pages/SelectWeekPage/hooks/useSelectWeek';
 import { selectedWeekAtom } from 'pages/SelectWeekPage/states';
 import { weekStatusConverter } from 'utils/weekStatusConverter';
 

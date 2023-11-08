@@ -1,8 +1,8 @@
 import { DailyWorkTimeData } from 'apis/types';
 import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
-import { useGetMonthly } from 'hooks/SchedulePage/fetch';
-import useSchedule from 'hooks/SchedulePage/useSchedule';
 import { useAtomValue } from 'jotai';
+import { useGetMonthly } from 'pages/SchedulePage/hooks/fetch';
+import useSchedule from 'pages/SchedulePage/hooks/useSchedule';
 import { dateAtom } from '../states';
 import CalendarDayBox from './CalendarDayBox';
 
