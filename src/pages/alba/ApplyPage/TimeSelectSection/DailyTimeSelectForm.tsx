@@ -2,9 +2,9 @@ import BorderBox from 'components/@commons/BorderBox';
 import CheckBox from 'components/@commons/CheckBox';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
-import { useGetApplyForm } from 'hooks/alba/apply/fetch';
-import useSelectTime from 'hooks/alba/apply/useSelectTime';
 import { useAtomValue } from 'jotai';
+import { useGetApplyForm } from 'pages/alba/ApplyPage/hooks/fetch';
+import useSelectTime from 'pages/alba/ApplyPage/hooks/useSelectTime';
 import { weeklySelectAtom } from '../states';
 
 const DailyTimeSelectForm = ({ day, startWeekDate }: { day: number; startWeekDate: string }): JSX.Element => {
@@ -16,30 +16,28 @@ const DailyTimeSelectForm = ({ day, startWeekDate }: { day: number; startWeekDat
   const { selectTimeHandler } = useSelectTime();
 
   return (
-    <>
-      <FlexContainer $wFull>
-        {weeklySelect[day].map((timeObject, timeIndex) => (
-          <label key={timeObject.title}>
-            <BorderBox width="100%" gradation={true}>
-              <FlexContainer $wFull $padding="28px" $direction="row" $align="center">
-                <CheckBox
-                  type="checkbox"
-                  onClick={() => selectTimeHandler(timeIndex, day)}
-                  checked={timeObject.isChecked}
-                  readOnly
-                />
-                <Text size="xl" margin="0">
-                  {timeObject.title}
-                </Text>
-                <Text size="xl" margin="0 0 0 auto">
-                  {timeObject.startTime} ~ {timeObject.endTime}
-                </Text>
-              </FlexContainer>
-            </BorderBox>
-          </label>
-        ))}
-      </FlexContainer>
-    </>
+    <FlexContainer $wFull data-testid="체크리스트">
+      {weeklySelect[day].map((timeObject, timeIndex) => (
+        <label key={timeObject.title} data-testid={timeObject.isChecked}>
+          <BorderBox width="100%" gradation={true}>
+            <FlexContainer $wFull $padding="28px" $direction="row" $align="center">
+              <CheckBox
+                type="checkbox"
+                onClick={() => selectTimeHandler(timeIndex, day)}
+                checked={timeObject.isChecked}
+                readOnly
+              />
+              <Text size="xl" margin="0">
+                {timeObject.title}
+              </Text>
+              <Text size="xl" margin="0 0 0 auto">
+                {timeObject.startTime} ~ {timeObject.endTime}
+              </Text>
+            </FlexContainer>
+          </BorderBox>
+        </label>
+      ))}
+    </FlexContainer>
   );
 };
 export default DailyTimeSelectForm;

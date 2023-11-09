@@ -23,22 +23,26 @@ const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
 
   return (
     <DropDownCont>
-      <DropdownBtn onClick={dropdownOnClick} aria-label="멤버 선택">
+      <DropdownBtn onClick={dropdownOnClick}>
         <Text margin="0" size="sm">
           {member.name || '선택'}
         </Text>
         {isOpen ? <DropUp /> : <DropDown />}
       </DropdownBtn>
       {isOpen && (
-        <FlexContainer $wFull $gap="10px" $padding="12px 0" data-testid="멤버리스트">
+        <FlexContainer $wFull $gap="10px" $padding="12px 0" as="ol" data-testid="멤버리스트">
           {members.map((member: UserData, index) => (
-            <ol key={member.name + index} onClick={() => contentOnClick(member)}>
-              <FlexContainer $wFull $align="flex-start">
-                <Text margin="0" size="sm">
-                  {member.name}
-                </Text>
-              </FlexContainer>
-            </ol>
+            <FlexContainer
+              as="li"
+              $wFull
+              $align="flex-start"
+              key={member.name + index}
+              onClick={() => contentOnClick(member)}
+            >
+              <Text margin="0" size="sm">
+                {member.name}
+              </Text>
+            </FlexContainer>
           ))}
         </FlexContainer>
       )}

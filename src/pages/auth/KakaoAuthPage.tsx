@@ -1,7 +1,7 @@
 import { convertPath } from 'apis/convertURI';
 import PageContainer from 'components/@commons/PageContainer';
 import Loader from 'components/Suspenses/Loader';
-import useLogin from 'hooks/auth/useLogin';
+import useLogin from 'pages/auth/hooks/useLogin';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 

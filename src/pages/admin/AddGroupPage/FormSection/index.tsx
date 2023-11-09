@@ -1,7 +1,7 @@
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
-import useAddGroupForm from 'hooks/admin/AddGroupPage/useAddGroupForm';
+import useAddGroupForm from 'pages/admin/AddGroupPage/hooks/useAddGroupForm';
 import { marketNoValidator, nameValidator } from 'utils/validators';
 import InputBar from './InputBar';
 

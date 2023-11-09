@@ -1,21 +1,22 @@
 import { WeekStatusData } from 'apis/types';
 import { MonthBox } from 'components/Calendar/CalendarStyle';
 import { BorderWeekBox, WeekContainer, WeekStatusBar } from 'components/PageStyledComponents/admin/SelectWeekPage';
-import { useGetWeekProgress } from 'hooks/SelectWeekPage/fetch';
-import useSelectWeek from 'hooks/SelectWeekPage/useSelectWeek';
 import { useAtomValue } from 'jotai';
 import StatusCalendarWeekly from 'pages/SelectWeekPage/Calendar/StatusCalendarWeekly';
+import { useGetWeekProgress } from 'pages/SelectWeekPage/hooks/fetch';
+import useSelectWeek from 'pages/SelectWeekPage/hooks/useSelectWeek';
 import { selectedWeekAtom } from 'pages/SelectWeekPage/states';
+import { weekStatusConverter } from 'utils/weekStatusConverter';
 
 const StatusCalendar = (): JSX.Element => {
   const { weekStatusData } = useGetWeekProgress();
-  const { weekOnClickHandler, statusConverter } = useSelectWeek();
+  const { weekOnClickHandler } = useSelectWeek();
   const selectedWeek = useAtomValue(selectedWeekAtom);
   return (
-    <MonthBox $wFull>
+    <MonthBox $wFull data-testid="주차선택캘린더">
       {weekStatusData?.table.map((weekObj: WeekStatusData, i) => (
-        <WeekContainer key={`${i}주`} onClick={() => weekOnClickHandler(weekObj)}>
-          <WeekStatusBar $status={weekObj.weekStatus}>{statusConverter(weekObj.weekStatus)}</WeekStatusBar>
+        <WeekContainer onClick={() => weekOnClickHandler(weekObj)} key={`${i}주`} data-testid={`${i}주`}>
+          <WeekStatusBar $status={weekObj.weekStatus}>{weekStatusConverter(weekObj.weekStatus)}</WeekStatusBar>
           {weekObj.dates[0] === selectedWeek.startWeekDate && <BorderWeekBox />}
 
           <StatusCalendarWeekly dates={weekObj.dates} />

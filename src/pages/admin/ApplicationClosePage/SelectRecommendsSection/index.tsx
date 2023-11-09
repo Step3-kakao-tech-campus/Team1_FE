@@ -1,16 +1,15 @@
-import React from 'react';
-import { DailyWorkersTable } from 'components/DailyWorkersTable';
+import BorderBox from 'components/@commons/BorderBox';
 import ColorBox from 'components/@commons/ColorBox';
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
+import { DailyWorkersTable } from 'components/DailyWorkersTable';
+import { ScrollContainer } from 'components/PageStyledComponents/admin/ApplicationClose';
+import useWeekSelector from 'hooks/useWeekSelector';
+import { useGetRecommends } from 'pages/admin/ApplicationClosePage/hooks/fetch';
+import useClose from 'pages/admin/ApplicationClosePage/hooks/useClose';
 import { myTheme } from 'styles/myTheme';
 import { stringDateMoveKor } from 'utils/dateToString';
-import { ScrollContainer } from 'components/PageStyledComponents/admin/ApplicationClose';
-import useClose from 'hooks/admin/ApplicationClosePage/useClose';
-import useWeekSelector from 'hooks/useWeekSelector';
-import BorderBox from 'components/@commons/BorderBox';
-import { useGetRecommends } from 'hooks/admin/ApplicationClosePage/fetch';
 
 const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { recommendsRes } = useGetRecommends(startWeekDate);
@@ -19,11 +18,12 @@ const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): 
 
   return (
     <>
-      <ScrollContainer>
+      <ScrollContainer as="ol" data-testid="후보목록">
         {recommendsRes?.data.recommends.map((e, candidateIndex: number) => (
           <FlexContainer
             $shrink="0"
             $width="32%"
+            as="li"
             key={`후보${candidateIndex}`}
             onClick={() => setCandidate(candidateIndex)}
           >

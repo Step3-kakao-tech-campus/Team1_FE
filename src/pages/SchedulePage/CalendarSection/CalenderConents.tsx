@@ -1,15 +1,16 @@
 import { DailyWorkTimeData } from 'apis/types';
 import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
-import { useGetMonthly } from 'hooks/SchedulePage/fetch';
-import useSchedule from 'hooks/SchedulePage/useSchedule';
-import { useAtomValue } from 'jotai';
-import { dateAtom } from '../states';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { useGetMonthly } from 'pages/SchedulePage/hooks/fetch';
+import { dateAtom, monthAtom } from '../states';
 import CalendarDayBox from './CalendarDayBox';
 
 const CalenderConents = (): JSX.Element => {
-  const { scheduleData } = useGetMonthly();
-  const { dateOnClick } = useSchedule();
+  const selectedMonth = useAtomValue(monthAtom);
+  const { scheduleData } = useGetMonthly(selectedMonth);
+
   const selectedDate = useAtomValue(dateAtom);
+  const setSelectedDate = useSetAtom(dateAtom);
 
   return (
     <MonthBox $wFull data-testid="월간스케줄">
@@ -20,7 +21,7 @@ const CalenderConents = (): JSX.Element => {
               key={e.date}
               dateString={e.date}
               timeList={e.workTime}
-              onClick={() => dateOnClick(e.workTime !== null, e.date)}
+              onClick={() => setSelectedDate({ isFixed: e.workTime !== null, date: e.date })}
               isSelected={selectedDate.date === e.date}
               colors={scheduleData.badgeColor}
             />

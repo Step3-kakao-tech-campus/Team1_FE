@@ -1,0 +1,14 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "*",
+      "localStorage": [
+        {
+          "name": "login",
+          "value": "{\"token\":\"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjE0LCJzdWIiOiJ1c2VyIiwiaWF0IjoxNjk5MjExMDkzLCJleHAiOjE2OTkyMTk3MzN9.I7ejmrZrlo4CDr0xkShI4fZTWGe6S1kUgBxvsO1VMqA\",\"isLogin\":true,\"isAdmin\":true}"
+        }
+      ]
+    }
+  ]
+}

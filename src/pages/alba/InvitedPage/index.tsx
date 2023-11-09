@@ -1,13 +1,13 @@
-import React, { Suspense } from 'react';
-import { useParams } from 'react-router-dom';
-import PageContainer from 'components/@commons/PageContainer';
-import JoinDone from 'pages/alba/InvitedPage/JoinDone';
 import FlexContainer from 'components/@commons/FlexContainer';
-import InvitationSkeleton from 'components/Suspenses/PageSkeletons/InvitationSkeleton';
-import InvitationContent from './InvitationContent';
+import PageContainer from 'components/@commons/PageContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
+import InvitationSkeleton from 'components/Suspenses/PageSkeletons/InvitationSkeleton';
 import LoginSignupModal from 'components/modals/LoginSignupModal';
-import useInvitation from 'hooks/alba/invitation/useInvitation';
+import JoinDone from 'pages/alba/InvitedPage/JoinDone';
+import useInvitation from 'pages/alba/InvitedPage/hooks/useInvitation';
+import { Suspense } from 'react';
+import { useParams } from 'react-router-dom';
+import InvitationContent from './InvitationContent';
 
 const InvitedPage = (): JSX.Element => {
   const invitationKey: string = useParams()?.invitationKey || '';

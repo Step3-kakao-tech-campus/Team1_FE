@@ -1,34 +1,39 @@
-const storage: Storage = localStorage;
+class LoginData {
+  saveLoginData = (token: string, userData: UserDataType) => {
+    sessionStorage.removeItem('beforeLoginURL');
+    sessionStorage.removeItem('code');
 
-export const saveLoginData = (token: string, userData: UserDataType) => {
-  sessionStorage.removeItem('beforeLoginURL');
-  sessionStorage.removeItem('code');
+    const loginData = {
+      token: token,
+      isLogin: true,
+      isAdmin: userData.isAdmin,
+    };
 
-  const loginData = {
-    token: token,
-    isLogin: true,
-    isAdmin: userData.isAdmin,
+    storage.setItem('login', JSON.stringify(loginData));
+    return;
   };
 
-  storage.setItem('login', JSON.stringify(loginData));
-};
+  removeLoginData = () => {
+    storage.removeItem('login');
+    location.reload();
+    return;
+  };
 
-export const removeLoginData = () => {
-  storage.removeItem('login');
-  location.reload();
-};
+  getLoginData = () => {
+    const stringData = storage.getItem('login');
+    if (stringData === null) return defaultLoginState;
+    return JSON.parse(stringData);
+  };
+}
+
+export const loginDatahandlers = new LoginData();
+
+const storage: Storage = localStorage;
 
 const defaultLoginState = {
   isLogin: false,
   token: '',
   isAdmin: false,
-};
-
-export const getLoginData = () => {
-  const stringData = storage.getItem('login');
-  if (stringData === null) return defaultLoginState;
-
-  return JSON.parse(stringData);
 };
 
 interface UserDataType {

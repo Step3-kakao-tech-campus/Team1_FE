@@ -1,17 +1,16 @@
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
-import React from 'react';
 import { useAtomValue } from 'jotai';
+import useWeeklyDetail from 'pages/SelectWeekPage/hooks/useWeeklyDetail';
 import { selectedWeekAtom } from 'pages/SelectWeekPage/states';
-import useWeeklyDetail from 'hooks/SelectWeekPage/useWeeklyDetail';
 
 const AlbaSubmitButton = (): JSX.Element => {
   const selectedWeek = useAtomValue(selectedWeekAtom);
-  const { albaBtnHandler } = useWeeklyDetail();
+  const { gotoApply } = useWeeklyDetail();
 
   return (
     <>
-      {selectedWeek.startWeekDate !== '' && <SubmitButton onClick={albaBtnHandler}>신청하러가기</SubmitButton>}
+      {selectedWeek.startWeekDate !== '' && <SubmitButton onClick={gotoApply}>신청하러가기</SubmitButton>}
       {selectedWeek.startWeekDate === '' && <Text> 주차를 선택해 주세요</Text>}
     </>
   );

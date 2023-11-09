@@ -1,6 +1,6 @@
 import { convertPath } from 'apis/convertURI';
 import { ErrorData } from 'apis/types';
-import { removeLoginData } from 'utils/loginDatahandlers';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 
 export const defaultErrorHandler = (error: ErrorData) => {
   console.log('defaultErrorHandler', error);
@@ -11,13 +11,13 @@ export const defaultErrorHandler = (error: ErrorData) => {
 
   if (error.response === undefined) {
     alert('서버 오류');
-    removeLoginData();
+    loginDatahandlers.removeLoginData();
     return;
   }
 
   // 서버 에러 응답
-  console.log('defaultErrorHandler', error.response?.data);
-  const code = error.response.data?.code;
+  console.log('defaultErrorHandler', error.response);
+  const code = error.response.data?.errorCode;
   switch (code) {
     case -10000:
       // 타임 아웃
@@ -66,13 +66,13 @@ export const defaultErrorHandler = (error: ErrorData) => {
     case -21000:
       // 토큰 유효하지 않음
       alert('로그인이 만료되었습니다.');
-      removeLoginData();
+      loginDatahandlers.removeLoginData();
       redirect(convertPath('/'));
       return;
 
     default:
       alert(`잘못된 접근입니다`);
-      removeLoginData();
+      loginDatahandlers.removeLoginData();
       redirect(convertPath('/'));
       return;
   }

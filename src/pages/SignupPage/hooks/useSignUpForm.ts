@@ -1,5 +1,5 @@
 import useErrorHandler from 'error/useErrorHandler';
-import useLogin from 'hooks/auth/useLogin';
+import useLogin from 'pages/auth/hooks/useLogin';
 import { useLocation } from 'react-router-dom';
 
 const useSignUpForm = ({ isAdmin, userName }: { isAdmin: boolean | null; userName: string }) => {

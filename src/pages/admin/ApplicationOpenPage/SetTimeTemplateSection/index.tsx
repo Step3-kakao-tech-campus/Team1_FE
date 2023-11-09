@@ -5,8 +5,8 @@ import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import { AddButton } from 'components/@commons/icons/buttons';
 import SetTimeTemplateSkeleton from 'components/Suspenses/PageSkeletons/SetTimeTemplateSkeleton';
-import { useGetOpenTemplate } from 'hooks/admin/ApplicationOpenPage/fetch';
-import useTimeTemplate from 'hooks/admin/ApplicationOpenPage/useTimeTemplate';
+import { useGetOpenTemplate } from 'pages/admin/ApplicationOpenPage/hooks/fetch';
+import useTimeTemplate from 'pages/admin/ApplicationOpenPage/hooks/useTimeTemplate';
 import { Suspense } from 'react';
 import { myTheme } from 'styles/myTheme';
 import { stringDateMoveKor } from 'utils/dateToString';
@@ -21,11 +21,11 @@ const SetTimeTemplateSection = ({ startWeekDate }: { startWeekDate: string }): J
       </Text>
 
       <Text>근무 시간대를 설정하세요</Text>
-      <FlexContainer $wFull $align="center" $gap="30px">
+      <FlexContainer as="ol" $wFull $align="center" $gap="30px">
         <Suspense fallback={<SetTimeTemplateSkeleton />}>
           <FetchGetOpen startWeekDate={startWeekDate}>
             {timeTemplate.map((time: TimeData, timeIndex: number) => (
-              <ColorBox $wFull key={`${time.title}${timeIndex}`} $background={myTheme.color.lightYellow}>
+              <ColorBox as="li" $wFull key={`${time.title}${timeIndex}`} $background={myTheme.color.lightYellow}>
                 <FlexContainer $wFull $padding="20px">
                   <OpenTimeInputs
                     timeData={time}

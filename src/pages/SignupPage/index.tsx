@@ -1,4 +1,3 @@
-import React from 'react';
 import FlexContainer from 'components/@commons/FlexContainer';
 import PageContainer from 'components/@commons/PageContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
@@ -7,9 +6,9 @@ import SelectTypeSection from 'pages/SignupPage/SelectTypeSection';
 
 import useForm from 'hooks/useForm';
 
-import { nameValidator } from 'utils/validators';
-import useSignUpForm from 'hooks/SignUpPage/useSignUpForm';
 import LogoPicture from 'components/@commons/LogoPicture';
+import useSignUpForm from 'pages/SignupPage/hooks/useSignUpForm';
+import { nameValidator } from 'utils/validators';
 
 const signupPage = (): JSX.Element => {
   const {

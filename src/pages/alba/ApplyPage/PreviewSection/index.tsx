@@ -1,13 +1,12 @@
-import React from 'react';
 import BorderBox from 'components/@commons/BorderBox';
 import FlexContainer from 'components/@commons/FlexContainer';
-import Text from 'components/@commons/Text';
-import usePreviewSelected from 'hooks/alba/apply/usePreviewSelected';
-import weekdayArray from 'utils/weekdayArray';
 import SubmitButton from 'components/@commons/SubmitButton';
+import Text from 'components/@commons/Text';
+import { PrevButton } from 'components/@commons/icons/buttons';
+import usePreviewSelected from 'pages/alba/ApplyPage/hooks/usePreviewSelected';
 import { myTheme } from 'styles/myTheme';
 import { stringDateMoveKor } from 'utils/dateToString';
-import { PrevButton } from 'components/@commons/icons/buttons';
+import weekdayArray from 'utils/weekdayArray';
 
 const PreviewSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { submitApplyHandler, checkedTimeOnly, goSelectHandler } = usePreviewSelected(startWeekDate);
@@ -23,8 +22,8 @@ const PreviewSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Eleme
 
       <FlexContainer $wFull>
         {weekdayArray.map((weekday, dayIndex) => (
-          <BorderBox gradation key={`${dayIndex}요일`}>
-            <FlexContainer $wFull $direction="row" $padding="20px 24px">
+          <BorderBox gradation key={weekday.kor}>
+            <FlexContainer $wFull $direction="row" $padding="20px 24px" data-testid="요일별선택미리보기">
               <FlexContainer $direction="row" $justify="space-between" $width="120px">
                 <Text size="lg" margin="0">
                   {stringDateMoveKor(startWeekDate, dayIndex)}

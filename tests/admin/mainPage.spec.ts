@@ -8,7 +8,7 @@ test.describe('매니저 메인 페이지', () => {
     await mockMapper({ page: page, url: 'group', method: 'GET', response: mockResponse(getMyinfo) });
 
     await page.goto(`${baseURL}`);
-    await expect(page.locator('//span[contains(text(), "확정 스케줄")]')).toBeVisible();
+    await expect(page.getByRole('button', { name: '선택' })).toBeVisible();
   });
 
   // 그룹이 있고 멤버가 없으면 초대하기 화면이 표시된다.

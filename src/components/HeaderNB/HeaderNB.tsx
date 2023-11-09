@@ -10,9 +10,9 @@ import {
 import Sidebar from 'components/Sidebar';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getLoginData } from 'utils/loginDatahandlers';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 
-const isAdmin = getLoginData().isAdmin;
+const isAdmin = loginDatahandlers.getLoginData().isAdmin;
 
 const HeaderNB = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +29,7 @@ const HeaderNB = (): JSX.Element => {
             </HeaderButton>
           </HeaderLeftMenuGroup>
           <HeaderTitleCont>
-            <Text size="lg" key={isAdmin + nowPath} data-testId="페이지제목">
+            <Text size="lg" key={isAdmin + nowPath} data-testid="페이지제목">
               {isAdmin ? adminTitle[nowPath] : albaTitle[nowPath]}
             </Text>
           </HeaderTitleCont>

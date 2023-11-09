@@ -1,6 +1,5 @@
-import React from 'react';
 import { InputPeople } from 'components/PageStyledComponents/admin/ApplicationOpenPage';
-import { usePeopleValidation } from 'hooks/admin/ApplicationOpenPage/usePeopleValidation';
+import { usePeopleValidation } from 'pages/admin/ApplicationOpenPage/hooks/usePeopleValidation';
 
 const EditAmountForm = ({ timeIndex, day }: { timeIndex: number; day: number }): JSX.Element => {
   const { val, onBlurHandler, onChangeHandler } = usePeopleValidation(timeIndex, day);

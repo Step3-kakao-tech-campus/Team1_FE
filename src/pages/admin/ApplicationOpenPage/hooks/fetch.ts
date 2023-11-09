@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { getTimeTemplate, postOpenApplication } from 'apis/admin/application/open';
 import { convertPath } from 'apis/convertURI';
-import useTimeTemplate from 'hooks/admin/ApplicationOpenPage/useTimeTemplate';
 import { useAtomValue, useSetAtom } from 'jotai';
+import useTimeTemplate from 'pages/admin/ApplicationOpenPage/hooks/useTimeTemplate';
 import { timeTemplateAtom, weeklyPeopleAtom } from 'pages/admin/ApplicationOpenPage/states';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

@@ -1,11 +1,11 @@
 import { UserData } from 'apis/types';
 import Loader from 'components/Suspenses/Loader';
 import GetInviteKeyModal from 'components/modals/GetInviteKeyModal';
-import useLogin from 'hooks/auth/useLogin';
 import useGetMyInfo from 'hooks/useGetMyInfo';
 import useModal from 'hooks/useModal';
+import useLogin from 'pages/auth/hooks/useLogin';
 import { Suspense } from 'react';
-import { getLoginData } from 'utils/loginDatahandlers';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 import FlexContainer from '../@commons/FlexContainer';
 import Text from '../@commons/Text';
 import { HorizontalLine, SidebarBackground, SidebarBox } from './styles';
@@ -25,7 +25,7 @@ const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element =>
 export default Sidebar;
 
 const SideBarContent = () => {
-  const isAdmin = getLoginData().isAdmin;
+  const isAdmin = loginDatahandlers.getLoginData().isAdmin;
   const { userName, userType, groupName, members } = useGetMyInfo();
 
   return (
@@ -92,11 +92,11 @@ const SideBarMemberList = ({ memberList }: { memberList?: UserData[] }) => {
       </Text>
       <HorizontalLine />
 
-      <FlexContainer $wFull $align="flex-start" $gap="16px">
+      <FlexContainer as="ol" $wFull $align="flex-start" $gap="16px">
         {memberList?.map((member: UserData) => (
-          <ol key={`${member.name}${member.userId}`}>
+          <li key={`${member.name}${member.userId}`}>
             <Text>{member.name}</Text>
-          </ol>
+          </li>
         ))}
       </FlexContainer>
     </FlexContainer>

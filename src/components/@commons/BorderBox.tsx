@@ -7,11 +7,12 @@ interface Props {
   border?: boolean;
   borderColor?: string;
   children: React.ReactNode;
+  as?: string;
 }
 
-const BorderBox = ({ width, gradation, border, borderColor, children }: Props): JSX.Element => {
+const BorderBox = ({ width, gradation, border, borderColor, children, as }: Props): JSX.Element => {
   return (
-    <StyledBorderBox $width={width} $gradation={gradation} $border={border} $borderColor={borderColor}>
+    <StyledBorderBox $width={width} $gradation={gradation} $border={border} $borderColor={borderColor} as={as}>
       {children}
     </StyledBorderBox>
   );
