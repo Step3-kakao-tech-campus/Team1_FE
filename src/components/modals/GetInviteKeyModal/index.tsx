@@ -19,7 +19,7 @@ const GetInviteKeyModal = (): JSX.Element => {
   const link = `${baseURL}/invited/${inviteKeyData?.data.invitationKey}`;
 
   return (
-    <FlexContainer $wFull $padding="20px" $gap="30px" data-testId="초대링크모달">
+    <FlexContainer $wFull $padding="20px" $gap="30px" data-testid="초대링크모달">
       <FlexContainer $gap="10px">
         <Text size="xl" weight="bold">
           초대 링크

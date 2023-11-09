@@ -29,7 +29,7 @@ const HeaderNB = (): JSX.Element => {
             </HeaderButton>
           </HeaderLeftMenuGroup>
           <HeaderTitleCont>
-            <Text size="lg" key={isAdmin + nowPath} data-testId="페이지제목">
+            <Text size="lg" key={isAdmin + nowPath} data-testid="페이지제목">
               {isAdmin ? adminTitle[nowPath] : albaTitle[nowPath]}
             </Text>
           </HeaderTitleCont>

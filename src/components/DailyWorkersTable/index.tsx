@@ -7,7 +7,7 @@ import { NameBox, TitleBox } from './styles';
 
 export const DailyWorkersTable = ({ dailyData }: { dailyData: TimeWorkerListData[] | undefined }): JSX.Element => {
   return (
-    <FlexContainer $direction="row" $wFull $gap="3%" data-testId="일간근무표">
+    <FlexContainer $direction="row" $wFull $gap="3%" data-testid="일간근무표">
       {dailyData?.map((timeData: TimeWorkerListData, timeindex) => (
         <FlexContainer key={`${timeData.title}${timeindex}`} $wFull $gap="10px">
           <TitleBox $timeIndex={timeindex}>
@@ -33,7 +33,7 @@ export const DailyWorkersTable = ({ dailyData }: { dailyData: TimeWorkerListData
 
 export const NotFixedDateBox = (): JSX.Element => {
   return (
-    <GrayBox data-testId="미확정일간근무표">
+    <GrayBox data-testid="미확정일간근무표">
       <Text size="lg" weight="medium">
         아직 확정된 스케줄이 없습니다
       </Text>

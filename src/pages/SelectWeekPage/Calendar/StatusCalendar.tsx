@@ -13,9 +13,9 @@ const StatusCalendar = (): JSX.Element => {
   const { weekOnClickHandler } = useSelectWeek();
   const selectedWeek = useAtomValue(selectedWeekAtom);
   return (
-    <MonthBox $wFull>
+    <MonthBox $wFull data-testid="주차선택캘린더">
       {weekStatusData?.table.map((weekObj: WeekStatusData, i) => (
-        <WeekContainer key={`${i}주`} onClick={() => weekOnClickHandler(weekObj)}>
+        <WeekContainer onClick={() => weekOnClickHandler(weekObj)} key={`${i}주`} data-testid={`${i}주`}>
           <WeekStatusBar $status={weekObj.weekStatus}>{weekStatusConverter(weekObj.weekStatus)}</WeekStatusBar>
           {weekObj.dates[0] === selectedWeek.startWeekDate && <BorderWeekBox />}
 
