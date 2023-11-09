@@ -50,7 +50,7 @@ export interface ErrorData {
   response?: {
     status: number;
     data?: {
-      code: number;
+      errorCode: number;
     };
   };
 }

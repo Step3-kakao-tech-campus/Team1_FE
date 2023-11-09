@@ -10,8 +10,15 @@ spec:
     metadata:
       labels:
         app: frontend
-    spec: 
+    spec:
       containers:
         - name: frontend
           # 여러분의 image 주소를 입력해주세요.
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_0b6943ee814a
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_9d9678dcd735
+          volumeMounts:
+          - name: config
+            mountPath: /etc/nginx/nginx.conf
+      volumes:
+        - name: config
+          configMap:
+            name: frontconfig

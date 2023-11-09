@@ -1,13 +1,12 @@
-import React from 'react';
 import BorderBox from 'components/@commons/BorderBox';
 import FlexContainer from 'components/@commons/FlexContainer';
-import Text from 'components/@commons/Text';
-import usePreviewSelected from 'hooks/alba/apply/usePreviewSelected';
-import weekdayArray from 'utils/weekdayArray';
 import SubmitButton from 'components/@commons/SubmitButton';
+import Text from 'components/@commons/Text';
+import { PrevButton } from 'components/@commons/icons/buttons';
+import usePreviewSelected from 'pages/alba/ApplyPage/hooks/usePreviewSelected';
 import { myTheme } from 'styles/myTheme';
 import { stringDateMoveKor } from 'utils/dateToString';
-import { PrevButton } from 'components/@commons/icons/buttons';
+import weekdayArray from 'utils/weekdayArray';
 
 const PreviewSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { submitApplyHandler, checkedTimeOnly, goSelectHandler } = usePreviewSelected(startWeekDate);

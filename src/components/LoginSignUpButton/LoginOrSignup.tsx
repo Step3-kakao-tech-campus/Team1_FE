@@ -1,7 +1,6 @@
 import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
-import useLogin from 'hooks/auth/useLogin';
-import React from 'react';
+import useLogin from 'pages/auth/hooks/useLogin';
 
 interface Props {
   redirectPage?: string;

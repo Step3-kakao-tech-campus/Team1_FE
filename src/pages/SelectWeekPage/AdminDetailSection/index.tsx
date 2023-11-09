@@ -2,11 +2,11 @@ import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import { DailyWorkersTable } from 'components/DailyWorkersTable';
 import Loader from 'components/Suspenses/Loader';
-import { useGetDailyWorkers } from 'hooks/SchedulePage/fetch';
-import { useGetApplyStatus } from 'hooks/SelectWeekPage/fetch';
-import useWeeklyDetail from 'hooks/SelectWeekPage/useWeeklyDetail';
 import useWeekSelector from 'hooks/useWeekSelector';
 import { useAtomValue } from 'jotai';
+import { useGetDailyWorkers } from 'pages/SchedulePage/hooks/fetch';
+import { useGetApplyStatus } from 'pages/SelectWeekPage/hooks/fetch';
+import useWeeklyDetail from 'pages/SelectWeekPage/hooks/useWeeklyDetail';
 import { Suspense } from 'react';
 import { stringDateMove } from 'utils/dateToString';
 import { selectedWeekAtom } from '../states';
@@ -36,18 +36,18 @@ const AdminDetailSection = (): JSX.Element => {
 export default AdminDetailSection;
 
 const OpenDetail = (): JSX.Element => {
-  const { openHandler } = useWeeklyDetail();
-  return <SubmitButton onClick={openHandler}>스케줄 모집 시작하기</SubmitButton>;
+  const { gotoOpenApply } = useWeeklyDetail();
+  return <SubmitButton onClick={gotoOpenApply}>스케줄 모집 시작하기</SubmitButton>;
 };
 
 const InProgressDetail = (): JSX.Element => {
   const { day, WeekBarComponent } = useWeekSelector(0);
   const { applicantsStatusRes } = useGetApplyStatus();
-  const { closeHandler } = useWeeklyDetail();
+  const { gotoCloseApply } = useWeeklyDetail();
 
   return (
     <>
-      <SubmitButton onClick={closeHandler}>모집 마감하고 배정하기</SubmitButton>
+      <SubmitButton onClick={gotoCloseApply}>모집 마감하고 배정하기</SubmitButton>
       <WeekBarComponent />
       <DailyWorkersTable dailyData={applicantsStatusRes?.applyStatus[day]} />
     </>

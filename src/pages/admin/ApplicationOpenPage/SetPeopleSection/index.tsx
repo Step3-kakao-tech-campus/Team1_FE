@@ -1,13 +1,12 @@
-import FlexContainer from 'components/@commons/FlexContainer';
 import BorderBox from 'components/@commons/BorderBox';
+import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
-import React from 'react';
 import useWeekSelector from 'hooks/useWeekSelector';
-import EditAmountForm from './EditAmountForm';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { usePostOpenApplication } from 'hooks/admin/ApplicationOpenPage/fetch';
+import { usePostOpenApplication } from 'pages/admin/ApplicationOpenPage/hooks/fetch';
 import { openStepAtom, timeTemplateAtom } from '../states';
+import EditAmountForm from './EditAmountForm';
 
 const SetPeopleSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Element => {
   const { day, WeekBarComponent } = useWeekSelector(0);

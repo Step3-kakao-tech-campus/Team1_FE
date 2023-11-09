@@ -10,11 +10,11 @@ import DailyWorkers from 'pages/SchedulePage/DailyWorkerSection/DailyWorkers';
 import Dropdown from 'pages/SchedulePage/HeaderSection/Dropdown';
 import TotalWorkTime from 'pages/SchedulePage/HeaderSection/TotalWorkTime';
 import { Suspense } from 'react';
-import { getLoginData } from 'utils/loginDatahandlers';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 import { memberAtom, monthAtom } from './states';
 
 const SchedulePage = ({ members }: { members?: UserData[] }): JSX.Element => {
-  const isAdmin = getLoginData().isAdmin;
+  const isAdmin = loginDatahandlers.getLoginData().isAdmin;
   const nowMember = useAtomValue(memberAtom);
 
   return (

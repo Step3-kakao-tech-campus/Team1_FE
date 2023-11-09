@@ -1,11 +1,11 @@
-import React from 'react';
 import useModal from 'hooks/useModal';
-import { getLoginData } from 'utils/loginDatahandlers';
-import { usePostGroupJoin } from 'hooks/alba/invitation/fetch';
 import usePopUpPage from 'hooks/usePopUpPage';
+import { usePostGroupJoin } from 'pages/alba/InvitedPage/hooks/fetch';
+import React from 'react';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 
 const useInvitation = (invitationKey: string, donePage: React.ReactNode, loginModal: React.ReactNode) => {
-  const loginState = getLoginData();
+  const loginState = loginDatahandlers.getLoginData();
   const { modalOnHandler } = useModal();
   const { popUpOnHandler } = usePopUpPage();
 
