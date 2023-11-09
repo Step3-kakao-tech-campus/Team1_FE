@@ -2,14 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { getDailyWorkers } from 'apis/schedule/getDailyWorkers';
 import { getMonthly } from 'apis/schedule/getMonthly';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { memberAtom, monthAtom, workTimeAtom } from 'pages/SchedulePage/states';
+import { SelectedMonthData, memberAtom, workTimeAtom } from 'pages/SchedulePage/states';
 import { useEffect } from 'react';
 import { loginDatahandlers } from 'utils/loginDatahandlers';
 
-export const useGetMonthly = () => {
+export const useGetMonthly = ({ year, month }: SelectedMonthData) => {
   const nowMember = useAtomValue(memberAtom);
-  const { year, month } = useAtomValue(monthAtom);
-  const setWorkTime = useSetAtom(workTimeAtom);
   const isAdmin = loginDatahandlers.getLoginData().isAdmin;
 
   const { data: scheduleData } = useQuery(
@@ -27,6 +25,7 @@ export const useGetMonthly = () => {
     },
   );
 
+  const setWorkTime = useSetAtom(workTimeAtom);
   useEffect(() => {
     if (scheduleData === undefined) return;
     setWorkTime({ ...scheduleData?.totalTime });
