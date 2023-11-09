@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { mockMapper, mockResponse } from '../mock/mockResponse';
 import { getMyinfo, getMyinfoNoGroup } from '../mock/responseBody/getMyInfo';
-import { getMonthly } from './../mock/responseBody/getSchedule';
+import { getMonthly } from './../mock/responseBody/schedulePage';
 
 test.describe('알바 메인 페이지', () => {
   // 그룹이 있으면 스케줄 화면이 표시된다.

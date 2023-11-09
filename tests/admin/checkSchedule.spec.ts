@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { CheckRequest, requestParamGetter } from '../mock/CheckRequest';
 import { mockMapper, mockResponse } from '../mock/mockResponse';
 import { getMyinfo } from '../mock/responseBody/getMyInfo';
-import { getDailyWorker, getMonthly } from '../mock/responseBody/getSchedule';
+import { getDailyWorker, getMonthly } from '../mock/responseBody/schedulePage';
 
 test('스케줄 확인', async ({ page, baseURL }) => {
   await mockMapper({ page, url: 'group', method: 'GET', response: mockResponse(getMyinfo) });
