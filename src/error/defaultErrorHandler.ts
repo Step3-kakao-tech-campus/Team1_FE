@@ -16,7 +16,7 @@ export const defaultErrorHandler = (error: ErrorData) => {
   }
 
   // 서버 에러 응답
-  console.log('defaultErrorHandler', error.response?.data);
+  console.log('defaultErrorHandler', error.response);
   const code = error.response.data?.errorCode;
   switch (code) {
     case -10000:
@@ -42,38 +42,38 @@ export const defaultErrorHandler = (error: ErrorData) => {
     case -20000:
       // 이미 가입되었는데 가입 요청
       alert('이미 가입되었습니다');
-      redirect(convertPath('/'));
+      // redirect(convertPath('/'));
       return;
 
     case -20001:
       // 이미 그룹이 있음
       alert('이미 소속된 그룹이 있습니다');
-      redirect(convertPath('/'));
+      // redirect(convertPath('/'));
       return;
 
     case -20002:
       // 이미 모집 시작되었는데 모집 시작
       alert('해당 주차 모집이 이미 시작되었습니다');
-      redirect(convertPath('/newSchedule'));
+      // redirect(convertPath('/newSchedule'));
       return;
 
     case -20003:
       // 이미 모집 마감되었는데 모집 마감
       alert('해당 주차 모집이 이미 마감되었습니다');
-      redirect(convertPath('/newSchedule'));
+      // redirect(convertPath('/newSchedule'));
       return;
 
     case -21000:
       // 토큰 유효하지 않음
       alert('로그인이 만료되었습니다.');
       loginDatahandlers.removeLoginData();
-      redirect(convertPath('/'));
+      // redirect(convertPath('/'));
       return;
 
     default:
       alert(`잘못된 접근입니다`);
       loginDatahandlers.removeLoginData();
-      redirect(convertPath('/'));
+      // redirect(convertPath('/'));
       return;
   }
 };
