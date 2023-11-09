@@ -2,8 +2,9 @@ import { defineConfig, devices } from '@playwright/test';
 import path from 'path';
 require('dotenv').config();
 
-export const ADMINSTATE = path.join(__dirname, './playwright/.auth/admin.json');
-export const ALBASTATE = path.join(__dirname, './playwright/.auth/alba.json');
+const ADMINSTATE = path.join(__dirname, './tests/state/admin.json');
+const ALBASTATE = path.join(__dirname, './tests/state/alba.json');
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -25,7 +26,6 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: `${process.env.REACT_APP_BASE_URL}`,
-
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
