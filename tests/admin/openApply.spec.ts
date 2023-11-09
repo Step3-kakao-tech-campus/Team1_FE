@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
-import { CheckRequest } from '../mock/CheckRequest';
 import { getWeekProgressAllocatable } from '../mock/responseBody/selectWeek';
+import { CheckRequest } from './../mock/CheckRequest';
 import { mockMapper, mockResponse } from './../mock/mockResponse';
 import { getTimeTemplate } from './../mock/responseBody/open';
 
-test.describe('매니저 모집 시작', () => {
-  test('매니저 모집 시작', async ({ page }) => {
+test.describe('스케줄 모집 시작', () => {
+  test('스케줄 모집 시작', async ({ page }) => {
     const allocatable = page.getByText('모집 전').first();
 
     // 주를 클릭하면 시작하기 버튼이 뜬다
@@ -51,11 +51,11 @@ test.describe('매니저 모집 시작', () => {
     await tuesday.click();
 
     // 인원을 입력하면 인원이 변경된다.
-    const amount = page.locator('//ol//input').first();
+    const amount = page.locator('//li//input').first();
     await amount.fill('10');
 
     // 스케줄 모집 시작하기 버튼을 누르면 제출되고 메인으로 이동한다.
-    const check = new CheckRequest({ page, url: 'schedule/worktime*' });
+    const check = new CheckRequest({ page, url: 'schedule/worktime' });
     await check.requestBodyParser();
 
     const doneButton = page.getByRole('button', { name: '스케줄 모집 시작하기 (그룹원에게 알림이 가요!)' });
@@ -72,21 +72,21 @@ test.describe('매니저 모집 시작', () => {
 test.beforeEach(async ({ page, baseURL }) => {
   await mockMapper({
     page,
-    url: `/schedule/status*`,
+    url: `schedule/status*`,
     method: 'GET',
     response: mockResponse(getWeekProgressAllocatable),
   });
 
   await mockMapper({
     page,
-    url: `/schedule/worktime*`,
+    url: `schedule/worktime?*`,
     method: 'GET',
     response: mockResponse(getTimeTemplate),
   });
 
   await mockMapper({
     page,
-    url: `/schedule/worktime*`,
+    url: `schedule/worktime`,
     method: 'POST',
     response: mockResponse(null),
   });

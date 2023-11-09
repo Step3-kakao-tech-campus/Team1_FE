@@ -29,6 +29,7 @@ class CheckRequest {
         route.continue();
         return;
       }
+      route.continue();
       return;
     });
   };
@@ -43,6 +44,8 @@ class CheckRequest {
           return;
         }
       }
+      route.continue();
+      return;
     });
   };
 }

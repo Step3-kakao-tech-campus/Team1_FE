@@ -13,13 +13,15 @@ test.describe('매니저 주차 선택', () => {
     // 모집 마감일 경우 : 요일별 근무표가 뜬다
     const closed = page.getByText('모집 마감').first();
     await closed.click();
+
+    await expect(page.getByTestId('일간근무표')).toBeVisible();
   });
 });
 
 test.beforeEach(async ({ page, baseURL }) => {
   await mockMapper({
     page,
-    url: `/schedule/status*`,
+    url: `schedule/status*`,
     method: 'GET',
     response: mockResponse(getWeekProgressClosed),
   });

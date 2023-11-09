@@ -18,9 +18,9 @@ test('스케줄 확인', async ({ page, baseURL }) => {
   await expect(page.getByTestId('월간스케줄')).toBeVisible();
 
   // 2. 캘린더 날짜를 누르면
-  const firstDate = calendar.locator('div').nth(1).locator('div').nth(1);
+  const firstDate = calendar.locator('div').first().locator('div').first();
   await firstDate.click();
-  const badge = firstDate.locator('div').locator('ol');
+  const badge = firstDate.locator('div').locator('li');
 
   if (badge === null) {
     // 2-1. 확정 스케줄이 없으면 아직 스케줄이 확정되지 않았습니다 가 표시된다.
