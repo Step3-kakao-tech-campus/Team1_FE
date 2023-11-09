@@ -23,7 +23,7 @@ const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
 
   return (
     <DropDownCont>
-      <DropdownBtn onClick={dropdownOnClick} aria-label="멤버 선택">
+      <DropdownBtn onClick={dropdownOnClick}>
         <Text margin="0" size="sm">
           {member.name || '선택'}
         </Text>
