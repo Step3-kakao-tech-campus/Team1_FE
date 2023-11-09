@@ -21,8 +21,6 @@ export const mockMapper = async ({
   await page.route(`*/**/${url}`, async (route) => {
     if (route.request().method() === method) {
       await route.fulfill(response);
-    } else {
-      await route.continue();
     }
   });
 };

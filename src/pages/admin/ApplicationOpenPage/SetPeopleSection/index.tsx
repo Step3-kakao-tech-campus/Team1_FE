@@ -18,9 +18,9 @@ const SetPeopleSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Ele
     <FlexContainer $wFull $gap="48px">
       <button onClick={() => setStep('setTime')}>시간대 수정하기</button>
       <WeekBarComponent />
-      <FlexContainer $wFull>
+      <FlexContainer as="ol" $wFull>
         {timeTemplate.map((timeData, timeIndex) => (
-          <BorderBox gradation key={`${day}${timeIndex}`}>
+          <BorderBox as="li" gradation key={`${day}${timeIndex}`}>
             <FlexContainer $wFull $direction="row" $padding="32px 60px" $align="center">
               <Text size="xl" margin="0">
                 {timeData.title}

@@ -18,11 +18,12 @@ const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): 
 
   return (
     <>
-      <ScrollContainer>
+      <ScrollContainer as="ol" data-testid="후보목록">
         {recommendsRes?.data.recommends.map((e, candidateIndex: number) => (
           <FlexContainer
             $shrink="0"
             $width="32%"
+            as="li"
             key={`후보${candidateIndex}`}
             onClick={() => setCandidate(candidateIndex)}
           >

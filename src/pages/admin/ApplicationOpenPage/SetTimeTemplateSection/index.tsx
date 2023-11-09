@@ -21,11 +21,11 @@ const SetTimeTemplateSection = ({ startWeekDate }: { startWeekDate: string }): J
       </Text>
 
       <Text>근무 시간대를 설정하세요</Text>
-      <FlexContainer $wFull $align="center" $gap="30px">
+      <FlexContainer as="ol" $wFull $align="center" $gap="30px">
         <Suspense fallback={<SetTimeTemplateSkeleton />}>
           <FetchGetOpen startWeekDate={startWeekDate}>
             {timeTemplate.map((time: TimeData, timeIndex: number) => (
-              <ColorBox $wFull key={`${time.title}${timeIndex}`} $background={myTheme.color.lightYellow}>
+              <ColorBox as="li" $wFull key={`${time.title}${timeIndex}`} $background={myTheme.color.lightYellow}>
                 <FlexContainer $wFull $padding="20px">
                   <OpenTimeInputs
                     timeData={time}

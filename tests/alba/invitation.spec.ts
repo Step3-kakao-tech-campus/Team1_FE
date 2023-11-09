@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { mockMapper, mockResponse } from '../mock/mockResponse';
-import { getGroupInfo } from '../mock/responseBody/getInvitation';
+import { getGroupInfo } from '../mock/responseBody/invitation';
 
 test.describe('초대장', () => {
   test('접속', async ({ page, baseURL }) => {

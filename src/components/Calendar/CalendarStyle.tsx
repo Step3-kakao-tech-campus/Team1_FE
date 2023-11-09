@@ -20,7 +20,7 @@ export const BadgeText = styled.span`
   }
 `;
 
-export const Badge = styled.ol<{ $color?: string }>`
+export const Badge = styled.li<{ $color?: string }>`
   background-color: ${(props) => props.$color};
 
   display: flex;
@@ -30,7 +30,7 @@ export const Badge = styled.ol<{ $color?: string }>`
   border-radius: 8px;
 `;
 
-export const BadgeCont = styled.div`
+export const BadgeCont = styled.ol`
   width: 100%;
   display: flex;
   flex-direction: column;
