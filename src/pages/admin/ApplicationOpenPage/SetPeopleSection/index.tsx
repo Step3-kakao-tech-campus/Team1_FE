@@ -20,7 +20,7 @@ const SetPeopleSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Ele
       <WeekBarComponent />
       <FlexContainer $wFull>
         {timeTemplate.map((timeData, timeIndex) => (
-          <BorderBox gradation key={`${day}${timeIndex}`}>
+          <BorderBox as="ol" gradation key={`${day}${timeIndex}`}>
             <FlexContainer $wFull $direction="row" $padding="32px 60px" $align="center">
               <Text size="xl" margin="0">
                 {timeData.title}

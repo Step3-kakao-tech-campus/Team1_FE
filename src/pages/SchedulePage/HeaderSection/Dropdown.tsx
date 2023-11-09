@@ -32,13 +32,17 @@ const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
       {isOpen && (
         <FlexContainer $wFull $gap="10px" $padding="12px 0" data-testid="멤버리스트">
           {members.map((member: UserData, index) => (
-            <ol key={member.name + index} onClick={() => contentOnClick(member)}>
-              <FlexContainer $wFull $align="flex-start">
-                <Text margin="0" size="sm">
-                  {member.name}
-                </Text>
-              </FlexContainer>
-            </ol>
+            <FlexContainer
+              as="ol"
+              $wFull
+              $align="flex-start"
+              key={member.name + index}
+              onClick={() => contentOnClick(member)}
+            >
+              <Text margin="0" size="sm">
+                {member.name}
+              </Text>
+            </FlexContainer>
           ))}
         </FlexContainer>
       )}

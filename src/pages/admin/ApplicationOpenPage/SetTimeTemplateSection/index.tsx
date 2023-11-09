@@ -25,7 +25,7 @@ const SetTimeTemplateSection = ({ startWeekDate }: { startWeekDate: string }): J
         <Suspense fallback={<SetTimeTemplateSkeleton />}>
           <FetchGetOpen startWeekDate={startWeekDate}>
             {timeTemplate.map((time: TimeData, timeIndex: number) => (
-              <ColorBox $wFull key={`${time.title}${timeIndex}`} $background={myTheme.color.lightYellow}>
+              <ColorBox as="ol" $wFull key={`${time.title}${timeIndex}`} $background={myTheme.color.lightYellow}>
                 <FlexContainer $wFull $padding="20px">
                   <OpenTimeInputs
                     timeData={time}
