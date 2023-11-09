@@ -1,11 +1,11 @@
-const getWeekProgressInprogress = {
+export const getWeekProgressInprogress = {
   weekStatus: 'inProgress',
 };
 
-const getWeekProgressAllocatable = {
+export const getWeekProgressAllocatable = {
   weekStatus: 'allocatable',
 };
 
-const getWeekProgressClosed = {
+export const getWeekProgressClosed = {
   weekStatus: 'closed',
 };
