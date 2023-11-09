@@ -18,9 +18,9 @@ export const DailyWorkersTable = ({ dailyData }: { dailyData: TimeWorkerListData
               {strTimeProcessor(timeData.startTime)} ~ {strTimeProcessor(timeData.endTime)}
             </Text>
           </TitleBox>
-          <FlexContainer $gap="8px">
+          <FlexContainer as="ol" $gap="8px">
             {timeData.workerList.map((w: UserData, i) => (
-              <NameBox key={`${w.name}${i}`}>
+              <NameBox as="li" key={`${w.name}${i}`}>
                 <Text>{w.name}</Text>
               </NameBox>
             ))}

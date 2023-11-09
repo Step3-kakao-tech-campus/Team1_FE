@@ -22,8 +22,8 @@ const PreviewSection = ({ startWeekDate }: { startWeekDate: string }): JSX.Eleme
 
       <FlexContainer $wFull>
         {weekdayArray.map((weekday, dayIndex) => (
-          <BorderBox gradation key={`${dayIndex}요일`}>
-            <FlexContainer $wFull $direction="row" $padding="20px 24px">
+          <BorderBox gradation key={weekday.kor}>
+            <FlexContainer $wFull $direction="row" $padding="20px 24px" data-testid="요일별선택미리보기">
               <FlexContainer $direction="row" $justify="space-between" $width="120px">
                 <Text size="lg" margin="0">
                   {stringDateMoveKor(startWeekDate, dayIndex)}

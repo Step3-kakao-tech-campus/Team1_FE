@@ -30,10 +30,10 @@ const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
         {isOpen ? <DropUp /> : <DropDown />}
       </DropdownBtn>
       {isOpen && (
-        <FlexContainer $wFull $gap="10px" $padding="12px 0" data-testid="멤버리스트">
+        <FlexContainer $wFull $gap="10px" $padding="12px 0" as="ol" data-testid="멤버리스트">
           {members.map((member: UserData, index) => (
             <FlexContainer
-              as="ol"
+              as="li"
               $wFull
               $align="flex-start"
               key={member.name + index}
