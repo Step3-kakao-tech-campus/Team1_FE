@@ -4,9 +4,8 @@ import { getMyInfo } from 'apis/userInfo';
 import { loginDatahandlers } from 'utils/loginDatahandlers';
 
 const useGetMyInfo = () => {
-  const { data: myInfo } = useQuery(['myInfo'], getMyInfo, {
+  const { data: myInfo } = useQuery(['myInfo'], () => getMyInfo(), {
     suspense: true,
-    cacheTime: 0,
     refetchOnWindowFocus: false,
   });
 

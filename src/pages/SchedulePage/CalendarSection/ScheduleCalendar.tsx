@@ -1,11 +1,11 @@
 import { DailyWorkTimeData } from 'apis/types';
-import { MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
+import { Badge, BadgeCont, BadgeText, MonthBox, WeekGrid } from 'components/Calendar/CalendarStyle';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useGetMonthly } from 'pages/SchedulePage/hooks/fetch';
 import { dateAtom, monthAtom } from '../states';
 import CalendarDayBox from './CalendarDayBox';
 
-const CalenderConents = (): JSX.Element => {
+const ScheduleCalendar = (): JSX.Element => {
   const selectedMonth = useAtomValue(monthAtom);
   const { scheduleData } = useGetMonthly(selectedMonth);
 
@@ -23,8 +23,15 @@ const CalenderConents = (): JSX.Element => {
               timeList={e.workTime}
               onClick={() => setSelectedDate({ isFixed: e.workTime !== null, date: e.date })}
               isSelected={selectedDate.date === e.date}
-              colors={scheduleData.badgeColor}
-            />
+            >
+              <BadgeCont>
+                {e.workTime?.map((title) => (
+                  <Badge key={title} $color={scheduleData.badgeColor[title]}>
+                    <BadgeText>{title}</BadgeText>
+                  </Badge>
+                ))}
+              </BadgeCont>
+            </CalendarDayBox>
           ))}
         </WeekGrid>
       ))}
@@ -32,4 +39,4 @@ const CalenderConents = (): JSX.Element => {
   );
 };
 
-export default CalenderConents;
+export default ScheduleCalendar;

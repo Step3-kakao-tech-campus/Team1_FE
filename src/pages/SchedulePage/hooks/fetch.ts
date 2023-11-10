@@ -4,11 +4,9 @@ import { getMonthly } from 'apis/schedule/getMonthly';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { SelectedMonthData, memberAtom, workTimeAtom } from 'pages/SchedulePage/states';
 import { useEffect } from 'react';
-import { loginDatahandlers } from 'utils/loginDatahandlers';
 
 export const useGetMonthly = ({ year, month }: SelectedMonthData) => {
   const nowMember = useAtomValue(memberAtom);
-  const isAdmin = loginDatahandlers.getLoginData().isAdmin;
 
   const { data: scheduleData } = useQuery(
     ['getMonthly', year, month, nowMember.userId],
@@ -17,7 +15,6 @@ export const useGetMonthly = ({ year, month }: SelectedMonthData) => {
         year: year,
         month: month,
         userId: nowMember.userId,
-        isAdmin: isAdmin,
       }),
     {
       suspense: true,

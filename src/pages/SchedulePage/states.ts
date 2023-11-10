@@ -1,13 +1,10 @@
 import { TotalWorkedTimeData, UserData } from 'apis/types';
 import { atom } from 'jotai';
-import { loginDatahandlers } from 'utils/loginDatahandlers';
-
-const isAdmin = loginDatahandlers.getLoginData().isAdmin;
 
 const workTimeDefault = { monthly: 0, weekly: 0 };
-const memberDefault = isAdmin ? { userId: 0, name: '', isSelected: false } : { userId: 0, name: '', isSelected: true };
 const dateDefault = { date: '', isFixed: false };
 const monthDefault = { year: new Date().getFullYear(), month: new Date().getMonth() };
+const memberDefault = { userId: 0, name: '', isSelected: true };
 
 export const workTimeAtom = atom<TotalWorkedTimeData>(workTimeDefault);
 export const memberAtom = atom<MemberType>(memberDefault); // 선택된 멤버 정보
