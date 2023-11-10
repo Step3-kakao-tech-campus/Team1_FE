@@ -1,10 +1,8 @@
 import { Page } from 'playwright-core';
 
-export const mockResponse = (responseBody) => {
-  if (responseBody === null) {
-    return { status: 200 };
-  }
-  return { status: 200, contentType: 'application/json', body: JSON.stringify(responseBody) };
+export const mockResponse = (responseBody, status: number = 200) => {
+  const body = status === 200 ? { response: responseBody } : { error: responseBody };
+  return { status: status, contentType: 'application/json', body: JSON.stringify(body) };
 };
 
 export const mockMapper = async ({

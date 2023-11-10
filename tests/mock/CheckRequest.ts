@@ -11,30 +11,27 @@ class CheckRequest {
     this.url = url;
   }
 
-  public getRequestParam = () => {
+  getRequestParam = () => {
     if (this.requestParam.length === 0) return null;
     return this.requestParam.at(-1);
   };
 
-  public getRequestBody = () => {
+  getRequestBody = () => {
     if (this.requestBody.length === 0) return null;
     const stringBody = this.requestBody.at(-1);
     return JSON.parse(stringBody || '');
   };
 
-  public requestParamParser = async () => {
+  requestParamParser = async (response) => {
     await this.page.route(`*/**/${this.url}`, async (route) => {
       if (route.request().method() === 'GET') {
         this.requestParam.push(route.request().url());
-        route.continue();
-        return;
+        await route.fulfill(response);
       }
-      route.continue();
-      return;
     });
   };
 
-  public requestBodyParser = async () => {
+  requestBodyParser = async () => {
     await this.page.route(`*/**/${this.url}`, async (route) => {
       if (route.request().method() === 'POST' || route.request().method() === 'PUT') {
         const response = route.request().postData();

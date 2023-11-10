@@ -1,8 +1,5 @@
 export const postLoginNoUser = {
-  status: 404,
-  body: JSON.stringify({
-    errorCode: -10006,
-  }),
+  errorCode: -10006,
 };
 
 export const postLoginAdmin = {

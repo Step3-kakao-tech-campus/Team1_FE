@@ -61,7 +61,7 @@ test.beforeEach(async ({ page, baseURL }) => {
   await mockMapper({
     page,
     url: `schedule/application`,
-    method: 'POST',
+    method: 'PUT',
     response: mockResponse(null),
   });
 
