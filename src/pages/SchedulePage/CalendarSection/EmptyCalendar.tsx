@@ -9,7 +9,7 @@ const EmptyCalendar = (): JSX.Element => {
   const selectedMonth = useAtomValue(monthAtom);
 
   return (
-    <MonthBox $wFull data-testid="월간스케줄">
+    <MonthBox $wFull data-testid="빈캘린더">
       {to2Dimension({ ...selectedMonth, monthly: [] }).table.map((weekArray: DailyWorkTimeData[], i) => (
         <WeekGrid key={`${i}주`} $aspectRatio="5.6">
           {weekArray.map((e: DailyWorkTimeData) => (
