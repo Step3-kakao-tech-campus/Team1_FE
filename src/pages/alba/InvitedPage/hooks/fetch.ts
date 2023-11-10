@@ -7,6 +7,12 @@ export const useGetInvitation = (invitationKey: string) => {
     () => getGroupInfo({ invitationKey: invitationKey }),
     {
       suspense: true,
+      onError: (error: any) => {
+        if (error.response.data.error === -20004) {
+          throw error;
+        }
+        throw error;
+      },
     },
   );
   return { marketData };
