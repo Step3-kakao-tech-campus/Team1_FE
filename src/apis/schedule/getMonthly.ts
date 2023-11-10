@@ -1,6 +1,5 @@
 import instance from 'apis/instance';
 import { DailyWorkTimeData, TotalWorkedTimeData } from 'apis/types';
-import { AxiosResponse } from 'axios';
 import { timeColors } from 'utils/colors';
 import { dateToString } from 'utils/dateToString';
 
@@ -21,7 +20,7 @@ export const getMonthly = async (info: Info): Promise<Return> => {
     };
   }
 
-  const response: AxiosResponse<Response> = await instance.get(`/schedule/fix/month`, { params });
+  const response: Response = await instance.get(`/schedule/fix/month`, { params });
 
   return to2Dimension(info, response);
 };
@@ -44,11 +43,11 @@ interface Info {
   userId: number;
 }
 
-const to2Dimension = (info: Info, response: AxiosResponse<Response>): Return => {
+const to2Dimension = (info: Info, response: Response): Return => {
   const { year, month } = { ...info };
 
-  const totalTime = response.data.work_summary;
-  const monthly = response.data.schedule;
+  const totalTime = response.work_summary;
+  const monthly = response.schedule;
 
   let firstMonday = 1;
 

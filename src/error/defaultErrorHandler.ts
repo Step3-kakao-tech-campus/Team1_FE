@@ -16,9 +16,13 @@ export const defaultErrorHandler = (error: ErrorData) => {
   }
 
   // 서버 에러 응답
-  console.log('defaultErrorHandler', error.response);
-  const code = error.response.data?.errorCode;
+  const code = error.response.data?.error.errorCode;
+  console.log('defaultErrorHandler', error.response.data?.error);
   switch (code) {
+    case undefined:
+      alert(`에러코드가 없습니다`);
+      return;
+
     case -10000:
       // 타임 아웃
       alert(`일시적인 네트워크 오류가 발생했습니다. 다시 시도하세요`);
@@ -29,7 +33,7 @@ export const defaultErrorHandler = (error: ErrorData) => {
       alert(`서버 오류`);
       return;
 
-    case -10005:
+    case -10004:
       // 폼 validation
       alert(`입력값이 올바르지 않습니다`);
       return;

@@ -11,7 +11,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackProps) => {
 
   const navigate = useNavigate();
   const isAdmin = loginDatahandlers.getLoginData().isAdmin;
-  const code = error.response?.data?.errorCode || 0;
+  const code = error.response?.data?.error.errorCode || 0;
 
   switch (code) {
     case -10000:

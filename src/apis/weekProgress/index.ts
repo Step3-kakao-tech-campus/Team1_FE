@@ -1,6 +1,5 @@
 import instance from 'apis/instance';
 import { WeekStatusData, WeekStatusTypes } from 'apis/types';
-import { AxiosResponse } from 'axios';
 import { dateToString } from 'utils/dateToString';
 
 export const getWeekProgress = async ({ year, month }: { year: number; month: number }): Promise<Return> => {
@@ -44,8 +43,8 @@ export const getWeekProgress = async ({ year, month }: { year: number; month: nu
         startWeekDate: dateToString(new Date(year, month, startWeekDate)),
       };
 
-      const response: AxiosResponse<Response> = await instance.get(`/schedule/status`, { params });
-      weekObject.weekStatus = response.data.weekStatus;
+      const response: Response = await instance.get(`/schedule/status`, { params });
+      weekObject.weekStatus = response.weekStatus;
     }
 
     table.push(weekObject);

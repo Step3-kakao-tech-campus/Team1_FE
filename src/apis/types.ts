@@ -50,11 +50,14 @@ export interface ErrorData {
   response?: {
     status: number;
     data?: {
-      errorCode: number;
+      error: {
+        errorCode: number;
+      };
     };
   };
 }
 
+export interface Response {}
 export interface ErrorFallbackProps {
   error: ErrorData;
   resetErrorBoundary: () => void;

@@ -39,7 +39,7 @@ export const useGetDailyWorkers = (selectedDate: string, enabled?: boolean) => {
     ['getDailyWorkers', 'newSchedule', selectedDate],
     () =>
       getDailyWorkers({ selectedDate: selectedDate }).catch((err) => {
-        if (err.response?.data?.code === -11001) {
+        if (err.response?.code === -11001) {
           return null;
         } else {
           throw err;

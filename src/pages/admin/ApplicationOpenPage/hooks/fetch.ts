@@ -16,7 +16,7 @@ export const usePostOpenApplication = (startWeekDate: string) => {
   const navigate = useNavigate();
 
   const { mutate: openApplicationMutate } = useMutation(
-    ['postAddNewGroup'],
+    ['postOpenApplication', startWeekDate],
     () =>
       postOpenApplication({
         weeklyAmount: weeklyAmount,

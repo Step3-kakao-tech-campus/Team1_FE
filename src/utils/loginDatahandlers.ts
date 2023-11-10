@@ -19,7 +19,7 @@ class LoginData {
     return;
   };
 
-  getLoginData = () => {
+  getLoginData = (): LoginStateData => {
     const stringData = storage.getItem('login');
     if (stringData === null) return defaultLoginState;
     return JSON.parse(stringData);
@@ -37,5 +37,11 @@ const defaultLoginState = {
 };
 
 interface UserDataType {
+  isAdmin: boolean;
+}
+
+interface LoginStateData {
+  isLogin: boolean;
+  token: string;
   isAdmin: boolean;
 }

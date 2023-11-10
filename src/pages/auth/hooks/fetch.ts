@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-import { postsignup, postLogin, SignupRequest } from 'apis/auth';
-import React from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { SignupRequest, postLogin, postsignup } from 'apis/auth';
+import { useNavigate } from 'react-router-dom';
 import { useLoginState } from './useLoginState';
 
 export const useLoginFetch = () => {
@@ -14,7 +13,7 @@ export const useLoginFetch = () => {
     (code: string) =>
       postLogin({ code: code }).catch((error) => {
         // 비회원일 경우
-        if (error.response && error.response.status === 404) {
+        if (error.response && error.response.data.error.errorCode === -10006) {
           // 회원가입 처리를 하러 간다.
           navigate('/signup', { state: { code: code } });
           return null;
@@ -25,7 +24,7 @@ export const useLoginFetch = () => {
     {
       onSuccess: (response) => {
         if (response === null) return;
-        afterLogin(response.headers.authorization, response.data);
+        afterLogin(response.token, { isAdmin: response.isAdmin });
       },
     },
   );
@@ -36,7 +35,7 @@ export const useLoginFetch = () => {
     (requestBody: SignupRequest) => postsignup(requestBody),
     {
       onSuccess: (response) => {
-        afterLogin(response.headers.authorization, response.data);
+        afterLogin(response.token, { isAdmin: response.isAdmin });
       },
     },
   );
