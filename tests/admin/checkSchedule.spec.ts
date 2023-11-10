@@ -11,12 +11,13 @@ test('스케줄 확인', async ({ page, baseURL }) => {
   const check = new CheckRequest({ page, url: 'schedule/fix/month*' });
   await check.requestParamParser(mockResponse(getMonthly));
   await page.goto(`${baseURL}`);
+  await expect(page.getByTestId('빈캘린더')).toBeVisible();
 
   // 1. 드롭다운에서 멤버를 선택하면 이번달 캘린더가 표시된다.
   await page.getByRole('button', { name: '선택' }).click();
   await page.getByTestId('멤버리스트').locator('li').nth(1).click();
   const calendar = page.getByTestId('월간스케줄');
-  await expect(page.getByTestId('월간스케줄')).toBeVisible();
+  await expect(calendar).toBeVisible();
 
   // 2. 캘린더 날짜를 누르면
   const firstDate = calendar.locator('div').first().locator('div').first();
