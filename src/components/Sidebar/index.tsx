@@ -1,7 +1,7 @@
 import { UserData } from 'apis/types';
 import Loader from 'components/Suspenses/Loader';
 import GetInviteKeyModal from 'components/modals/GetInviteKeyModal';
-import useGetMyInfo from 'hooks/useGetMyInfo';
+import useGetMyInfo, { UserType } from 'hooks/useGetMyInfo';
 import useModal from 'hooks/useModal';
 import useLogin from 'pages/auth/hooks/useLogin';
 import { Suspense } from 'react';
@@ -31,7 +31,7 @@ const SideBarContent = () => {
   return (
     <FlexContainer $wFull $justify="start" $gap="32px" $wrap="wrap">
       <SideBarProfile userName={userName} isAdmin={isAdmin} userType={userType} groupName={groupName} />
-      <SideBarButtons isAdmin={isAdmin} />
+      <SideBarButtons userType={userType} />
       {(userType === 'ALBA' || userType === 'ADMIN') && <SideBarMemberList memberList={members} />}
     </FlexContainer>
   );
@@ -45,7 +45,7 @@ const SideBarProfile = ({
 }: {
   userName: string;
   isAdmin: boolean;
-  userType: string;
+  userType: UserType;
   groupName: string | null;
 }) => {
   return (
@@ -67,12 +67,12 @@ const SideBarProfile = ({
   );
 };
 
-const SideBarButtons = ({ isAdmin }: { isAdmin: boolean }) => {
+const SideBarButtons = ({ userType }: { userType: UserType }) => {
   const { logout } = useLogin('/');
   const { modalOnHandler } = useModal();
   return (
     <FlexContainer $align="flex-start" $gap="20px">
-      {isAdmin && (
+      {(userType === 'ADMIN' || userType === 'ADMIN_NO_MEMBER') && (
         <button onClick={() => modalOnHandler(<GetInviteKeyModal />)}>
           <Text>직원 초대하기</Text>
         </button>
