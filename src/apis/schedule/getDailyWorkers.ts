@@ -3,8 +3,8 @@ import { TimeWorkerListData } from 'apis/types';
 import { strTimeProcessor } from 'utils/strTimeProcessor';
 
 export const getDailyWorkers = async (params: Params): Promise<Response> => {
-  const response = await instance.get(`/schedule/fix/day`, { params });
-  const schedule = response.data.schedule.map((time: TimeWorkerListData) => ({
+  const response: Response = await instance.get(`/schedule/fix/day`, { params });
+  const schedule = response.schedule.map((time: TimeWorkerListData) => ({
     ...time,
     startTime: strTimeProcessor(time.startTime),
     endTime: strTimeProcessor(time.endTime),

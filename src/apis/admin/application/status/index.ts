@@ -1,14 +1,13 @@
 import instance from 'apis/instance';
 import { TimeData, TimeWithIdData, TimeWorkerListData, UserData } from 'apis/types';
-import { AxiosResponse } from 'axios';
 import { strTimeProcessor } from 'utils/strTimeProcessor';
 
 export const getApplyStatus = async (params: Params): Promise<Return> => {
-  const response: AxiosResponse<Response> = await instance.get(`/schedule/remain/week`, { params });
-  const weeklyArray = response.data.applyStatus;
+  const response: Response = await instance.get(`/schedule/remain/week`, { params });
+  const weeklyArray = response.applyStatus;
 
   const templates: { [index: number]: TimeData } = {};
-  for (let timeObj of response.data.template) {
+  for (let timeObj of response.template) {
     templates[timeObj.workTimeId] = {
       title: timeObj.title,
       startTime: strTimeProcessor(timeObj.startTime),

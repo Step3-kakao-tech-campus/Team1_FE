@@ -1,8 +1,7 @@
 import instance from 'apis/instance';
 import { UserData } from 'apis/types';
-import { AxiosResponse } from 'axios';
 
-export const getMyInfo = (): Promise<AxiosResponse<Response>> => {
+export const getMyInfo = (): Promise<Response> => {
   return instance.get(`/group`);
 };
 

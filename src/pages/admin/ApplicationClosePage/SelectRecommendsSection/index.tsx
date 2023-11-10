@@ -19,7 +19,7 @@ const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): 
   return (
     <>
       <ScrollContainer as="ol" data-testid="후보목록">
-        {recommendsRes?.data.recommends.map((e, candidateIndex: number) => (
+        {recommendsRes?.recommends.map((e, candidateIndex: number) => (
           <FlexContainer
             $shrink="0"
             $width="32%"
@@ -45,7 +45,7 @@ const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): 
         </FlexContainer>
       </BorderBox>
 
-      <DailyWorkersTable dailyData={recommendsRes?.data.recommends[candidate][day]} />
+      <DailyWorkersTable dailyData={recommendsRes?.recommends[candidate][day]} />
       <SubmitButton onClick={submitHandler}>스케줄 확정하기 (그룹원에게 알림이 가요!)</SubmitButton>
     </>
   );

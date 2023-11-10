@@ -1,10 +1,10 @@
-import PageContainer from 'components/@commons/PageContainer';
-import React, { Suspense, useEffect } from 'react';
-import FormSection from './FormSection';
-import { useNavigate } from 'react-router-dom';
 import { convertPath } from 'apis/convertURI';
+import PageContainer from 'components/@commons/PageContainer';
 import Loader from 'components/Suspenses/Loader';
 import useGetMyInfo from 'hooks/useGetMyInfo';
+import React, { Suspense, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import FormSection from './FormSection';
 
 const AddGroupPage = (): JSX.Element => {
   return (

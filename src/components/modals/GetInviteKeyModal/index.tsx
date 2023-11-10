@@ -16,7 +16,7 @@ const GetInviteKeyModal = (): JSX.Element => {
   const { data: inviteKeyData, isFetching } = useQuery(['inviteKey'], getInviteKey);
   const { modalOffHandler } = useModal();
   const [isCopied, setIsCopied] = useState(false);
-  const link = `${baseURL}/invited/${inviteKeyData?.data.invitationKey}`;
+  const link = `${baseURL}/invited/${inviteKeyData?.invitationKey}`;
 
   return (
     <FlexContainer $wFull $padding="20px" $gap="30px" data-testid="초대링크모달">
@@ -36,7 +36,7 @@ const GetInviteKeyModal = (): JSX.Element => {
           </SubmitButton>
         )}
         {!isFetching && (
-          <CopyToClipboard text={inviteKeyData?.data.invitationKey || ''}>
+          <CopyToClipboard text={inviteKeyData?.invitationKey || ''}>
             {!isCopied ? (
               <SubmitButton onClick={() => setIsCopied(true)}>복사하기</SubmitButton>
             ) : (

@@ -10,9 +10,9 @@ const useGetMyInfo = () => {
     refetchOnWindowFocus: false,
   });
 
-  const userName = myInfo?.data.userName || '';
-  const groupName = myInfo?.data.groupName || null;
-  const members = myInfo?.data.members || [];
+  const userName = myInfo?.userName || '';
+  const groupName = myInfo?.groupName || null;
+  const members = myInfo?.members || [];
   const userType = userTypeCheck(groupName, members);
 
   return {
@@ -25,7 +25,7 @@ const useGetMyInfo = () => {
 
 export default useGetMyInfo;
 
-type UserType = 'NON_USER' | 'ADMIN_NO_GROUP' | 'ADMIN_NO_MEMBER' | 'ADMIN' | 'ALBA_NO_GROUP' | 'ALBA';
+export type UserType = 'NON_USER' | 'ADMIN_NO_GROUP' | 'ADMIN_NO_MEMBER' | 'ADMIN' | 'ALBA_NO_GROUP' | 'ALBA';
 
 const userTypeCheck = (groupName: string | null, members: UserData[]): UserType => {
   const loginState = loginDatahandlers.getLoginData();

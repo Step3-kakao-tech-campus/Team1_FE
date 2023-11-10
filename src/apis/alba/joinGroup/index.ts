@@ -1,5 +1,4 @@
 import instance from 'apis/instance';
-import { AxiosResponse } from 'axios';
 
 // 그룹초대 승인
 export const postGroupJoin = (body: PostRequest) => {
@@ -11,7 +10,7 @@ interface PostRequest {
 }
 
 // 매장명 확인, (추가: 이미 소속된 그룹인지 여부)
-export const getGroupInfo = (params: GetParams): Promise<AxiosResponse<GetResponse>> => {
+export const getGroupInfo = (params: GetParams): Promise<GetResponse> => {
   return instance.get(`/group/invitation/information`, { params });
 };
 

@@ -19,10 +19,6 @@ interface LoginRequest {
 }
 
 interface LoginResponse {
-  headers: {
-    authorization: string;
-  };
-  data: {
-    isAdmin: boolean;
-  };
+  token: string;
+  isAdmin: boolean;
 }

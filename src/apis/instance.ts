@@ -26,11 +26,18 @@ export const requestDefault = instance.interceptors.request.use(
 );
 
 export const responseInterceptors = instance.interceptors.response.use(
-  (response) => {
-    console.log(response);
-    return response;
+  (resolve) => {
+    console.log(resolve);
+    if (resolve.config.url?.includes('auth')) {
+      return {
+        token: resolve.headers.authorization,
+        isAdmin: resolve.data.response.isAdmin,
+      };
+    }
+    return resolve.data.response;
   },
   (error) => {
+    console.log(error);
     return Promise.reject(error);
   },
 );
