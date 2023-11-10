@@ -2,17 +2,18 @@ import instance from 'apis/instance';
 import { DailyWorkTimeData, TotalWorkedTimeData } from 'apis/types';
 import { timeColors } from 'utils/colors';
 import { dateToString } from 'utils/dateToString';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 
-export const getMonthly = async (info: Info): Promise<Return> => {
-  const { year, month } = { ...info };
+export const getMonthly = async ({ year, month, userId }: Param): Promise<Return> => {
   const strMonth = String(month + 1).padStart(2, '0');
+  const isAdmin = loginDatahandlers.getLoginData().isAdmin;
 
   let params = {};
 
-  if (info.isAdmin) {
+  if (isAdmin) {
     params = {
       month: `${year}-${strMonth}`,
-      userId: info.userId,
+      userId: userId,
     };
   } else {
     params = {
@@ -21,8 +22,8 @@ export const getMonthly = async (info: Info): Promise<Return> => {
   }
 
   const response: Response = await instance.get(`/schedule/fix/month`, { params });
-
-  return to2Dimension(info, response);
+  const calendar = to2Dimension({ year, month, monthly: response.schedule });
+  return { table: calendar.table, totalTime: response.work_summary, badgeColor: calendar.badgeColor };
 };
 
 interface Return {
@@ -36,19 +37,21 @@ interface Response {
   work_summary: TotalWorkedTimeData;
 }
 
-interface Info {
+interface Param {
   year: number;
   month: number;
-  isAdmin: boolean;
-  userId: number;
+  userId?: number;
 }
 
-const to2Dimension = (info: Info, response: Response): Return => {
-  const { year, month } = { ...info };
-
-  const totalTime = response.work_summary;
-  const monthly = response.schedule;
-
+export const to2Dimension = ({
+  year,
+  month,
+  monthly,
+}: {
+  year: number;
+  month: number;
+  monthly: DailyWorkTimeData[];
+}) => {
   let firstMonday = 1;
 
   // 1. 첫번째 월요일 찾기
@@ -94,5 +97,5 @@ const to2Dimension = (info: Info, response: Response): Return => {
   allWorkTimesArr.map((e, i) => {
     badgeColor[e] = timeColors(i);
   });
-  return { table, totalTime, badgeColor };
+  return { table, badgeColor };
 };

@@ -5,7 +5,8 @@ import CalenderOutter, { MonthData } from 'components/Calendar/CalenderOutter';
 import Loader from 'components/Suspenses/Loader';
 import Skeleton from 'components/Suspenses/Skeleton';
 import { useAtom, useAtomValue } from 'jotai';
-import CalenderConents from 'pages/SchedulePage/CalendarSection/CalenderConents';
+import EmptyCalendar from 'pages/SchedulePage/CalendarSection/EmptyCalendar';
+import ScheduleCalendar from 'pages/SchedulePage/CalendarSection/ScheduleCalendar';
 import DailyWorkers from 'pages/SchedulePage/DailyWorkerSection/DailyWorkers';
 import Dropdown from 'pages/SchedulePage/HeaderSection/Dropdown';
 import TotalWorkTime from 'pages/SchedulePage/HeaderSection/TotalWorkTime';
@@ -28,14 +29,16 @@ const SchedulePage = ({ members }: { members?: UserData[] }): JSX.Element => {
         </FlexContainer>
       </FlexContainer>
 
-      {nowMember.isSelected && (
-        <FlexContainer $wFull $gap="8px">
-          <MonthSelector />
+      <FlexContainer $wFull $gap="8px">
+        <MonthSelector />
+        {nowMember.isSelected ? (
           <Suspense fallback={<Skeleton aspectRatio="1.12" isDeffered />}>
-            <CalenderConents />
+            <ScheduleCalendar />
           </Suspense>
-        </FlexContainer>
-      )}
+        ) : (
+          <EmptyCalendar />
+        )}
+      </FlexContainer>
 
       <FlexContainer $wFull>
         <Suspense fallback={<Loader />}>
