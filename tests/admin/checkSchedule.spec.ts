@@ -6,11 +6,10 @@ import { getDailyWorker, getMonthly } from '../mock/responseBody/schedulePage';
 
 test('스케줄 확인', async ({ page, baseURL }) => {
   await mockMapper({ page, url: 'group', method: 'GET', response: mockResponse(getMyinfo) });
-  await mockMapper({ page, url: 'schedule/fix/month*', method: 'GET', response: mockResponse(getMonthly) });
   await mockMapper({ page, url: 'schedule/fix/day*', method: 'GET', response: mockResponse(getDailyWorker) });
 
   const check = new CheckRequest({ page, url: 'schedule/fix/month*' });
-  await check.requestParamParser();
+  await check.requestParamParser(mockResponse(getMonthly));
   await page.goto(`${baseURL}`);
 
   // 1. 드롭다운에서 멤버를 선택하면 이번달 캘린더가 표시된다.

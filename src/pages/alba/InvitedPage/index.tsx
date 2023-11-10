@@ -3,9 +3,11 @@ import PageContainer from 'components/@commons/PageContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import InvitationSkeleton from 'components/Suspenses/PageSkeletons/InvitationSkeleton';
 import LoginSignupModal from 'components/modals/LoginSignupModal';
+import InvitationErrorFallback from 'error/InvitationErrorFallback';
 import JoinDone from 'pages/alba/InvitedPage/JoinDone';
 import useInvitation from 'pages/alba/InvitedPage/hooks/useInvitation';
 import { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { useParams } from 'react-router-dom';
 import InvitationContent from './InvitationContent';
 
@@ -16,14 +18,16 @@ const InvitedPage = (): JSX.Element => {
   const { acceptBtnHandler } = useInvitation(invitationKey, donePage, loginModal);
 
   return (
-    <PageContainer withoutHeader withoutBottonBar>
-      <FlexContainer $wFull $padding="60px" $gap="36px">
-        <Suspense fallback={<InvitationSkeleton />}>
-          <InvitationContent invitationKey={invitationKey} />
-          <SubmitButton onClick={acceptBtnHandler}>승인하기</SubmitButton>
-        </Suspense>
-      </FlexContainer>
-    </PageContainer>
+    <ErrorBoundary FallbackComponent={InvitationErrorFallback}>
+      <PageContainer withoutHeader withoutBottonBar>
+        <FlexContainer $wFull $padding="60px" $gap="36px">
+          <Suspense fallback={<InvitationSkeleton />}>
+            <InvitationContent invitationKey={invitationKey} />
+            <SubmitButton onClick={acceptBtnHandler}>승인하기</SubmitButton>
+          </Suspense>
+        </FlexContainer>
+      </PageContainer>
+    </ErrorBoundary>
   );
 };
 

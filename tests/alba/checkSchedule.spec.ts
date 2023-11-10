@@ -6,11 +6,9 @@ import { getDailyWorker, getMonthly } from '../mock/responseBody/schedulePage';
 
 test('스케줄 확인', async ({ page, baseURL }) => {
   await mockMapper({ page, url: 'group', method: 'GET', response: mockResponse(getMyinfo) });
-  await mockMapper({ page, url: 'schedule/fix/month*', method: 'GET', response: mockResponse(getMonthly) });
   await mockMapper({ page, url: 'schedule/fix/day*', method: 'GET', response: mockResponse(getDailyWorker) });
-
   const check = new CheckRequest({ page, url: 'schedule/fix/month*' });
-  await check.requestParamParser();
+  await check.requestParamParser(mockResponse(getMonthly));
 
   // 1. 접속하면 이번달 캘린더가 표시된다.
   await page.goto(`${baseURL}`);
@@ -33,6 +31,7 @@ test('스케줄 확인', async ({ page, baseURL }) => {
   }
 
   // 3. 캘린더 달을 이동하면 이전/다음달 캘린더가 표시된다
+
   const iter = 5;
   for (let i = 0; i < iter; i++) {
     await page.getByLabel('이전').click();
