@@ -3,23 +3,10 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
 import { DropDown, DropUp } from 'components/@commons/icons';
 import { DropDownCont, DropdownBtn } from 'components/PageStyledComponents/admin/MainPage';
-import { useAtom } from 'jotai';
-import { memberAtom } from 'pages/SchedulePage/states';
-import { useState } from 'react';
+import { useSelectMember } from 'pages/SchedulePage/hooks/useSelectMember';
 
 const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
-  const [member, setMember] = useAtom(memberAtom);
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const dropdownOnClick = () => {
-    setIsOpen((prev) => !prev);
-  };
-
-  const contentOnClick = (m: UserData) => {
-    setMember({ userId: m.userId, name: m.name, isSelected: true });
-    setIsOpen(false);
-  };
+  const { member, isOpen, dropdownOnClick, contentOnClick } = useSelectMember();
 
   return (
     <DropDownCont>
