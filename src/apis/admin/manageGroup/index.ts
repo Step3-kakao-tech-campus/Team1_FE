@@ -2,7 +2,11 @@ import instance from 'apis/instance';
 import { AddNeweGroupForm } from 'apis/types';
 
 export const postAddNewGroup = (body: AddNeweGroupForm) => {
-  return instance.post(`/group`, body);
+  const marketNumber = body.marketNumber.slice(0, 2) + '-' + body.marketNumber.slice(2);
+  return instance.post(`/group`, {
+    ...body,
+    marketNumber: marketNumber,
+  });
 };
 
 // 초대링크 발급
