@@ -12,11 +12,9 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { loginDatahandlers } from 'utils/loginDatahandlers';
 
-const isAdmin = loginDatahandlers.getLoginData().isAdmin;
-
 const HeaderNB = (): JSX.Element => {
+  const isAdmin = loginDatahandlers.getLoginData().isAdmin;
   const [isOpen, setIsOpen] = useState(false);
-
   const nowPath = useLocation().pathname;
 
   return (
