@@ -1,5 +1,41 @@
 # Team1
-1조## 카카오 테크 캠퍼스 3단계 진행 보드
+
+## Stacks 
+
+<div>
+<img src="https://img.shields.io/badge/GIT-F05032?style=for-the-badge&logo=GIT&logoColor=white">
+<img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=GITHUB&logoColor=white">
+<img src="https://img.shields.io/badge/VISUAL STUDIO CODE-007ACC?style=for-the-badge&logo=VISUAL STUDIO CODE&logoColor=white">
+</div>
+<div>
+<img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
+<img src="https://img.shields.io/badge/TYPESCRIPT-3178C6?style=for-the-badge&logo=TYPESCRIPT&logoColor=white">
+<img src="https://img.shields.io/badge/REACT-61DAFB?style=for-the-badge&logo=REACT&logoColor=white">
+<img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=React Query&logoColor=white">
+<img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Redux&logoColor=white">
+JOTAI
+</div>
+<div>
+<img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled components&logoColor=white">
+</div>
+<div>
+<img src="https://img.shields.io/badge/playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white">
+</div>
+
+## 주요 기능
+
+
+
+
+
+
+
+
+<br/><br/>
+<details>
+
+<summary>카카오 테크 캠퍼스 3단계 진행 보드</summary>
+
 
 </br>
 
@@ -250,4 +286,6 @@ UI 컴포넌트의 명칭과 이를 구현하는 능력은 필수적인 커뮤�
 </div>
 
 ---
+
+</details>
 
