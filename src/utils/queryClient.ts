@@ -4,7 +4,6 @@ import { defaultErrorHandler } from 'error/defaultErrorHandler';
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError(error, query) {
-      defaultErrorHandler(error || { name: 'unknownError' });
       setTimeout(() => {
         queryClient.removeQueries(query.queryKey);
       }, 1000);

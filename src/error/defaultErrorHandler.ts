@@ -21,10 +21,9 @@ export const defaultErrorHandler = (error: ErrorData) => {
   const errorType = stringErrorCode(code);
 
   switch (errorType) {
-    case 'GO_TO_JOIN':
-      return;
-
-    case 'INVALID_INVITATION':
+    case 'TIMEOUT':
+      // 타임아웃
+      alert('연결이 지연되었습니다. 다시 시도하세요');
       return;
 
     case 'ALEADY_USER':
@@ -56,27 +55,9 @@ export const defaultErrorHandler = (error: ErrorData) => {
       alert(`입력값이 올바르지 않습니다`);
       return;
 
-    case 'TIMEOUT':
-      // 타임 아웃
-      alert(`일시적인 네트워크 오류가 발생했습니다. 다시 시도하세요`);
-      return;
-
-    case 'AUTHENTICATION':
-      // 토큰 유효하지 않음
-      alert('로그인이 만료되었습니다.');
-      loginDatahandlers.removeLoginData();
-      redirect(convertPath('/'));
-      return;
-
-    case 'AUTHORIZATION':
-      // 접근 권한
-      alert(`잘못된 접근입니다`);
-      loginDatahandlers.removeLoginData();
-      redirect(convertPath('/'));
-      return;
-
     default:
-      alert(`서버 오류`);
+      // 처리 불가능 에러
+      alert('서버 오류');
       loginDatahandlers.removeLoginData();
       redirect(convertPath('/'));
       return;

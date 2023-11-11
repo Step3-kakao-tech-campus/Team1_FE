@@ -49,6 +49,8 @@ function App(): JSX.Element {
                   <Route path={convertPath('/apply')} element={<SelectWeekPage isAdmin={false} />} />
                   <Route path={convertPath('/apply/selectTimes')} element={<ApplyPage />} />
                 </Route>
+
+                <Route path={convertPath('/wrong')} element={<ApplyPage />} />
               </Routes>
             </ErrorBoundary>
           </ViewPortContainer>
