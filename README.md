@@ -18,6 +18,10 @@
 - [API 문서](링크를_넣어주세요)
 - [Error 처리 문서](링크를_넣어주세요)
 
+## 배포 링크
+
+[풀스택 배포 링크](링크를_넣어주세요)
+[프론트엔드 테스트용 배포 링크](https://k14c7827846a9a.user-app.krampoline.com)
 
 ## 기술 스택 
 <div>
@@ -40,7 +44,7 @@ JOTAI
 <img src="https://img.shields.io/badge/VISUAL STUDIO CODE-007ACC?style=for-the-badge&logo=VISUAL STUDIO CODE&logoColor=white">
 </div>
 
-### 디렉토리 구조
+## 디렉토리 구조
 
 디렉토리 구조에 대한 설명을 적어주세요.
 
@@ -48,10 +52,6 @@ JOTAI
 ## 강조할 점
 
 
-## 배포 링크
-
-[풀스택 배포 링크](링크를_넣어주세요)
-[프론트엔드 테스트용 배포 링크](https://k14c7827846a9a.user-app.krampoline.com)
 
 ## 반대편 repo
 
