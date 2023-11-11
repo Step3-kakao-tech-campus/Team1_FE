@@ -2,8 +2,8 @@ import { TimeData } from 'apis/types';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
 import { CloseCircleButton } from 'components/@commons/icons/buttons';
-import { ButtonContainer, InputTime, InputTitle } from 'components/PageStyledComponents/admin/ApplicationOpenPage';
 import useFormOnBlurUpdate from 'hooks/useFormOnBlurUpdate';
+import { ButtonContainer, InputTime, InputTitle } from 'pages/admin/ApplicationOpenPage/styles';
 
 interface Props {
   timeData: TimeData;
