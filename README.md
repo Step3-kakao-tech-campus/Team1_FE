@@ -137,15 +137,15 @@ npm run start
 - 아이콘 버튼에 라벨을 추가했습니다
 ```
 
-## 반대편 repo
+
+## ERD
+![ERD drawio](https://github.com/Step3-kakao-tech-campus/Team1_FE/assets/111048211/ed0b6044-fe85-40c0-957a-e3a27429761e)
+
+
+
+## 백엔드 repo
 
 [TEAM1_BE](https://github.com/Step3-kakao-tech-campus/Team1_BE)
-
-## 전체 스트럭쳐
-
-전체 스트럭쳐에 대한 설명을 적어주세요.
-
-
 
 
 
