@@ -18,7 +18,6 @@ export const useGetMonthly = ({ year, month }: SelectedMonthData) => {
       }),
     {
       suspense: true,
-      enabled: nowMember.isSelected === true,
     },
   );
 
