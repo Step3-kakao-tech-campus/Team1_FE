@@ -138,7 +138,7 @@ npm run start
 
 ## 반대편 repo
 
-[반대편 repo](https://github.com/Step3-kakao-tech-campus/Team1_BE)
+[TEAM1_BE](https://github.com/Step3-kakao-tech-campus/Team1_BE)
 
 ## 전체 스트럭쳐
 
