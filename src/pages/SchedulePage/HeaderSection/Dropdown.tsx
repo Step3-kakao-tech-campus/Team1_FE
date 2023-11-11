@@ -2,8 +2,8 @@ import { UserData } from 'apis/types';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
 import { DropDown, DropUp } from 'components/@commons/icons';
-import { DropDownCont, DropdownBtn } from 'components/PageStyledComponents/admin/MainPage';
 import { useSelectMember } from 'pages/SchedulePage/hooks/useSelectMember';
+import { DropDownCont, DropdownBtn } from 'pages/SchedulePage/styles';
 
 const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
   const { member, isOpen, dropdownOnClick, contentOnClick } = useSelectMember();

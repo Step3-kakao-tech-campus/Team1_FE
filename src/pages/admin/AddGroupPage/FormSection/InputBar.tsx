@@ -1,7 +1,7 @@
 import BorderBox from 'components/@commons/BorderBox';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
-import { Check, InputBox, InputLabel } from 'components/PageStyledComponents/admin/AddGroup';
+import { Check, InputBox, InputLabel } from 'pages/admin/AddGroupPage/styles';
 import React from 'react';
 
 const InputBar = ({

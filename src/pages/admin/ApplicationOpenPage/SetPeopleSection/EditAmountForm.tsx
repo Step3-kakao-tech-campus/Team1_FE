@@ -1,5 +1,5 @@
-import { InputPeople } from 'components/PageStyledComponents/admin/ApplicationOpenPage';
 import { usePeopleValidation } from 'pages/admin/ApplicationOpenPage/hooks/usePeopleValidation';
+import { InputPeople } from 'pages/admin/ApplicationOpenPage/styles';
 
 const EditAmountForm = ({ timeIndex, day }: { timeIndex: number; day: number }): JSX.Element => {
   const { val, onBlurHandler, onChangeHandler } = usePeopleValidation(timeIndex, day);

@@ -4,10 +4,10 @@ import FlexContainer from 'components/@commons/FlexContainer';
 import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import { DailyWorkersTable } from 'components/DailyWorkersTable';
-import { ScrollContainer } from 'components/PageStyledComponents/admin/ApplicationClose';
 import useWeekSelector from 'hooks/useWeekSelector';
 import { useGetRecommends } from 'pages/admin/ApplicationClosePage/hooks/fetch';
 import useClose from 'pages/admin/ApplicationClosePage/hooks/useClose';
+import { ScrollContainer } from 'pages/admin/ApplicationClosePage/styles';
 import { myTheme } from 'styles/myTheme';
 import { stringDateMoveKor } from 'utils/dateToString';
 
