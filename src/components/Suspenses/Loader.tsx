@@ -18,6 +18,7 @@ const Loader = ({ size, isDeffered = true }: { size?: string; isDeffered?: boole
           enableBackground="new 0 0 40 40"
           xmlSpace="preserve"
         >
+          <title id="catTitle">로딩중</title>
           <path
             opacity="0.2"
             fill="#000"
