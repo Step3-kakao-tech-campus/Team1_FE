@@ -1,4 +1,5 @@
-![Alt text](gitsource/%EB%85%B8%EC%85%98%EB%B0%B0%EB%84%884.png)
+![배너](https://github.com/Step3-kakao-tech-campus/Team1_FE/assets/111048211/3621340d-0bd1-4556-94bd-5583288136ce)
+
 
 ## 프로젝트 설명
 
