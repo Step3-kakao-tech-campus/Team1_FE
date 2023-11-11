@@ -17,6 +17,7 @@ const InvitationErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackPro
           resetErrorBoundary();
           navigate(convertPath('/'));
         }}
+        isNeedLogout={false}
         btnText="메인으로"
       />
     );
