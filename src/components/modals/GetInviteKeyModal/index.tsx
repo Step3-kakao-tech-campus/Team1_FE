@@ -36,7 +36,7 @@ const GetInviteKeyModal = (): JSX.Element => {
           </SubmitButton>
         )}
         {!isFetching && (
-          <CopyToClipboard text={inviteKeyData?.invitationKey || ''}>
+          <CopyToClipboard text={link}>
             {!isCopied ? (
               <SubmitButton onClick={() => setIsCopied(true)}>복사하기</SubmitButton>
             ) : (
