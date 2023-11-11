@@ -58,7 +58,7 @@ const SideBarProfile = ({
       </FlexContainer>
       <FlexContainer $direction="row" $justify="start" $align="center">
         <Text margin="0 0 4px 0" size="sm">
-          {userType === 'ALBA' || userType === 'ADMIN' ? groupName : '무소속'}
+          {userType === 'ALBA_NO_GROUP' || userType === 'ADMIN_NO_GROUP' ? '무소속' : groupName}
         </Text>
       </FlexContainer>
 
