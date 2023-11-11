@@ -1,15 +1,8 @@
-export const postLoginNoUser = {
-  status: 404,
-  body: JSON.stringify({
-    errorCode: -10006,
-  }),
-};
+export const loginHeader = { authorization: 'Bearer ABC' };
 
-export const postLoginAdmin = {
-  token: 'Bearer ABC',
+export const loginSuccessBody = {
   isAdmin: true,
 };
-export const postLoginAlba = {
-  token: 'Bearer ABC',
-  isAdmin: false,
+export const loginErrorBody = {
+  errorCode: -10006,
 };
