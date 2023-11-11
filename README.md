@@ -1,17 +1,24 @@
-# 스케줄, 알빠임?
+![Alt text](gitsource/%EB%85%B8%EC%85%98%EB%B0%B0%EB%84%884.png)
 
-## 배포 인스턴스
+## 프로젝트 설명
 
+프로젝트에 대한 자세한 설명을 적어주세요.
+
+## 사용 방법
+
+프로젝트를 어떻게 사용하는지에 대한 설명을 적어주세요.
 
 ## 주요 기능
 
+프로젝트의 주요 기능에 대한 설명을 적어주세요.
+
+## 주요 문서 링크
+
+- [API 문서](링크를_넣어주세요)
+- [Error 처리 문서](링크를_넣어주세요)
 
 
-
-
-## Stacks 
-
-
+## 기술 스택 
 <div>
 <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
 <img src="https://img.shields.io/badge/TYPESCRIPT-3178C6?style=for-the-badge&logo=TYPESCRIPT&logoColor=white">
@@ -31,6 +38,31 @@ JOTAI
 <img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=GITHUB&logoColor=white">
 <img src="https://img.shields.io/badge/VISUAL STUDIO CODE-007ACC?style=for-the-badge&logo=VISUAL STUDIO CODE&logoColor=white">
 </div>
+
+### 디렉토리 구조
+
+디렉토리 구조에 대한 설명을 적어주세요.
+
+
+## 강조할 점
+
+
+## 배포 링크
+
+[풀스택 배포 링크](링크를_넣어주세요)
+[프론트엔드 테스트용 배포 링크](https://k14c7827846a9a.user-app.krampoline.com)
+
+## 반대편 repo
+
+[반대편 repo](https://github.com/Step3-kakao-tech-campus/Team1_BE)
+
+## 전체 스트럭쳐
+
+전체 스트럭쳐에 대한 설명을 적어주세요.
+
+
+
+
 
 
 
