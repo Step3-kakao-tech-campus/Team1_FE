@@ -16,6 +16,8 @@ declare module 'styled-components' {
     };
     fonts: {
       fontSize: {
+        xxxs: string;
+        xxs: string;
         xs: string;
         sm: string;
         base: string;
@@ -32,6 +34,13 @@ declare module 'styled-components' {
         medium: number;
         light: number;
       };
+    };
+    window: {
+      minWidth: string;
+      mobileMax: string;
+      tabletMin: string;
+      tabletMax: string;
+      desktopMin: string;
     };
   }
 }

@@ -1,8 +1,8 @@
+import { AdminBottomNB, AlbaBottomNB } from 'components/BottomNB/BottomNB';
+import HeaderNB from 'components/HeaderNB/HeaderNB';
 import React from 'react';
 import styled from 'styled-components';
-import HeaderNB from 'components/HeaderNB/HeaderNB';
-import { AlbaBottomNB, AdminBottomNB } from 'components/BottomNB/BottomNB';
-import useLogin from 'hooks/useLogin';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 
 interface Props {
   children: React.ReactNode;
@@ -11,64 +11,53 @@ interface Props {
   justify?: string;
   withoutHeader?: boolean;
   withoutBottonBar?: boolean;
+  maxWidth?: string;
 }
 
-const PageContainer = ({ children, gap, padding, withoutHeader, withoutBottonBar, justify }: Props): JSX.Element => {
-  const isAdmin = useLogin().getLoginState().isAdmin;
+const PageContainer = ({
+  children,
+  gap,
+  padding,
+  withoutHeader,
+  withoutBottonBar,
+  justify,
+  maxWidth,
+}: Props): JSX.Element => {
+  const isAdmin = loginDatahandlers.getLoginData().isAdmin;
+
   return (
-    <WholeConatiner>
-      <ColumnContainer>
-        {!withoutHeader && <HeaderNB />}
-        <MainContainer $gap={gap} $padding={padding} $justify={justify} $bottom={!withoutBottonBar}>
-          {children}
-        </MainContainer>
-        {!withoutBottonBar && isAdmin && <AdminBottomNB />}
-        {!withoutBottonBar && !isAdmin && <AlbaBottomNB />}
-      </ColumnContainer>
-    </WholeConatiner>
+    <>
+      {!withoutHeader && <HeaderNB />}
+      <MainContainer $gap={gap} $padding={padding} $justify={justify} $bottom={!withoutBottonBar} $maxWidth={maxWidth}>
+        {children}
+      </MainContainer>
+      {!withoutBottonBar && isAdmin && <AdminBottomNB />}
+      {!withoutBottonBar && !isAdmin && <AlbaBottomNB />}
+    </>
   );
 };
 
 export default PageContainer;
-
-const WholeConatiner = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ColumnContainer = styled.div`
-  position: relative;
-
-  width: 100%;
-  height: 100%;
-
-  max-width: 585px;
-  min-height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-`;
 
 const MainContainer = styled.main<{
   $gap?: string;
   $padding?: string;
   $justify?: string;
   $bottom?: boolean;
+  $maxWidth?: string;
 }>`
+  width: 100%;
+  box-sizing: border-box;
   flex-grow: 1;
   position: relative;
 
   gap: ${(props) => (props.$gap ? props.$gap : '20px')};
-  padding: ${(props) => (props.$padding ? props.$padding : '28px')};
-
+  padding: ${(props) => (props.$padding ? props.$padding : '20px')};
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   justify-content: ${(props) => (props.$justify ? props.$justify : 'center')};
   align-items: center;
 
-  padding-bottom: ${(props) => (props.$bottom ? '80px' : '')};
+  max-width: ${(props) => (props.$maxWidth ? props.$maxWidth : 'none')};
 `;

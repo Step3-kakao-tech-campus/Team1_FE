@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
+import { UserData } from 'apis/types';
 import FlexContainer from 'components/@commons/FlexContainer';
 import Text from 'components/@commons/Text';
+import { DropDown, DropUp } from 'components/@commons/icons';
+import { DropDownCont, DropdownBtn } from 'components/PageStyledComponents/admin/MainPage';
 import { useAtom } from 'jotai';
-import { DropDownCont } from 'components/PageStyledComponents/admin/MainPage';
 import { memberAtom } from 'pages/SchedulePage/states';
-import { UserData } from 'apis/types';
+import { useState } from 'react';
 
 const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
   const [member, setMember] = useAtom(memberAtom);
@@ -17,21 +17,31 @@ const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
   };
 
   const contentOnClick = (m: UserData) => {
-    setMember({ memberId: m.memberId, name: m.name, isSelected: true });
+    setMember({ userId: m.userId, name: m.name, isSelected: true });
     setIsOpen(false);
   };
 
   return (
     <DropDownCont>
-      <FlexContainer onClick={dropdownOnClick} $wFull $direction="row" $justify="space-between" $padding="4px 0">
-        <Text margin="0">{member.name || '선택'}</Text>
-        <Text margin="0">{isOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}</Text>
-      </FlexContainer>
+      <DropdownBtn onClick={dropdownOnClick}>
+        <Text margin="0" size="sm">
+          {member.name || '선택'}
+        </Text>
+        {isOpen ? <DropUp /> : <DropDown />}
+      </DropdownBtn>
       {isOpen && (
-        <FlexContainer $wFull $gap="10px" $padding="16px 0">
-          {members.map((member: UserData) => (
-            <FlexContainer $wFull $align="flex-start" onClick={() => contentOnClick(member)} key={member.name}>
-              <Text margin="0">{member.name}</Text>
+        <FlexContainer $wFull $gap="10px" $padding="12px 0" as="ol" data-testid="멤버리스트">
+          {members.map((member: UserData, index) => (
+            <FlexContainer
+              as="li"
+              $wFull
+              $align="flex-start"
+              key={member.name + index}
+              onClick={() => contentOnClick(member)}
+            >
+              <Text margin="0" size="sm">
+                {member.name}
+              </Text>
             </FlexContainer>
           ))}
         </FlexContainer>

@@ -8,6 +8,6 @@ export const getMyInfo = (): Promise<AxiosResponse<Response>> => {
 
 interface Response {
   userName: string;
-  groupName: string;
+  groupName: string | null;
   members: UserData[];
 }

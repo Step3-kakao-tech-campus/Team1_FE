@@ -10,19 +10,15 @@ spec:
     metadata:
       labels:
         app: frontend
-    spec: 
+    spec:
       containers:
         - name: frontend
           # 여러분의 image 주소를 입력해주세요.
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_dc7d1d6c6ec9
-          env:
-            - name: REACT_APP_KAKAO_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: kakaosecret
-                  key: apikey
-            - name: REACT_APP_KAKAO_REDIRECT_URI
-              valueFrom:
-                secretKeyRef:
-                  name: kakaosecret
-                  key: redirect
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_9d9678dcd735
+          volumeMounts:
+          - name: config
+            mountPath: /etc/nginx/nginx.conf
+      volumes:
+        - name: config
+          configMap:
+            name: frontconfig

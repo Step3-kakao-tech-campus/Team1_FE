@@ -1,20 +1,24 @@
-// TimeWorkersData
-export interface TimeWorkerListData {
-  title: string;
-  startTime: string;
-  endTime: string;
-  workerList: UserData[];
-}
-
-export interface UserData {
-  memberId: number;
-  name: string;
-}
-
 export interface TimeData {
   title: string;
   startTime: string;
   endTime: string;
+}
+
+export interface TimeWithIdData extends TimeData {
+  workTimeId: number;
+}
+
+export interface TimeWorkerListData extends TimeData {
+  workerList: UserData[];
+}
+
+export interface SelectedTimeData extends TimeData {
+  isChecked: boolean;
+}
+
+export interface UserData {
+  userId: number;
+  name: string;
 }
 
 export interface DailyWorkTimeData {
@@ -27,14 +31,31 @@ export interface TotalWorkedTimeData {
   monthly: number;
 }
 
-export interface SelectedTimeData {
-  workTimeId: number;
-  isChecked: boolean;
-}
-
 export interface WeekStatusData {
   weekStatus: WeekStatusTypes;
   dates: string[];
 }
 
+export interface AddNeweGroupForm {
+  marketName: string;
+  marketNumber: string;
+  mainAddress: string;
+  detailAddress: string;
+}
+
 export type WeekStatusTypes = 'allocatable' | 'inProgress' | 'closed' | '';
+
+export interface ErrorData {
+  name?: string;
+  response?: {
+    status: number;
+    data?: {
+      errorCode: number;
+    };
+  };
+}
+
+export interface ErrorFallbackProps {
+  error: ErrorData;
+  resetErrorBoundary: () => void;
+}

@@ -1,22 +1,21 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { getMyInfo } from 'apis/userInfo';
 import { AdminNoGroupPage, AdminNoMemberPage } from 'pages/admin/ETCMainPage';
 import SchedulePage from 'pages/SchedulePage';
-import { UserData } from 'apis/types';
+import useGetMyInfo from 'hooks/useGetMyInfo';
 
 const AdminMainIndex = (): JSX.Element => {
-  const { data: membersData } = useQuery(['getMyInfo'], getMyInfo, { suspense: true });
-  const hasGroup = membersData?.data.groupName !== null;
-  const hasMember = membersData && membersData.data.members.length > 1;
+  const { userType, members } = useGetMyInfo();
 
-  return (
-    <>
-      {!hasGroup && <AdminNoGroupPage />}
-      {hasGroup && !hasMember && <AdminNoMemberPage />}
-      {hasGroup && hasMember && <SchedulePage members={membersData?.data.members as UserData[]} />}
-    </>
-  );
+  switch (userType) {
+    case 'ADMIN_NO_GROUP':
+      return <AdminNoGroupPage />;
+    case 'ADMIN_NO_MEMBER':
+      return <AdminNoMemberPage />;
+    case 'ADMIN':
+      return <SchedulePage members={members} />;
+    default:
+      return <></>;
+  }
 };
 
 export default AdminMainIndex;

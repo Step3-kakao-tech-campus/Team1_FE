@@ -23,5 +23,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/k8s/configMap.yaml
 /k8s/secret.yaml
+/test-results/
+/playwright-report/
+/playwright/
+/tests/tests-examples/
+/tests/logintest.ts

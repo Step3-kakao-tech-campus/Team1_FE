@@ -15,6 +15,8 @@ const myTheme: DefaultTheme = {
   },
   fonts: {
     fontSize: {
+      xxxs: '0.5rem',
+      xxs: '0.625rem',
       xs: '0.75rem',
       sm: '0.875rem',
       base: '1rem',
@@ -31,6 +33,13 @@ const myTheme: DefaultTheme = {
       regular: 400,
       light: 300,
     },
+  },
+  window: {
+    minWidth: '280px',
+    mobileMax: '480px',
+    tabletMin: '480.1px',
+    tabletMax: '768px',
+    desktopMin: '768.1px',
   },
 };
 

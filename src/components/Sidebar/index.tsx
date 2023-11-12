@@ -1,36 +1,104 @@
-import React from 'react';
-import styled from 'styled-components';
+import { UserData } from 'apis/types';
+import Loader from 'components/Suspenses/Loader';
+import GetInviteKeyModal from 'components/modals/GetInviteKeyModal';
+import useGetMyInfo from 'hooks/useGetMyInfo';
+import useModal from 'hooks/useModal';
+import useLogin from 'pages/auth/hooks/useLogin';
+import { Suspense } from 'react';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
+import FlexContainer from '../@commons/FlexContainer';
+import Text from '../@commons/Text';
+import { HorizontalLine, SidebarBackground, SidebarBox } from './styles';
 
-export const HorizontalLine = styled.div`
-  border-top: 0.05rem solid;
-  border-color: gray;
-  width: 100%;
-  height: 0.5rem;
-  margin: 0.5rem 0;
-`;
+const Sidebar = ({ closeHandler }: { closeHandler: () => void }): JSX.Element => {
+  return (
+    <SidebarBackground onClick={closeHandler}>
+      <SidebarBox onClick={(e) => e.stopPropagation()}>
+        <Suspense fallback={<Loader />}>
+          <SideBarContent />
+        </Suspense>
+      </SidebarBox>
+    </SidebarBackground>
+  );
+};
 
-export const SidebarBackground = styled.div`
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 980;
-`;
+export default Sidebar;
 
-export const SidebarBox = styled.div`
-  background-color: #ffffff;
-  height: 100%;
-  width: 75%;
-  padding: 2rem;
-  max-width: 25rem;
+const SideBarContent = () => {
+  const isAdmin = loginDatahandlers.getLoginData().isAdmin;
+  const { userName, userType, groupName, members } = useGetMyInfo();
 
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  align-items: start;
+  return (
+    <FlexContainer $wFull $justify="start" $gap="32px" $wrap="wrap">
+      <SideBarProfile userName={userName} isAdmin={isAdmin} userType={userType} groupName={groupName} />
+      <SideBarButtons isAdmin={isAdmin} />
+      {(userType === 'ALBA' || userType === 'ADMIN') && <SideBarMemberList memberList={members} />}
+    </FlexContainer>
+  );
+};
 
-  gap: 2rem;
-  z-index: 981;
-`;
+const SideBarProfile = ({
+  userName,
+  isAdmin,
+  groupName,
+  userType,
+}: {
+  userName: string;
+  isAdmin: boolean;
+  userType: string;
+  groupName: string | null;
+}) => {
+  return (
+    <FlexContainer $gap="12px" $padding="0">
+      <FlexContainer $direction="row" $justify="start" $align="center">
+        <Text size="lg" weight="bold" margin="0">
+          {userName}
+        </Text>
+        <Text margin="0">{isAdmin && 'Admin'}</Text>
+      </FlexContainer>
+      <FlexContainer $direction="row" $justify="start" $align="center">
+        <Text margin="0 0 4px 0" size="sm">
+          {userType === 'ALBA' || userType === 'ADMIN' ? groupName : '무소속'}
+        </Text>
+      </FlexContainer>
+
+      <HorizontalLine />
+    </FlexContainer>
+  );
+};
+
+const SideBarButtons = ({ isAdmin }: { isAdmin: boolean }) => {
+  const { logout } = useLogin('/');
+  const { modalOnHandler } = useModal();
+  return (
+    <FlexContainer $align="flex-start" $gap="20px">
+      {isAdmin && (
+        <button onClick={() => modalOnHandler(<GetInviteKeyModal />)}>
+          <Text>직원 초대하기</Text>
+        </button>
+      )}
+      <button onClick={logout}>
+        <Text>로그아웃</Text>
+      </button>
+    </FlexContainer>
+  );
+};
+
+const SideBarMemberList = ({ memberList }: { memberList?: UserData[] }) => {
+  return (
+    <FlexContainer $wFull $align="flex-start" $gap="16px">
+      <Text weight="bold" margin="0">
+        우리 매장 직원 목록
+      </Text>
+      <HorizontalLine />
+
+      <FlexContainer as="ol" $wFull $align="flex-start" $gap="16px">
+        {memberList?.map((member: UserData) => (
+          <li key={`${member.name}${member.userId}`}>
+            <Text>{member.name}</Text>
+          </li>
+        ))}
+      </FlexContainer>
+    </FlexContainer>
+  );
+};

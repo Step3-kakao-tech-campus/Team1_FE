@@ -1,12 +1,13 @@
 import { styled } from 'styled-components';
-import React from 'react';
 
 export const HeaderContainer = styled.header`
+  position: fixed;
   width: 100%;
+  left: 0%;
   height: 60px;
   padding: 16px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: ${({ theme }) => theme.color.backgroundColor};
 `;
@@ -19,7 +20,6 @@ export const HeaderLeftMenuGroup = styled.div`
 export const HeaderRightMenuGroup = styled.div`
   display: flex;
   align-items: center;
-  margin-left: auto;
 `;
 
 export const HeaderInnerBox = styled.div`
@@ -33,5 +33,10 @@ export const HeaderButton = styled.button`
   display: flex;
   align-items: center;
   text-decoration: none;
-  margin: 0 10px;
+`;
+
+export const HeaderTitleCont = styled.div`
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
 `;

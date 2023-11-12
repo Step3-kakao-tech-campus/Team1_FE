@@ -1,31 +1,30 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import PageContainer from 'components/@commons/PageContainer';
-import { atom, useAtomValue } from 'jotai';
-import weekdayArray from 'utils/weekdayArray';
 import TimeSelectSection from './TimeSelectSection';
+import useErrorHandler from 'error/useErrorHandler';
 import PreviewSection from './PreviewSection';
-import { SelectedTimeData } from 'apis/types';
-
-export const weeklySelectAtom = atom<SelectedTimeData[][]>(weekdayArray.map(() => []));
-export const applyStepAtom = atom(1);
+import usePopUpPage from 'hooks/usePopUpPage';
+import SubmitButton from 'components/@commons/SubmitButton';
 
 const ApplyPage = (): JSX.Element => {
-  const startWeekDate = useLocation().state.startWeekDate;
-  const step = useAtomValue(applyStepAtom);
+  // startWeekDate 값 불러오기
+  const state = useLocation().state;
+
+  // startWeekDate 값 없을때 에러 처리
+  const { wrongPathHandler } = useErrorHandler();
+  if (state === null) {
+    wrongPathHandler('/apply');
+  }
+
+  // 미리보기 페이지
+  const previewPage = <PreviewSection startWeekDate={state.startWeekDate} />;
+  const { popUpOnHandler } = usePopUpPage();
 
   return (
-    <PageContainer justify="start">
-      {step === 1 && (
-        <Suspense>
-          <TimeSelectSection startWeekDate={startWeekDate} />
-        </Suspense>
-      )}
-      {step === 2 && (
-        <Suspense>
-          <PreviewSection startWeekDate={startWeekDate} />
-        </Suspense>
-      )}
+    <PageContainer justify="start" gap="40px">
+      <TimeSelectSection startWeekDate={state.startWeekDate} previewPage={previewPage} />
+      <SubmitButton onClick={() => popUpOnHandler(previewPage)}>미리보기</SubmitButton>
     </PageContainer>
   );
 };

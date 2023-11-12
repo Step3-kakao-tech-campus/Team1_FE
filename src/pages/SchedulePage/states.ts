@@ -1,12 +1,32 @@
+import { TotalWorkedTimeData, UserData } from 'apis/types';
 import { atom } from 'jotai';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
 
-export const workTimeAtom = atom({ monthly: 0, weekly: 0 });
-export const memberAtom = atom<MemberType>({ memberId: 0, name: '', isSelected: false }); // 선택된 멤버 정보
-export const dateAtom = atom({ date: '', isFixed: false }); // 선택된 날짜 정보
-export const monthAtom = atom({ year: new Date().getFullYear(), month: new Date().getMonth() }); // 선택된 달 정보
+const isAdmin = loginDatahandlers.getLoginData().isAdmin;
 
-interface MemberType {
-  memberId: number;
-  name: string;
+const workTimeDefault = { monthly: 0, weekly: 0 };
+const memberDefault = isAdmin ? { userId: 0, name: '', isSelected: false } : { userId: 0, name: '', isSelected: true };
+const dateDefault = { date: '', isFixed: false };
+const monthDefault = { year: new Date().getFullYear(), month: new Date().getMonth() };
+
+export const workTimeAtom = atom<TotalWorkedTimeData>(workTimeDefault);
+export const memberAtom = atom<MemberType>(memberDefault); // 선택된 멤버 정보
+export const dateAtom = atom(dateDefault); // 선택된 날짜 정보
+export const monthAtom = atom(monthDefault, (get, set, update: SelectedMonthData) => {
+  set(monthAtom, update);
+  set(dateAtom, dateDefault);
+});
+
+export interface SelectedMonthData {
+  year: number;
+  month: number;
+}
+
+export interface SelectedDateData {
+  date: string;
+  isFixed: boolean;
+}
+
+interface MemberType extends UserData {
   isSelected: boolean;
 }

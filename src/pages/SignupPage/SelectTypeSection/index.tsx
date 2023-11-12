@@ -1,24 +1,31 @@
 import FlexContainer from 'components/@commons/FlexContainer';
+import Text from 'components/@commons/Text';
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props<T> {
+interface Props {
   selectOneHandler: (event: React.MouseEvent<HTMLElement>, value: boolean) => void;
-  userInfo: T;
-}
-
-interface UserType {
   isAdmin: boolean | null;
 }
 
-const SelectTypeSection = <T extends UserType>({ selectOneHandler, userInfo }: Props<T>): JSX.Element => {
+const SelectTypeSection = ({ selectOneHandler, isAdmin }: Props): JSX.Element => {
   return (
-    <FlexContainer $direction="row" $wFull={true} $padding="0 40px">
-      <Button id="isAdmin" onClick={(e) => selectOneHandler(e, true)} $isSelected={userInfo.isAdmin === true}>
-        매니저로 <br /> 시작하기
+    <FlexContainer $direction="row" $wFull={true} $padding="20px 0">
+      <Button id="isAdmin" onClick={(e) => selectOneHandler(e, true)} $isSelected={isAdmin === true}>
+        <Text size="lg" block>
+          매니저로
+        </Text>
+        <Text size="lg" block>
+          시작하기
+        </Text>
       </Button>
-      <Button id="isAdmin" onClick={(e) => selectOneHandler(e, false)} $isSelected={userInfo.isAdmin === false}>
-        알바생으로 <br /> 시작하기
+      <Button id="isAdmin" onClick={(e) => selectOneHandler(e, false)} $isSelected={isAdmin === false}>
+        <Text size="lg" block>
+          알바생으로
+        </Text>
+        <Text size="lg" block>
+          시작하기
+        </Text>
       </Button>
     </FlexContainer>
   );
@@ -27,12 +34,8 @@ const SelectTypeSection = <T extends UserType>({ selectOneHandler, userInfo }: P
 export default SelectTypeSection;
 
 const Button = styled.button<{ color?: string; $isSelected: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 50px 10px;
-
   width: 100%;
+  padding: 50px 10px;
 
   background: ${(props) => (props.$isSelected ? props.theme.color.yellow : props.theme.color.lightBlue)};
   border: 1px solid #000000;

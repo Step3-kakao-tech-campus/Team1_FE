@@ -1,18 +1,36 @@
 import PageContainer from 'components/@commons/PageContainer';
-import DoneSection from 'pages/admin/AddGroupPage/DoneSection';
-import React, { useState } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import FormSection from './FormSection';
+import { useNavigate } from 'react-router-dom';
+import { convertPath } from 'apis/convertURI';
+import Loader from 'components/Suspenses/Loader';
+import useGetMyInfo from 'hooks/useGetMyInfo';
 
 const AddGroupPage = (): JSX.Element => {
-  // 해당 매니저가 이미 그룹을 가지고 있는 경우 : 리다이렉트 "/"
-  const [isDone, setIsDone] = useState(false);
-
   return (
-    <PageContainer withoutHeader withoutBottonBar padding="0 40px">
-      {!isDone && <FormSection doneStateHandler={() => setIsDone((prev) => true)} />}
-      {isDone && <DoneSection />}
+    <PageContainer withoutHeader withoutBottonBar padding="0 40px" gap="52px">
+      <Suspense fallback={<Loader />}>
+        <CheckAuth>
+          <FormSection />
+        </CheckAuth>
+      </Suspense>
     </PageContainer>
   );
 };
 
 export default AddGroupPage;
+
+const CheckAuth = ({ children }: { children: React.ReactNode }) => {
+  const { userType } = useGetMyInfo();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userType !== 'ADMIN_NO_GROUP') {
+      alert('이미 그룹이 있습니다');
+      navigate(convertPath('/'));
+      return;
+    }
+  }, [userType]);
+
+  return <>{children}</>;
+};

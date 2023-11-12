@@ -1,37 +1,38 @@
-import React, { useState } from 'react';
+import Text from 'components/@commons/Text';
+import { Hamburger } from 'components/@commons/icons';
 import {
+  HeaderButton,
   HeaderContainer,
   HeaderInnerBox,
-  HeaderButton,
   HeaderLeftMenuGroup,
-  HeaderRightMenuGroup,
+  HeaderTitleCont,
 } from 'components/HeaderNB/HeaderNBStyels';
-import useLogin from 'hooks/useLogin';
-import { Alarm, Hamburger } from './icons';
-import Sidebar from 'components/Sidebar/Sidebar';
+import Sidebar from 'components/Sidebar';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { loginDatahandlers } from 'utils/loginDatahandlers';
+
+const isAdmin = loginDatahandlers.getLoginData().isAdmin;
 
 const HeaderNB = (): JSX.Element => {
-  /* ----------------------- ! 수정 중 입니다 ! ------------------------ */
-
-  const loginState = useLogin().getLoginState();
-  const { logout } = useLogin('/');
-
   const [isOpen, setIsOpen] = useState(false);
+
+  const nowPath = useLocation().pathname;
 
   return (
     <>
       <HeaderContainer>
         <HeaderInnerBox>
           <HeaderLeftMenuGroup>
-            <HeaderButton onClick={() => setIsOpen(true)}>
+            <HeaderButton onClick={() => setIsOpen(true)} aria-label="메뉴">
               <Hamburger />
             </HeaderButton>
           </HeaderLeftMenuGroup>
-
-          <HeaderRightMenuGroup>
-            <Alarm />
-            {loginState.isLogin && <HeaderButton onClick={logout}>임시로그아웃</HeaderButton>}
-          </HeaderRightMenuGroup>
+          <HeaderTitleCont>
+            <Text size="lg" key={isAdmin + nowPath} data-testid="페이지제목">
+              {isAdmin ? adminTitle[nowPath] : albaTitle[nowPath]}
+            </Text>
+          </HeaderTitleCont>
         </HeaderInnerBox>
       </HeaderContainer>
 
@@ -41,3 +42,16 @@ const HeaderNB = (): JSX.Element => {
 };
 
 export default HeaderNB;
+
+const albaTitle: { [index: string]: string } = {
+  '/': '내 스케줄',
+  '/apply': '신청하기',
+  '/apply/selectTimes': '신청하기',
+};
+
+const adminTitle: { [index: string]: string } = {
+  '/': '확정 스케줄',
+  '/newSchedule': '모집하기',
+  '/newSchedule/open': '모집 시작하기',
+  '/newSchedule/close': '모집 마감하기',
+};

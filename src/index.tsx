@@ -3,13 +3,11 @@ import ReactDOM from 'react-dom/client';
 import 'styles/index.css';
 import App from 'App';
 
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-
-const queryClient = new QueryClient();
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <QueryClientProvider client={queryClient}>
+  <BrowserRouter>
     <App />
-  </QueryClientProvider>,
+  </BrowserRouter>,
 );

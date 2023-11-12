@@ -1,33 +1,31 @@
 import React from 'react';
 import { Badge, BadgeCont, BadgeText, BorderDayBox, DateCircle, OutterDayBox } from 'components/Calendar/CalendarStyle';
 import Text from 'components/@commons/Text';
-import { dateToString } from 'utils/dateToString';
+import { stringDateIsToday } from 'utils/dateToString';
 
-interface DayBoxProps {
+interface Props {
   dateString: string;
   timeList: string[] | null;
   onClick: React.MouseEventHandler<HTMLDivElement>;
   isSelected: boolean;
+  colors: { [index: string]: string };
 }
 
-const CalendarDayBox = ({ dateString, timeList, onClick, isSelected }: DayBoxProps): JSX.Element => {
-  const date = Number.parseInt(dateString.split('-')[2]);
-
+const CalendarDayBox = ({ dateString, timeList, onClick, isSelected, colors }: Props): JSX.Element => {
   return (
     <OutterDayBox onClick={onClick} $disabled={timeList === null}>
       {isSelected && <BorderDayBox />}
-      <DateCircle $isToday={dateString === dateToString(new Date())}>
+      <DateCircle $isToday={stringDateIsToday(dateString)}>
         <Text size="xs" weight="regular">
-          {date}
+          {dateString.split('-')[2]}
         </Text>
       </DateCircle>
       <BadgeCont>
-        {!!timeList &&
-          timeList.map((t) => (
-            <Badge key={t} $time={t}>
-              <BadgeText>{t}</BadgeText>
-            </Badge>
-          ))}
+        {timeList?.map((title) => (
+          <Badge key={title} $color={colors[title]}>
+            <BadgeText>{title}</BadgeText>
+          </Badge>
+        ))}
       </BadgeCont>
     </OutterDayBox>
   );
