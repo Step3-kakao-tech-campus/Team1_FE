@@ -32,8 +32,10 @@ export const useGetApplyForm = (startWeekDate: string) => {
 
 export const usePutApplyForm = (startWeekDate: string, onSuccess: () => void) => {
   const weeklySelect = useAtomValue(weeklySelectAtom);
-
-  const { mutate } = useMutation(() => putApply({ weekStartDate: startWeekDate, apply: weeklySelect }), {
+  const apply = weeklySelect.map((daily) =>
+    daily.map((time) => ({ isChecked: time.isChecked, workTimeId: time.workTimeId })),
+  );
+  const { mutate } = useMutation(() => putApply({ weekStartDate: startWeekDate, apply: apply }), {
     onSuccess: onSuccess,
   });
 

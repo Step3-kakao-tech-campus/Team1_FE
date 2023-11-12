@@ -1,5 +1,5 @@
 import instance from 'apis/instance';
-import { SelectedTimeData, TimeData, TimeWithIdData } from 'apis/types';
+import { ApplyData, SelectedTimeData, TimeData, TimeWithIdData } from 'apis/types';
 import { strTimeProcessor } from 'utils/strTimeProcessor';
 
 export const getApplyForm = async (params: GetParams): Promise<GetReturn> => {
@@ -16,11 +16,11 @@ export const getApplyForm = async (params: GetParams): Promise<GetReturn> => {
 
   const selected = response.selected.map((dailyArray) => {
     return dailyArray.map((workersObj) => {
-      return { ...templates[workersObj.workTimeId], isChecked: workersObj.isChecked };
+      return { ...templates[workersObj.workTimeId], ...workersObj };
     });
   });
 
-  return { selected, templates };
+  return { selected };
 };
 
 interface GetParams {
@@ -29,15 +29,11 @@ interface GetParams {
 
 interface GetResponse {
   template: TimeWithIdData[];
-  selected: {
-    workTimeId: number;
-    isChecked: boolean;
-  }[][];
+  selected: ApplyData[][];
 }
 
 interface GetReturn {
   selected: SelectedTimeData[][];
-  templates: { [index: number]: TimeData };
 }
 
 export const putApply = (body: PutRequest) => {
@@ -46,5 +42,5 @@ export const putApply = (body: PutRequest) => {
 
 interface PutRequest {
   weekStartDate: string;
-  apply: SelectedTimeData[][];
+  apply: ApplyData[][];
 }

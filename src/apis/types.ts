@@ -12,7 +12,12 @@ export interface TimeWorkerListData extends TimeData {
   workerList: UserData[];
 }
 
-export interface SelectedTimeData extends TimeData {
+export interface SelectedTimeData extends TimeWithIdData {
+  isChecked: boolean;
+}
+
+export interface ApplyData {
+  workTimeId: number;
   isChecked: boolean;
 }
 
@@ -57,7 +62,6 @@ export interface ErrorData {
   };
 }
 
-export interface Response {}
 export interface ErrorFallbackProps {
   error: ErrorData;
   resetErrorBoundary: () => void;
