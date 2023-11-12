@@ -15,23 +15,23 @@ import { loginDatahandlers } from 'utils/loginDatahandlers';
 import { memberAtom, monthAtom } from './states';
 
 const SchedulePage = ({ members }: { members?: UserData[] }): JSX.Element => {
-  const isAdmin = loginDatahandlers.getLoginData().isAdmin;
   const nowMember = useAtomValue(memberAtom);
+  const isAdmin = loginDatahandlers.getLoginData().isAdmin;
 
   return (
     <PageContainer justify="start" padding="0 20px" maxWidth="600px">
       <FlexContainer $direction="row" $wFull $justify="start" $height="48px" $gap="0">
         <FlexContainer $wFull $align="flex-start">
-          {nowMember.isSelected && <TotalWorkTime />}
+          {(nowMember.userId !== 0 || !isAdmin) && <TotalWorkTime />}
         </FlexContainer>
         <FlexContainer $hFull $wFull $position="relative">
-          {isAdmin && !!members && <Dropdown members={members} />}
+          {isAdmin && <Dropdown members={members || []} />}
         </FlexContainer>
       </FlexContainer>
 
       <FlexContainer $wFull $gap="8px">
         <MonthSelector />
-        {nowMember.isSelected ? (
+        {nowMember.userId !== 0 || !isAdmin ? (
           <Suspense fallback={<Skeleton aspectRatio="1.12" isDeffered />}>
             <ScheduleCalendar />
           </Suspense>
