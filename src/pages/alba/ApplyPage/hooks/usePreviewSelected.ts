@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { convertPath } from 'apis/convertURI';
 import usePopUpPage from 'hooks/usePopUpPage';
 import { useAtomValue } from 'jotai';
@@ -22,9 +23,11 @@ const usePreviewSelected = (startWeekDate: string) => {
   };
 
   // 제출 요청
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const postOnSuccess = () => {
     navigate(convertPath('/'));
+    queryClient.removeQueries(['getApplyForm', startWeekDate]);
     popUpOffHandler();
   };
   const { mutate } = usePutApplyForm(startWeekDate, postOnSuccess);
