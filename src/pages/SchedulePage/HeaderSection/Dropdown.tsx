@@ -18,19 +18,21 @@ const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
       </DropdownBtn>
       {isOpen && (
         <FlexContainer $wFull $gap="10px" $padding="12px 0" as="ol" data-testid="멤버리스트">
-          {members.slice(1).map((member: UserData, index) => (
-            <FlexContainer
-              as="li"
-              $wFull
-              $align="flex-start"
-              key={member.name + index}
-              onClick={() => contentOnClick(member)}
-            >
-              <Text margin="0" size="sm">
-                {member.name}
-              </Text>
-            </FlexContainer>
-          ))}
+          {members
+            .filter((member) => member.isAdmin === false)
+            .map((member: UserData, index) => (
+              <FlexContainer
+                as="li"
+                $wFull
+                $align="flex-start"
+                key={member.name + index}
+                onClick={() => contentOnClick(member)}
+              >
+                <Text margin="0" size="sm">
+                  {member.name}
+                </Text>
+              </FlexContainer>
+            ))}
         </FlexContainer>
       )}
     </DropDownCont>

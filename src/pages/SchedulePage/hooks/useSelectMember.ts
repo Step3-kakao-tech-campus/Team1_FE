@@ -12,8 +12,8 @@ export const useSelectMember = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const contentOnClick = (m: UserData) => {
-    setMember({ userId: m.userId, name: m.name });
+  const contentOnClick = (userinfo: UserData) => {
+    setMember({ ...userinfo });
     setIsOpen(false);
   };
 

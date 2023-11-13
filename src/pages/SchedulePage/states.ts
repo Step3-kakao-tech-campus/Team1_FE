@@ -4,7 +4,7 @@ import { atom } from 'jotai';
 const workTimeDefault = { monthly: 0, weekly: 0 };
 const dateDefault = { date: '', isFixed: false };
 const monthDefault = { year: new Date().getFullYear(), month: new Date().getMonth() };
-const memberDefault = { userId: 0, name: '' };
+const memberDefault = { userId: 0, name: '', isAdmin: false };
 
 export const workTimeAtom = atom<TotalWorkedTimeData>(workTimeDefault);
 export const memberAtom = atom<UserData>(memberDefault); // 선택된 멤버 정보

@@ -24,6 +24,7 @@ export interface ApplyData {
 export interface UserData {
   userId: number;
   name: string;
+  isAdmin: boolean;
 }
 
 export interface DailyWorkTimeData {
