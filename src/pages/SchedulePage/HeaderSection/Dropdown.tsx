@@ -18,7 +18,7 @@ const Dropdown = ({ members }: { members: UserData[] }): JSX.Element => {
       </DropdownBtn>
       {isOpen && (
         <FlexContainer $wFull $gap="10px" $padding="12px 0" as="ol" data-testid="멤버리스트">
-          {members.map((member: UserData, index) => (
+          {members.slice(1).map((member: UserData, index) => (
             <FlexContainer
               as="li"
               $wFull
