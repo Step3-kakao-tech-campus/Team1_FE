@@ -7,7 +7,7 @@ import { NameBox, TitleBox } from './styles';
 
 export const DailyWorkersTable = ({ dailyData }: { dailyData: TimeWorkerListData[] | undefined }): JSX.Element => {
   return (
-    <FlexContainer $direction="row" $wFull $gap="3%" data-testid="일간근무표">
+    <FlexContainer $wFull $direction="row" $align="start" $gap="3%" data-testid="일간근무표">
       {dailyData?.map((timeData: TimeWorkerListData, timeindex) => (
         <FlexContainer key={`${timeData.title}${timeindex}`} $wFull $gap="10px">
           <TitleBox $timeIndex={timeindex}>
