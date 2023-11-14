@@ -34,7 +34,6 @@ const AlarmContainer = styled.main<{
   align-items: center;
 
   z-index: 993;
-  overflow-y: scroll;
 `;
 
 const AlarmBackground = styled.div`

@@ -11,9 +11,9 @@ const ViewPortContainer = ({ children }: { children: React.ReactNode }): JSX.Ele
 
   return (
     <WholeConatiner>
+      {popUp.isOn && <PopUpPage>{popUp.content}</PopUpPage>}
       <ColumnContainer>
         {modal.isOn && <Modal>{modal.content}</Modal>}
-        {popUp.isOn && <PopUpPage>{popUp.content}</PopUpPage>}
         {children}
       </ColumnContainer>
     </WholeConatiner>
