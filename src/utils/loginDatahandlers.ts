@@ -1,8 +1,5 @@
 class LoginData {
   saveLoginData = (token: string, userData: UserDataType) => {
-    sessionStorage.removeItem('beforeLoginURL');
-    sessionStorage.removeItem('code');
-
     const loginData = {
       token: token,
       isLogin: true,

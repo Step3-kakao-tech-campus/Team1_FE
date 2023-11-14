@@ -10,8 +10,12 @@ export const useLoginState = () => {
       isAdmin: boolean;
     },
   ) => {
+    const redirect = sessionStorage.getItem('beforeLoginURL') || '';
     loginDatahandlers.saveLoginData(token, userData);
-    navigate(convertPath(sessionStorage.getItem('beforeLoginURL') || '/'));
+    navigate(convertPath(redirect));
+
+    sessionStorage.removeItem('beforeLoginURL');
+    sessionStorage.removeItem('code');
   };
 
   return { afterLogin };
