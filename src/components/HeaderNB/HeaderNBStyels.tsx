@@ -10,6 +10,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   background-color: ${({ theme }) => theme.color.backgroundColor};
+  z-index: 90;
 `;
 
 export const HeaderLeftMenuGroup = styled.div`

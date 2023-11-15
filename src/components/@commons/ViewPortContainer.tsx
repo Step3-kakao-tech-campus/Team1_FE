@@ -12,7 +12,7 @@ const ViewPortContainer = ({ children }: { children: React.ReactNode }): JSX.Ele
   return (
     <WholeConatiner>
       {popUp.isOn && <PopUpPage>{popUp.content}</PopUpPage>}
-      <ColumnContainer>
+      <ColumnContainer $isVisible={!popUp.isOn}>
         {modal.isOn && <Modal>{modal.content}</Modal>}
         {children}
       </ColumnContainer>
@@ -31,7 +31,7 @@ const WholeConatiner = styled.div`
   justify-content: center;
 `;
 
-const ColumnContainer = styled.div`
+const ColumnContainer = styled.div<{ $isVisible: boolean }>`
   position: relative;
 
   width: 100%;
@@ -44,7 +44,7 @@ const ColumnContainer = styled.div`
   }
   min-height: 100vh;
 
-  display: flex;
+  display: ${(props) => (props.$isVisible ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
 `;
