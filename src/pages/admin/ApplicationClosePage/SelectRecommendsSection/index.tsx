@@ -5,6 +5,7 @@ import SubmitButton from 'components/@commons/SubmitButton';
 import Text from 'components/@commons/Text';
 import { DailyWorkersTable } from 'components/DailyWorkersTable';
 import useWeekSelector from 'hooks/useWeekSelector';
+import NoApplicant from 'pages/admin/ApplicationClosePage/SelectRecommendsSection/NoApplicant';
 import { useGetRecommends } from 'pages/admin/ApplicationClosePage/hooks/fetch';
 import useClose from 'pages/admin/ApplicationClosePage/hooks/useClose';
 import { ScrollContainer } from 'pages/admin/ApplicationClosePage/styles';
@@ -15,6 +16,10 @@ const SelectRecommendsSection = ({ startWeekDate }: { startWeekDate: string }): 
   const { recommendsRes } = useGetRecommends(startWeekDate);
   const { setCandidate, candidate, submitHandler } = useClose(startWeekDate);
   const { day, WeekBarComponent } = useWeekSelector(0);
+
+  if (recommendsRes?.recommends.length === 0) {
+    return <NoApplicant />;
+  }
 
   return (
     <>
